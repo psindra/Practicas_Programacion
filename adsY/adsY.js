@@ -27,12 +27,14 @@ javascript: f = async function() {
 };
 
 
-if (document.querySelector("#country-code")) {
-	document.querySelector("#country-code").innerHTML = document.querySelector("#header > ytd-topbar-logo-renderer > span").innerHTML + "<br>no ADS";
-}
-
 if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
 	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
 }
 
+if (document.querySelector("#country-code")) {
+	document.querySelector("#country-code").innerHTML = document.querySelector("#header > ytd-topbar-logo-renderer > span").innerHTML + "<br>no ADS";
+}
+
+
 a1 = setInterval(f, 10000);
+f();
