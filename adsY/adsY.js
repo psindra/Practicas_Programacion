@@ -26,7 +26,7 @@ javascript: f = async function() {
 	var1 = await setTimeout(f,20);
 };
 
-if (await document.querySelector("#country-code")) {
+if (document.querySelector("#country-code")) {
 	document.querySelector("#country-code").innerHTML = "no ADS"
 }
 
