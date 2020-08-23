@@ -3,9 +3,11 @@ javascript: f = function() {
         document.querySelector(".ytp-ad-skip-button").click()
     } else { 
 	    if (document.querySelector(".ytp-ad-text")) {
-		    /* document.querySelector(".html5-main-video") */ // para usarse en vez de "#movie_player > div.html5-video-container > video"
-		    // document.querySelector("#movie_player > div.html5-video-container > video").currentTime = document.querySelector("#movie_player > div.html5-video-container > video").getDuration() + 1
-		    document.querySelector(".html5-main-video").currentTime = document.querySelector(".html5-main-video").getDuration() + 1;
+		    if !(document.querySelector(".ytp-ad-skip-button")){
+			    /* document.querySelector(".html5-main-video") */ // para usarse en vez de "#movie_player > div.html5-video-container > video"
+			    // document.querySelector("#movie_player > div.html5-video-container > video").currentTime = document.querySelector("#movie_player > div.html5-video-container > video").getDuration() + 1
+			    document.querySelector(".html5-main-video").currentTime = document.querySelector(".html5-main-video").getDuration() + 1;
+		    }
 	    }
     };
     if (document.querySelector(".ytp-ad-overlay-close-button")) {
