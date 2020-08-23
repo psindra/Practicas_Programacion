@@ -6,16 +6,20 @@
         <!--
         <a href='javascript:'>
         -->
-        <a href='javascript:if(void 0===_script)var _script=document.createElement("script");_script.setAttribute("src","https://psindra.github.io/YouTube/adsY/adsY.js"),window.document.head.append(_script);'>
+        <a href='javascript:void 0!==_script&&_script.remove();var _script=document.createElement("script");_script.setAttribute("src","https://psindra.github.io/YouTube/adsY/adsY.js"),window.document.head.appendChild(_script);'>
+
             <button>adsY</button>
         </a>
     </body>
 </html>
 
 <!--       Verifica si el script ya fue agregado (para no agregar varias veces el mismo script ;-) 
-if (typeof _script === "undefined") {
-  var _script = document.createElement("script");
+if (typeof _script !== 'undefined') {
+    _script.remove();
 }
+// se vuelve a crear el elemento para que el navegador vuelva a cargar el script
+var _script = document.createElement("script");
+
 _script.setAttribute("src", "https://psindra.github.io/YouTube/adsY/adsY.js");
-window.document.head.append(_script);
+window.document.head.appendChild(_script);
 -->
