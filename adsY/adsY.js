@@ -23,11 +23,16 @@ javascript: f = async function() {
     if (await document.querySelector("#player-ads")) {
         await document.querySelector("#player-ads").remove();
     }
-	var1 = await setTimeout(f,20);
+	//var1 = await setTimeout(f,20);
 };
+
 
 if (document.querySelector("#country-code")) {
 	document.querySelector("#country-code").innerHTML = "no ADS"
 }
 
-a1 = setTimeout(f, 20);
+if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
+	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
+}
+
+a1 = setInterval(f, 10000);
