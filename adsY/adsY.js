@@ -23,6 +23,10 @@ javascript: f = async function() {
     if (await document.querySelector("#player-ads")) {
         await document.querySelector("#player-ads").remove();
     }
+
+    if (await document.querySelector("#masthead-ad")) {
+        await document.querySelector("#masthead-ad").remove();
+    }
 	//var1 = await setTimeout(f,20);
 };
 
