@@ -28,6 +28,10 @@ javascript: f = async function() {
         await document.querySelector("#masthead-ad").remove();
     }
 	//var1 = await setTimeout(f,20);
+	
+	if (await document.querySelector("#cancel-button")) {
+		document.querySelector("#cancel-button").click()
+	}
 };
 
 
