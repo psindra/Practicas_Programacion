@@ -1,4 +1,5 @@
-javascript: f = async function() {
+// javascript: 
+f = async function() {
     if (await document.querySelector(".ytp-ad-skip-button")) {
         await document.querySelector(".ytp-ad-skip-button").click()
     } else { 
