@@ -1,5 +1,6 @@
 // javascript: 
 f = async function() {
+	/*
     if (await document.querySelector(".ytp-ad-skip-button")) {
         await document.querySelector(".ytp-ad-skip-button").click()
     } else { 
@@ -9,7 +10,14 @@ f = async function() {
 		    var video_duration = await document.querySelector(".html5-main-video").getDuration()
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 	    }
-    };
+    };	*/
+	
+	// nueva función para reemplazar al que hacía el click
+	if (await document.querySelector("#button\\:3u")) {
+		var video_duration = await document.querySelector(".html5-main-video").getDuration();
+		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
+	}
+	
     if (await document.querySelector(".ytp-ad-overlay-close-button")) {
         await document.querySelector(".ytp-ad-overlay-close-button").click()
     }
