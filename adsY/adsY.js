@@ -13,7 +13,7 @@ f = async function() {
     };	*/
 	
 	// nueva función para reemplazar al que hacía el click
-	if (await ytp-ad-button ytp-ad-button-link ytp-ad-clickable) {
+	if (await document.querySelector("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable")) {
 		var video_duration = await document.querySelector(".html5-main-video").getDuration();
 		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 	}
