@@ -5,7 +5,7 @@ f = async function() {
         await document.querySelector(".ytp-ad-skip-button").click()
     } else { 
 	    if (await document.querySelector(".ytp-ad-text")) {
-		    /* document.querySelector(".html5-main-video") */ // para usarse en vez de "#movie_player > div.html5-video-container > video"
+		    // document.querySelector(".html5-main-video") // para usarse en vez de "#movie_player > div.html5-video-container > video"
 		    // document.querySelector("#movie_player > div.html5-video-container > video").currentTime = document.querySelector("#movie_player > div.html5-video-container > video").getDuration() + 1
 		    var video_duration = await document.querySelector(".html5-main-video").getDuration()
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
