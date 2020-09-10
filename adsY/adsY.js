@@ -1,8 +1,13 @@
 // javascript: 
 f = async function() {
-	/*
+	if (document.querySelector("#movie_player").classList.contains("ad-showing")) {
+		alert("document.querySelector("#movie_player").classList.contains("ad-showing")");
+	}
+		
     if (await document.querySelector(".ytp-ad-skip-button")) {
-        await document.querySelector(".ytp-ad-skip-button").click()
+		await document.querySelector(".ytp-ad-skip-button-slot").removeAttribute('style');
+		await document.querySelector(".ytp-ad-skip-button-slot > span").removeAttribute('style')
+//         await document.querySelector(".ytp-ad-skip-button").click()
     } else { 
 	    if (await document.querySelector(".ytp-ad-text")) {
 		    // document.querySelector(".html5-main-video") // para usarse en vez de "#movie_player > div.html5-video-container > video"
@@ -10,12 +15,15 @@ f = async function() {
 		    var video_duration = await document.querySelector(".html5-main-video").getDuration()
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 	    }
-    };	*/
+    };
 	
 	// nueva función para reemplazar al que hacía el click
 	if (await document.querySelector("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable")) {
 		var video_duration = await document.querySelector(".html5-main-video").getDuration();
-		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
+// 		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
+		await alert("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable");
+		await document.querySelector(".ytp-ad-skip-button-slot").removeAttribute('style');
+		await document.querySelector(".ytp-ad-skip-button-slot > span").removeAttribute('style')
 	}
 	
     if (await document.querySelector(".ytp-ad-overlay-close-button")) {
