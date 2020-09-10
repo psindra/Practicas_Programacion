@@ -1,7 +1,7 @@
 // javascript: 
 f = async function() {
 	if (document.querySelector("#movie_player").classList.contains("ad-showing")) {
-		alert('document.querySelector("#movie_player").classList.contains("ad-showing")');
+		await alert('document.querySelector("#movie_player").classList.contains("ad-showing")');
 	}
 	
     if (await document.querySelector(".ytp-ad-skip-button")) {
