@@ -1,7 +1,9 @@
 // javascript: 
 f = async function() {
-	if (document.querySelector("#movie_player").classList.contains("ad-showing")) {
-		await alert('document.querySelector("#movie_player").classList.contains("ad-showing")');
+	if (document.querySelector("#movie_player").classList.contains("ad-showing") & !document.querySelector("#movie_player").classList.contains("var1")) {
+		document.getElementsByTagName('video')[0].pause()
+		await document.querySelector("#movie_player").classList.add("var1");
+		await alert('class "ad-showing"');
 	}
 	
     if (await document.querySelector(".ytp-ad-skip-button")) {
@@ -21,7 +23,7 @@ f = async function() {
 	if (await document.querySelector("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable")) {
 		var video_duration = await document.querySelector(".html5-main-video").getDuration();
 // 		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
-		await alert("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable");
+// 		await alert("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable");
 		await document.querySelector(".ytp-ad-skip-button-slot").removeAttribute('style');
 		await document.querySelector(".ytp-ad-skip-button-slot > span").removeAttribute('style')
 	}
