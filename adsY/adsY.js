@@ -58,7 +58,7 @@ f = async function() {
 // 	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
 // }
 
-if (document.querySelector("#country-code")) {
+if (document.querySelector("#country-code") & document.querySelector("ytd-topbar-logo-renderer.ytd-app.style-scope #country-code")) {
 	document.querySelector("#country-code").innerHTML = document.querySelector("ytd-topbar-logo-renderer.ytd-app.style-scope #country-code").innerHTML + "<br>no ADS";
 }
 
