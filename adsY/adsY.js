@@ -19,7 +19,7 @@ f = async function() {
 		    var video_duration = await document.querySelector(".html5-main-video").getDuration()
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 		    
-		    document.querySelector(".ytp-ad-preview-container.countdown-next-to-thumbnail").addEventListener('click', function() {
+		    document.querySelector(".ytp-ad-text.ytp-ad-preview-text").addEventListener('click', function() {
 			    document.querySelector(".html5-main-video").currentTime = 999999;
 		    });
 	    }
