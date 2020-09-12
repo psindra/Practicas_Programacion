@@ -18,6 +18,10 @@ f = async function() {
 		    // document.querySelector("#movie_player > div.html5-video-container > video").currentTime = document.querySelector("#movie_player > div.html5-video-container > video").getDuration() + 1
 		    var video_duration = await document.querySelector(".html5-main-video").getDuration()
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
+		    
+		    document.querySelector(".ytp-ad-preview-container.countdown-next-to-thumbnail").addEventListener('click', function() {
+			    document.querySelector(".html5-main-video").currentTime = 999999; 
+		    }
 	    }
     };
 	
