@@ -1,9 +1,11 @@
 // javascript: 
 f = async function() {
-	if (document.querySelector("#movie_player").classList.contains("ad-showing") & !document.querySelector("#movie_player").classList.contains("var1")) {
-		document.getElementsByTagName('video')[0].pause()
-		await document.querySelector("#movie_player").classList.add("var1");
-		await alert('class "ad-showing"');
+	if (document.querySelector("#movie_player").classList.contains("ad-showing")) {
+		await document.getElementsByTagName('video')[0].pause()
+		if (!document.querySelector("#movie_player").classList.contains("var1")){
+			await document.querySelector("#movie_player").classList.add("var1");
+			await alert('class "ad-showing"');
+		}	// fin de incorporación "var1"
 	}
 	
     if (await document.querySelector(".ytp-ad-skip-button")) {
