@@ -20,8 +20,8 @@ f = async function() {
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 		    
 		    document.querySelector(".ytp-ad-preview-container.countdown-next-to-thumbnail").addEventListener('click', function() {
-			    document.querySelector(".html5-main-video").currentTime = 999999; 
-		    }
+			    document.querySelector(".html5-main-video").currentTime = 999999;
+		    });
 	    }
     };
 	
