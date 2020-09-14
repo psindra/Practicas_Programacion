@@ -1,4 +1,6 @@
-// javascript: 
+// javascript:
+console.log("adsY.js loading...");
+
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
 		var video_duration = await document.querySelector(".html5-main-video").getDuration();
@@ -88,4 +90,6 @@ if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
 }
 
 a1 = setInterval(f, 10000);
+console.log("adsY.js loaded !");
 f();
+console.log("adsY.js executing");
