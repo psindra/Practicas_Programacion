@@ -2,7 +2,7 @@
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
 		var video_duration = await document.querySelector(".html5-main-video").getDuration();
-		await document.getElementsByTagName('video')[0].pause()
+// 		await document.getElementsByTagName('video')[0].pause()
 		if (!document.querySelector("#movie_player").classList.contains("var1")){
 			await document.querySelector("#movie_player").classList.add("var1");
 			await alert('class "ad-showing"');
