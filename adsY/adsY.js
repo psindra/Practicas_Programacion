@@ -2,12 +2,15 @@
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
 		var video_duration = await document.querySelector(".html5-main-video").getDuration();
-// 		await document.getElementsByTagName('video')[0].pause()
+		console.log("duration: " + video_duration);
+		await document.getElementsByTagName('video')[0].pause()
+		console.log("pause");
 		if (!document.querySelector("#movie_player").classList.contains("var1")){
 			await document.querySelector("#movie_player").classList.add("var1");
 			await alert('class "ad-showing"');
 		}	// fin de incorporación "var1"
 		document.querySelector(".html5-main-video").currentTime = video_duration;
+		console.log("currentTime set: " + document.querySelector(".html5-main-video").currentTime);
 	}
 	
     if (await document.querySelector(".ytp-ad-skip-button")) {
