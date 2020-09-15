@@ -86,17 +86,34 @@ if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
 	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
 }
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// observador = new MutationObserver(function(mutationsList, observer) {
-// mutationsList.forEach(mutation => {
-//         if (mutation.attributeName === 'class') {
-//             f();
-//         }
-//     })
-// } );
-// observador..observe(
-//     document.getElementById('main'),
-//     { attributeFilter: ["class"] }
-// )
+if (document.querySelector("#movie_player")) {
+	document.querySelector("#movie_player").addEventListener("DOMSubtreeModified", function() {
+		if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
+			document.querySelector("#movie_player > div.video-ads.ytp-ad-module").remove();
+		}
+	});
+}
+
+observador = new MutationObserver(function(mutationsList, observer) {
+mutationsList.forEach(mutation => {
+	if (mutation.target.classList.contains("ad-showing")) {
+		var video_duration = document.querySelector(".html5-main-video").getDuration();
+		console.log("duration: " + video_duration);
+// 		await document.getElementsByTagName('video')[0].pause()
+		console.log("pause");
+		if (!document.querySelector("#movie_player").classList.contains("var1")){
+			 document.querySelector("#movie_player").classList.add("var1");
+			 alert('class "ad-showing"');
+		}	// fin de incorporación "var1"
+		document.querySelector(".html5-main-video").currentTime = video_duration;
+		console.log("currentTime set: " + document.querySelector(".html5-main-video").currentTime);
+        }
+    })
+} );
+observador..observe(
+    document.getElementById('main'),
+    { attributeFilter: ["class"] }
+)
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 a1 = setInterval(f, 10000);
