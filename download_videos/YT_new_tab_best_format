@@ -1,0 +1,1 @@
+JSON.parse( ytplayer.config.args.player_response).streamingData.formats.pop().url
