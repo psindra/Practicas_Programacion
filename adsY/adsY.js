@@ -67,9 +67,6 @@ f = async function() {
 };
 
 
-// if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
-// 	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
-// }
 
 if (document.querySelector("#country-code") & document.querySelector("ytd-topbar-logo-renderer.ytd-app.style-scope #country-code")) {
 	document.querySelector("#country-code").innerHTML = document.querySelector("ytd-topbar-logo-renderer.ytd-app.style-scope #country-code").innerHTML + "<br>no ADS";
@@ -85,9 +82,22 @@ if (document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)")) {
 }
 
 
-if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
-	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
-}
+// if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
+// 	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
+// }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+const observador = new MutationObserver(function(mutationsList, observer) {
+mutationsList.forEach(mutation => {
+        if (mutation.attributeName === 'class') {
+            f();
+        }
+    })
+} );
+observador.observe(
+    document.querySelector("#movie_player"),
+    { attributes: true }
+)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 a1 = setInterval(f, 10000);
 console.log("adsY.js loaded !");
