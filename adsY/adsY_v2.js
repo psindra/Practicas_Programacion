@@ -96,7 +96,7 @@ if (document.querySelector("#movie_player")) {
 
 observador = new MutationObserver(function(mutationsList, observer) {
 mutationsList.forEach(mutation => {
-	if (mutation.target.classList.contains("ad-showing")) {
+	if (!mutation.oldValue.includes("ad-showing") & mutation.target.classList.contains("ad-showing")) {
 		var video_duration = document.querySelector(".html5-main-video").getDuration();
 		console.log("duration: " + video_duration);
 // 		await document.getElementsByTagName('video')[0].pause()
@@ -110,8 +110,8 @@ mutationsList.forEach(mutation => {
         }
     })
 } );
-observador..observe(
-    document.getElementById('main'),
+observador.observe(
+    document.querySelector("#movie_player"),
     { attributeFilter: ["class"] }
 )
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
