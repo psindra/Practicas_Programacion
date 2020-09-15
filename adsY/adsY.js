@@ -82,22 +82,22 @@ if (document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)")) {
 }
 
 
-// if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
-// 	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
-// }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-const observador = new MutationObserver(function(mutationsList, observer) {
-mutationsList.forEach(mutation => {
-        if (mutation.attributeName === 'class') {
-            f();
-        }
-    })
-} );
-observador.observe(
-    document.querySelector("#movie_player"),
-    { attributes: true }
-)
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
+	document.querySelector("#movie_player > div.video-ads.ytp-ad-module").addEventListener("DOMSubtreeModified", f);
+}
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// observador = new MutationObserver(function(mutationsList, observer) {
+// mutationsList.forEach(mutation => {
+//         if (mutation.attributeName === 'class') {
+//             f();
+//         }
+//     })
+// } );
+// observador..observe(
+//     document.getElementById('main'),
+//     { attributeFilter: ["class"] }
+// )
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 a1 = setInterval(f, 10000);
 console.log("adsY.js loaded !");
