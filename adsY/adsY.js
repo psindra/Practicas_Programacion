@@ -15,6 +15,11 @@ f = async function() {
 		console.log("currentTime set: " + document.querySelector(".html5-main-video").currentTime);
 	}
 	
+	if (await document.querySelector(".ytp-ad-timed-pie-countdown-container")) {
+		try { await document.querySelector(".ytp-ad-skip-button").click(); }
+			catch(e){};		
+	}
+	
     if (await document.querySelector(".ytp-ad-skip-button")) {
 		await document.querySelector(".ytp-ad-skip-button-slot").removeAttribute('style');
 		await document.querySelector(".ytp-ad-skip-button-slot > span").removeAttribute('style')
