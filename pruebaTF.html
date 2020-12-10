@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js">
       // Define a model for linear regression.
+      console.log('TF version:', tf.version);
+      console.log("const model = tf.sequential();")
       const model = tf.sequential();
       model.add(tf.layers.dense({units: 1, inputShape: [1]}));
 
@@ -20,6 +22,7 @@
         model.predict(tf.tensor2d([5], [1, 1])).print();
         // Open the browser devtools to see the output
       })
+      console.log("predicted: --> " + model.predict(tf.tensor2d([5], [1, 1])));
     </script>
   </head>
 
@@ -27,7 +30,7 @@
     <script>
       // Your code will go here
       // open up your console - if everything loaded properly you should see the correct version number
-      console.log('ml5 version:', tf.version);
+      console.log('(2)TF version:', tf.version);
     </script>
   </body>
 </html>
