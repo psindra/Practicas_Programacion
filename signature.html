@@ -15,7 +15,7 @@
     </canvas>
     <script>
       var canvas = document.querySelector("canvas");
-      var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.height/60), minWidth:(canvas.height/300)});
+      var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/120), minWidth:(canvas.wigth/600)});
       fun = function()
       {
         var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
