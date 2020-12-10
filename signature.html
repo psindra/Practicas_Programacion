@@ -18,14 +18,19 @@
       var signaturePad = new SignaturePad(canvas);
       fun = function()
       {
-        for (i=0; i < canvas.getContext("2d").getImageData(0,0,10,10).data.length;i+=4)
+        var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
+        canvas_data_array = new Array(canvas_data.length/4);
+        for (i=0; i < canvas_data.length;i+=4)
         {
-          console.log("pixel " + (i/4+1) + "   [R]:"+canvas.getContext("2d").getImageData(0,0,10,10).data[i] + "   [G]:"+canvas.getContext("2d").getImageData(0,0,10,10).data[i+1] + "   [B]:"+canvas.getContext("2d").getImageData(0,0,10,10).data[i+2] + "   [L]:"+canvas.getContext("2d").getImageData(0,0,10,10).data[i+3]);
+          console.log("pixel " + (i/4+1) + "   [R]:"+canvas_data[i] + "   [G]:"+canvas_data[i+1] + "   [B]:"+canvas_data[i+2] + "   [L]:"+canvas_data[i+3]);
+          canvas_data_array[i/4] = canvas_data[i+3];
         }
       }
     </script>
-    <button onclick="fun()">
-    </button>
+    <div>
+      <button onclick="fun()" value="console log">
+      </button>
+    </div>
   </body>
   
 
