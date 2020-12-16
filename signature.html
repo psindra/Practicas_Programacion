@@ -15,7 +15,7 @@
     </canvas>
     <script>
       var canvas = document.querySelector("canvas");
-      var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/120), minWidth:(canvas.wigth/600)});
+      var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/40), minWidth:(canvas.wigth/200)});
       fun = function()
       {
         var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
@@ -38,7 +38,7 @@
             }
           }
           console.log(renglon+"\n");
-          renglon = "~";
+          renglon = "i";
         }
       }
     </script>
@@ -71,7 +71,7 @@
             }
           }
           console.log(renglon+"\n");
-          renglon = "~";
+          renglon = "i";
         }
       }
     </script>
