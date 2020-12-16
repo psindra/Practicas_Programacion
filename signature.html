@@ -10,8 +10,8 @@
     </script>
   </head>
 
-  <body>
-    <canvas width="250" height="250">
+  <body style="background: gray">
+    <canvas width="250" height="250" style= "background: white">
     </canvas>
     <script>
       var canvas = document.querySelector("canvas");
@@ -48,6 +48,7 @@
         canvas2 = document.createElement("canvas");
         canvas2.width = 28;
         canvas2.height = 28;
+        canvas2.style.background = "white";
         document.body.appendChild(canvas2);
         canvas2_cont = canvas2.getContext("2d");
         canvas2_cont.drawimage(canvas, 0,0, 28,28);
