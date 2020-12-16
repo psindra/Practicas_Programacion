@@ -53,17 +53,16 @@
         canvas2_cont.drawimage(canvas, 0,0, 28,28);
         canvas2_data = canvas2_cont.getImageData(0,0,canvas2.width, canvas2.height).data
         canvas2_data_array = new Array(canvas2_data.length/4);
-        for (i=0; i < canvas_data.length;i+=4)
+        for (i=0; i < canvas2_data.length;i+=4)
         {
-          //console.log("pixel " + (i/4+1) + "   [R]:"+canvas_data[i] + "   [G]:"+canvas_data[i+1] + "   [B]:"+canvas_data[i+2] + "   [L]:"+canvas_data[i+3]);
-          canvas_data_array[i/4] = canvas_data[i+3];
+          canvas2_data_array[i/4] = canvas2_data[i+3];
         }
         var renglon ="";
-        for (i=0;i<canvas.height;i++)
+        for (i=0;i<canvas2.height;i++)
         {
-          for(j=0;j<canvas.width;j++)
+          for(j=0;j<canvas2.width;j++)
           {
-            if(canvas_data_array[i*canvas.width+j])
+            if(canvas2_data_array[i*canvas2.width+j])
             {
               renglon += "+";
             } else {
