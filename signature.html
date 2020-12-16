@@ -51,7 +51,7 @@
         canvas2.style.background = "white";
         document.body.appendChild(canvas2);
         canvas2_cont = canvas2.getContext("2d");
-        canvas2_cont.drawimage(canvas, 0,0, 28,28);
+        canvas2_cont.drawImage(canvas, 0,0, 28,28);
         canvas2_data = canvas2_cont.getImageData(0,0,canvas2.width, canvas2.height).data
         canvas2_data_array = new Array(canvas2_data.length/4);
         for (i=0; i < canvas2_data.length;i+=4)
