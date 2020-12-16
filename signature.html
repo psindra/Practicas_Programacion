@@ -25,7 +25,7 @@
           //console.log("pixel " + (i/4+1) + "   [R]:"+canvas_data[i] + "   [G]:"+canvas_data[i+1] + "   [B]:"+canvas_data[i+2] + "   [L]:"+canvas_data[i+3]);
           canvas_data_array[i/4] = canvas_data[i+3];
         }
-        var renglon ="";
+        var renglon ="~";
         for (i=0;i<canvas.height;i++)
         {
           for(j=0;j<canvas.width;j++)
@@ -38,7 +38,7 @@
             }
           }
           console.log(renglon+"\n");
-          renglon = "";
+          renglon = "~";
         }
       }
     </script>
@@ -58,7 +58,7 @@
         {
           canvas2_data_array[i/4] = canvas2_data[i+3];
         }
-        var renglon ="";
+        var renglon ="~";
         for (i=0;i<canvas2.height;i++)
         {
           for(j=0;j<canvas2.width;j++)
@@ -71,7 +71,7 @@
             }
           }
           console.log(renglon+"\n");
-          renglon = "";
+          renglon = "~";
         }
       }
     </script>
