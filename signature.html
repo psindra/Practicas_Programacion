@@ -16,7 +16,7 @@
     <script>
       modelo = tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
       var canvas = document.querySelector("canvas");
-      var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/35), minWidth:(canvas.wigth/100)});
+      var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/30), minWidth:(canvas.wigth/60)});
       fun = function()
       {
         var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
