@@ -42,9 +42,44 @@
         }
       }
     </script>
+    <script>
+      func2 = function () 
+      {
+        canvas2 = document.createElement("canvas");
+        canvas2.width = 28;
+        canvas2.height = 28;
+        document.body.appendChild(canvas2);
+        canvas2_cont = canvas2.getContext("2d");
+        canvas2_cont.drawimage(canvas, 0,0, 28,28);
+        canvas2_data = canvas2_cont.getImageData(0,0,canvas2.width, canvas2.height).data
+        canvas2_data_array = new Array(canvas2_data.length/4);
+        for (i=0; i < canvas_data.length;i+=4)
+        {
+          //console.log("pixel " + (i/4+1) + "   [R]:"+canvas_data[i] + "   [G]:"+canvas_data[i+1] + "   [B]:"+canvas_data[i+2] + "   [L]:"+canvas_data[i+3]);
+          canvas_data_array[i/4] = canvas_data[i+3];
+        }
+        var renglon ="";
+        for (i=0;i<canvas.height;i++)
+        {
+          for(j=0;j<canvas.width;j++)
+          {
+            if(canvas_data_array[i*canvas.width+j])
+            {
+              renglon += "+";
+            } else {
+              renglon += " ";
+            }
+          }
+          console.log(renglon+"\n");
+          renglon = "";
+        }
+      }
+    </script>
+          
     <div>
       <button onclick="fun()">console log</button>
       <button onclick="signaturePad.clear()">Clear</button>
+      <button onclick="func2()>transform</button>
     </div>
   </body>
   
