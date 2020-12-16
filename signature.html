@@ -14,7 +14,7 @@
     <canvas width="250" height="250" style= "background: white">
     </canvas>
     <script>
-      modelo = tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
+      modelo = await tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
       var canvas = document.querySelector("canvas");
       var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/30), minWidth:(canvas.wigth/60)});
       fun = function()
@@ -84,8 +84,9 @@
         {
           canvas2_data_array_for_tensor[i] = canvas2_data_array[i] / 255;
         }
-        prediccion = modelo.predict(tf.tensor(canvas2_data_array_for_tensor, [1,784]));
-        prediccion.print();
+        predict = modelo.predict(tf.tensor(canvas2_data_array_for_tensor, [1,784]));
+        prediccion = (await predict.array())[0];
+        alert(prediccion.indexOf(math.max(...prediccion));
       }
     </script>
           
