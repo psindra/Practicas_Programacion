@@ -96,7 +96,7 @@
         }
         predict = modelo.predict(tf.tensor(canvas2_data_array_for_tensor, [1,784]));
         prediccion = (await predict.array())[0];
-        if (!confirm(prediccion.indexOf(Math.max(...prediccion))) + "  =>  " + prediccion[prediccion.indexOf(Math.max(...prediccion))]*100 + "%")
+        if (!confirm(prediccion.indexOf(Math.max(...prediccion)) + "  =>  " + prediccion[prediccion.indexOf(Math.max(...prediccion))]*100 + "%"))
         {
           var renglon ="~";
           for (i=0;i<canvas2.height;i++)
