@@ -14,7 +14,9 @@
     <canvas width="250" height="250" style= "background: white">
     </canvas>
     <script>
-      modelo = await tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
+//       modelo = await tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
+//       por el AWAIT
+      tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})
       var canvas = document.querySelector("canvas");
       var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/30), minWidth:(canvas.wigth/60)});
       fun = function()
