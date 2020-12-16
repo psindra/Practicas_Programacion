@@ -18,7 +18,7 @@
 //       por el AWAIT
       tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})
       var canvas = document.querySelector("canvas");
-      var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/15), minWidth:(canvas.wigth/15)});
+      var signaturePad = new SignaturePad(canvas, {maxWidth:7, minWidth:5, velocityFilterWeight: 0});
       fun = function()
       {
         var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
