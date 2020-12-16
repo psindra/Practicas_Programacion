@@ -79,7 +79,7 @@
       }
     </script>
     <script>
-      func3 = function()
+      func3 = async function()
       {
         canvas2_data_array_for_tensor = new Array(canvas2_data_array.length);
         for (i=0; i < canvas2_data_array.length;i++)
@@ -88,7 +88,7 @@
         }
         predict = modelo.predict(tf.tensor(canvas2_data_array_for_tensor, [1,784]));
         prediccion = (await predict.array())[0];
-        alert(prediccion.indexOf(math.max(...prediccion));
+        alert(prediccion.indexOf(Math.max(...prediccion)));
       }
     </script>
           
