@@ -45,7 +45,7 @@
     <script>
       func2 = function () 
       {
-        canvas2 = document.createElement("canvas");
+        try{ const canvas2 = document.createElement("canvas");} catch(){};
         canvas2.width = 28;
         canvas2.height = 28;
         canvas2.style.background = "white";
@@ -79,7 +79,7 @@
     <div>
       <button onclick="fun()">console log</button>
       <button onclick="signaturePad.clear()">Clear</button>
-      <button onclick="func2()>transform</button>
+      <button onclick="func2()">transform</button>
     </div>
   </body>
   
