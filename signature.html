@@ -98,6 +98,7 @@
         prediccion = (await predict.array())[0];
         if (!confirm(prediccion.indexOf(Math.max(...prediccion))))
         {
+          var renglon ="~";
           for (i=0;i<canvas2.height;i++)
           {
             for(j=0;j<canvas2.width;j++)
@@ -120,7 +121,7 @@
       <button onclick="fun()">console log</button>
       <button onclick="signaturePad.clear()">Clear</button>
       <button onclick="func2()">transform</button>
-      <button onclick="func2(); func3();">Guess</button>
+      <button onclick="func3()">Guess</button>
     </div>
   </body>
   
