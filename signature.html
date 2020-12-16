@@ -14,6 +14,7 @@
     <canvas width="250" height="250" style= "background: white">
     </canvas>
     <script>
+      modelo = tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
       var canvas = document.querySelector("canvas");
       var signaturePad = new SignaturePad(canvas, {maxWidth:(canvas.width/35), minWidth:(canvas.wigth/100)});
       fun = function()
@@ -75,11 +76,24 @@
         }
       }
     </script>
+    <script>
+      func3 = function()
+      {
+        canvas2_data_array_for_tensor = new Array(canvas2_data_array.length);
+        for (i=0; i < canvas2_data.length;i+=4)
+        {
+          canvas2_data_array_for_tensor[i] = canvas2_data_array[i] / 255;
+        }
+        prediccion = modelo.predict(tf.tensor(canvas2_data_array_for_tensor, [1,784]));
+        prediccion.print();
+      }
+    </script>
           
     <div>
       <button onclick="fun()">console log</button>
       <button onclick="signaturePad.clear()">Clear</button>
       <button onclick="func2()">transform</button>
+      <button onclick="func2(); func3();">Guess</button>
     </div>
   </body>
   
