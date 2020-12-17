@@ -18,7 +18,7 @@
 //       modelo = await tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
 //       por el AWAIT
       try{tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})}
-      catch(){tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
+      catch{tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
       var canvas = document.querySelector("canvas");
       var signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
       document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
@@ -64,7 +64,7 @@
         {
           canvas2_data_array[i/4] = canvas2_data[i+3];
         }
-        try { historial, historial_numero } catch(){ historial = new Array; historial_numero = new Array}
+        try { historial, historial_numero } catch{ historial = new Array; historial_numero = new Array}
         historial.push(canvas2_data_array);
         historial_numero.push(document.querySelector("body > h1").textContent);
         document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
