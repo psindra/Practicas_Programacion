@@ -11,42 +11,45 @@
   </head>
 
   <body style="background: gray">
+    <h1> </h1>
     <canvas width="250" height="250" style= "background: white">
     </canvas>
     <script>
 //       modelo = await tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
 //       por el AWAIT
-      tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})
+      try{tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})}
+      catch(){tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
       var canvas = document.querySelector("canvas");
       var signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
-      fun = function()
-      {
-        var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
-        canvas_data_array = new Array(canvas_data.length/4);
-        for (i=0; i < canvas_data.length;i+=4)
-        {
-          //console.log("pixel " + (i/4+1) + "   [R]:"+canvas_data[i] + "   [G]:"+canvas_data[i+1] + "   [B]:"+canvas_data[i+2] + "   [L]:"+canvas_data[i+3]);
-          canvas_data_array[i/4] = canvas_data[i+3];
-        }
-        var renglon ="~";
-        for (i=0;i<canvas.height;i++)
-        {
-          for(j=0;j<canvas.width;j++)
-          {
-            if(canvas_data_array[i*canvas.width+j])
-            {
-              renglon += "+";
-            } else {
-              renglon += " ";
-            }
-          }
-          console.log(renglon+"\n");
-          renglon = "i";
-        }
-      }
+      document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
+//       fun = function()
+//       {
+//         var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
+//         canvas_data_array = new Array(canvas_data.length/4);
+//         for (i=0; i < canvas_data.length;i+=4)
+//         {
+//           //console.log("pixel " + (i/4+1) + "   [R]:"+canvas_data[i] + "   [G]:"+canvas_data[i+1] + "   [B]:"+canvas_data[i+2] + "   [L]:"+canvas_data[i+3]);
+//           canvas_data_array[i/4] = canvas_data[i+3];
+//         }
+//         var renglon ="~";
+//         for (i=0;i<canvas.height;i++)
+//         {
+//           for(j=0;j<canvas.width;j++)
+//           {
+//             if(canvas_data_array[i*canvas.width+j])
+//             {
+//               renglon += "+";
+//             } else {
+//               renglon += " ";
+//             }
+//           }
+//           console.log(renglon+"\n");
+//           renglon = "i";
+//         }
+//       }
     </script>
     <script>
-      func2 = function () 
+      cargarValor = function () 
       {
         try { canvas2} catch{ canvas2 = document.createElement("canvas")};
         canvas2.width = 28;
@@ -61,69 +64,48 @@
         {
           canvas2_data_array[i/4] = canvas2_data[i+3];
         }
-        var renglon ="~";
-        for (i=0;i<canvas2.height;i++)
-        {
-          for(j=0;j<canvas2.width;j++)
-          {
-            if(canvas2_data_array[i*canvas2.width+j])
-            {
-              renglon += " +";
-            } else {
-              renglon += "  ";
-            }
-          }
-          console.log(renglon+"\n");
-          renglon = "i";
-        }
+        try { historial, historial_numero } catch(){ historial = new Array; historial_numero = new Array}
+        historial.push(canvas2_data_array);
+        historial_numero.push(document.querySelector("body > h1").textContent);
+        document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
+        canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
       }
-    </script>
-    <script>
-      func3 = async function()
+      
+      entrenarModelo = async function()
       {
-        try { canvas2} catch{ canvas2 = document.createElement("canvas")};
-        canvas2.width = 28;
-        canvas2.height = 28;
-        canvas2.style.background = "white";
-        document.body.appendChild(canvas2);
-        canvas2_cont = canvas2.getContext("2d");
-        canvas2_cont.drawImage(canvas, 0,0, 28,28);
-        canvas2_data = canvas2_cont.getImageData(0,0,canvas2.width, canvas2.height).data
-        canvas2_data_array_for_tensor = new Array(canvas2_data.length/4);
-        for (i=0; i < canvas2_data.length;i+=4)
-        {
-          canvas2_data_array_for_tensor[i/4] = canvas2_data[i+3] / 255;
-        }
-        predict = modelo.predict(tf.tensor(canvas2_data_array_for_tensor, [1,784]));
-        prediccion = (await predict.array())[0];
-        if (!confirm(prediccion.indexOf(Math.max(...prediccion)) + "  =>  " + prediccion[prediccion.indexOf(Math.max(...prediccion))]*100 + "%"))
-        {
-          var renglon ="~";
-          for (i=0;i<canvas2.height;i++)
-          {
-            for(j=0;j<canvas2.width;j++)
-            {
-              if(canvas2_data_array_for_tensor[i*canvas2.width+j])
-              {
-                renglon += "[+]";
-              } else {
-                renglon += "   ";
-              }
-            }
-            console.log(renglon+"\n");
-            renglon = i;
-          }
-          console.log(prediccion);
-          alert("0: "+prediccion[0].toFixed(5)+"\n"+"1: "+prediccion[1].toFixed(5)+"\n"+"2: "+prediccion[2].toFixed(5)+"\n"+"3: "+prediccion[3].toFixed(5)+"\n"+"4: "+prediccion[4].toFixed(5)+"\n"+"5: "+prediccion[5].toFixed(5)+"\n"+"6: "+prediccion[6].toFixed(5)+"\n"+"7: "+prediccion[7].toFixed(5)+"\n"+"8: "+prediccion[8].toFixed(5)+"\n"+"9: "+prediccion[9].toFixed(5))
-        }
+        modelo.compile({loss:'categoricalCrossentropy', optimizer:'sgd', metrics:'accuracy'})
+        ff = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:100, verbose:2})
+        alert("entrenado");
+        evaluacion = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:100})
+        alert("evaluación => " + await evaluacion[1].array()*100 + "%");
+        save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
+      }
+      descargarModelo() = ascync function()
+      {
+        save_file = await modelo.save('downloads://modelo_entrenado_MNIST_web')
+      }
+      
+      cargardesdeArchivo = scync function()
+      {
+        const uploadJSONInput = document.getElementById('upload-json');
+        const uploadWeightsInput = document.getElementById('upload-weights');
+        modelo = await tf.loadLayersModel(tf.io.browserFiles(
+        [uploadJSONInput.files[0], uploadWeightsInput.files[0]]));
       }
     </script>
           
     <div>
-      <button onclick="fun()">console log</button>
+      <button onclick="cargarValor()" style="width: 86px; height: 76px;">Cargar valor</button>
+      <button onclick="entrenarModelo()" style="width: 86px; height: 76px;">Entrenar Modelo</button>
       <button onclick="signaturePad.clear()">Clear</button>
-      <button onclick="func2()">transform</button>
-      <button onclick="func3()">Guess</button>
+      <div>
+      <button onclick="descargarModelo()" style="width: 86px; height: 76px;">Descargar Modelo</button>
+      </div>
+      <label for="upload-json">JSON file:</label>
+      <input type="file" id="upload-json" name="upload-json">
+      <label for="upload-weights">BIN file:</label>
+      <input type="file" id="upload-weights" name="upload-weights">
+      <button onclick="cargardesdeArchivo()">Cargar modelo desde archivo</button>
     </div>
   </body>
   
