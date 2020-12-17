@@ -18,8 +18,8 @@
       inicio = async function () 
       {
         try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})} catch{await tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
-        var canvas = document.querySelector("canvas");
-        var signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
+        canvas = document.querySelector("canvas");
+        signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
         document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
       }
       inicio();
