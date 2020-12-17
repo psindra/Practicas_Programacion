@@ -119,7 +119,8 @@
       }
       cargarModeloLocal = async function()
       {
-        try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})} catch{alert("no hay modelo en el navegador")};
+        try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})
+           alert("modelo cargado desde el navegador")} catch{alert("no hay modelo en el navegador")};
       }
     </script>
           
