@@ -40,7 +40,7 @@
         canvas2_data_array = new Array(canvas2_data.length/4);
         for (i=0; i < canvas2_data.length;i+=4)
         {
-          canvas2_data_array[i/4] = canvas2_data[i+3];
+          canvas2_data_array[i/4] = canvas2_data[i+3] / 255;
         }
         try { historial, historial_numero } catch{ historial = new Array; historial_numero = new Array}
         historial.push(canvas2_data_array);
