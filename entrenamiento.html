@@ -55,7 +55,7 @@
         alert("entrenado");
         evaluacion = await modelo.evaluate(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
         alert("evaluación => " + await evaluacion[1].array()*100 + "%");
-        pp = await modelo.predict(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
+        pp = await modelo.predict(tf.tensor(historial,[historial.length,784]))
         prediccion = (await pp.array()).map((arr)=>{return arr.indexOf(Math.max(...arr))});
 //         save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
       }
