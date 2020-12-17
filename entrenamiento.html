@@ -10,15 +10,14 @@
     </script>
   </head>
 
-  <body style="background: gray" onload="Init()">
+  <body style="background: gray">
     <h1>X</h1>
     <canvas width="250" height="250" style= "background: white">
     </canvas>
     <script>
       inicio = async function () 
       {
-        try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})}
-        catch{await tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
+        try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})} catch{await tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
         var canvas = document.querySelector("canvas");
         var signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
         document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
@@ -54,11 +53,13 @@
         modelo.compile({loss:'categoricalCrossentropy', optimizer:'sgd', metrics:'accuracy'})
         ff = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:100, verbose:2})
         alert("entrenado");
-        evaluacion = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:100})
+        evaluacion = await modelo.evaluate(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
         alert("evaluación => " + await evaluacion[1].array()*100 + "%");
+        pp = await modelo.predict(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
+        prediccion = (await pp.array()).map((arr)=>{return arr.indexOf(Math.max(...arr))});
         save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
       }
-      descargarModelo() = async function()
+      descargarModelo = async function()
       {
         save_file = await modelo.save('downloads://modelo_entrenado_MNIST_web')
       }
