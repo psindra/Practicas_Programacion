@@ -85,7 +85,7 @@
         save_file = await modelo.save('downloads://modelo_entrenado_MNIST_web')
       }
       
-      cargardesdeArchivo = scync function()
+      cargardesdeArchivo = ascync function()
       {
         const uploadJSONInput = document.getElementById('upload-json');
         const uploadWeightsInput = document.getElementById('upload-weights');
