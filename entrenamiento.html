@@ -44,7 +44,7 @@
         }
         try { historial, historial_numero } catch{ historial = new Array; historial_numero = new Array}
         historial.push(canvas2_data_array);
-        historial_numero.push(document.querySelector("body > h1").textContent);
+        historial_numero.push(parseInt(document.querySelector("body > h1").textContent));
         document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
         canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
       }
