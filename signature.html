@@ -117,6 +117,10 @@
           alert("0: "+prediccion[0].toFixed(5)+"\n"+"1: "+prediccion[1].toFixed(5)+"\n"+"2: "+prediccion[2].toFixed(5)+"\n"+"3: "+prediccion[3].toFixed(5)+"\n"+"4: "+prediccion[4].toFixed(5)+"\n"+"5: "+prediccion[5].toFixed(5)+"\n"+"6: "+prediccion[6].toFixed(5)+"\n"+"7: "+prediccion[7].toFixed(5)+"\n"+"8: "+prediccion[8].toFixed(5)+"\n"+"9: "+prediccion[9].toFixed(5))
         }
       }
+      cargarModeloLocal = async function()
+      {
+        try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})} catch{alert("no hay modelo en el navegador")};
+      }
     </script>
           
     <div>
@@ -124,6 +128,7 @@
       <button onclick="signaturePad.clear()">Clear</button>
       <button onclick="func2()">transform</button>
       <button onclick="func3()">Guess</button>
+      <br><br><button onclick="cargarModeloLocal()">Cargar modelo del navegador</button>
     </div>
   </body>
   
