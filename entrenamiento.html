@@ -10,44 +10,21 @@
     </script>
   </head>
 
-  <body style="background: gray">
+  <body style="background: gray" onload="Init()">
     <h1>X</h1>
     <canvas width="250" height="250" style= "background: white">
     </canvas>
     <script>
-//       modelo = await tf.loadLayersModel("./Modelo_pre_entrenado/model.json")
-//       por el AWAIT
-      try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})}
-      catch{tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
-      var canvas = document.querySelector("canvas");
-      var signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
-      document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
-//       fun = function()
-//       {
-//         var canvas_data = canvas.getContext("2d").getImageData(0,0,canvas.height,canvas.width).data;
-//         canvas_data_array = new Array(canvas_data.length/4);
-//         for (i=0; i < canvas_data.length;i+=4)
-//         {
-//           //console.log("pixel " + (i/4+1) + "   [R]:"+canvas_data[i] + "   [G]:"+canvas_data[i+1] + "   [B]:"+canvas_data[i+2] + "   [L]:"+canvas_data[i+3]);
-//           canvas_data_array[i/4] = canvas_data[i+3];
-//         }
-//         var renglon ="~";
-//         for (i=0;i<canvas.height;i++)
-//         {
-//           for(j=0;j<canvas.width;j++)
-//           {
-//             if(canvas_data_array[i*canvas.width+j])
-//             {
-//               renglon += "+";
-//             } else {
-//               renglon += " ";
-//             }
-//           }
-//           console.log(renglon+"\n");
-//           renglon = "i";
-//         }
-//       }
+      Init = async function()
+      {
+        try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})}
+        catch{tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
+        var canvas = document.querySelector("canvas");
+        var signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
+        document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
+      }
     </script>
+    
     <script>
       cargarValor = function () 
       {
@@ -85,7 +62,7 @@
         save_file = await modelo.save('downloads://modelo_entrenado_MNIST_web')
       }
       
-      cargardesdeArchivo = ascync function()
+      cargardesdeArchivo = async function()
       {
         const uploadJSONInput = document.getElementById('upload-json');
         const uploadWeightsInput = document.getElementById('upload-weights');
