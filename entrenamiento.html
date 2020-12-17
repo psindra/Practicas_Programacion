@@ -19,7 +19,7 @@
       {
         try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})} catch{await tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
         canvas = document.querySelector("canvas");
-        signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
+        signaturePad = new SignaturePad(canvas, {maxWidth:10, minWidth:8, velocityFilterWeight: 0});
         document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
         modelo.compile({loss:'categoricalCrossentropy', optimizer:'sgd', metrics:'accuracy'})
       }
