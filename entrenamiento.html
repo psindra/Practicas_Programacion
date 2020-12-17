@@ -80,7 +80,7 @@
         alert("evaluación => " + await evaluacion[1].array()*100 + "%");
         save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
       }
-      descargarModelo() = ascync function()
+      descargarModelo() = async function()
       {
         save_file = await modelo.save('downloads://modelo_entrenado_MNIST_web')
       }
