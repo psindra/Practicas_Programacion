@@ -21,6 +21,7 @@
         canvas = document.querySelector("canvas");
         signaturePad = new SignaturePad(canvas, {maxWidth:8, minWidth:7, velocityFilterWeight: 0});
         document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
+        modelo.compile({loss:'categoricalCrossentropy', optimizer:'sgd', metrics:'accuracy'})
       }
       inicio();
     </script>
@@ -50,8 +51,7 @@
       
       entrenarModelo = async function()
       {
-        modelo.compile({loss:'categoricalCrossentropy', optimizer:'sgd', metrics:'accuracy'})
-        ff = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:100, verbose:2})
+        ff = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:1000, verbose:2})
         alert("entrenado");
         evaluacion = await modelo.evaluate(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
         alert("evaluación => " + await evaluacion[1].array()*100 + "%");
