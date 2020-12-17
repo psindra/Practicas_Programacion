@@ -57,7 +57,7 @@
         alert("evaluación => " + await evaluacion[1].array()*100 + "%");
         pp = await modelo.predict(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
         prediccion = (await pp.array()).map((arr)=>{return arr.indexOf(Math.max(...arr))});
-        save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
+//         save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
       }
       descargarModelo = async function()
       {
@@ -71,6 +71,10 @@
         modelo = await tf.loadLayersModel(tf.io.browserFiles(
         [uploadJSONInput.files[0], uploadWeightsInput.files[0]]));
       }
+      guardarLocal = async function()
+      {
+        save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
+      }
     </script>
       <div><br>
       <button onclick="cargarValor()" style="width: 86px; height: 76px;">Cargar valor</button><b>  </b>
@@ -80,6 +84,7 @@
     <div>
     <button onclick="entrenarModelo()" style="width: 86px; height: 76px;">Entrenar Modelo</button>
     <button onclick="descargarModelo()" style="width: 86px; height: 76px;">Descargar Modelo</button>
+    <button onclick="guardarLocal()" style="width: 86px; height: 76px;">Guardar Modelo en navegador</button>
     </div>
     <br><br>
     <label for="upload-json">JSON file:</label>
