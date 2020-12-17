@@ -93,19 +93,19 @@
         [uploadJSONInput.files[0], uploadWeightsInput.files[0]]));
       }
     </script>
-          
+
+    <button onclick="cargarValor()" style="width: 86px; height: 76px;">Cargar valor</button><b>  </b>
+    <button onclick="signaturePad.clear()">Clear</button>
+    <br><br>
     <div>
-      <button onclick="cargarValor()" style="width: 86px; height: 76px;">Cargar valor</button>
-      <button onclick="entrenarModelo()" style="width: 86px; height: 76px;">Entrenar Modelo</button>
-      <button onclick="signaturePad.clear()">Clear</button>
-      <div>
-      <button onclick="descargarModelo()" style="width: 86px; height: 76px;">Descargar Modelo</button>
-      </div>
-      <label for="upload-json">JSON file:</label>
-      <input type="file" id="upload-json" name="upload-json">
-      <label for="upload-weights">BIN file:</label>
-      <input type="file" id="upload-weights" name="upload-weights">
-      <button onclick="cargardesdeArchivo()">Cargar modelo desde archivo</button>
+    <button onclick="entrenarModelo()" style="width: 86px; height: 76px;">Entrenar Modelo</button>
+    <button onclick="descargarModelo()" style="width: 86px; height: 76px;">Descargar Modelo</button>
     </div>
+    <br><br>
+    <label for="upload-json">JSON file:</label>
+    <input type="file" id="upload-json" name="upload-json"><br>
+    <label for="upload-weights">BIN file:</label>
+    <input type="file" id="upload-weights" name="upload-weights"><br>
+    <button onclick="cargardesdeArchivo()">Cargar modelo desde archivo</button>
   </body>
   
