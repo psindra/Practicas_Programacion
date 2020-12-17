@@ -75,10 +75,16 @@
       {
         save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
       }
+      vaciarBuffer = async function()
+      {
+        historial = new Array; historial_numero = new Array;
+      }
+        
     </script>
       <div><br>
       <button onclick="cargarValor()" style="width: 86px; height: 76px;">Cargar valor</button><b>  </b>
       <button onclick="signaturePad.clear()">Clear</button>
+      <button onclick="vaciarBuffer()" style="width: 86px; height: 76px;">Vaciar Buffer</button><b>  </b>
       <br><br>
     </div>
     <div>
