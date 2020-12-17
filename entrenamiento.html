@@ -51,7 +51,7 @@
       
       entrenarModelo = async function()
       {
-        ff = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:1000, verbose:2})
+        ff = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:50, verbose:2})
         alert("entrenado");
         evaluacion = await modelo.evaluate(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
         alert("evaluación => " + await evaluacion[1].array()*100 + "%");
