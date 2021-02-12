@@ -3,7 +3,7 @@ console.log("adsY.js loading...");
 
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
-		var video_duration = await document.querySelector(".html5-main-video").getDuration();
+		var video_duration = await document.querySelector(".html5-main-video").duration;
 		console.log("duration: " + video_duration);
 // 		await document.getElementsByTagName('video')[0].pause()
 		console.log("pause");
@@ -28,7 +28,7 @@ f = async function() {
 	    if (await document.querySelector(".ytp-ad-text")) {
 		    // document.querySelector(".html5-main-video") // para usarse en vez de "#movie_player > div.html5-video-container > video"
 		    // document.querySelector("#movie_player > div.html5-video-container > video").currentTime = document.querySelector("#movie_player > div.html5-video-container > video").getDuration() + 1
-		    var video_duration = await document.querySelector(".html5-main-video").getDuration()
+		    var video_duration = await document.querySelector(".html5-main-video").duration;
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 		    
 		    await document.querySelector(".ytp-ad-text.ytp-ad-preview-text").addEventListener('click', function() {
@@ -39,7 +39,7 @@ f = async function() {
 	
 	// nueva función para reemplazar al que hacía el click
 	if (await document.querySelector("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable")) {
-		var video_duration = await document.querySelector(".html5-main-video").getDuration();
+		var video_duration = await document.querySelector(".html5-main-video").duration;
 // 		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 // 		await alert("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable");
 		await document.querySelector(".ytp-ad-skip-button-slot").removeAttribute('style');
