@@ -6,21 +6,21 @@
      }
  } catch (e) {
      stream = document.getElementsByTagName('video')[0].captureStream();
-     mimeType = 'video/webm';
+     mmimeType = 'video/webm;codecs=h264';
      recordedChunks = [];
      stopped = false;
      recording = true;
      mediaRecorder = new MediaRecorder(stream, {
-         mimeType: mimeType
+         mimeType: 'video/webm;codecs=h264'
      });
      mediaRecorder.ondataavailable = function(e) {
          if (e.data.size > 0) {
              recordedChunks.push(e.data);
              console.info(e.data);
-             document.querySelector("#logo-icon > svg > g > g:nth-child(1) > polygon").setAttribute('fill', '#000000')
+             document.querySelector("#logo-icon > svg > g > g:nth-child(1) > polygon").setAttribute('fill', '#000000');
              setTimeout(() => {
-                 document.querySelector("#logo-icon > svg > g > g:nth-child(1) > polygon").setAttribute('fill', '#FFFFFF')
-             }, 1000)
+                 document.querySelector("#logo-icon > svg > g > g:nth-child(1) > polygon").setAttribute('fill', '#FFFFFF');
+             }, 250);
 
          }
          if (recording === false) {
@@ -32,16 +32,16 @@
      mediaRecorder.onstop = function() {
          console.info("Sended mediaRecorder.stop()");
          const recordedBlob = new Blob(recordedChunks, {
-             type: mimeType
+             type: 'video/mp4;codecs=h264'
          });
          recordedChunks = [];
-         document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path").setAttribute('fill', '#FF0000')
+         document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path").setAttribute('fill', '#FF0000');
          downloadLink = document.createElement('a');
          downloadLink.href = URL.createObjectURL(recordedBlob);
          downloadLink.target = '_blank';
          downloadLink.click();
      };
-     mediaRecorder.start(5000);
+     mediaRecorder.start(1000);
      console.info("Recording..");
-     document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path").setAttribute('fill', '#00FF00')
+     document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path").setAttribute('fill', '#00FF00');
  }
