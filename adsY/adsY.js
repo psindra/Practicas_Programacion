@@ -48,7 +48,7 @@ f = async function() {
 	
     
 	//////////////////////////////////////////////////////////////////
-	document.querySelector("#movie_player > div.video-ads.ytp-ad-module")?.remove()
+	await document.querySelector("#movie_player > div.video-ads.ytp-ad-module")?.remove()
 	
 // 	if (await document.querySelector(".ytp-ad-overlay-close-button")) {
 //         await document.querySelector(".ytp-ad-overlay-close-button").click()
