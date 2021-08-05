@@ -32,26 +32,30 @@ f = async function() {
 		    //document.querySelector(".html5-main-video").currentTime = video_duration + 1;
 		    
 		    await document.querySelector(".ytp-ad-text.ytp-ad-preview-text").addEventListener('click', function() {
-			    document.querySelector(".html5-main-video").currentTime = video_duration;
+			    document.querySelector(".html5-main-video").currentTime = video_duration;    
 		    });
 	    }
     };
 	
-	// nueva función para reemplazar al que hacía el click
-	if (await document.querySelector("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable")) {
-		var video_duration = await document.querySelector(".html5-main-video").duration;
-// 		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
-// 		await alert("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable");
-		await document.querySelector(".ytp-ad-skip-button-slot").removeAttribute('style');
-		await document.querySelector(".ytp-ad-skip-button-slot > span").removeAttribute('style')
-	}
+// 	// nueva función para reemplazar al que hacía el click
+// 	if (await document.querySelector("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable")) {
+// 		var video_duration = await document.querySelector(".html5-main-video").duration;
+// // 		document.querySelector(".html5-main-video").currentTime = video_duration + 1;
+// // 		await alert("button.ytp-ad-button.ytp-ad-button-link.ytp-ad-clickable");
+// 		await document.querySelector(".ytp-ad-skip-button-slot").removeAttribute('style');
+// 		await document.querySelector(".ytp-ad-skip-button-slot > span").removeAttribute('style')
+// 	}
 	
-    if (await document.querySelector(".ytp-ad-overlay-close-button")) {
-        await document.querySelector(".ytp-ad-overlay-close-button").click()
-    }
     
-    if (await document.querySelector(".ytp-ad-image-overlay")) {
-        await document.querySelector(".ytp-ad-image-overlay").remove()	}
+	//////////////////////////////////////////////////////////////////
+	document.querySelector("#movie_player > div.video-ads.ytp-ad-module")?.remove()
+	
+// 	if (await document.querySelector(".ytp-ad-overlay-close-button")) {
+//         await document.querySelector(".ytp-ad-overlay-close-button").click()
+//     }
+    
+//     if (await document.querySelector(".ytp-ad-image-overlay")) {
+//         await document.querySelector(".ytp-ad-image-overlay").remove()	}
 		
     if (await document.querySelector("#confirm-button.style-scope.yt-confirm-dialog-renderer")) {
         await document.querySelector("#confirm-button.style-scope.yt-confirm-dialog-renderer").click();
@@ -64,7 +68,7 @@ f = async function() {
     if (await document.querySelector("#masthead-ad")) {
         await document.querySelector("#masthead-ad").remove();
     }
-	//var1 = await setTimeout(f,20);
+	//////////////////////////////////////////////////////////////////
 	
 	if (await document.querySelector("#cancel-button")) {
 		document.querySelector("#cancel-button").click()
@@ -104,7 +108,7 @@ if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
 // )
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-a1 = setInterval(f, 10000);
+a1 = setInterval(f, 15000);
 console.log("adsY.js loaded !");
 f();
 console.log("adsY.js executing");
