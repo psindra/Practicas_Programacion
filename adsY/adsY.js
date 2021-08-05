@@ -112,6 +112,6 @@ if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 a1 = setInterval(f, 15000);
-console.log("adsY.js loaded !");
+console.log("adsY.js loaded !" + " " + VERSION);
 f();
 console.log("adsY.js executing");
