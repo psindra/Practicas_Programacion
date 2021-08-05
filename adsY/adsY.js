@@ -80,7 +80,8 @@ f = async function() {
 
 
 if (document.querySelector("#country-code") && document.querySelector("ytd-topbar-logo-renderer.ytd-app.style-scope #country-code")) {
-	document.querySelector("#country-code").innerHTML = document.querySelector("ytd-topbar-logo-renderer.ytd-app.style-scope #country-code").innerHTML + "<br>no ADS" + VERSION;
+	document.querySelector("#country-code").innerHTML = document.querySelector("ytd-topbar-logo-renderer.ytd-app.style-scope #country-code").innerHTML
+		+ "<br>no ADS" + VERSION;
 }
 
 if (document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)")) {
