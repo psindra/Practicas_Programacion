@@ -1,7 +1,7 @@
 // javascript:
 console.log("adsY.js loading...");
 
-var global VERSION = "v1.2"
+var global VERSION = "v2.1"
 
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
