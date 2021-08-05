@@ -1,7 +1,9 @@
 // javascript:
-console.log("adsY.js loading...");
-
 var global VERSION = "v2.1"
+
+console.log("adsY.js loading..." + " " + VERSION);
+
+
 
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
@@ -112,6 +114,6 @@ if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 a1 = setInterval(f, 15000);
-console.log("adsY.js loaded !" + " " + VERSION);
+console.log("adsY.js loaded !");
 f();
-console.log("adsY.js executing");
+console.log("adsY.js executing" + " " + VERSION);
