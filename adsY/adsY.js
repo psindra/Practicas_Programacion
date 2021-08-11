@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.3"
+var VERSION = "v2.1.4"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -7,7 +7,7 @@ console.log("adsY.js loading..." + " " + VERSION);
 
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
-		var video_duration = await document.querySelector(".html5-main-video").duration;
+		video_duration = await document.querySelector(".html5-main-video").duration;
 		console.log("duration: " + video_duration);
 // 		await document.getElementsByTagName('video')[0].pause()
 // 		console.log("pause");
