@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.1"
+var VERSION = "v2.1.3"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -10,11 +10,11 @@ f = async function() {
 		var video_duration = await document.querySelector(".html5-main-video").duration;
 		console.log("duration: " + video_duration);
 // 		await document.getElementsByTagName('video')[0].pause()
-		console.log("pause");
-		if (!document.querySelector("#movie_player").classList.contains("var1")){
-			await document.querySelector("#movie_player").classList.add("var1");
+// 		console.log("pause");
+		if (!document.querySelector("#movie_player").classList.contains("adsY_flag_"+ VERSION)){
+			await document.querySelector("#movie_player").classList.add("adsY_flag_"+ VERSION);
 			await alert('class "ad-showing"');
-		}	// fin de incorporación "var1"
+		}	// fin de incorporación >> "adsY_flag_"+ VERSION <<
 		document.querySelector(".html5-main-video").currentTime = video_duration;
 		console.log("currentTime set: " + document.querySelector(".html5-main-video").currentTime);
 	}
@@ -53,6 +53,9 @@ f = async function() {
     
 	//////////////////////////////////////////////////////////////////
 // 	await document.querySelector("#movie_player > div.video-ads.ytp-ad-module")?.remove()
+// 	document.querySelector(".ytp-ad-overlay-slot")?.remove()
+	document.querySelector("#movie_player > div.video-ads.ytp-ad-module > div.ytp-ad-overlay-slot")?.remove()
+	
 	
 // 	if (await document.querySelector(".ytp-ad-overlay-close-button")) {
 //         await document.querySelector(".ytp-ad-overlay-close-button").click()
@@ -63,17 +66,20 @@ f = async function() {
 		
     if (await document.querySelector("#confirm-button.style-scope.yt-confirm-dialog-renderer")) {
         await document.querySelector("#confirm-button.style-scope.yt-confirm-dialog-renderer").click();
-        await document.querySelector("#confirm-button.style-scope.yt-confirm-dialog-renderer").remove();	}
-
-    if (await document.querySelector("#player-ads")) {
-        await document.querySelector("#player-ads").remove();
-    }
+        await document.querySelector("#confirm-button.style-scope.yt-confirm-dialog-renderer").remove();
+	}
+	
+	document.querySelector("#player-ads")?.remove();
+// 	if (await document.querySelector("#player-ads")) {
+//         await document.querySelector("#player-ads").remove();
+//     }
 
     if (await document.querySelector("#masthead-ad")) {
         await document.querySelector("#masthead-ad").remove();
     }
 	//////////////////////////////////////////////////////////////////
 	
+	document.querySelector("#cancel-button")?.click()
 	if (await document.querySelector("#cancel-button")) {
 		document.querySelector("#cancel-button").click()
 	}
