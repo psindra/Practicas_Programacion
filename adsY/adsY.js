@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.5"
+var VERSION = "v2.1.6"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
