@@ -15,7 +15,7 @@ f = async function() {
 // 			await document.querySelector("#movie_player").classList.add("adsY_flag_"+ VERSION);
 // 			await alert('class "ad-showing"');
 // 		}	// fin de incorporación >> "adsY_flag_"+ VERSION <<
-		document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime = video_duration || \
+		document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime = video_duration ||
 							document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").duration;
 		console.log("currentTime set: " + document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime);
 	}
