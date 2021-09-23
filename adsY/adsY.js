@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.6"
+var VERSION = "v2.1.7"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -7,16 +7,17 @@ console.log("adsY.js loading..." + " " + VERSION);
 
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
-		video_duration = await document.querySelector(".html5-main-video").duration;
+		video_duration = await document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").duration;
 		console.log("duration: " + video_duration);
-// 		await document.getElementsByTagName('video')[0].pause()
-// 		console.log("pause");
-		if (!document.querySelector("#movie_player").classList.contains("adsY_flag_"+ VERSION)){
-			await document.querySelector("#movie_player").classList.add("adsY_flag_"+ VERSION);
-			await alert('class "ad-showing"');
-		}	// fin de incorporación >> "adsY_flag_"+ VERSION <<
-		document.querySelector(".html5-main-video").currentTime = video_duration || document.querySelector(".html5-main-video").duration;
-		console.log("currentTime set: " + document.querySelector(".html5-main-video").currentTime);
+// // 		await document.getElementsByTagName('video')[0].pause()
+// // // 		console.log("pause");
+// 		if (!document.querySelector("#movie_player").classList.contains("adsY_flag_"+ VERSION)){
+// 			await document.querySelector("#movie_player").classList.add("adsY_flag_"+ VERSION);
+// 			await alert('class "ad-showing"');
+// 		}	// fin de incorporación >> "adsY_flag_"+ VERSION <<
+		document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime = video_duration || \
+							document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").duration;
+		console.log("currentTime set: " + document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime);
 	}
 	
 	if (await document.querySelector(".ytp-ad-timed-pie-countdown-container")) {
@@ -78,12 +79,13 @@ f = async function() {
         await document.querySelector("#masthead-ad").remove();
     }
 	//////////////////////////////////////////////////////////////////
+// // 	PROBAMOS COMENTANDO ESTE CLICK PARA VER SI DEJA DE HACER CLICK A CADA RATO
+// 	document.querySelector("#cancel-button")?.click()
+// 	if (await document.querySelector("#cancel-button")) {
+// 		document.querySelector("#cancel-button").click()
+// 	}
 	
-	document.querySelector("#cancel-button")?.click()
-	if (await document.querySelector("#cancel-button")) {
-		document.querySelector("#cancel-button").click()
-	}
-};
+};	// final función f()
 
 
 
@@ -123,4 +125,10 @@ if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module")) {
 a1 = setInterval(f, 15000);
 console.log("adsY.js loaded !");
 f();
+
+if (!document.querySelector("#movie_player").classList.contains("adsY_flag_"+ VERSION)){
+	document.querySelector("#movie_player").classList.add("adsY_flag_"+ VERSION);
+	alert('class "ad-showing"');
+}	// fin de incorporación >> "adsY_flag_"+ VERSION <<
+
 console.log("adsY.js executing" + " " + VERSION);
