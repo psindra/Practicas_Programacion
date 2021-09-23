@@ -128,7 +128,8 @@ f();
 
 if (!document.querySelector("#movie_player").classList.contains("adsY_flag_"+ VERSION)){
 	document.querySelector("#movie_player").classList.add("adsY_flag_"+ VERSION);
-	alert('class "ad-showing"');
+// 	alert('class "ad-showing"');
+	alert("adsY.js executing" + " " + VERSION);
 }	// fin de incorporación >> "adsY_flag_"+ VERSION <<
 
 console.log("adsY.js executing" + " " + VERSION);
