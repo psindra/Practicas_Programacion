@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.9"
+var VERSION = "v2.1.10"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -99,14 +99,26 @@ if (document.querySelector("#country-code") && document.querySelector("ytd-topba
 }
 
 if (document.querySelector("#logo-icon > svg > g > g:nth-child(1)")) {
-		// 	https://bennettfeely.com/clippy/
-// 	var cruz_negra_polygon = "12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75"
-// 	document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)").innerHTML += '<polygon points="' + cruz_negra_polygon + '"></polygon>';
+// 		// 	https://bennettfeely.com/clippy/
+// // 	var cruz_negra_polygon = "12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75"
+// // 	document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)").innerHTML += '<polygon points="' + cruz_negra_polygon + '"></polygon>';
+// 	pp = document.createElement("polygon");
+// 	pp.setAttribute('points', "12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75");
+// 	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += pp.outerHTML;
+// // 	
+// 	document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path:nth-child(2)").setAttribute("fill","black");
+// 	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += '<svg viewBox="106 -4 70 70" focusable="false" class="style-scope yt-icon" 
+// 	preserveAspectRatio="">  <polygon points="12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75" 
+// 	fill="SpringGreen"></polygon>  </svg>'
+	ss = document.createElement("svg");
+	ss.setAttribute('viewBox', '106 -4 70 70')
+	ss.setAttribute('class', 'style-scope yt-icon')
+	ss.toggleAttribute('preserveAspectRatio', true)
 	pp = document.createElement("polygon");
 	pp.setAttribute('points', "12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75");
-	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += pp.outerHTML;
-// 	
-	document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path:nth-child(2)").setAttribute("fill","black");
+	pp.setAttribute('fill', 'SpringGreen');
+	ss.appendChild(pp);
+	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += ss.outerHTML;
 }
 
 
