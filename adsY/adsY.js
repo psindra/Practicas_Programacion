@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.7"
+var VERSION = "v2.1.8"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -84,6 +84,9 @@ f = async function() {
 // 	if (await document.querySelector("#cancel-button")) {
 // 		document.querySelector("#cancel-button").click()
 // 	}
+// 	
+// 	PROBAMOS BOTON Y CLASE PARA EL OK DE "CONTINUAR REPRODUCIENDO":
+	document.querySelector("#cancel-button.yt-confirm-dialog-renderer")?.click();
 	
 };	// final función f()
 
@@ -101,7 +104,7 @@ if (document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)")) {
 // 	document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)").innerHTML += '<polygon points="' + cruz_negra_polygon + '"></polygon>';
 	pp = document.createElement("polygon");
 	pp.setAttribute('points', "12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75");
-	document.querySelector("#logo-icon-container > svg > g > g:nth-child(1)").innerHTML += pp.outerHTML;
+	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += pp.outerHTML;
 }
 
 
