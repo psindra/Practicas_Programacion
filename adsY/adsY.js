@@ -105,11 +105,8 @@ if (document.querySelector("#logo-icon > svg > g > g:nth-child(1)")) {
 // 	pp = document.createElement("polygon");
 // 	pp.setAttribute('points', "12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75");
 // 	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += pp.outerHTML;
-// // 	
-// 	document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path:nth-child(2)").setAttribute("fill","black");
-// 	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += '<svg viewBox="106 -4 70 70" focusable="false" class="style-scope yt-icon" 
-// 	preserveAspectRatio="">  <polygon points="12.5 0,0 12.5,18.75 31.25,0 50,12.5 62.5,31.25 43.75,50 62.5,62.5 50,43.75 31.25,62.5 12.5,50 0,31.25 18.75" 
-// 	fill="SpringGreen"></polygon>  </svg>'
+	
+	
 	ss = document.createElement("svg");
 	ss.setAttribute('viewBox', '106 -4 70 70')
 	ss.setAttribute('class', 'style-scope yt-icon')
@@ -119,6 +116,8 @@ if (document.querySelector("#logo-icon > svg > g > g:nth-child(1)")) {
 	pp.setAttribute('fill', 'SpringGreen');
 	ss.appendChild(pp);
 	document.querySelector("#logo-icon > svg > g > g:nth-child(1)").innerHTML += ss.outerHTML;
+	
+	document.querySelector("#logo-icon > svg > g > g:nth-child(1) > path:nth-child(2)").setAttribute("fill","black");
 }
 
 
