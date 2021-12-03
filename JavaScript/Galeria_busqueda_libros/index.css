@@ -1,0 +1,52 @@
+.Global{
+  text-align: center;
+  padding: 10px;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* Gallery Styles */
+.book{
+  display: inline-block;
+  width: 220px;
+  height: 220px;
+  margin: 10px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.book-img{
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border: 4px solid gray;
+  border-radius: 4px;
+  position: absolute;
+}
+
+.book-title{
+  background-color: #333333;
+  color: white;
+  opacity: 0.75;
+  width: 214px;
+  margin-left: 4px;
+  text-align: center;
+  bottom: 0px;
+  padding: 10px;
+  position: absolute;
+}
+
+
