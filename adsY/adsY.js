@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.10"
+var VERSION = "v2.1.11"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -75,16 +75,22 @@ f = async function() {
 //         await document.querySelector("#player-ads").remove();
 //     }
 
-    if (await document.querySelector("#masthead-ad")) {
-        await document.querySelector("#masthead-ad").remove();
-    }
+	document.querySelector("#masthead-ad")?.remove();
+//     if (await document.querySelector("#masthead-ad")) {
+//         await document.querySelector("#masthead-ad").remove();
+//     }
+	document.querySelector("#masthead-ad")?.remove();
+	
+	
 	//////////////////////////////////////////////////////////////////
-// // 	PROBAMOS COMENTANDO ESTE CLICK PARA VER SI DEJA DE HACER CLICK A CADA RATO
+// // 	PROBAMOS COMENTANDO ESTE CLICK PARA VER SI DEJA DE HACER CLICK A CADA RATO ✅
 // 	document.querySelector("#cancel-button")?.click()
 // 	if (await document.querySelector("#cancel-button")) {
 // 		document.querySelector("#cancel-button").click()
-// 	}
+// 	}	// ✅
 // 	
+	
+	
 // 	PROBAMOS BOTON Y CLASE PARA EL OK DE "CONTINUAR REPRODUCIENDO":
 	document.querySelector("#cancel-button.yt-confirm-dialog-renderer")?.click();
 	
