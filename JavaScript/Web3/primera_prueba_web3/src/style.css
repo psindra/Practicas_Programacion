@@ -1,0 +1,14 @@
+body {
+    text-align: center;
+  }
+
+  button {
+    display: inline-block;
+    margin: 1em 1em;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+
+  label {
+    padding: 20px;
+  }

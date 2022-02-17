@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unos eth pal chow fei</title>
+    <link rel="stylesheet" href="src/style.css">
+    <script src="dist/web3.min.js"></script>
+</head>
+<body>
+    <div id="conectar">
+        <button id="btn-conectar">Conectar wallet</button>
+    </div>
+    <div id="address" style="display: flex;align-items: center;justify-content: center;">
+        <label for="address" id="lbl-address"> Tu wallet: </label>
+        <span id="span-address"></span>
+    </div>
+    <div id="sendTransaction">
+        <button id="btn-sendTransaction">Enviar unos pe</button>
+    </div>
+    <div id="cake" style="display: flex;align-items: center;justify-content: center;">
+        <label for="cake" id="lbl-cake" style="display: none;"> no seas rata, si tenés: </label>
+        <span id="span-cake"></span>
+    </div>
+    <script src="src/json_Interface.js"></script>
+    <script src="src/index.js"></script>
+</body>
+</html>
