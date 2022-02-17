@@ -12,3 +12,33 @@ body {
   label {
     padding: 20px;
   }
+  
+  div#conectar, div#address, div#container-saldos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  div#conectar{
+    background-color: rgba(105, 105, 105, 0.178);
+    margin: 20px;
+    padding: 10px 20px;
+    /* max-width: 150px; */
+    }
+  
+
+  /* div#container-saldos{
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  } */
+
+  div#container-saldos>div{
+    /* flex-grow: 1; */
+    margin: 20px;
+    /* min-width: 120px; */
+    border: 2px solid #333;
+    padding: 20px 20px;
+    /* height: 20px; */
+  }

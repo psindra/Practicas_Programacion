@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unos eth pal chow fei</title>
+    <link rel="stylesheet" href="src/style.css">
+    <script src="dist/web3.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1-rc.0/web3.min.js" integrity="sha512-Ui9NE+/XdhwxssTrWetwWgpwpZJCLgTpB2dgkq+xe3O7lmZEJe+2rw3OT3YbYIUCQWH5dOO8ObLOYmbUVpPBgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+</head>
+<body>
+    <div id="conectar">
+        <button id="btn-conectar">Conectar wallet</button>
+    </div>
+    <div id="address" style="display: none;">
+        <label for="address" id="lbl-address"> Tu wallet: </label>
+        <span id="span-address"></span>
+    </div>
+    <!-- <div id="sendTransaction">
+        <button id="btn-sendTransaction">Enviar unos pe</button>
+    </div> -->
+    <div id="container-saldos" style="display: none;">
+        <div>
+            <label for="" id="lbl-saldo-cake" > Saldo CAKE: </label>
+            <br>
+            <span id="span-saldo-cake"></span>
+        </div>
+        <div>
+            <label for="" id="lbl-saldo-eth">Saldo BNB:</label>
+            <br>
+            <span id="span-saldo-eth"></span>
+        </div>
+        <div>
+            <label for="" id="lbl-saldo-ada">Saldo ADA:</label>
+            <br>
+            <span id="span-saldo-ada"></span>
+        </div>
+        <div>
+            <label for="" id="lbl-saldo-busd">Saldo BUSD:</label>
+            <br>
+            <span id="span-saldo-busd"></span>
+        </div>
+        <div>
+            <label for="" id="lbl-saldo-usdt">Saldo USDT:</label>
+            <br>
+            <span id="span-saldo-usdt"></span>
+        </div>
+    </div>
+    <script src="src/ABI_json_Interface.js"></script>
+    <script src="src/index v2.js"></script>
+</body>
+</html>
