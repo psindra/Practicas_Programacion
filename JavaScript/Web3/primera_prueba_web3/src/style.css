@@ -42,3 +42,15 @@ body {
     padding: 20px 20px;
     /* height: 20px; */
   }
+
+  div#container-firmar{
+    background-color: rgba(105, 105, 105, 0.178);
+    position: absolute;
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: 20px;
+    padding: 10px 20px;
+  }
