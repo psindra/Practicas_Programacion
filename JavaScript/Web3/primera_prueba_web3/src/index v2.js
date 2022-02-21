@@ -37,13 +37,14 @@ web3.eth.getChainId().then(chainId=> {
 
 // var contract_cake;
 // (async ()=>{
-//     contract_cake = await new web3.eth.Contract(ABIgenerico, '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82');
-// })();
+    //     contract_cake = await new web3.eth.Contract(ABIgenerico, '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82');
+    // })();
+    
+    btn_conectar.addEventListener('click', async()=>{
+        div_address.style.setProperty("display", "none")
+        container_saldos.style.setProperty("display", "none")
 
-btn_conectar.addEventListener('click', async()=>{
-    var account;
-
-    await web3.eth.requestAccounts()
+        await web3.eth.requestAccounts()
         .then(account=>{
             web3.eth.defaultAccount = account[0];
         })
@@ -107,7 +108,7 @@ btn_conectar.addEventListener('click', async()=>{
     div_address.style.removeProperty("display")
     container_saldos.style.removeProperty("display")
 
-})  // fin addEventListener
+})  // fin addEventListener "click"
 
 // btn_sendTransaction.addEventListener('click', async ()=>{
 //     await web3.eth.sendTransaction({to: web3.eth.defaultAccount, value: 2e15})
