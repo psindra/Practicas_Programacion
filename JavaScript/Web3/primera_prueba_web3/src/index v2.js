@@ -35,19 +35,23 @@ web3.eth.getChainId().then(chainId=> {
     }
 });
 
-var contract_cake;
-(async ()=>{
-    contract_cake = await new web3.eth.Contract(ABIgenerico, '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82');
-})();
+// var contract_cake;
+// (async ()=>{
+//     contract_cake = await new web3.eth.Contract(ABIgenerico, '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82');
+// })();
 
 btn_conectar.addEventListener('click', async()=>{
     var account;
-    try {
-        alert("wallet => " + (web3.eth.defaultAccount = (await web3.eth.requestAccounts())[0]))
-    } catch (error) {
-        alert("debes permitir leer tu wallet");
-        throw ("=> Debes permitir leer tu wallet");
-    }
+
+    await web3.eth.requestAccounts()
+        .then(account=>{
+            web3.eth.defaultAccount = account[0];
+        })
+        .catch(error=>{
+            alert("debes permitir leer la dirección pública de tu wallet");
+            throw ("=> Debes permitir leer la dirección pública de tu wallet");
+        })
+
     // alert("2=> " + await web3.eth.call({method: 'eth_requestAccounts'}))
     
     if(web3.eth.defaultAccount){
@@ -55,14 +59,17 @@ btn_conectar.addEventListener('click', async()=>{
     }
 
 
-    let cake_amount = contract_cake.methods.balanceOf(web3.eth.defaultAccount)
+    // contract_cake.methods.balanceOf(web3.eth.defaultAccount) //.call().....
+    new web3.eth.Contract(ABIgenerico, '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82')
+    .methods.balanceOf(web3.eth.defaultAccount)
         .call()
         .then((cake_amount)=>{
         span_cake.textContent = (cake_amount/1e18).toFixed(4) + '  Cake';
     })
     span_cake.innerHTML = "<i>leyendo...</i>";
     
-    let eth_amount = web3.eth.getBalance(web3.eth.defaultAccount)
+    // ETH
+    web3.eth.getBalance(web3.eth.defaultAccount)
     .then((eth_amount)=>{
         span_eth.textContent = (eth_amount/1e18).toFixed(4) + '  BNB';
         // + ((56) === (await web3.eth.getChainId()))? '  Ether': '  BNB';
@@ -70,6 +77,7 @@ btn_conectar.addEventListener('click', async()=>{
     span_eth.innerHTML = "<i>leyendo...</i>";
 
     // el resto de contratos
+    // ADA
     new web3.eth.Contract(ABIgenerico, '0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47')
     .methods.balanceOf(web3.eth.defaultAccount)
         .call()
@@ -78,6 +86,7 @@ btn_conectar.addEventListener('click', async()=>{
         })
     span_ada.innerHTML = "<i>leyendo...</i>";
     
+    // BUSD
     new web3.eth.Contract(ABIgenerico, '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56')
     .methods.balanceOf(web3.eth.defaultAccount)
         .call()
@@ -86,6 +95,7 @@ btn_conectar.addEventListener('click', async()=>{
         })
     span_busd.innerHTML = "<i>leyendo...</i>";
     
+    // USDT
     new web3.eth.Contract(ABIgenerico, '0x55d398326f99059fF775485246999027B3197955')
     .methods.balanceOf(web3.eth.defaultAccount)
         .call()
@@ -93,8 +103,7 @@ btn_conectar.addEventListener('click', async()=>{
             span_usdt.textContent = (usdt_amount/1e18).toFixed(4) + '  usdt';
         })
     span_usdt.innerHTML = "<i>leyendo...</i>";
-
-    // div_saldos.style
+    
     div_address.style.removeProperty("display")
     container_saldos.style.removeProperty("display")
 
