@@ -1,5 +1,6 @@
 body {
     text-align: center;
+    margin-bottom: 170px; /* para que no colisione con el footer */
   }
 
   button {
@@ -22,35 +23,31 @@ body {
   
   div#conectar{
     background-color: rgba(105, 105, 105, 0.178);
-    margin: 20px;
-    padding: 10px 20px;
-    /* max-width: 150px; */
+    margin: 5px 20px;
+    padding: 0px 20px;
     }
   
 
-  /* div#container-saldos{
-    display: none;
-    flex-wrap: wrap;
-    justify-content: center;
-  } */
+  div#container-saldos{
+    /* margin-bottom: div#container-firmar.height; */
+    background-color: rgba(105, 105, 105, 0.178);
+    margin: 0px 20px;
+  }
 
   div#container-saldos>div{
-    /* flex-grow: 1; */
     margin: 20px;
-    /* min-width: 120px; */
     border: 2px solid #333;
     padding: 20px 20px;
-    /* height: 20px; */
   }
 
   div#container-firmar{
     background-color: rgba(105, 105, 105, 0.178);
-    position: absolute;
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
+    position: fixed;
     left: 0px;
     right: 0px;
     bottom: 0px;
-    margin: 20px;
+    margin: 20px 30px;
     padding: 10px 20px;
   }
+
+ 
