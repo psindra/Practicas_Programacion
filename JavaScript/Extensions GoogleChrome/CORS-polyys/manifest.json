@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "CORS-polyys",
+    "description": "cambia los headers 'Access-Control-Allow-Origin' a '*' o al host del sitio en particular (dependiendo si existe Certificación en el sitio) y 'Access-Control-Allow-Credentials' a True. Además agrega casi todos los metodos disponibles al header 'Access-Control-Allow-Methods'",
+    "version": "0.2", // "icons": { "128": ""},// "browser_action": {"default_icon": ""},
+    "permissions":[
+        "activeTab",
+        "webRequest",
+        "webRequestBlocking",
+        "call_urls",
+        "storage"
+    ],
+    "background": {
+        "persistent": true,
+        "scripts": ["scripts/main.js"]
+    }
+}
