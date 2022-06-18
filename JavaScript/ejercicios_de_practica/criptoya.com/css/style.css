@@ -1,0 +1,38 @@
+table{
+    width: 100%;
+}
+table th,table td {
+    border:1px solid gray;
+    padding: 1.5vw 3vw;
+    text-align: center;
+  }
+
+table th{
+    cursor: pointer;
+}
+table tbody th{
+    padding: 5px 0.25vw;
+
+}
+
+table thead th[active]{
+    background-color: rgb(0, 128, 0, 0.5);
+    position: relative;
+}
+
+table th[active="true"]::after{
+    position: absolute;
+    right: 5px;
+    content: "▴";
+    /* margin-inline: 20px; */
+}
+table th[active="false"]::after{
+    position: absolute;
+    right: 5px;
+    content: "▾";
+    /* margin-inline: 20px; */
+}
+
+table tbody td[active]{
+    background-color: rgba(0, 191, 191, 0.35);
+}
