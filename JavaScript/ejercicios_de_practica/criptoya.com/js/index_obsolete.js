@@ -2,10 +2,23 @@ var cotizaciones;
 const DOM_table = document.querySelector("table");
 // const DOM_tBody = document.querySelector("table>tbody");
 const DOM_tBody = DOM_table.tBodies[0];
-let _choosenOrder = [2, true]
+let _choosenOrder = [0, true]
 
+const ordenar = function(rowsArray, columna=_choosenOrder[0], orden=_choosenOrder[1]){
+    rowsArray.sort((a,b)=>{
+        return a.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent > b.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent? (orden*2-1) : (orden*-2+1);
+    })
+    // console.log(...rowsArray);
+    let _tBody = document.createElement("tbody");
+    _tBody.append(...rowsArray);
+    DOM_table.replaceChild(_tBody, DOM_table.tBodies[0]);
+    DOM_table.replaceChild(DOM_table.tBodies[0], DOM_table.tBodies[0]);
+    // DOM_table.replaceChild(_tBody, DOM_tBody);
+    return rowsArray;
+}
+
+let _Rows;
 const cargarDatos = function(){
-    let _Rows;
     fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json)*/;cotizaciones=json}).then(()=>{
         /* Object.entries convierte de JSON anidado a vector Array indice-0 para key
         indice-1 para value */
@@ -33,42 +46,39 @@ const cargarDatos = function(){
         
         return _row;
         })
-
-        DOM_table.tBodies[0].append(..._Rows);
-        marcarPuntas();
-        ordenar(DOM_table.tBodies[0].rows);
+    
+        ordenar(_Rows);
     })
 }
 cargarDatos();
 
 const actualizarDatos = function(){
     fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json)*/;cotizaciones=json}).then(()=>{
-        for (const fila of DOM_table.tBodies[0].rows) {
-            fila.childNodes[1].textContent = cotizaciones[fila.childNodes[0].textContent].ask;
-            fila.childNodes[2].textContent = cotizaciones[fila.childNodes[0].textContent].totalAsk;
-            fila.childNodes[3].textContent = cotizaciones[fila.childNodes[0].textContent].bid;
-            fila.childNodes[4].textContent = cotizaciones[fila.childNodes[0].textContent].totalBid;
-        }
-        
-        marcarPuntas();
+    /* Object.entries convierte de JSON anidado a vector Array indice-0 para key
+    indice-1 para value */
+    
+    for (const fila of DOM_table.tBodies[0].rows) {
+        // console.log(fila);
+        // console.log(cotizaciones[fila.childNodes[0].textContent].ask);
+        fila.childNodes[1].textContent = cotizaciones[fila.childNodes[0].textContent].ask;
+        fila.childNodes[2].textContent = cotizaciones[fila.childNodes[0].textContent].totalAsk;
+        fila.childNodes[3].textContent = cotizaciones[fila.childNodes[0].textContent].bid;
+        fila.childNodes[4].textContent = cotizaciones[fila.childNodes[0].textContent].totalBid;
+    }
+    
     ordenar(DOM_table.tBodies[0].rows);
-})
+    //     ordenar(_Rows);
+    })
 }
+// actualizarDatos();
 
 const ordenar = function(rows, columna=_choosenOrder[0], orden=_choosenOrder[1]){
     let rowsArray = Array.prototype.slice.call(rows);
     rowsArray.sort((a,b)=>{
         return a.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent > b.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent? (orden*2-1) : (orden*-2+1);
     })
+    // debugger;
     rowsArray[0].parentElement.append(...rowsArray);
-    
-}
-
-const marcarPuntas = function(){
-    ordenar(DOM_table.tBodies[0].rows,columna=2);
-    DOM_table.tBodies[0].firstElementChild.childNodes[2].setAttribute("active", null);
-    ordenar(DOM_table.tBodies[0].rows,columna=4);
-    DOM_table.tBodies[0].lastElementChild.childNodes[4].setAttribute("active", null);
 }
 
 const _Nombre = document.querySelector("table>thead>tr>th.Nombre");
@@ -93,7 +103,7 @@ const limpiarActive = function(){
 _Nombre.addEventListener("click", (ev)=>{
     _Nombre.orden = ! _Nombre.orden;
     _choosenOrder = [0, _Nombre.orden]
-    ordenar(DOM_table.tBodies[0].rows, 0, _Nombre.orden);
+    ordenar(_Rows, 0, _Nombre.orden);
 
     limpiarActive();
     _Nombre.setAttribute("active", _Nombre.orden);
@@ -101,8 +111,8 @@ _Nombre.addEventListener("click", (ev)=>{
 _ask.addEventListener("click", (ev)=>{
     _ask.orden = ! _ask.orden;
     _choosenOrder = [1, _ask.orden]
-    ordenar(DOM_table.tBodies[0].rows, 1, _ask.orden);
-    // if(_ask.orden){ DOM_table.tBodies[0].rows[0].childNodes[1].setAttribute("active", null);}
+    ordenar(_Rows, 1, _ask.orden);
+    if(_ask.orden){ _Rows[0].childNodes[1].setAttribute("active", null);}
 
     limpiarActive();
     _ask.setAttribute("active", _ask.orden)
@@ -110,8 +120,8 @@ _ask.addEventListener("click", (ev)=>{
 _askTotal.addEventListener("click", (ev)=>{
     _askTotal.orden = ! _askTotal.orden;
     _choosenOrder = [2, _askTotal.orden]
-    ordenar(DOM_table.tBodies[0].rows, 2, _askTotal.orden);
-    // if(_askTotal.orden){ DOM_table.tBodies[0].rows[0].childNodes[2].setAttribute("active", null);}
+    ordenar(_Rows, 2, _askTotal.orden);
+    if(_askTotal.orden){ _Rows[0].childNodes[2].setAttribute("active", null);}
 
     limpiarActive();
     _askTotal.setAttribute("active", _askTotal.orden)
@@ -119,8 +129,8 @@ _askTotal.addEventListener("click", (ev)=>{
 _bid.addEventListener("click", (ev)=>{
     _bid.orden = ! _bid.orden;
     _choosenOrder = [3, _bid.orden]
-    ordenar(DOM_table.tBodies[0].rows, 3, _bid.orden);
-    // if(!_bid.orden){ DOM_table.tBodies[0].rows[0].childNodes[3].setAttribute("active", null);}
+    ordenar(_Rows, 3, _bid.orden);
+    if(!_bid.orden){ _Rows[0].childNodes[3].setAttribute("active", null);}
 
     limpiarActive();
     _bid.setAttribute("active", _bid.orden)
@@ -128,12 +138,12 @@ _bid.addEventListener("click", (ev)=>{
 _bidTotal.addEventListener("click", (ev)=>{
     _bidTotal.orden = ! _bidTotal.orden;
     _choosenOrder = [4, _bidTotal.orden]
-    ordenar(DOM_table.tBodies[0].rows, 4, _bidTotal.orden);
-    // if(!_bidTotal.orden){ DOM_table.tBodies[0].rows[0].childNodes[4].setAttribute("active", null);}
-
+    ordenar(_Rows, 4, _bidTotal.orden);
+    if(!_bidTotal.orden){ _Rows[0].childNodes[4].setAttribute("active", null);}
     limpiarActive();
     _bidTotal.setAttribute("active", _bidTotal.orden)
 });
 
 
+// setInterval(cargarDatos, 10000);
 setInterval(actualizarDatos, 10000);
