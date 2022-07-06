@@ -61,14 +61,25 @@ const ordenar = function(rows, columna=_choosenOrder[0], orden=_choosenOrder[1])
         return a.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent > b.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent? (orden*2-1) : (orden*-2+1);
     })
     rowsArray[0].parentElement.append(...rowsArray);
-    
+    limpiarActive();
+    rowsArray[0].parentElement.parentElement["tHead"].querySelector(`th:nth-child(${columna+1})`).setAttribute("active", orden);
 }
 
-const marcarPuntas = function(){
-    ordenar(DOM_table.tBodies[0].rows,columna=2);
-    DOM_table.tBodies[0].firstElementChild.childNodes[2].setAttribute("active", null);
-    ordenar(DOM_table.tBodies[0].rows,columna=4);
-    DOM_table.tBodies[0].lastElementChild.childNodes[4].setAttribute("active", null);
+const marcarPuntas = function(rows=DOM_table.tBodies[0].rows){
+    let rowsArray = Array.from(rows);
+    rowsArray.forEach(fila=>{
+        fila.removeAttribute("active");
+    })
+    rowsArray.sort((a,b)=>{
+        let columna=2, orden=true;
+        return a.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent > b.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent? (orden*2-1) : (orden*-2+1);
+    })
+    rowsArray[0].childNodes[2].setAttribute("active", null);
+    rowsArray.sort((a,b)=>{
+        let columna=4, orden=false;
+        return a.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent > b.querySelector(`th:nth-child(${columna+1}),td:nth-child(${columna+1})`).textContent? (orden*2-1) : (orden*-2+1);
+    })
+    rowsArray[0].childNodes[4].setAttribute("active", null);
 }
 
 const _Nombre = document.querySelector("table>thead>tr>th.Nombre");
@@ -93,46 +104,46 @@ const limpiarActive = function(){
 _Nombre.addEventListener("click", (ev)=>{
     _Nombre.orden = ! _Nombre.orden;
     _choosenOrder = [0, _Nombre.orden]
-    ordenar(DOM_table.tBodies[0].rows, 0, _Nombre.orden);
+    ordenar(DOM_table.tBodies[0].rows, _choosenOrder[0], _choosenOrder[1]);
 
     limpiarActive();
-    _Nombre.setAttribute("active", _Nombre.orden);
+    // _Nombre.setAttribute("active", _Nombre.orden);
 });
 _ask.addEventListener("click", (ev)=>{
     _ask.orden = ! _ask.orden;
     _choosenOrder = [1, _ask.orden]
-    ordenar(DOM_table.tBodies[0].rows, 1, _ask.orden);
+    ordenar(DOM_table.tBodies[0].rows, _choosenOrder[0], _choosenOrder[1]);
     // if(_ask.orden){ DOM_table.tBodies[0].rows[0].childNodes[1].setAttribute("active", null);}
 
-    limpiarActive();
-    _ask.setAttribute("active", _ask.orden)
+    // limpiarActive();
+    // _ask.setAttribute("active", _ask.orden);
 });
 _askTotal.addEventListener("click", (ev)=>{
     _askTotal.orden = ! _askTotal.orden;
     _choosenOrder = [2, _askTotal.orden]
-    ordenar(DOM_table.tBodies[0].rows, 2, _askTotal.orden);
+    ordenar(DOM_table.tBodies[0].rows, _choosenOrder[0], _choosenOrder[1]);
     // if(_askTotal.orden){ DOM_table.tBodies[0].rows[0].childNodes[2].setAttribute("active", null);}
 
-    limpiarActive();
-    _askTotal.setAttribute("active", _askTotal.orden)
+    // limpiarActive();
+    // _askTotal.setAttribute("active", _askTotal.orden);
 });
 _bid.addEventListener("click", (ev)=>{
     _bid.orden = ! _bid.orden;
     _choosenOrder = [3, _bid.orden]
-    ordenar(DOM_table.tBodies[0].rows, 3, _bid.orden);
+    ordenar(DOM_table.tBodies[0].rows, _choosenOrder[0], _choosenOrder[1]);
     // if(!_bid.orden){ DOM_table.tBodies[0].rows[0].childNodes[3].setAttribute("active", null);}
 
-    limpiarActive();
-    _bid.setAttribute("active", _bid.orden)
+    // limpiarActive();
+    // _bid.setAttribute("active", _bid.orden);
 });
 _bidTotal.addEventListener("click", (ev)=>{
     _bidTotal.orden = ! _bidTotal.orden;
     _choosenOrder = [4, _bidTotal.orden]
-    ordenar(DOM_table.tBodies[0].rows, 4, _bidTotal.orden);
+    ordenar(DOM_table.tBodies[0].rows, _choosenOrder[0], _choosenOrder[1]);
     // if(!_bidTotal.orden){ DOM_table.tBodies[0].rows[0].childNodes[4].setAttribute("active", null);}
 
-    limpiarActive();
-    _bidTotal.setAttribute("active", _bidTotal.orden)
+    // limpiarActive();
+    // _bidTotal.setAttribute("active", _bidTotal.orden);
 });
 
 

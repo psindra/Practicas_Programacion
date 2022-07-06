@@ -24,13 +24,11 @@ table th[active="true"]::after{
     position: absolute;
     right: 5px;
     content: "▴";
-    /* margin-inline: 20px; */
 }
 table th[active="false"]::after{
     position: absolute;
     right: 5px;
     content: "▾";
-    /* margin-inline: 20px; */
 }
 
 table tbody td[active]{
