@@ -6,7 +6,13 @@ let _choosenOrder = [2, true]
 
 const cargarDatos = function(){
     let _Rows;
-    fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json)*/;cotizaciones=json}).then(()=>{
+    fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json);*/cotizaciones=json}).then(async()=>{
+        await fetch("https://criptoya.com/api/"+ "binancep2p/" + _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{
+            let cotizacionP2P=json;
+            cotizaciones.binanceP2P = {totalAsk: cotizacionP2P.asks.data[0].adv.price,
+                                       totalBid: cotizacionP2P.bids.data[0].adv.price};
+        }).catch(console.log);
+        
         /* Object.entries convierte de JSON anidado a vector Array indice-0 para key
         indice-1 para value */
         _Rows = Object.entries(cotizaciones).map(broker=>{
@@ -42,8 +48,15 @@ const cargarDatos = function(){
 cargarDatos();
 
 const actualizarDatos = function(){
-    fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json)*/;cotizaciones=json}).then(()=>{
+    fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json)*/;cotizaciones=json}).then( async()=>{
+        await fetch("https://criptoya.com/api/"+ "binancep2p/" + _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{
+            let cotizacionP2P=json;
+            cotizaciones.binanceP2P = {totalAsk: cotizacionP2P.asks.data[0].adv.price,
+                                       totalBid: cotizacionP2P.bids.data[0].adv.price};
+        }).catch(console.log);
+
         for (const fila of DOM_table.tBodies[0].rows) {
+            /* fila.childNodes[0].textContent ➡ es el nombre del exchange "i" */
             fila.childNodes[1].textContent = cotizaciones[fila.childNodes[0].textContent].ask;
             fila.childNodes[2].textContent = cotizaciones[fila.childNodes[0].textContent].totalAsk;
             fila.childNodes[3].textContent = cotizaciones[fila.childNodes[0].textContent].bid;
