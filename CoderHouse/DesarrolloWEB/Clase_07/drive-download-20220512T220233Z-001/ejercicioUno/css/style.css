@@ -1,0 +1,106 @@
+/*                                  --------PALETA DE COLORES DESKTOP--------
+header: #E06B6F;
+nav: #F5BD62;
+main: #9EDE82;
+section: #F0BC62;
+aside: #91C2FA;
+footer: #B784F6; 
+*/
+
+/*                                  --------PALETA DE COLORES TABLET--------
+header: #EFD6AC;
+nav: #432534;
+main: #183A37;
+section: #A5C882;
+aside: #5AB1BB;
+footer: #8B6220; 
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+div{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4,1fr);
+    grid-template-areas: 
+    "nav header header header"
+    "nav main main aside"
+    "nav section section aside"
+    "nav footer footer footer"
+    ;
+}
+
+header{
+    background-color: #E06B6F;
+    height: 100px;
+    grid-area: header
+}
+
+nav{
+    background-color: #F5BD62;
+    height: 400px;
+    grid-area: nav
+}
+
+main {
+    background-color: #9EDE82;
+    height: 100px;
+    grid-area: main
+}
+
+section {
+    background-color: #F0BC62;
+    height: 100px;
+    grid-area: section
+}
+
+aside {
+    background-color: #91C2FA;
+    height: 200px;
+    grid-area: aside
+}
+
+footer {
+    background-color: #B784F6;
+    height: 100px;
+    grid-area: footer
+}
+
+@media screen and (max-width: 768px) {
+    div{
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: 
+        "nav header header"
+        "nav main aside"
+        "nav section aside"
+        "nav footer footer"
+        ;
+    }
+    header{
+        background-color: #EFD6AC;
+    }
+    
+    nav{
+        background-color: #432534;
+    }
+    
+    main {
+        background-color: #183A37;
+    }
+    
+    section {
+        background-color: #A5C882;
+    }
+    
+    aside {
+        background-color: #5AB1BB;
+    }
+    
+    footer {
+        background-color: #8B6220;
+    }
+
+}
