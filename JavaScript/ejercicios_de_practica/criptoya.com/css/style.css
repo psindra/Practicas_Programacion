@@ -2,17 +2,27 @@ table{
     width: 100%;
 }
 table th,table td {
-    border:1px solid gray;
-    padding: 1.5vw 3vw;
-    text-align: center;
-  }
+    /* border:1px solid gray; */
+    /* padding: 1.5vw 3vw; */
+    /* text-align: center; */
+}
 
-table th{
+table > :not(tbody) th{
     cursor: pointer;
 }
-table tbody th{
-    padding: 5px 0.25vw;
+/* table th, table td, */
+table *:is(td,th){
+    text-align: center;
+}
 
+table tbody th{
+    text-align: end;
+    font-size: clamp(0.65rem, calc(0.5rem + 1vw), 1.7rem);
+}
+
+table tbody td{
+    font-size: clamp(0.7rem, calc(0.5rem + 1.5vw), 1.7rem);
+    /* font-size: calc(0.9rem + 1.5vw); */
 }
 
 table thead th[active]{
