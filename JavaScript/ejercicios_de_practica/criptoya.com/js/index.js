@@ -6,8 +6,8 @@ let _choosenOrder = [2, true]
 
 const cargarDatos = function(){
     let _Rows;
-    fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json);*/cotizaciones=json}).then(async()=>{
-        await fetch("https://criptoya.com/api/"+ "binancep2p/" + _coin + "/ars" + "/1").then(resp=> {return resp.json()}).then(json=>{
+    fetch("https://criptoya.com/api/"+ _coin[0] + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json);*/cotizaciones=json}).then(async()=>{
+        await fetch("https://criptoya.com/api/"+ "binancep2p/" + _coin[0] + "/ars" + "/1").then(resp=> {return resp.json()}).then(json=>{
             let cotizacionP2P=json;
             cotizaciones.binanceP2P = { ask: cotizacionP2P.asks.data[0].adv.price,
                                         totalAsk: cotizacionP2P.asks.data[0].adv.price,
@@ -50,8 +50,8 @@ const cargarDatos = function(){
 cargarDatos();
 
 const actualizarDatos = function(){
-    fetch("https://criptoya.com/api/"+ _coin + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json)*/;cotizaciones=json}).then( async()=>{
-        await fetch("https://criptoya.com/api/"+ "binancep2p/" + _coin + "/ars" + "/1").then(resp=> {return resp.json()}).then(json=>{
+    fetch("https://criptoya.com/api/"+ _coin[0] + "/ars").then(resp=> {return resp.json()}).then(json=>{/*console.log(json)*/;cotizaciones=json}).then( async()=>{
+        await fetch("https://criptoya.com/api/"+ "binancep2p/" + _coin[0] + "/ars" + "/1").then(resp=> {return resp.json()}).then(json=>{
             let cotizacionP2P=json;
             cotizaciones.binanceP2P = { ask: cotizacionP2P.asks.data[0].adv.price,
                                         totalAsk: cotizacionP2P.asks.data[0].adv.price,
