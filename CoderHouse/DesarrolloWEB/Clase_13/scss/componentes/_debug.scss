@@ -1,0 +1,160 @@
+:root{
+    /* --variable-debug: not-debugging; */
+    
+}
+
+* {
+    /* outline: 1px solid yellow; */
+}
+
+header h2 {
+    /* debugging */
+    -webkit-background-clip: unset;
+    background-color: var(--variable-debug, red);
+}
+
+header nav {
+    /* debugging */
+    background-color: var(--variable-debug, green);
+}
+
+header nav ul {
+    /* debugging */
+    background-color: var(--variable-debug, antiquewhite);
+}
+header nav ul li {
+    /* debugging */
+    border: var(--variable-debug, 2px solid blue);
+}
+
+header nav ul li a {
+    /* debugging */
+    background-color: var(--variable-debug, yellow);
+}
+
+/* ####################### */
+
+main {
+    /* debugging */
+    border: var(--variable-debug, 2px solid violet);
+    
+}
+
+h2 {
+}
+
+#imagenPerfil {
+}
+.div_imagenPerfil{
+}
+
+section {
+    /* debugging */
+    border: var(--variable-debug, 1px solid lawngreen);
+}
+
+section>div {
+    /* debugging */
+    border: var(--variable-debug, 2px orange solid);
+}
+.wrap_reverse {
+}
+
+section>div>div {
+    /* debugging */
+    border: var(--variable-debug, 2px red solid);
+}
+
+
+section>div>div img {
+}
+section#contacto>div>div>img {
+}
+
+section>div>div form {
+    /* debugging */
+    outline: var(--variable-debug, 1px solid greenyellow);
+}
+section>div>div form *{
+    /* debugging */
+    outline: var(--variable-debug, 1px solid blue);
+}
+
+
+section>div>ul{
+    /* debugging */
+    border: var(--variable-debug, 3px dashed blue);
+}
+
+
+section#experiencia>div>ul,
+section#proyectosLaborales>div>ul {
+}
+
+section>div>ul>li {
+    /* debugging */
+    border: var(--variable-debug, 2px solid lightblue);
+}
+section>div>ul>li>p{
+    /* debugging */
+    border: var(--variable-debug, 1px solid green);
+}
+
+section#idiomas>div>ul{
+}
+
+#proyectos, #idiomas {
+}
+
+/* propiedades particulares para los botones del form */
+#formulario_contacto>div{
+}
+#formulario_contacto>div>input[type=submit],
+#formulario_contacto>div>input[type=reset] {
+}
+#formulario_contacto>div>input[type=submit]:hover{
+}
+#formulario_contacto>div>input[type=reset]:hover {
+}
+
+header>div.hamburger {
+    background-color: aquamarine;
+}
+
+header>div.hamburger>label {
+    background-color: white;
+    outline: 2px solid black;
+}
+header>div.hamburger>label {
+    outline: 2px dashed yellow;
+}
+
+
+
+/* ####################### */
+
+
+footer {
+}
+
+footer>div {
+    /* debugging */
+    background-color: var(--variable-debug, brown);
+    border: var(--variable-debug, 2px dashed orange);
+}
+
+footer>div>a {
+    /* debugging */
+    border: var(--variable-debug, 2px solid greenyellow);
+}
+
+footer>div>a span,
+footer>div>a i {
+    /* debugging */
+    border: var(--variable-debug, 1px solid purple);
+}
+
+footer #derechosReservados p {
+    /* debugging */
+    background-color: var(--variable-debug, blue);
+}

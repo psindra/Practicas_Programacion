@@ -1,0 +1,20 @@
+{
+  "name": "Clase_13",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.16",
+    "sass": "^1.52.1"
+  },
+  "dependencies": {
+    "node": "^17.7.2",
+    "npm": "^8.12.1"
+  }
+}

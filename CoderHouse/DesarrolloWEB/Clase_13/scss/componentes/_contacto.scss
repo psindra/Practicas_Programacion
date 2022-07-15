@@ -1,0 +1,17 @@
+header#id{
+    /* prueba comentario */
+    background-color: aqua;
+    nav{
+        border: 2px dashed blue ;
+        a {
+            text-decoration: solid;
+            @media (min-width<480px) {
+                text-decoration: dashed;
+            }
+        }
+    }
+
+    @media (max-width<480px) {
+        color: blue;
+    }
+}

@@ -1,0 +1,477 @@
+
+:root {
+    --color-texto: rgb(147, 125, 209);
+    /* color: rgb(179, 152, 253);  /* color para probar texto */
+    
+    --color-1: 155, 55, 255;
+    --color-2: 199, 179, 255;
+    --color-3: 128, 0, 255;
+    --color-4: 160, 160, 160;
+    --color-5: 79, 67, 142;
+    
+    --color-gris-1: 186, 186, 186;
+    --color-gris-2: 150, 150, 150;
+    /* 👇🏻 --color-gris-2 * 20%; */
+    --color-gris-3: 30,30,30;
+    --color-gris-4: gray;
+    --color-gris-4: rgb(128, 128, 128);
+    --color-gris-5: 160, 160, 160;
+    
+    --color-h2: rgb(var(--color-2), 0.9);
+    --gradiente-fondo-h2-1: rgb(var(--color-1));
+    --gradiente-fondo-h2-2: rgb(var(--color-2));
+    --gradiente-borde-1: rgba(var(--color-1), 0.7);
+    --gradiente-borde-2: rgba(var(--color-2));
+    --gradiente-nav-1:   rgba(var(--color-1), 0.4) 0%;
+    --gradiente-nav-2:   rgb(var(--color-3), 0.05) 40%;
+    --border-perfil:     rgba(var(--color-5)); /* ex-H2 ex-colorBotón */
+    /* --background-intercalado: var(--color-gris-2),0.2; */
+    --background-intercalado: var(--color-gris-3);
+    --fondo: rgba(var(--color-gris-3),0.9);
+    
+    
+    color-scheme: only light;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(0, 0, 0,0.95);
+    box-sizing: border-box;
+    
+    /* GRID, aunque no es necesario en verdad */
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto;
+}
+
+
+/* ################# NAVBAR ################# */
+header {
+    background-color: rgb(var(--color-gris-1));
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+header h2 {
+    color: black;
+    color: var(--gradiente-fondo-h2-1);
+    font-size: xx-large;
+    background-image: unset;
+    align-self: center;
+}
+
+@supports (-webkit-background-clip: text){
+    header h2{
+        -webkit-background-clip: text;
+        background-image: url("https://uploads-ssl.webflow.com/61f03747d8d407ed117df27f/61f116f06248585a2739061f_Button%20BG.png");
+        color: rgb(0, 0, 0, 0.25);
+    }
+}
+
+header nav {
+    min-width: max-content;
+}
+
+header nav ul {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    height: 100%;
+}
+header nav ul li {
+    display: flex;
+    background-color: rgb(var(--color-gris-1));
+    text-align: center;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    font-family: monospace;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.5em;
+    color: var(--color-texto);
+    width: 100%;
+}
+header nav ul li a:hover,
+header nav ul li a:focus {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.3);
+    background-image: linear-gradient(to top, var(--gradiente-nav-1),var(--gradiente-nav-2));
+    box-shadow: 0px 1px 12px 0px;
+}
+
+header>nav>input[type="checkbox"]{
+    display: none;
+}
+header>nav>label[for="hamburger_chk"] {
+    display: none;
+}
+/* ----------------- NAVBAR ----------------- */
+
+
+
+/* ################## MAIN ################## */
+main {
+    color: var(--color-texto);
+    
+    /* para que quede más lindo, y mejor espaciadas las cosas */
+    max-width: 1000px;
+
+    justify-self: center;
+    width: 100%;
+    
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 450;
+    color: var(--gradiente-fondo-h2-1);
+    display: inline-flex;
+}
+@supports (-webkit-background-clip: text){
+    h2{
+        -webkit-background-clip: text;
+        background-image: linear-gradient(-45deg, var(--gradiente-fondo-h2-1), var(--gradiente-fondo-h2-2));
+        color: transparent;
+    }
+}
+
+h3 {
+    padding-block: 2%;
+}
+
+h4 {
+    text-transform: uppercase;
+    padding-block: 2%;
+}
+
+#imagenPerfil {
+    display: block;
+    border-radius: 50%;
+    width: 9.5rem;
+    height: 9.5rem;
+    max-height: 42.5vw;
+    max-width: 42.5vw;
+    animation: rotar 5s infinite ease-in-out reverse;
+}
+.div_imagenPerfil{
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(45deg, var(--gradiente-borde-1), var(--gradiente-borde-2));
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    max-height: 45vw;
+    max-width: 45vw;
+    animation: rotar 5s infinite ease-in-out , radio 5s infinite linear;
+    box-shadow: 1px 0 10px;
+    z-index: -1;
+}
+@keyframes rotar {
+    100% {transform: rotate(719deg);
+    };
+}
+@keyframes radio {
+    0% {border-radius: 48%}
+    50% {border-radius: 50%}
+    100% {border-radius: 48%};
+}
+
+section {
+    padding: 15px 5px;
+}
+
+section>div {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.wrap_reverse {
+    flex-wrap: wrap-reverse;
+}
+    
+section>div>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 15rem;
+    min-width: min-content;
+    flex-grow: 1;
+    margin: 2.5% 5%;
+}
+
+section>div>div img, 
+section>div>div video {
+    width: 10rem;
+    height: 10rem;
+    max-height: 45vw;
+    max-width: 45vw;
+    align-self: center;
+    object-fit: cover;
+    box-shadow: 0 0 20px -5px;
+    margin-inline: 15px;
+}
+
+section>div#proyectos_personales_1>div img {
+    object-position: 42%;
+}
+
+section#contacto>div>div>img {
+    display: block;
+}
+
+
+section>div>ul{
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-left: 5%;
+    justify-items: stretch;
+    
+    /* ???: cómo evitar que sobresalga por los costados en pantalla
+    MUY angosta ??? */
+}
+
+section#experiencia>div>ul>li,
+section#proyectosLaborales>div>ul {
+    list-style-type: '⩺  ';   /* otra opción */
+    /* list-style-image: url('../assets/img/10x10.png'); */
+}
+section#experiencia>div>ul>li>ul ,
+section>div>ul>li>ul {
+    list-style-image: none;
+    --estilo-lista-dentro-lista: none;
+    list-style-type: var(--estilo-lista-dentro-lista);
+    padding-left: 0.5rem;
+}
+section>div>ul>li>ul>li::first-letter {
+    padding-left: 0.5rem;
+}
+
+section#experiencia>div>ul>li:nth-child(3)>ul {
+    --estilo-lista-dentro-lista: "•"
+}
+
+section#experiencia>div>ul>li:nth-child(4)>ul {
+    --estilo-lista-dentro-lista: "•"
+}
+
+section#experiencia>div>ul>li:nth-child(5)>ul {
+    --estilo-lista-dentro-lista: "-"
+}
+
+section#proyectosLaborales>div>ul>li:nth-child(2)>ul {
+    --estilo-lista-dentro-lista: "•"
+}
+
+section#proyectosLaborales>div>ul>li:nth-child(3)>ul {
+    --estilo-lista-dentro-lista: "*"
+}
+
+section#proyectosLaborales>div>ul>li:nth-child(4)>ul {
+    --estilo-lista-dentro-lista: "-"
+}
+
+section#proyectosLaborales>div>ul>li:nth-child(5)>ul {
+    --estilo-lista-dentro-lista: "-"
+}
+
+
+section#idiomas>div>ul{
+    /* para la seccion Idiomas las celdas van a ser un poquito más angostas */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+#proyectos, #idiomas {
+    background-color: rgba(var(--color-gris-2));
+    background-color: rgba(var(--background-intercalado));
+    box-shadow: 0px 0px 5px 5px rgba(var(--background-intercalado));
+}
+
+section>div>div form {
+    display: flex; flex-direction: column;
+}
+section>div>div form *{
+    border-radius: 5px;
+}
+
+/* propiedades particulares para los botones del form */
+#formulario_contacto>div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-self: space-between;
+    margin-top: 10px;
+}
+#formulario_contacto>div>input[type=submit],
+#formulario_contacto>div>input[type=reset] {
+    background-color: var(--gradiente-borde-1);
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    flex-grow: 1;
+    box-shadow: 0px 0px 7px var(--color-texto);
+}
+#formulario_contacto>div>input[type=submit]:hover{
+    background-color: var(--gradiente-fondo-h2-1);
+    background-image: url("https://uploads-ssl.webflow.com/61f03747d8d407ed117df27f/61f116f06248585a2739061f_Button%20BG.png");
+    background-size: cover;
+}
+#formulario_contacto>div>input[type=reset]:hover {
+    background-color: rgba(var(--color-3));
+    background-image: url("https://uploads-ssl.webflow.com/61f03747d8d407ed117df27f/61f116f06248585a2739061f_Button%20BG.png");
+}
+
+
+@media screen and (max-width: 414px) {
+    header h2 {
+        font-size: x-large;
+    }
+    
+    header>nav{
+        position: absolute;
+        /* right: 0px; */
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    header>nav>ul {
+        display: block;
+        position: absolute;
+        height: auto;
+        right: 0;
+        top: 100%;
+        opacity: 0;
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in;
+        transform: translateY(-50%) scaleY(0);
+    }
+    header>nav>input:checked ~ ul {
+        opacity: 1;
+        /* transition: transform 0.5s ease-in-out, opacity 0.75s linear; */
+        transform: translateY(0px) scaleY(1);
+    }
+    header>nav>label[for="hamburger_chk"] {
+        position: absolute;
+        right: 0;
+        margin: 2px;
+        padding: 2px;
+        height: 95%;
+        border: 1.5px solid var(--color-gris-4);
+        border-radius: 5px;
+        cursor: pointer;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    @supports (aspect-ratio: 1 / 1) {
+        header>nav>label[for="hamburger_chk"] {
+            aspect-ratio: 1 / 1;
+        }
+    }
+    
+    header>nav>label[for="hamburger_chk"]>hr {
+        width: 20px;
+        height: 4px;
+        border-radius: 15px;
+        background-color: rgb(var(--color-gris-2));
+        background-color: var(--color-gris-4);
+        border: 1.5px solid rgba(var(--color-gris-2));
+        transition: transform 0.5s ease-in-out;
+        transform: rotate(0deg);
+    }
+    
+    header>nav>input:checked + label[for="hamburger_chk"]>hr{
+        border: 1px solid var(--color-gris-4);
+        background-color: var(--color-gris-4);
+        transform: translateY(+7px) rotate(+45deg);
+    }
+    header>nav>input:checked + label[for="hamburger_chk"]>hr:nth-child(2){
+        opacity: 0;
+    }
+    header>nav>input:checked + label[for="hamburger_chk"]>hr:last-child{
+        transform: translateY(-7px) rotate(-45deg);
+    }
+    
+    section>div>ul{
+        /* "!important" para que pise la especificidad de las reglas Desktop fuera de la media query */
+        grid-template-columns: 1fr !important;
+    }
+
+    main>section>h2 {
+        text-align: center;
+        display: block;
+    }
+    
+    
+
+}
+/* ------------------ MAIN ------------------ */
+
+
+
+/* ################# FOOTER ################# */
+footer {
+    /* no uso height por ahora */
+    min-height: 40px;
+    background-color: var(--color-gris-4);
+    position: sticky;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    align-items: center;
+
+}
+
+footer>div {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    min-width: 50%;
+}
+
+footer>div>a {
+    /* padding: 0 4%; */
+    padding: min(1%, 5px) 4%;
+    display: flex;
+}
+
+footer>div>a>span,
+footer>div>a>i{
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+footer>div>a>i>svg {
+    height: 25px;
+    width: 25px;
+    color: rgb(var(--color-gris-1));
+}
+footer>div>a:hover>i>svg {
+    color: var(--gradiente-fondo-h2-1);
+}
+
+footer #derechosReservados p {
+    text-align: center;
+    padding-block: 3%;
+    padding-block: min(3%, 10px);
+}
+/* ----------------- FOOTER ----------------- */
