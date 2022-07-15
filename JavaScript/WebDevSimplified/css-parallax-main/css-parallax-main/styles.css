@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+}
+
+.wrapper {
+  height: 100vh;
+  /* overflow-y: auto; */
+  overflow-x: hidden;
+  perspective: 10px;
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transform-style: preserve-3d;
+  z-index: -1;
+  gap: 20px;
+}
+
+.background {
+  transform: translateZ(-10px) scale(2);
+}
+
+.foreground {
+  transform: translateZ(-5px) scale(1.5);
+}
+
+.background,
+.foreground {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.title {
+  font-size: 7rem;
+  color: white;
+  text-shadow: 0 0 5px black;;
+}
+
+section.b {
+  font-size: 2rem;
+  padding: 2rem;
+  background-color: #333;
+  color: white;
+  /* transform: translateZ(0); */
+  /* transform: translateZ(1px) scale(0.9); */
+}
+
+section.a {
+  font-size: 2rem;
+  padding: 2rem;
+  background-color: rgb(53, 55, 88);
+  color: white;
+  transform: translateZ(0.1px) scale(0.999);
+}
