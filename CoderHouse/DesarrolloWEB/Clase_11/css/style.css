@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.div1{
+    background-color: aqua;
+}
+.div2{
+    background-color: yellow;
+}
+.div3{
+    background-color: green;
+}
+.div4{
+    background-color: palevioletred;
+}
+.div5{
+    background-color: yellowgreen;
+}
+
+.contenedorDiv{
+    margin: auto;
+}
