@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-color: tomato;
+    grid-area: header;
+}
+nav{
+    background-color: #BC342C;
+    grid-area: nav;
+}
+main{
+    background-color: #ED4534;
+    grid-area: main;
+}
+section{
+    background-color: #F6C76F;
+}
+aside{
+    background-color: #004B5A;
+    grid-area: ads;
+}
+footer{
+    background-color: #071F41;
+    grid-area: footer;
+}
+
+body>div {
+    display: grid;
+    grid-template-areas: 
+    "nav header header"
+    "nav main ads"
+    "nav section ads"
+    "footer footer footer"
+}
