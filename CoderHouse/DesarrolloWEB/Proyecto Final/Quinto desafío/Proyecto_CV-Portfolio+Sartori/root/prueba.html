@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body>div>div{
+            border: 2px dotted blue;
+        }
+        .div_1, .div_2 {
+            background-color: antiquewhite;
+            display: block;
+            flex: 1;
+            border: 1px solid red;
+        }
+        .div_3{
+        }
+        .container{
+            border: 3px solid yellow;
+            display: flex;
+            justify-content: flex-end;
+            /* justify-content: stretch; */
+        }
+
+        p{
+            background-color: aqua;
+        }
+
+        .prueba:nth-child(2) p{
+            background-color: greenyellow;
+            border: 3px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="div_1">
+            <p>1 Lorem ipsum <br>adsadsada adsadas, s!</p>
+        </div>
+        <div class="div_2 prueba">
+            <p>2 Lorem ipsum <br>adsadsada, s!</p>
+        </div>
+        <div class="div_3 prueba">
+            <p class="">3 Lorem ipsum <br>adsadsada, s!</p>
+        </div>
+        <div class="div_4">
+            <p class="">4 Lorem ipsum <br>adsadsada, s!</p>
+        </div>
+    </div>
+</body>
+</html>

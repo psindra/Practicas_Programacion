@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final Curso Desarrollo Web</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="./assets/img/30x30.png" type="image/png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="headerId">
+        <h2>Paolo Sartori</h2>
+        <nav>
+            <input type="checkbox" name="hamburger_chk" id="hamburger_chk">
+            <label for="hamburger_chk" class="lbl_chk">
+                <hr>
+                <hr>
+                <hr>
+            </label>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../pages/proyectos.html">Proyectos</a></li>
+                <li><a href="../pages/formulario.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="contacto">
+            <h2>Contactá conmigo</h2>
+            <div>
+                <div>
+                    <img src="../assets/img/imagen_formulario.png" alt="Complete su formulario">
+                </div>
+                <div>
+                    <form name="formulario_contacto" id="formulario_contacto" action="#" method="post">
+                        <label for="input_nombre">Nombre</label>
+                        <!-- <br> -->
+                        <input type="text" name="input_nombre" id="input_nombre" placeholder="John Smith" required>
+                        <!-- <br> -->
+                        <label for="input_email">Correo electrónico</label>
+                        <!-- <br> -->
+                        <input type="email" name="input_email" id="input_email" placeholder="example@mail.com" required>
+                        <!-- <br> -->
+                        <label for="input_telefono">Teléfono de contacto</label>
+                        <!-- <br> -->
+                        <input type="tel" name="input_telefono" id="input_telefono" placeholder="+54(11)5123123" pattern="[^a-zA-Z]*">
+                        <!-- <br> -->
+                        <label for="input_mensaje">Mensaje</label>
+                        <!-- <br> -->
+                        <textarea name="input_mensaje" id="input_mensaje" cols="5" rows="5" placeholder="Mensaje
+                        1234567890123456798a123456789b123456789c123456798d123456789e123456789f123456798g123456789h" required></textarea>
+                        <!-- <br> -->
+                        <div>
+                            <input type="reset" value="Vaciar formulario">
+                            <input type="submit" value="Enviar Mensaje">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="footerId">
+        <div id="derechosReservados">
+            <p>©Todos los derechos reservados</p>
+        </div>
+        <div>
+            <a href="https://api.whatsapp.com/#####" target="_blank" rel="noopener noreferrer">
+                <img src="../assets/img/whatsapp_icon.png" alt="Contactar mediante Whatsapp">
+            </a>
+            <a href="https://api.telegram.com/#####" target="_blank" rel="noopener noreferrer">
+                <img src="../assets/img/telegram_icon.png" alt="Contactar mediante telegram">
+            </a>
+            <a href="https://api.github.com/#####" target="_blank" rel="noopener noreferrer">
+                <img src="../assets/img/github_icon.png" alt="Repositorio github">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>

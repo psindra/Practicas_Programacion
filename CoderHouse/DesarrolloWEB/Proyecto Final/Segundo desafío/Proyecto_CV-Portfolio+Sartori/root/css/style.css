@@ -1,0 +1,194 @@
+:root {
+    --variable-debug: not-debugging;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: rgb(186, 186, 186);
+    position: sticky;
+    top: 0;
+}
+
+header h2 {
+    display: inline-block;
+    color: black;
+    padding-left: 10px;
+    
+    /* debugging */
+    background-color: var(--variable-debug, red);
+}
+
+header nav {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    height: 100%; /* #### TODO: cambiar por FLEX*/
+    
+    /* debugging */
+    background-color: var(--variable-debug, green);
+}
+
+header nav ul {
+    text-align: right;
+
+    /* debugging */
+    background-color: var(--variable-debug, antiquewhite);
+}
+header nav ul li {
+    display: inline-block;
+    
+    /* debugging */
+    background-color: var(--variable-debug, blue);
+}
+
+header nav ul li a {
+    padding: 0 10px;
+    text-decoration: none;
+    font-family: monospace;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: rgb(147, 125, 209);
+}
+
+/* ####################### */
+
+
+main {
+    /* color: rgb(179, 152, 253);  /* color para probar */
+    color: rgb(147, 125, 209);
+    
+    /* para que quede más lindo, */
+    /* y mejor espaciadas las cosas */
+    max-width: 1000px;
+    /* para centrar */
+    /* TODO: cambiar por flex */
+    margin: auto;
+    
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 450;
+    /* color: rgb(79, 67, 142); */
+    color: rgb(199, 179, 255, 0.9);
+}
+
+#imagenPerfil {
+    border-radius: 50%;
+    border: 2px solid rgb(79, 67, 142);
+}
+
+section {
+    padding: 15px 5px;
+    
+    /* debugging */
+    border: var(--variable-debug, 1px solid lawngreen);
+}
+
+section>div {
+    display: flex;
+    margin: 10px;
+    
+    /* debugging */
+    border: var(--variable-debug, 2px orange solid);
+    /* background-color: var(--variable-debug, rgba(0, 255, 0, 0.1)); */
+}
+
+section>div>div {
+    border: var(--variable-debug, 1px red solid);
+    width: 40%;
+    /* TODO: cambiar luego por Flex */
+    margin: auto;
+}
+
+section>div>div>img {
+    height: 10rem;
+    display: block;
+    margin: auto auto;
+}
+section#contacto>div>div>img {
+    height: 15rem;
+}
+
+section>div>ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%;
+    margin: auto 5%;
+    
+    /* no hace falta justify-content ya que está
+    grow > 0, que rellena todos los espacios */
+    /* justify-content: space-around; */
+    
+    /* debugging */
+    border: var(--variable-debug, 2px dashed blue);
+    
+}
+section#experiencia>div>ul,
+section#proyectosLaborales>div>ul {
+    /* list-style-type: '⩺ ';   otra opción*/
+    list-style-image: url('../assets/img/10x10.png');
+}
+
+section>div>ul>li {
+    width: 250px;
+    flex-grow: 1;
+    
+    /* debugging */
+    border: var(--variable-debug, 2px solid lightblue);
+}
+
+section#idiomas>div>ul>li {
+    width: 150px;
+    flex-grow: 1;
+}
+
+
+#proyectos, #idiomas {
+    background-color: rgba(150, 150, 150, 0.2);
+}
+
+#formulario_contacto>input[type=submit],
+#formulario_contacto>input[type=reset] {
+    background-color: rgba(160, 160, 160);
+    color: rgb(79, 67, 142);
+    /* color: inherit; */
+    padding: 5px;
+}
+
+
+/* ####################### */
+
+
+footer {
+    /* height: 40px; */
+    --variable-debug: grey;
+    background-color: var(--variable-debug, violet);
+    position: sticky;
+    bottom: 0px;
+}
+footer div {
+    display: inline-block;
+    background-color: var(--variable-debug, brown);
+    width: 49%;
+    text-align: center;
+}
+footer div a {
+    /* TODO: pasar a FLEX */
+    margin: 4%;
+}
+footer #derechosReservados p {
+    background-color: var(--variable-debug, blue);
+}
