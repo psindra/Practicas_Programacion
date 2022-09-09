@@ -1,0 +1,33 @@
+from re import X
+import mouse
+import time
+
+while True:
+    mouse.move(x=1, y=1,absolute=False)
+    print("mouse.move(x=1, y=1,absolute=False)")
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(2)
+    mouse.move(x=-1, y=-1,absolute=False)
+    print("mouse.move(x=-1, y=-1,absolute=False)")
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(10)
+    print(time.asctime())
+    time.sleep(8)
