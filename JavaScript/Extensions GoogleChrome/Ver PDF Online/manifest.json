@@ -1,0 +1,21 @@
+{
+   "author": "-----",
+   "background": {
+      "persistent": true,
+      "scripts": [ "undisposition_bg.js" ]
+   },
+   "browser_action": {
+      "default_title": "Título: Ver PDF Online"
+   },
+   "description": "Removes Content-Disposition: attachment HTTP header to allow view files instead of downloading them. Extension icon acts as toggle.",
+   /*"icons": {
+      "128": "icons/icon128.png",
+      "16": "icons/icon16.png",
+      "19": "icons/icon19.png",
+      "48": "icons/icon48.png"
+   },*/
+   "manifest_version": 2,
+   "name": "Ver PDF Online",
+   "permissions": [ "webRequest", "webRequestBlocking", "<all_urls>", "storage" ],
+   "version": "0.1"
+}
