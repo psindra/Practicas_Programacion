@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.14"
+var VERSION = "v2.1.15"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -61,6 +61,11 @@ f = async function() {
 		/** */if(document.querySelector(".ytp-ad-skip-button-slot")){
 			contadores_YT['".ytp-ad-skip-button-slot"'] +=1;
 		}
+		/** */ try {
+			await document.querySelector(".ytp-ad-skip-button").click();
+			contadores_YT['".ytp-ad-skip-button").click()'] +=1;
+		} catch(e){};
+			
 //         await document.querySelector(".ytp-ad-skip-button").click()
     } else {
 	    if (await document.querySelector(".ytp-ad-text")) {
