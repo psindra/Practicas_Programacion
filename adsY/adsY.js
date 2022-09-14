@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.15"
+var VERSION = "v2.1.16"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -28,16 +28,18 @@ f = async function() {
 		contadores_YT[`.contains("ad-showing")`] +=1;
 		const video_duration = await document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").duration;
 		console.log('"ad-showing" duration: ' + video_duration);
-
+		
 		// // 		await document.getElementsByTagName('video')[0].pause()
 		// // // 		console.log("pause");
 		// 		if (!document.querySelector("#movie_player").classList.contains("adsY_flag_"+ VERSION)){
 			// 			await document.querySelector("#movie_player").classList.add("adsY_flag_"+ VERSION);
 			// 			await alert('class "ad-showing"');
 			// 		}	// fin de incorporación >> "adsY_flag_"+ VERSION <<
-		//
-		document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime = video_duration ||
-		document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").duration;
+			//
+			console.log('"ad-showing" pre currentTime: ' + document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime);
+			document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime = video_duration ||
+			document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").duration;
+			console.log('"ad-showing" post currentTime: ' + document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime);
 		// console.log("currentTime set: " + document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime);
 		/** */ if (document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").currentTime == document.querySelector(".ad-showing > .html5-video-container > .html5-main-video").duration){
 			contadores_YT['".ad-showing > .html5-video-container > .html5-main-video") .duration == .currentTime'] +=1;
