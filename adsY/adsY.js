@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.12"
+var VERSION = "v2.1.13"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -19,7 +19,7 @@ let contadores_YT = {
 	'"#masthead-ad" 2': 0,
 	'"#cancel-button.yt-confirm-dialog-renderer"': 0,
 	'"#country-code"': 0,
-
+	"f()": 0
 }
 contadores_YT = JSON.parse(localStorage.getItem("contadores_YT"));
 
@@ -140,6 +140,9 @@ document.querySelector("#cancel-button.yt-confirm-dialog-renderer")?.click();
 /** */ document.querySelector("#cancel-button.yt-confirm-dialog-renderer")?
 	contadores_YT['"#cancel-button.yt-confirm-dialog-renderer"'] +=1 : null;
 	
+	
+	contadores_YT["f()"] += 1;
+	localStorage.setItem("contadores_YT", JSON.stringify(contadores_YT));
 };	// final función f()
 
 
