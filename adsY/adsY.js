@@ -21,7 +21,7 @@ let contadores_YT = {
 	'"#country-code"': 0,
 	'f()': 0
 }
-contadores_YT = {...contadores_YT, ...JSON.parse(localStorage.getItem("contadores_YT"))};
+contadores_YT = {...contadores_YT, ...JSON.parse(localStorage.getItem("polyys:contadores_YT"))};
 
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
@@ -143,7 +143,7 @@ document.querySelector("#cancel-button.yt-confirm-dialog-renderer")?.click();
 	
 	contadores_YT['f()'] += 1;
 	new Promise(resolve=>{
-		localStorage.setItem("contadores_YT", JSON.stringify(contadores_YT));
+		localStorage.setItem("polyys:contadores_YT", JSON.stringify(contadores_YT));
 		resolve();		
 	})
 };	// final función f()
