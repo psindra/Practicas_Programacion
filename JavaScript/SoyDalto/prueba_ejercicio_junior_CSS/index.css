@@ -1,0 +1,90 @@
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #333;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    color: darkblue;
+}
+
+h3{
+    margin: 0px;
+}
+
+h4{
+    color: #999;
+}
+
+h5{
+    margin: 0;
+}
+img {
+    width: 100px;
+    align-content: center;
+}
+
+div.img_esq_div{
+    width: 30px;
+    height: 30px;
+    align-content: center;
+    position: absolute;
+    right: 0px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+img.img_esq{
+    height: 100%;
+    width: auto;
+    /* position: inherit; */
+}
+
+div.contenedor_producto {
+    flex-grow: 1;
+    margin: 20px;
+    max-width: 200px;
+    border: 2px solid #333;
+    padding: 0 20px;
+}
+
+div.contenedor_producto:hover {
+    border-color: #71a154;
+    box-shadow: 0px 0px 30px #317124;
+    color: #f77;
+}
+div.modal > div.contenedor_producto{
+    box-shadow: none;
+    border: none;
+    flex-grow: 1;
+    max-width: 200px;
+    background-color: lightgray;
+}
+
+div.contenedor_producto:focus{
+    box-shadow: 0px 0px 30px #713124;
+}
+
+form {
+    width: 100%;
+    text-align: center;
+    padding: 50px 0px;
+}
+
+form > input[type=submit]{
+    background: #71a154;
+    color: white;
+    border: none;
+    padding: 12px 36px;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+form > input[type=submit]:hover {
+    box-shadow: 0px 0px 10px #317124;
+}
+

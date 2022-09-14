@@ -1,0 +1,62 @@
+body {
+  text-align: center;
+  margin-bottom: 170px; /* para que no colisione con el footer */
+}
+body[v4]{
+  background-color: rgb(0,0,0,0.93); color:white;
+}
+
+  button {
+    display: inline-block;
+    margin: 1em 1em;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  button[v4]{
+    
+    background-color: rgb(113, 113, 113);
+    color: white;
+    /* border-color: transparent; */
+  }
+
+  label {
+    padding: 20px;
+  }
+  
+  div#conectar, div#address, div#container-saldos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  div#conectar{
+    background-color: rgba(105, 105, 105, 0.178);
+    margin: 1px 20px;
+    padding: 0px 20px;
+    }
+  
+
+  div#container-saldos{
+    /* margin-bottom: div#container-firmar.height; */
+    background-color: rgba(105, 105, 105, 0.178);
+    margin: 0px 20px;
+  }
+
+  div#container-saldos>div{
+    margin: 20px;
+    border: 2px solid #333;
+    padding: 20px 20px;
+  }
+
+  div#container-firmar{
+    background-color: rgba(105, 105, 105, 0.178);
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: 20px 30px;
+    padding: 10px 20px;
+  }
+
+ 

@@ -1,0 +1,130 @@
+body{
+    background: rgb(0,212,255);
+    background: radial-gradient(circle, rgba(0,212,255,0.15449929971988796) 64%, rgba(20,5,171,0.4458158263305322) 100%);
+}
+
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #333;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    color: darkblue;
+}
+
+h3{
+    margin: 0px;
+}
+
+h4{
+    color: #999;
+}
+
+h5{
+    margin: 0;
+}
+img {
+    width: 100px;
+    align-content: center;
+}
+
+div.img_esq_div{
+    width: 30px;
+    height: 30px;
+    align-content: center;
+    position: absolute;
+    right: 0px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+img.img_esq{
+    height: 100%;
+    width: auto;
+    /* position: inherit; */
+}
+
+div.contenedor_producto {
+    flex-grow: 1;
+    margin: 20px;
+    max-width: 200px;
+    border: 2px solid #333;
+    padding: 0 20px;
+}
+
+div.contenedor_producto:hover {
+    border-color: #71a154;
+    box-shadow: 0px 0px 30px #317124;
+    color: #f77;
+}
+div.modal > div.contenedor_producto{
+    box-shadow: none;
+    border: none;
+    flex-grow: 1;
+    max-width: 200px;
+    background-color: rgba(211, 211, 211, 0.25);
+}
+
+div.contenedor_producto:focus{
+    box-shadow: 0px 0px 30px #713124;
+}
+
+form {
+    width: 100%;
+    text-align: center;
+    padding: 50px 0px;
+}
+
+form > input[type=submit]{
+    background: #71a154;
+    color: white;
+    border: none;
+    padding: 12px 36px;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+form > input[type=submit]:hover {
+    box-shadow: 0px 0px 10px #317124;
+}
+
+div.modal_container{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+div.modal {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 300px;
+    padding: 0px;
+    align-items: center;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+div.modal > button{
+    border-radius: 15px;
+    background-color: #a1a054;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: whitesmoke;
+    margin: 10px;
+}
+
