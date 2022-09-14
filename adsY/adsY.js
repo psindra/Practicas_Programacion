@@ -1,5 +1,5 @@
 // javascript:
-var VERSION = "v2.1.13"
+var VERSION = "v2.1.14"
 
 console.log("adsY.js loading..." + " " + VERSION);
 
@@ -19,9 +19,9 @@ let contadores_YT = {
 	'"#masthead-ad" 2': 0,
 	'"#cancel-button.yt-confirm-dialog-renderer"': 0,
 	'"#country-code"': 0,
-	"f()": 0
+	'f()': 0
 }
-contadores_YT = JSON.parse(localStorage.getItem("contadores_YT"));
+contadores_YT = {...contadores_YT, ...JSON.parse(localStorage.getItem("contadores_YT"))};
 
 f = async function() {
 	if (await document.querySelector("#movie_player").classList.contains("ad-showing")) {
@@ -141,7 +141,7 @@ document.querySelector("#cancel-button.yt-confirm-dialog-renderer")?.click();
 	contadores_YT['"#cancel-button.yt-confirm-dialog-renderer"'] +=1 : null;
 	
 	
-	contadores_YT["f()"] += 1;
+	contadores_YT['f()'] += 1;
 	new Promise(resolve=>{
 		localStorage.setItem("contadores_YT", JSON.stringify(contadores_YT));
 		resolve();		
