@@ -142,7 +142,10 @@ document.querySelector("#cancel-button.yt-confirm-dialog-renderer")?.click();
 	
 	
 	contadores_YT["f()"] += 1;
-	localStorage.setItem("contadores_YT", JSON.stringify(contadores_YT));
+	new Promise(resolve=>{
+		localStorage.setItem("contadores_YT", JSON.stringify(contadores_YT));
+		resolve();		
+	})
 };	// final función f()
 
 
