@@ -1,39 +1,63 @@
 var active = true;
 chrome.webRequest.onHeadersReceived.addListener(
-	function(details){
-	console.log(details);
-	// alert(details.responseHeaders);
-		var headers=details.responseHeaders;
+	function(response){
+		// alert(details.responseHeaders);
+		/* var headers=details.responseHeaders; */
+		const headers=response.responseHeaders;
 		if (active)
 		{
-			for(var i=0;i<headers.length;i++){
-				if(headers[i].name.toLowerCase()=='content-disposition'){
-					if(headers[i].value.indexOf('attachment')==0){
-						//headers.splice(i,1);
-						alert(headers[i].value);
-						headers[i].value = headers[i].value.replace('attachment', 'inline');
-						alert(headers[i].value);
-					}
-					break;
-				}
+			const attachmentHeader = headers.find(header=>{
+				// console.log (header.name.toLowerCase() == "content-disposition");
+				return header.name.toLowerCase() == "content-disposition";
+			});
+			
+			if (attachmentHeader) {
+				console.log("%cHeadersReceived: ", 'background-color: blue');
+				console.log(JSON.parse(JSON.stringify(response)));
+
+				console.log("before: " + attachmentHeader.value);
+				attachmentHeader.value = attachmentHeader.value.replace("attachment", "inline");
+				console.log("after: " + attachmentHeader.value);
+
+
+				// const contentTypeHeader = headers.find(header=>{
+				// 	if (header.name.toLowerCase() == "content-type"){
+				// 		return header.name.toLowerCase().includes("application/octet-stream") || header.name.toLowerCase().includes("application/x-download") ||
+				// 		header.name.toLowerCase().includes("application/xml");
+				// 	}
+				// });
+				
+				// if (contentTypeHeader) {
+				// 	console.log(JSON.stringify(response));
+				// }
+				
+				const contentTypeHeader = headers.find(header=>{
+					console.log("%c" + header.name.toLowerCase() == "content-type", 'backgound-color: red');
+					return (header.name.toLowerCase() == "content-type");
+				});
+
+				console.log("before: " + contentTypeHeader.value);
+				// contentTypeHeader.value = contentTypeHeader.value.replace("application/octet-stream", "text/plain");
+				contentTypeHeader.value = contentTypeHeader.value.replace("application/octet-stream", "application/pdf");
+				// contentTypeHeader.value = contentTypeHeader.value.replace("application/x-download", "text/plain");
+				contentTypeHeader.value = contentTypeHeader.value.replace("application/x-download", "application/pdf");				
+				contentTypeHeader.value = contentTypeHeader.value.replace("application/xml", "text/xml");
+
+				console.log("after: " + contentTypeHeader.value);
+
+				console.log("%cLuego: ", 'background-color: green');
+				console.log(headers);
 			}
-			for(var j=0;j<headers.length;j++){
-				if(headers[j].name.toLowerCase()=='content-type'){
-					if(headers[j].value=='application/octet-stream'||headers[j].value=='application/x-download'){
-						alert("headers[j].value: " + headers[j].value);
-						headers[j].value='text/plain'; //I hope Chrome is wise enough
-					}
-					break;
-				}
-			}
+			
+			
 		}
 		return {responseHeaders: headers};
 	},
 	{
 		urls: ['<all_urls>'],
-		types: ['main_frame','sub_frame']
+		types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "other"]
 	},
-	['blocking', 'responseHeaders']
+	['extraHeaders', 'blocking', 'responseHeaders']
 );
 
 function loadOptions(callback)
