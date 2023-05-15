@@ -1,0 +1,20 @@
+{
+  "name": "prueba-api-mongoose",
+  "version": "1.0.0",
+  "description": "Prueba de Mongoose con una API Rest de Express",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  },
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0"
+  }
+}
