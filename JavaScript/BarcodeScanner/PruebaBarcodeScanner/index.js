@@ -12,6 +12,7 @@ async function testBarcodeAPI(){
     if ('BarcodeDetector' in window) {
         let formats = await window.BarcodeDetector.getSupportedFormats();
         console.log({formats});
+        alert(JSON.stringify(formats));
         if (formats.length) {
             //   barcodeDetectorUsable = true;
             globalBarcodeDetector = new window.BarcodeDetector();
@@ -110,8 +111,10 @@ videoCamera.addEventListener("loadeddata", function startDecoding() {
 function decodeBarcode(){
     try {
         globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
-            alert(JSON.stringify(detectedBarcode));
-            console.log(JSON.stringify(detectedBarcode));
+            if (detectedBarcode.length) {
+                alert(JSON.stringify(detectedBarcode));
+                console.log(JSON.stringify(detectedBarcode));
+            }
             setTimeout(decodeBarcode, DECODER_TIMEOUT);
         })
     } catch (err) {
