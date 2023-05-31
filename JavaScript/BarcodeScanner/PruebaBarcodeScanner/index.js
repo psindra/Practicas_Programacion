@@ -16,7 +16,7 @@ async function testBarcodeAPI(){
         if (formats.length) {
             //   barcodeDetectorUsable = true;
             globalBarcodeDetector = new window.BarcodeDetector();
-            alert("Native Barcode API supported");
+            alert("Native Barcode API supported ✅️");
         }
     } else {
         console.error("❌ Barcode Chrome API not");
