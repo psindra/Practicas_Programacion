@@ -26,7 +26,8 @@ async function testBarcodeAPI(){
 }
 
 async function testCameraPermissions(){
-    await navigator.mediaDevices.getUserMedia({video:true});
+    await navigator.mediaDevices.getUserMedia({video:true})
+    .then(stream=>{stream.stop()});
 }
 
 async function populateUserMediaDevices(){
