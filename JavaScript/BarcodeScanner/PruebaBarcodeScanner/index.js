@@ -70,7 +70,7 @@ function playCamera(){
 
     }).catch(err=>{
         console.error('getUserMediaError', err, err.stack);
-        alert('getUserMediaError', err, err.message);
+        alert('getUserMediaError\n' + JSON.stringify(err));
         // throw new Error("getUserMediaError", err)
     })
 }
