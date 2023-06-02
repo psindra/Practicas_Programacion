@@ -2,30 +2,6 @@ let cameraStream;
 let globalBarcodeDetector;
 const DECODER_TIMEOUT = 40;
 
-const log = document.querySelector("pre#preConsole");
-const renderError = (err)=>{
-    const pElement = document.createElement("p")
-    pElement.classList.add("pError");
-    if (err instanceof ErrorEvent){
-        pElement.textContent = `${err.type}: ${err.message}\n`;
-        // log.textContent = `${log.textContent}${err.type}: ${err.message}\n`;
-    } else if(err instanceof Error) {
-        pElement.textContent = `${err}: ${err.stack}\n`;
-        // log.textContent = `${log.textContent}${err}: ${err.stack}\n`;
-    } else {
-        pElement.textContent = `${err}\n`;
-        log.textContent = `${log.textContent}${err}\n`;
-    }
-    console.error(err);
-    alert(
-        JSON.stringify(err) != '{}' ? JSON.stringify(err) : err
-    );
-}
-window.addEventListener("error", (event) => {
-    renderError(event);
-});
-
-
 window.addEventListener("load", async ()=>{
     await testBarcodeAPI();
     await testCameraPermissions();
