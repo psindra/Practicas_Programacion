@@ -2,6 +2,23 @@ let cameraStream;
 let globalBarcodeDetector;
 const DECODER_TIMEOUT = 40;
 
+const log = document.querySelector("pre#preConsole");
+const renderError = (err)=>{
+    if (err instanceof ErrorEvent){
+        log.textContent = `${log.textContent}${err.type}: ${err.message}\n`;
+    } else if(err instanceof Error) {
+        log.textContent = `${log.textContent}${err}: ${err.stack}\n`;
+    } else {
+        log.textContent = `${log.textContent}${err}\n`;
+    }
+    console.log(err);
+    alert(JSON.stringify(err));
+}
+window.addEventListener("error", (event) => {
+    renderError(event);
+});
+
+
 window.addEventListener("load", async ()=>{
     await testBarcodeAPI();
     await testCameraPermissions();
@@ -71,9 +88,11 @@ function playCamera(){
         cameraStream = stream;
 
     }).catch(err=>{
-        console.error('getUserMediaError', err, err.stack);
-        alert('.getUserMediaError/n\n' + JSON.stringify(err));
-        // throw new Error("getUserMediaError", err)
+        // console.error('getUserMediaError', err, err.stack);
+        // alert('.getUserMediaError/n\n' + JSON.stringify(err));
+        // // throw new Error("getUserMediaError", err)
+        renderError(err);
+
     })
 }
 
