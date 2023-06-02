@@ -13,7 +13,7 @@ const renderError = (err)=>{
     }
     console.error(err);
     alert(
-        typeof err == "object" ? JSON.stringify(err) : err
+        JSON.stringify(err) != '{}' ? JSON.stringify(err) : err
     );
 }
 window.addEventListener("error", (event) => {
