@@ -1,4 +1,4 @@
-const log = document.querySelector("pre#preConsole");
+const preConsole = document.querySelector("pre#preConsole");
 const renderError = (err)=>{
     const pElement = document.createElement("p")
     pElement.classList.add("pError");
@@ -12,7 +12,7 @@ const renderError = (err)=>{
         pElement.textContent = `${err}\n`;
         // log.textContent = `${log.textContent}${err}\n`;
     }
-    log.appendChild(pElement);
+    preConsole.appendChild(pElement);
     console.error(err);
     alert(
         JSON.stringify(err) != '{}' ? JSON.stringify(err) : err
@@ -37,7 +37,7 @@ console.log = (...params)=>{
     });
     const pElement = document.createElement("p")
     pElement.innerText = textoConsola;
-    log.appendChild(pElement);
+    preConsole.appendChild(pElement);
     oldconsole_log(textoConsola);
 }
 
@@ -57,12 +57,12 @@ console.error = (...params)=>{
     const pElement = document.createElement("p")
     pElement.classList.add("pError");
     pElement.innerText = textoConsola;
-    log.appendChild(pElement);
+    preConsole.appendChild(pElement);
     oldconsole_error(textoConsola);
 }
 
 
 const cleanConsole = document.querySelector("button#cleanConsole")
 cleanConsole.addEventListener("click"),(ev)=>{
-    log.replaceChildren();
+    preConsole.replaceChildren();
 }
