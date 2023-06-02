@@ -12,15 +12,15 @@ async function testBarcodeAPI(){
     if ('BarcodeDetector' in window) {
         let formats = await window.BarcodeDetector.getSupportedFormats();
         console.log({formats});
-        alert(JSON.stringify(formats));
+        // alert(JSON.stringify(formats));
         if (formats.length) {
             //   barcodeDetectorUsable = true;
             globalBarcodeDetector = new window.BarcodeDetector();
             alert("Native Barcode API supported ✅️");
         }
     } else {
-        console.error("❌ Barcode Chrome API not");
-        alert("❌ Barcode Chrome API not");
+        const err = new Error("❌ Barcode Chrome API not")
+        renderError(err);
         // throw new Error("❌ Barcode Chrome API not");
     }
 }
@@ -51,8 +51,10 @@ async function populateUserMediaDevices(){
             }
         });
         if (!cameraDevices.length){
-            console.error("⛔ No cameras Detected")
-            alert("⛔ No cameras Detected")
+            const err = new Error("⛔ No cameras Detected")
+            console.error(err)
+            // alert("⛔ No cameras Detected")
+            renderError(err)
             // throw new Error("⛔ No cameras Detected")
         }
     })
@@ -84,7 +86,8 @@ function stopCamera(){
             cameraStream.getTracks().forEach(track => track.stop());
         }
     } catch (e){
-        alert(e.message);
+        // alert(e.message);
+        renderError(e);
     }
 }
 
@@ -117,13 +120,15 @@ function decodeBarcode(){
         if(cameraStream.active){
             globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
                 if (detectedBarcode.length) {
-                    alert(JSON.stringify(detectedBarcode));
+                    // alert(JSON.stringify(detectedBarcode));
                     console.log(JSON.stringify(detectedBarcode));
+                    console.log(detectedBarcode);
                 }
                 setTimeout(decodeBarcode, DECODER_TIMEOUT);
             })
         }
     } catch (err) {
-        alert("barcodeError", err.message);
+        // alert("barcodeError", err.message);
+        renderError(err)
     }
 }
