@@ -60,3 +60,9 @@ console.error = (...params)=>{
     log.appendChild(pElement);
     oldconsole_error(textoConsola);
 }
+
+
+const cleanConsole = document.querySelector("button#cleanConsole")
+cleanConsole.addEventListener("click"),(ev)=>{
+    log.replaceChildren();
+}
