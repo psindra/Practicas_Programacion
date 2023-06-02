@@ -126,7 +126,7 @@ function decodeBarcode(){
                     console.log(detectedBarcode);
                     DECODER_TIMEOUT_EXTRA = 2000;
                 }
-                setTimeout(decodeBarcode, DECODER_TIMEOUT);
+                setTimeout(decodeBarcode, DECODER_TIMEOUT + DECODER_TIMEOUT_EXTRA);
             })
         }
     } catch (err) {
