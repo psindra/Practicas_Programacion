@@ -133,13 +133,15 @@ videoCamera.addEventListener("loadeddata", function startDecoding() {
 
 function decodeBarcode(){
     try {
-        globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
-            if (detectedBarcode.length) {
-                alert(JSON.stringify(detectedBarcode));
-                console.log(JSON.stringify(detectedBarcode));
-            }
-            setTimeout(decodeBarcode, DECODER_TIMEOUT);
-        })
+        if(cameraStream.active){
+            globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
+                if (detectedBarcode.length) {
+                    alert(JSON.stringify(detectedBarcode));
+                    console.log(JSON.stringify(detectedBarcode));
+                }
+                setTimeout(decodeBarcode, DECODER_TIMEOUT);
+            })
+        }
     } catch (err) {
         alert("barcodeError", err.message);
     }
