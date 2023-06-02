@@ -119,11 +119,12 @@ videoCamera.addEventListener("loadeddata", function startDecoding() {
 function decodeBarcode(){
     try {
         if(cameraStream.active){
+            let DECODER_TIMEOUT_EXTRA = 0;
             globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
                 if (detectedBarcode.length) {
                     // alert(JSON.stringify(detectedBarcode));
                     console.log(detectedBarcode);
-                    var DECODER_TIMEOUT = 1500;
+                    DECODER_TIMEOUT_EXTRA = 2000;
                 }
                 setTimeout(decodeBarcode, DECODER_TIMEOUT);
             })
