@@ -15,7 +15,7 @@ const renderError = (err)=>{
     preConsole.appendChild(pElement);
     console.error(err);
     alert(
-        JSON.stringify(err) != '{}' ? JSON.stringify(err) : err
+        JSON.stringify(err) != '{}' ? JSON.stringify(err) : err.toString()
     );
 }
 window.addEventListener("error", (event) => {

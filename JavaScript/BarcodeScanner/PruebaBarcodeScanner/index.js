@@ -121,7 +121,6 @@ function decodeBarcode(){
             globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
                 if (detectedBarcode.length) {
                     // alert(JSON.stringify(detectedBarcode));
-                    console.log(JSON.stringify(detectedBarcode));
                     console.log(detectedBarcode);
                     var DECODER_TIMEOUT = 1500;
                 }
