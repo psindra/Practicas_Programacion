@@ -42,6 +42,7 @@ async function populateUserMediaDevices(){
                     new Option(
                         device.label ?? `Camara #${index}`,
                         device.deviceId,
+                        device.label.toLocaleLowerCase().includes("back"),
                         device.label.toLocaleLowerCase().includes("back")
                     )
                 );
