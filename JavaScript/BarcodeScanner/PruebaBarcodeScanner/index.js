@@ -123,7 +123,7 @@ function decodeBarcode(){
                     // alert(JSON.stringify(detectedBarcode));
                     console.log(JSON.stringify(detectedBarcode));
                     console.log(detectedBarcode);
-                    var DECODER_TIMEOUT = 500;
+                    var DECODER_TIMEOUT = 1500;
                 }
                 setTimeout(decodeBarcode, DECODER_TIMEOUT);
             })
