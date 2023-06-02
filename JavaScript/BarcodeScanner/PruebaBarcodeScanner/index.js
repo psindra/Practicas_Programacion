@@ -11,8 +11,10 @@ const renderError = (err)=>{
     } else {
         log.textContent = `${log.textContent}${err}\n`;
     }
-    console.log(err);
-    alert(JSON.stringify(err));
+    console.error(err);
+    alert(
+        typeof err == "object" ? JSON.stringify(err) : err
+    );
 }
 window.addEventListener("error", (event) => {
     renderError(event);
@@ -43,10 +45,9 @@ async function testBarcodeAPI(){
 }
 
 async function testCameraPermissions(){
-    console.log(navigator.mediaDevices.getUserMedia({video:true})
-    .then(stream=>{stream.getTracks().forEach(track => track.stop())}));
     return (navigator.mediaDevices.getUserMedia({video:true})
-    .then(stream=>{stream.getTracks().forEach(track => track.stop())}));
+    .then(stream=>{stream.getTracks().forEach(track => track.stop())}))
+    .catch(renderError);
 }
 
 async function populateUserMediaDevices(){
