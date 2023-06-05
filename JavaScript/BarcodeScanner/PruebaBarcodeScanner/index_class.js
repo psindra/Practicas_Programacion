@@ -70,7 +70,7 @@ function playCamera(){
 }
 
 function stopCamera(){
-    detector.stopDetection();
+    detector.userStopDetection();
 }
 
 
