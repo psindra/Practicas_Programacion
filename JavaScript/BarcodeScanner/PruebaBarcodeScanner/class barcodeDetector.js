@@ -64,6 +64,9 @@ class BarcodeReader {
     })
     }
 
+    async userStopDetection(){};
+    #stopDetecting;
+
     async detectBarcode({videoDIV, cameraId, detectorTimeout}) {
         if(!videoDIV){
             videoDIV = document.createElement("video");
@@ -77,6 +80,17 @@ class BarcodeReader {
         navigator.mediaDevices.getUserMedia(constraints).then( stream=>{
             videoDIV.srcObject = stream;
             cameraStream = stream;
+
+            this.#stopDetecting = async ()=>{
+                try{
+                    if (cameraStream){
+                        cameraStream.getTracks().forEach(track => track.stop());
+                    }
+                } catch (e){
+                    // alert(e.message);
+                    renderError(e);
+                }
+            }
         }).catch(err=>{
             // console.error('getUserMediaError', err, err.stack);
             // alert('.getUserMediaError/n\n' + JSON.stringify(err));
@@ -86,16 +100,6 @@ class BarcodeReader {
 
         
         
-        this.#stopDetecting = async ()=>{
-            try{
-                if (cameraStream){
-                    cameraStream.getTracks().forEach(track => track.stop());
-                }
-            } catch (e){
-                // alert(e.message);
-                renderError(e);
-            }
-        }
         
         return new Promise((resolve, reject) => {
             this.#decodeBarcode = async ()=>{
@@ -117,7 +121,8 @@ class BarcodeReader {
                 }
             }
 
-            this.stopDetection = async ()=>{
+            this.userStopDetection = async ()=>{
+                await this.#stopDetecting();
                 console.log("user stopped");
                 reject("user stopped !");
             }
