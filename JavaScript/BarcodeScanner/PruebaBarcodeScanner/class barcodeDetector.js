@@ -68,9 +68,9 @@ class BarcodeReader {
     #decodeBarcode;
     #stopDetecting;
 
-    async detectBarcode({videoDIV, cameraId, detectorTimeout}) {
-        if(!videoDIV){
-            videoDIV = document.createElement("video");
+    async detectBarcode({videoDOM, cameraId, detectorTimeout}) {
+        if(!videoDOM){
+            videoDOM = document.createElement("video");
         }
         const constraints = {
             video: {deviceId: cameraId ?? this.#selectedCameraId},
@@ -79,7 +79,7 @@ class BarcodeReader {
 
         let cameraStream;
         navigator.mediaDevices.getUserMedia(constraints).then( stream=>{
-            videoDIV.srcObject = stream;
+            videoDOM.srcObject = stream;
             cameraStream = stream;
 
             this.#stopDetecting = async ()=>{
@@ -107,7 +107,7 @@ class BarcodeReader {
                 try {
                     if(cameraStream.active){
                         let DECODER_TIMEOUT_EXTRA = 0;
-                        globalThis.globalBarcodeDetector.detect(videoDIV).then(detectedBarcode=>{
+                        globalThis.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
                             if (detectedBarcode.length) {
                                 console.log(detectedBarcode);
                                 this.#stopDetecting();
@@ -128,7 +128,7 @@ class BarcodeReader {
                 reject("user stopped !");
             }
 
-            videoDIV.addEventListener("loadeddata", function startDecoding() {
+            videoDOM.addEventListener("loadeddata", function startDecoding() {
                 this.#decodeBarcode.apply(this);
             }.bind(this))
         })

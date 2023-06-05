@@ -65,7 +65,7 @@ async function populateUserMediaDevices(){
 function playCamera(){
     // stopCamera();
     const inputDeviceSelect = document.querySelector("select#inputDeviceSelect");
-    detector.detectBarcode({videoDIV: document.querySelector("video#camera")})
+    detector.detectBarcode({videoDOM: document.querySelector("video#camera")})
     // detector.detectBarcode({cameraId:inputDeviceSelect.value, videoDIV: document.querySelector("video#camera")})
 }
 
