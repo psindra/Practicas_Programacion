@@ -107,7 +107,7 @@ class BarcodeReader {
                 try {
                     if(cameraStream.active){
                         let DECODER_TIMEOUT_EXTRA = 0;
-                        globalThis.globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
+                        globalThis.globalBarcodeDetector.detect(videoDIV).then(detectedBarcode=>{
                             if (detectedBarcode.length) {
                                 console.log(detectedBarcode);
                                 this.#stopDetecting();
