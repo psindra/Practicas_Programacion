@@ -65,6 +65,7 @@ class BarcodeReader {
     }
 
     async userStopDetection(){};
+    #decodeBarcode;
     #stopDetecting;
 
     async detectBarcode({videoDIV, cameraId, detectorTimeout}) {
