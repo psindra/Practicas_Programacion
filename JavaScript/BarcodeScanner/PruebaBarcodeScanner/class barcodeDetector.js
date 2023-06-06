@@ -15,9 +15,7 @@ class BarcodeReader {
             console.log({formats});
             // alert(JSON.stringify(formats));
             if (formats.length) {
-                //   barcodeDetectorUsable = true;
                 globalThis.globalBarcodeDetector = new window.BarcodeDetector();
-                // alert("Native Barcode API supported ✅️");
             }
         } else {
             console.error("❌ Barcode Chrome API not");
@@ -80,15 +78,15 @@ class BarcodeReader {
         }
 
         let cameraStream;
-        navigator.mediaDevices.getUserMedia(constraints).then( stream=>{
+        navigator.mediaDevices.getUserMedia(constraints).then(async stream=>{
             videoDOM.srcObject = stream;
             cameraStream = stream;
+
 
             this.#stopDetecting = async ()=>{
                 try{
                     if (cameraStream){
                         cameraStream.getTracks().forEach(track => track.stop());
-                        // videoDOM.removeEventListener("loadeddata");
                     }
                 } catch (e){
                     // alert(e.message);
@@ -101,9 +99,10 @@ class BarcodeReader {
             // // throw new Error("getUserMediaError", err)
             renderError(err);
         })
-
         
         
+        
+        new BarcodeDetector().detect(document.querySelector("video#camera")).then(console.log).catch(renderError);
         
         return new Promise((resolve, reject) => {
             this.#decodeBarcode = async ()=>{
@@ -111,17 +110,19 @@ class BarcodeReader {
                     if(cameraStream.active){
                         // let DECODER_TIMEOUT_EXTRA = 0;
                         console.log("detecting... 📸");
-                        console.log(globalThis.globalBarcodeDetector.detect);
+                        console.log(window.globalBarcodeDetector.detect);
                         console.log(videoDOM);
-                        console.log(globalThis.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
-                            console.log({detectedBarcode});
+                        // console.log(await globalThis.globalBarcodeDetector.detect(videoDOM).then(console.log))
+                        window.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
+                            console.log(detectedBarcode);
                             if (detectedBarcode.length) {
                                 console.log({detectedBarcode});
-                                this.#stopDetecting();
-                                resolve(detectedBarcode);
+                                /* this.#stopDetecting();
+                                resolve(detectedBarcode); */
                             }
-                            console.log(setTimeout.apply(this, this.#decodeBarcode, detectorTimeout ?? this.DETECTOR_TIMEOUT));
-                        }))
+                            /* console.log(setTimeout.apply(this, this.#decodeBarcode, detectorTimeout ?? this.DETECTOR_TIMEOUT)); */
+                        })
+                        .catch(renderError);
                         console.log("after");
                     }
                 } catch (err) {
@@ -135,13 +136,12 @@ class BarcodeReader {
                 console.log("user stopped");
                 reject("user stopped !");
             }
-
+        })
             videoDOM.addEventListener("loadeddata", function startDecoding() {
                 console.log("loadeddata");
                 // console.log(videoDOM.removeEventListener("loadeddata", startDecoding));
-                this.#decodeBarcode.apply(this);
+                // this.#decodeBarcode(this);
             }.bind(this), {once:true})
-        })
 
     }
 }
