@@ -111,15 +111,18 @@ class BarcodeReader {
                     if(cameraStream.active){
                         // let DECODER_TIMEOUT_EXTRA = 0;
                         console.log("detecting... 📸");
-                        console.log(globalThis.globalBarcodeDetector);
-                        globalThis.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
+                        console.log(globalThis.globalBarcodeDetector.detect);
+                        console.log(videoDOM);
+                        console.log(globalThis.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
+                            console.log({detectedBarcode});
                             if (detectedBarcode.length) {
-                                console.log(detectedBarcode);
+                                console.log({detectedBarcode});
                                 this.#stopDetecting();
                                 resolve(detectedBarcode);
                             }
                             console.log(setTimeout.apply(this, this.#decodeBarcode, detectorTimeout ?? this.DETECTOR_TIMEOUT));
-                        })
+                        }))
+                        console.log("after");
                     }
                 } catch (err) {
                     // alert("barcodeError", err.message);

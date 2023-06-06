@@ -32,6 +32,7 @@ console.log = (...params)=>{
             textoConsola += "\n";
         }else{
             textoConsola += param;
+            textoConsola += JSON.stringify(param);
             textoConsola += "\n";
         }
     });
