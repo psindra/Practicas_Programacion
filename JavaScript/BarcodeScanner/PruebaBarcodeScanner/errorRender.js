@@ -27,7 +27,7 @@ console.log = (...params)=>{
     let textoConsola = ""
     params.forEach(param=>{
         if (typeof param == "object" && JSON.stringify(param) != '{}'){
-            textoConsola += JSON.stringify(param);
+            textoConsola += JSON.stringify(param, null, 1);
             // textoConsola += JSON.stringify(param) != '{}' ? JSON.stringify(param) : param
             textoConsola += "\n";
         }else{
@@ -47,7 +47,7 @@ console.error = (...params)=>{
     let textoConsola = ""
     params.forEach(param=>{
         if (typeof param == "object" && JSON.stringify(param) != '{}'){
-            textoConsola += JSON.stringify(param);
+            textoConsola += JSON.stringify(param, null, 1);
             // textoConsola += JSON.stringify(param) != '{}' ? JSON.stringify(param) : param
             textoConsola += "\n";
         }else{
