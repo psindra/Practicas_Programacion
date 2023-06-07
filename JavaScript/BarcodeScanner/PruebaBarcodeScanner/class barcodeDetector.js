@@ -90,23 +90,28 @@ class BarcodeReader {
         
         
         
+        let lastBarcodeDetected = {};
         return new Promise((resolve, reject) => {
             this.#decodeBarcode = async ()=>{
                 try {
                     if(cameraStream.active){
                         // let DECODER_TIMEOUT_EXTRA = 0;
-                        globalThis.globalBarcodeDetector.detect(videoDOM)
-                        .then(detectedBarcode=>{
+                        globalThis.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
                             if (detectedBarcode.length) {
-                                this.#stopDetecting();
-                                resolve(detectedBarcode[0].rawValue);
+                                if (detectedBarcode[0].rawValue == lastBarcodeDetected?.rawValue){
+                                    this.#stopDetecting();
+                                    console.log("✅");
+                                    return resolve(detectedBarcode[0].rawValue);
+                                }
                             }
+                            lastBarcodeDetected = detectedBarcode[0];
                             setTimeout(this.#decodeBarcode, detectorTimeout ?? this.DETECTOR_TIMEOUT);
                         })
                         .catch(renderError);
                     }
                 } catch (err) {
                     // alert("barcodeError", err.message);
+                    console.log("error dentro del catch de #decodeBarcode");
                     renderError(err)
                 }
             }
@@ -117,7 +122,7 @@ class BarcodeReader {
                 reject("user stopped !");
             }
             document.querySelector("video#camera").addEventListener("playing", function startDecoding() {
-                console.log("playing");
+                console.log("🟢");
                 // console.log(videoDOM.removeEventListener("loadeddata", startDecoding));
                 this.#decodeBarcode();
                 // new BarcodeDetector().detect(document.querySelector("video#camera")).then(console.log).catch(renderError);
