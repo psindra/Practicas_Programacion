@@ -31,7 +31,7 @@ console.log = (...params)=>{
             // textoConsola += JSON.stringify(param) != '{}' ? JSON.stringify(param) : param
             textoConsola += "\n";
         }else{
-            textoConsola += param;
+            textoConsola += param.toString() != '[object Object]' ? param.toString(): JSON.stringify(param, null, 1);
             // textoConsola += JSON.stringify(param);
             textoConsola += "\n";
         }
