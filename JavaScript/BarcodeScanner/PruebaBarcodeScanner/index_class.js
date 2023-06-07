@@ -65,9 +65,11 @@ async function populateUserMediaDevices(){
 function playCamera(){
     // stopCamera();
     const inputDeviceSelect = document.querySelector("select#inputDeviceSelect");
-    const videoCamera = document.querySelector("video#camera");
-    // detector.detectBarcode({videoDOM: document.querySelector("video#camera"), cameraId: inputDeviceSelect.value})
-    detector.detectBarcode({videoDOM: videoCamera, cameraId: inputDeviceSelect.value});
+    // detector.detectBarcode({videoDOM: document.querySelector("video#camera")}).then(console.log);
+    detector.detectBarcode({videoDOM: document.querySelector("video#camera"), cameraId: inputDeviceSelect.value}).then(barcode=>{
+        console.log(barcode);
+        stopButton.dispatchEvent(new Event("click"));
+    });
     // detector.detectBarcode({cameraId:inputDeviceSelect.value, videoDIV: document.querySelector("video#camera")})
 }
 
@@ -90,30 +92,3 @@ stopButton.addEventListener("click", (ev)=>{
     playButton.disabled = false;
 })
 
-
-// const videoCamera = document.querySelector("video#camera");
-// // let videoInterval;
-// videoCamera.addEventListener("loadeddata", function startDecoding() {
-//     // clearInterval(videoInterval);
-//     // videoInterval = setInterval(decodeBarcode, 40);
-//     setTimeout(decodeBarcode, DECODER_TIMEOUT);
-// })
-
-// function decodeBarcode(){
-//     try {
-//         if(cameraStream.active){
-//             let DECODER_TIMEOUT_EXTRA = 0;
-//             globalBarcodeDetector.detect(videoCamera).then(detectedBarcode=>{
-//                 if (detectedBarcode.length) {
-//                     // alert(JSON.stringify(detectedBarcode));
-//                     console.log(detectedBarcode);
-//                     DECODER_TIMEOUT_EXTRA = 2000;
-//                 }
-//                 setTimeout(decodeBarcode, DECODER_TIMEOUT + DECODER_TIMEOUT_EXTRA);
-//             })
-//         }
-//     } catch (err) {
-//         // alert("barcodeError", err.message);
-//         renderError(err)
-//     }
-// }
