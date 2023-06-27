@@ -51,11 +51,14 @@ router.route("/listaCompra/:id")
             return res.status(404).json({error: 'Id not Found'});
         }
 
-        lista = new ListaCompra(req.body);
-        // lista.validate();
-        lista.save().then(lista=>{
-            return res.json(lista);
-        })
+        const newList = new ListaCompra(req.body);
+        if (lista.id === newList.id) {
+            lista.replaceOne(newList);
+            lista.save().then(lista=>{
+                return res.json(lista);
+            })
+        }
+        
     })
     .catch(err=>{
         console.log(err);

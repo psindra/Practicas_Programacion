@@ -25,7 +25,9 @@ const listaCompra_Schema = new mongoose.Schema({
 
 listaCompra_Schema.pre(["save", /^update/, /.*Update.*?/], function(next){
     this.listaProductos.forEach(item =>{
-        item.producto.save();
+        if(item.producto instanceof mongoose.model("detalleProducto")){
+            item.producto.save();
+        }
     })
     next();
 })
