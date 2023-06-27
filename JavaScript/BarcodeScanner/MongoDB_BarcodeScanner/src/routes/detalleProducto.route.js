@@ -38,7 +38,9 @@ router.route("/detalleProducto/:id")
             })
     })
     .post((req, res) => {         /* Crear nueva listaCompra */
-        DetalleProducto.findByIdAndUpdate(req.params["id"], req.body)
+    console.log(req.body);
+        const { id: _, ...editDoc } = { ...req.body };
+        DetalleProducto.findByIdAndUpdate(req.params["id"], editDoc, {new: true})
             .then(detalleProducto => {
                 return res.json(detalleProducto);
             })

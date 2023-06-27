@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const detalleProducto_Schema = mongoose.Schema({
     // barcodeProducto: {type: Number, require: true, unique: true, index: true},
-    barcodeProducto: {type: Number, unique: true},
+    barcodeProducto: {type: Number},
     descripcionProducto: {type: String},
    /*  historicoPrecios: [
         {
@@ -12,7 +12,7 @@ const detalleProducto_Schema = mongoose.Schema({
             
         }
     ] */
-    precio: {type: Number, require: true},
+    precio: {type: Number},
 })
 
 detalleProducto_Schema.method("actualizarValores", function(newDoc) {
