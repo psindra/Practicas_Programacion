@@ -3,12 +3,12 @@ import "dotenv/config"
 // const mongoose = require('mongoose');
 
 
-const mongodb_URI = process.env['mongodb_URI']
+const mongodb_URI = process.env['MONGODB_URI']
 const MONGODB_DATABASE = process.env['MONGODB_DATABASE']
 console.log({mongodb_URI, MONGODB_DATABASE});
 mongoose.connect(mongodb_URI + MONGODB_DATABASE, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
   .then(DB => {
     // console.log((DB.connection));

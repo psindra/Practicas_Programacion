@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const detalleProducto_Schema = mongoose.Schema({
-    barcodeProducto: {type: Number, require: true, unique: true, index: true},
+    // barcodeProducto: {type: Number, require: true, unique: true, index: true},
+    barcodeProducto: {type: Number, unique: true},
     descripcionProducto: {type: String},
    /*  historicoPrecios: [
         {
