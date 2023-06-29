@@ -13,8 +13,8 @@ const notas_Squema = new mongoose.Schema({
 
 notas_Squema.path("date").set(date=>{
     // return new Date((new Date(date).toDateString()));
-    console.log("path 'date' -> ", date);
-    console.log("path 'new Date(date)' -> ", new Date(date));
+    // console.log("path 'date' -> ", date);
+    // console.log("path 'new Date(date)' -> ", new Date(date));
     return date;
     return new Date(date);
 })
