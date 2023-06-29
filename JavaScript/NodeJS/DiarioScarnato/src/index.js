@@ -23,8 +23,8 @@ app.set("view engine", 'ejs');
 
 
 app.get("/", (req, res) => {
-  // res.redirect("/web/notas");
-  res.send("OK3");
+  res.redirect("/web/notas");
+  // res.send("OK3");
 })
 
 
