@@ -3,7 +3,7 @@ class BarcodeReader {
     }
     DETECTOR_TIMEOUT = 40;
     #selectedCameraId = null;
-    async init({useLastCamera}){
+    async init({useLastCamera, useLastBackCamera}){
         await this.#testBarcodeAPI();
         await this.#testCameraPermissions();
         return await this.#enumerateUserMediaDevices(useLastCamera);
@@ -35,6 +35,10 @@ class BarcodeReader {
             const cameraDevices = devices.filter((device, index)=>{
                 return device.kind == "videoinput";
                 if(device.kind == "videoinput"){
+                    if((useLastBackCamera || useLastCamera && useLastCamera=="back") && device.label.toLowerCase.includes("back")){
+                        this.#selectedCameraId = device;
+                    }
+                    
                     return true;
                 } else {
                     return false;
