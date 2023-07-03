@@ -26,7 +26,7 @@ router.route("/detalleProducto")
 
 
 router.route("/detalleProducto/:id")
-    .get((req, res) => {          /* Consultar por UNA producto */
+    .get((req, res) => {          /* Consultar por UN producto */
         DetalleProducto.findById(req.params["id"])
             // .populate("listaProductos.producto")
             // .sort("barcodeProducto")
@@ -37,7 +37,7 @@ router.route("/detalleProducto/:id")
                 return res.status(400).send(err);
             })
     })
-    .post((req, res) => {         /* Crear nueva listaCompra */
+    .post((req, res) => {         /* Editar nueva listaCompra existente */
     console.log(req.body);
         const { id: _, ...editDoc } = { ...req.body };
         DetalleProducto.findByIdAndUpdate(req.params["id"], editDoc, {new: true})
@@ -48,7 +48,7 @@ router.route("/detalleProducto/:id")
                 return res.status(400).send(err);
             })
     })
-    .delete((req, res) => {         /* Crear nueva listaCompra */
+    .delete((req, res) => {         /* Eliminar una listaCompra */
         DetalleProducto.findByIdAndDelete(req.params["id"])
             .then(detalleProducto => {
                 return res.json({deleted: detalleProducto});
