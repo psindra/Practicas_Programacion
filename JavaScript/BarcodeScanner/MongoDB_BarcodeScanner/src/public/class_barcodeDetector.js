@@ -73,6 +73,7 @@ class BarcodeReader {
 
         let cameraStream;
         navigator.mediaDevices.getUserMedia(constraints).then(async stream=>{
+            console.log(stream);
             videoDOM.srcObject = stream;
             cameraStream = stream;
 
