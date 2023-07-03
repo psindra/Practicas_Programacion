@@ -66,7 +66,7 @@ function playCamera(){
     // stopCamera();
     const inputDeviceSelect = document.querySelector("select#inputDeviceSelect");
     // detector.detectBarcode({videoDOM: document.querySelector("video#camera")}).then(console.log);
-    detector.detectBarcode({videoDOM: document.querySelector("video#scanVideo"), cameraId: inputDeviceSelect.value}).then(barcode=>{
+    detector.detectBarcode({videoDOM: document.querySelector("video#scanVideo")}).then(barcode=>{
         console.log(barcode);
         // stopButton.dispatchEvent(new Event("click"));
         stopCamera()
