@@ -96,6 +96,6 @@ function stopCamera(){
 // })
 
 
-function renderError(...params){
+/* function renderError(...params){
     console.error(...params);
-}
+} */
