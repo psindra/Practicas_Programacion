@@ -5,8 +5,6 @@ const router = express.Router();
 router.route("/detalleProducto")
     .get((req, res) => {          /* Consultar toda la BD */
         DetalleProducto.find()
-            // .populate("listaProductos.producto")
-            .sort("barcodeProducto")
             .then(detalleProductos => {
                 return res.json(detalleProductos);
             })
