@@ -207,12 +207,14 @@
                     const row = document.getElementById(`row-${rowId}`);
                     const barcode = row.cells[0].innerText;
                     const description = row.cells[1].innerText;
-                    const price = row.cells[2].innerText;
+                    const cantidad= row.cells[2].innerText;
+                    const price = row.cells[3].innerText;
 
                     // Set the form fields with the selected row's data
                     rowIdInput.value = rowId;
                     barcodeInput.value = barcode;
                     descriptionInput.value = description;
+                    cantidadInput.value = cantidad;
                     priceInput.value = price;
 
                     // Set the editing state
@@ -240,6 +242,7 @@
                 rowIdInput.value = "";
                 barcodeInput.value = "";
                 descriptionInput.value = "";
+                cantidadInput.value = "";
                 priceInput.value = "";
             }
 
@@ -258,7 +261,8 @@
                         row.innerHTML = `
                 <td>${data.barcodeProducto}</td>
                 <td>${data.descripcionProducto}</td>
-                <td>${data.precio}</td>
+                <td>${data.historicoPrecios[0].cantidad}</td>
+                <td>${data.historicoPrecios[0].precio}</td>
                 <td>
                   <button type="button" class="btn btn-sm btn-primary edit-btn" data-id="${rowId}">Edit</button>
                   <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="${rowId}">Delete</button>
@@ -272,11 +276,11 @@
                     barcodeInput.value = "";
                     descriptionInput.value = "";
                     priceInput.value = "";
-            updateTotal();
-
+                    
+                    updateTotal();
                 })
                 .catch(() => {
-                    alert("Error submitting the form");
+                    alert("Error getting API REST and submitting the form");
                 })
 
 
@@ -285,7 +289,7 @@
                 const rows = dataTable.getElementsByTagName("tr");
 
                 for (let i = 0; i < rows.length; i++) {
-                    const priceCell = rows[i].getElementsByTagName("td")[2];
+                    const priceCell = rows[i].getElementsByTagName("td")[3] * rows[i].getElementsByTagName("td")[2];
                     const price = parseFloat(priceCell.innerText);
                     if (!isNaN(price)) {
                         total += price;
