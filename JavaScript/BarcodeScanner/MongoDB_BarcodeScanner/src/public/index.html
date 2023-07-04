@@ -289,8 +289,9 @@
                 const rows = dataTable.getElementsByTagName("tr");
 
                 for (let i = 0; i < rows.length; i++) {
-                    const priceCell = rows[i].getElementsByTagName("td")[3] * rows[i].getElementsByTagName("td")[2];
-                    const price = parseFloat(priceCell.innerText);
+                    const priceCell = rows[i].getElementsByTagName("td")[3]
+                    const qtyCell = rows[i].getElementsByTagName("td")[2];
+                    const price = parseFloat(priceCell.innerText) * parseFloat(qtyCell.innerText);
                     if (!isNaN(price)) {
                         total += price;
                     }
