@@ -3,10 +3,10 @@ class BarcodeReader {
     }
     DETECTOR_TIMEOUT = 40;
     #selectedCameraId = null;
-    async init({useLastCamera, useLastBackCamera}){
+    async init({useLastCamera, useBackCamera}){
         await this.#testBarcodeAPI();
         await this.#testCameraPermissions();
-        return await this.#enumerateUserMediaDevices(useLastCamera);
+        return await this.#enumerateUserMediaDevices(useLastCamera, useBackCamera);
     }
 
     async #testBarcodeAPI(){
@@ -28,17 +28,15 @@ class BarcodeReader {
         .then(stream=>{stream.getTracks().forEach(track => track.stop())}));
     }
 
-    async #enumerateUserMediaDevices(useLastCamera){
+    async #enumerateUserMediaDevices(useLastCamera, useBackCamera){
         return navigator.mediaDevices.enumerateDevices()
         .then(devices=>{
-            console.log(devices);
             const cameraDevices = devices.filter((device, index)=>{
+                if((useBackCamera || (useLastCamera && useLastCamera=="back")) && device.label.toLowerCase().includes("back")){
+                    this.#selectedCameraId = device;
+                }
                 return device.kind == "videoinput";
                 if(device.kind == "videoinput"){
-                    if((useLastBackCamera || useLastCamera && useLastCamera=="back") && device.label.toLowerCase.includes("back")){
-                        this.#selectedCameraId = device;
-                    }
-                    
                     return true;
                 } else {
                     return false;
@@ -48,9 +46,9 @@ class BarcodeReader {
                 const err = new Error("⛔ No cameras Detected")
                 renderError(err)
             }
-            if(useLastCamera && (useLastCamera=="last" || useLastCamera==true || useLastCamera==1) ){
+            /* if(useLastCamera && (useLastCamera=="last" || useLastCamera==true || useLastCamera==1) ){
                 this.#selectedCameraId = cameraDevices.slice(-1)[0];
-            }
+            } */
 
             return cameraDevices;
     })
@@ -65,15 +63,16 @@ class BarcodeReader {
             videoDOM = document.createElement("video");
         }
 
+        console.log({"selectedCameraId": this.#selectedCameraId})
         const constraints = {
-            video: {deviceId: cameraId ?? this.#selectedCameraId.deviceId},
-            // video: {deviceId: this.#selectedCameraId.deviceId},
+            // video: {deviceId: cameraId ?? this.#selectedCameraId.deviceId , groupId: this.#selectedCameraId.groupId},
+            video: {deviceId: this.#selectedCameraId.deviceId},
             audio: false
         }
 
         let cameraStream;
+        console.log({constraints})
         navigator.mediaDevices.getUserMedia(constraints).then(async stream=>{
-            console.log(stream);
             videoDOM.srcObject = stream;
             cameraStream = stream;
 
@@ -99,6 +98,8 @@ class BarcodeReader {
         return new Promise((resolve, reject) => {
             this.#decodeBarcode = async ()=>{
                 try {
+                    console.log({"typeof cameraStream": (typeof cameraStream)})
+                    console.log({"cameraStream.active": cameraStream.active})
                     if(cameraStream.active){
                         // let DECODER_TIMEOUT_EXTRA = 0;
                         globalThis.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
@@ -126,7 +127,7 @@ class BarcodeReader {
                 console.log("user stopped");
                 reject("user stopped !");
             }
-            document.querySelector("video#camera").addEventListener("playing", function startDecoding() {
+            document.querySelector("video#scanVideo").addEventListener("playing", function startDecoding() {
                 console.log("🟢");
                 // console.log(videoDOM.removeEventListener("loadeddata", startDecoding));
                 this.#decodeBarcode();

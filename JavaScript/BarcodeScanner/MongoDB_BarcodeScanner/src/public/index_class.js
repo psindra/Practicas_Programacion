@@ -5,7 +5,7 @@ const detector = new BarcodeReader();
 
 
 window.addEventListener("load", async ()=>{
-    await detector.init({useLastCamera:true})
+    await detector.init({useLastCamera:"back"})
     // await populateUserMediaDevices();
 })
 
@@ -64,14 +64,15 @@ async function populateUserMediaDevices(){
 
 function playCamera(){
     // stopCamera();
-    const inputDeviceSelect = document.querySelector("select#inputDeviceSelect");
+    // const inputDeviceSelect = document.querySelector("select#inputDeviceSelect");
     // detector.detectBarcode({videoDOM: document.querySelector("video#camera")}).then(console.log);
     detector.detectBarcode({videoDOM: document.querySelector("video#scanVideo")}).then(barcode=>{
         console.log(barcode);
         // stopButton.dispatchEvent(new Event("click"));
         stopCamera()
+        document.getElementById("barcodeProducto").value = barcode;
+      console.log(document.getElementById("barcodeProducto").value);
         scanDialog.close();
-        barcodeInput.value = barcode;
     });
     // detector.detectBarcode({cameraId:inputDeviceSelect.value, videoDIV: document.querySelector("video#camera")})
 }

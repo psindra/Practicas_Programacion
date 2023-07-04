@@ -87,7 +87,7 @@ playButton.addEventListener("click", (ev)=>{
 })
 const stopButton = document.querySelector("button#stopButton");
 stopButton.addEventListener("click", (ev)=>{
-    stopCamera()
+    stopCamera();
     ev.target.disabled = true;
     playButton.disabled = false;
 })
