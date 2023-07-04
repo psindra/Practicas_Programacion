@@ -28,8 +28,6 @@ router.route("/detalleProducto")
 router.route("/detalleProducto/:id")
     .get((req, res) => {          /* Consultar por UN producto */
         DetalleProducto.findById(req.params["id"])
-            // .populate("listaProductos.producto")
-            // .sort("barcodeProducto")
             .then(detalleProducto => {
                 return res.json(detalleProducto);
             })

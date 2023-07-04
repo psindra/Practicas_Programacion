@@ -1,9 +1,19 @@
 import mongoose from "mongoose";
+import ListaCompra from "./listaCompra";
 
 const detalleProducto_Schema = mongoose.Schema({
     // barcodeProducto: {type: Number, require: true, unique: true, index: true},
     barcodeProducto: {type: Number},
     descripcionProducto: {type: String},
+    historicoPrecios: [
+        {
+            listaCompra: {type: mongoose.Types.ObjectId, ref: ListaCompra, /* require:true */},
+            fechaPrecio: {type: Date, default: Date.now},
+            fraccionamiento: {type: String},
+            precio: {type: Number, require: true},
+            cantidad: {type: Number, require: true},
+        }
+    ],
    /*  historicoPrecios: [
         {
             fechaPrecio: {type: Date, default: new Date(), unique: true},
