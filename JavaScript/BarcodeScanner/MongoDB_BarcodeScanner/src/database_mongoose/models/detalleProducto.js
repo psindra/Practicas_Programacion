@@ -7,7 +7,7 @@ const detalleProducto_Schema = mongoose.Schema({
     descripcionProducto: {type: String},
     historicoPrecios: [
         {
-            listaCompra: {type: mongoose.Types.ObjectId, ref: ListaCompra, /* require:true */},
+            listaCompra: {type: mongoose.Types.ObjectId, ref: "listaCompra", /* require:true */},
             fechaPrecio: {type: Date, default: Date.now},
             fraccionamiento: {type: String},
             precio: {type: Number, require: true},
