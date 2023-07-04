@@ -91,12 +91,8 @@ function stopCamera(){
 // })
 // const stopButton = document.querySelector("button#stopButton");
 // stopButton.addEventListener("click", (ev)=>{
-//     stopCamera()
+//     stopCamera();
 //     ev.target.disabled = true;
 //     playButton.disabled = false;
 // })
 
-
-/* function renderError(...params){
-    console.error(...params);
-} */

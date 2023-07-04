@@ -12,6 +12,9 @@
                 flex-wrap: wrap;
             }
         }
+      input#enableConsole:not(:checked)+pre#preConsole{
+        display: none;
+      }
     </style>
     <script defer src="errorRender.js" ></script>
     <script defer src="./class_barcodeDetector.js"></script>
@@ -77,7 +80,7 @@
 
     <br><br>
     <hr>
-    <button id="cleanConsole">Clean Console</button>
+    <button id="cleanConsole">Clean Console</button> <input type="checkbox" id="enableConsole" name="enableConsole">
     <pre id="preConsole">
     </pre>
 

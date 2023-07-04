@@ -47,7 +47,7 @@ class BarcodeReader {
                 renderError(err)
             }
             /* if(useLastCamera && (useLastCamera=="last" || useLastCamera==true || useLastCamera==1) ){
-                this.#selectedCameraId = cameraDevices.slice(-1)[0];
+                    this.#selectedCameraId = cameraDevices.slice(-1)[0];
             } */
 
             return cameraDevices;
@@ -63,7 +63,7 @@ class BarcodeReader {
             videoDOM = document.createElement("video");
         }
 
-        console.log({"selectedCameraId": this.#selectedCameraId})
+        // console.log({ "selectedCameraId": this.#selectedCameraId })
         const constraints = {
             // video: {deviceId: cameraId ?? this.#selectedCameraId.deviceId , groupId: this.#selectedCameraId.groupId},
             video: {deviceId: this.#selectedCameraId.deviceId},
@@ -71,7 +71,6 @@ class BarcodeReader {
         }
 
         let cameraStream;
-        console.log({constraints})
         navigator.mediaDevices.getUserMedia(constraints).then(async stream=>{
             videoDOM.srcObject = stream;
             cameraStream = stream;
@@ -79,9 +78,13 @@ class BarcodeReader {
 
             this.#stopDetecting = async ()=>{
                 try{
-                    if (cameraStream){
-                        cameraStream.getTracks().forEach(track => track.stop());
-                    }
+                    if (cameraStream) {
+                        cameraStream.getTracks().forEach(track => {
+                          track.stop();
+                          videoDOM.srcObject.removeTrack(track);
+                          videoDOM.srcObject = null;
+                        });
+                      }
                 } catch (e){
                     // alert(e.message);
                     renderError(e);
@@ -98,8 +101,6 @@ class BarcodeReader {
         return new Promise((resolve, reject) => {
             this.#decodeBarcode = async ()=>{
                 try {
-                    console.log({"typeof cameraStream": (typeof cameraStream)})
-                    console.log({"cameraStream.active": cameraStream.active})
                     if(cameraStream.active){
                         // let DECODER_TIMEOUT_EXTRA = 0;
                         globalThis.globalBarcodeDetector.detect(videoDOM).then(detectedBarcode=>{
