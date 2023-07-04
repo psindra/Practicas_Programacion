@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import ListaCompra from "./listaCompra";
+import ListaCompra from "./listaCompra.js";
 
 const detalleProducto_Schema = mongoose.Schema({
     // barcodeProducto: {type: Number, require: true, unique: true, index: true},
