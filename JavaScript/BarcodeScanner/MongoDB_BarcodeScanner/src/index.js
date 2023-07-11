@@ -6,7 +6,7 @@ const app = express();
 app.set("PORT", process.env.PORT || 7300);
 
 import "./database_mongoose/connection.js";
-import ListaCompra, { detalleProducto } from "./database_mongoose/models/listaCompra.js";
+import ListaCompra, { DetalleProducto} from "./database_mongoose/models/listaCompra.js";
 import mongoose from "mongoose";
 import { listaCompraRoute } from "./routes/listaCompra.route.js";
 import { detalleProductoRoute } from "./routes/detalleProducto.route.js";

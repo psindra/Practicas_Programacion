@@ -34,6 +34,6 @@ listaCompra_Schema.pre(["save", /^update/, /.*Update.*?/], function(next){
 
 
 
-export {detalleProducto};
+export {DetalleProducto as DetalleProducto};
 export const ListaCompra = mongoose.model("listaCompra", listaCompra_Schema);
 export default ListaCompra;
