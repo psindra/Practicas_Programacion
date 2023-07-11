@@ -27,6 +27,9 @@ router.route("/detalleProducto/:id")
     .get((req, res) => {          /* Consultar por UN producto */
         DetalleProducto.findById(req.params["id"])
             .then(detalleProducto => {
+                if(detalleProducto==null){
+                    return res.status(404).json({error: 'Id not Found'});
+                }
                 return res.json(detalleProducto);
             })
             .catch(err => {
@@ -38,6 +41,9 @@ router.route("/detalleProducto/:id")
         const { id: _, ...editDoc } = { ...req.body };
         DetalleProducto.findByIdAndUpdate(req.params["id"], editDoc, {new: true})
             .then(detalleProducto => {
+                if(detalleProducto==null){
+                    return res.status(404).json({error: 'Id not Found'});
+                }
                 return res.json(detalleProducto);
             })
             .catch(err => {
@@ -47,6 +53,9 @@ router.route("/detalleProducto/:id")
     .delete((req, res) => {         /* Eliminar una listaCompra */
         DetalleProducto.findByIdAndDelete(req.params["id"])
             .then(detalleProducto => {
+                if(detalleProducto==null){
+                    return res.status(404).json({error: 'Id not Found'});
+                }
                 return res.json({deleted: detalleProducto});
             })
             .catch(err => {
