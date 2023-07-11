@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import detalleProducto from "./detalleProducto.js";
+import DetalleProducto from "./detalleProducto.js";
 
 /* se puede integrar un esquema dentro de otro esquema. Predeterminadamente Mongoose va a
     agregarle un Id (esto se puede configurar) teniendo en cuenta que es el Esquema
@@ -7,17 +7,23 @@ import detalleProducto from "./detalleProducto.js";
     el (sub)modelo en su Documento correspondiente */
 
 const listaCompra_Schema = new mongoose.Schema({
-    fechaCompra: {type: Date},
+    fechaCompra: {type: Date, default: Date.now},
     supermercado: {type: String},
     listaProductos: [
+        // {
+        //     producto: {type: mongoose.Types.ObjectId, ref: DetalleProducto, require:true},
+        //     // producto: detalleProducto,
+        //     cantidad: {type: Number, require:true},
+        //     precioCompra: {type: Number, require:true},
+        //     checked: {type: Boolean},
+        //     _id: false,
+        // // producto: {type: mongoose.Schema.ObjectId, required: true, unique: true},
+        // }
         {
-            producto: {type: mongoose.Types.ObjectId, ref: detalleProducto, require:true},
-            // producto: detalleProducto,
-            cantidad: {type: Number, require:true},
-            precioCompra: {type: Number, require:true},
-            checked: {type: Boolean},
+            
+            producto:  {type: mongoose.Types.ObjectId, ref: DetalleProducto, require:true},
             _id: false,
-        // producto: {type: mongoose.Schema.ObjectId, required: true, unique: true},
+            
         }
     ],
     precioTotal: {type: Number}
