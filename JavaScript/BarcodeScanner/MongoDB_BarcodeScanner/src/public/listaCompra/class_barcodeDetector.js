@@ -139,5 +139,6 @@ class BarcodeReader {
     }
 }
 
-
+import renderError from "/errorRender.js";
+export {renderError};
 export default BarcodeReader;

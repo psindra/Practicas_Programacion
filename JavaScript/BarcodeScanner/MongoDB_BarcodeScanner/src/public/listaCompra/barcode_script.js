@@ -1,4 +1,4 @@
-import renderError from "./errorRender.js"
+import renderError from "/errorRender.js"
 import BarcodeReader from "./class_barcodeDetector.js"
 
 let cameraStream;
