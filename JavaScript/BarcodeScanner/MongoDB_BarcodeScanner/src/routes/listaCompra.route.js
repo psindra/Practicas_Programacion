@@ -15,8 +15,8 @@ router.route("/listaCompra")
     })
 })
 .post((req, res)=>{         /* Crear nueva listaCompra */
-    const newListaCompra = new ListaCompra();
-    newListaCompra = req.body;
+    const newListaCompra = new ListaCompra(req.body);
+    // newListaCompra = req.body;
     newListaCompra.save().then(lista=>{
         return res.json(lista);
     })
