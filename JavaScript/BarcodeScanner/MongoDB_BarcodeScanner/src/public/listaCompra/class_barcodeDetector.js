@@ -138,3 +138,6 @@ class BarcodeReader {
 
     }
 }
+
+
+export default BarcodeReader;

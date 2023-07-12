@@ -67,3 +67,6 @@ const cleanConsole = document.querySelector("button#cleanConsole")
 cleanConsole.addEventListener("click",(ev)=>{
     preConsole.replaceChildren();
 })
+
+
+export default renderError;

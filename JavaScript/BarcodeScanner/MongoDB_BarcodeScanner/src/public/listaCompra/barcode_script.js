@@ -1,3 +1,6 @@
+import renderError from "./errorRender.js"
+import BarcodeReader from "./class_barcodeDetector.js"
+
 let cameraStream;
 let globalBarcodeDetector;
 const DECODER_TIMEOUT = 40;
@@ -8,29 +11,6 @@ window.addEventListener("load", async ()=>{
     await detector.init({useLastCamera:"back"})
     // await populateUserMediaDevices();
 })
-
-// async function testBarcodeAPI(){
-//     if ('BarcodeDetector' in window) {
-//         let formats = await window.BarcodeDetector.getSupportedFormats();
-//         console.log({formats});
-//         // alert(JSON.stringify(formats));
-//         if (formats.length) {
-//             //   barcodeDetectorUsable = true;
-//             globalBarcodeDetector = new window.BarcodeDetector();
-//             alert("Native Barcode API supported ✅️");
-//         }
-//     } else {
-//         const err = new Error("❌ Barcode Chrome API not")
-//         renderError(err);
-//         // throw new Error("❌ Barcode Chrome API not");
-//     }
-// }
-
-// async function testCameraPermissions(){
-//     return (navigator.mediaDevices.getUserMedia({video:true})
-//     .then(stream=>{stream.getTracks().forEach(track => track.stop())}))
-//     .catch(renderError);
-// }
 
 async function populateUserMediaDevices(){
     navigator.mediaDevices.enumerateDevices()
@@ -80,19 +60,4 @@ function playCamera(){
 function stopCamera(){
     detector.userStopDetection();
 }
-
-
-
-// const playButton = document.querySelector("button#playButton");
-// playButton.addEventListener("click", (ev)=>{
-//     playCamera();
-//     ev.target.disabled = true;
-//     stopButton.disabled = false;
-// })
-// const stopButton = document.querySelector("button#stopButton");
-// stopButton.addEventListener("click", (ev)=>{
-//     stopCamera();
-//     ev.target.disabled = true;
-//     playButton.disabled = false;
-// })
 
