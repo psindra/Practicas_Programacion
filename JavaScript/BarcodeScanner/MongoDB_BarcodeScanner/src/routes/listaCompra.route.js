@@ -70,7 +70,18 @@ router.route("/listaCompra/:id")
         return res.json(err);
     })
 })
-
+.delete((req, res) => {         /* Eliminar una listaCompra */
+    ListaCompra.findByIdAndDelete(req.params["id"])
+        .then(listaCompra => {
+            if(listaCompra==null){
+                return res.status(404).json({error: 'DELETE: Id not Found'});
+            }
+            return res.json({deleted: listaCompra});
+        })
+        .catch(err => {
+            return res.status(400).send(err);
+        })
+})
 
 export {router as listaCompraRoute};
 export default router;
