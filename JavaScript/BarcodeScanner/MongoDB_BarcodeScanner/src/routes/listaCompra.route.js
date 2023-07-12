@@ -28,7 +28,7 @@ router.route("/listaCompra/:id")
     .populate("listaProductos.producto")
     .then(lista=>{
         if(lista==null){
-            return res.status(404).json({error: 'Id not Found'});
+            return res.status(404).json({error: 'GET: Id not Found'});
         }
         
         return res.json(lista);
@@ -48,7 +48,7 @@ router.route("/listaCompra/:id")
     .populate("listaProductos.producto")
     .then(lista=>{
         if(lista==null){
-            return res.status(404).json({error: 'Id not Found'});
+            return res.status(404).json({error: 'POST: Id not Found'});
         }
 
         const newList = new ListaCompra(req.body);
