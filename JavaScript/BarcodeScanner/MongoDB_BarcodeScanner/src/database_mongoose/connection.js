@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 try { await import("dotenv/config")}catch{};
-// const mongoose = require('mongoose');
 
 
 const MONGODB_URI = process.env['MONGODB_URI']
