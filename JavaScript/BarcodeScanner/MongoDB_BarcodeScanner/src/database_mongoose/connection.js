@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import "dotenv/config"
+try {require("dotenv/config")}catch{};
 // const mongoose = require('mongoose');
 
 
