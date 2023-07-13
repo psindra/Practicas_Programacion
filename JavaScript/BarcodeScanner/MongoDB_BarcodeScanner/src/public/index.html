@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <!-- <a class="nav-link active" aria-current="page" href="/web/notas">Home</a> -->
-                    <a class="nav-link btn btn-success" id="nuevaListaCompra" href="#">Nueva Lista de Compras</a>
+                    <a class="nav-link btn btn-dark" id="nuevaListaCompra" href="#">Nueva Lista de Compras</a>
                     <!-- <a class="nav-link" href="#">Pricing</a> -->
                     <!-- <a class="nav-link disabled">Disabled</a> -->
                 </div>
@@ -51,6 +51,38 @@
             </table>
         </div>
     </main>
+
+    <dialog id="nuevaListaCompraDialog" class="m-auto bg-dark">
+        <div class="container">
+            <div class="card bg-black">
+                <div class="card-header text-center">
+                    <a class="btn btn-outline-danger btn-sm float-end" onclick="this.closest('dialog').close()">x</a>
+                    <p class="h4 text-success">Nueva Lista de Compra</p>
+                </div>
+
+                <div class="card-body">
+                    <form action="#" id="formularioNvaLista">
+                        <div class="input-group mb-4 flex-wrap">
+                            <label for="fechaCompra" class="input-group-text bg-dark text-white-50">Fecha</label>
+                            <!-- <input type="date" class="form-control text-center bg-dark text-white" style="min-width: 140px;" name="fechaCompra" onfocus="this.value=(new Date().toLocaleDateString('fr-CA'))" required> -->
+                            <input type="text" class="form-control text-center bg-dark text-white" style="min-width: 140px;" name="fechaCompra" onfocus="(this.type='date', this.value=(new Date().toLocaleDateString('fr-CA')))">
+                        </div>
+
+                        <div class="input-group mb-4 flex-wrap">
+                            <label for="supermercado" class="input-group-text bg-dark text-white-50">Supermercado</label>
+                            <input type="text" name="supermercado" class="form-control text-center bg-dark text-white" style="min-width: 70px" autofocus required>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success d-block mx-auto text-center mt-2 px-4" id="crearNuevaListaCompra">Crear Lista de Compras</a>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </dialog>
 
     <br><br>
     <hr>

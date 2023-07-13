@@ -45,18 +45,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
     })      //then fetch
 
     const nuevaListaCompraNav = document.querySelector("nav a.nav-link#nuevaListaCompra");
+    const nuevaListaCompraDialog = document.getElementById("nuevaListaCompraDialog");
     nuevaListaCompraNav.addEventListener("click", ()=>{
+        nuevaListaCompraDialog.showModal();
+    })
+
+    const crearNuevaListaCompra = document.querySelector("form#formularioNvaLista button#crearNuevaListaCompra");
+    // crearNuevaListaCompra.addEventListener("click", ()=>{
+    const formularioNvaLista = document.querySelector("form#formularioNvaLista");
+    formularioNvaLista.addEventListener("submit", (ev)=>{
+        ev.preventDefault();
         fetch("/api/listaCompra", {
             method: "POST", headers:{"Content-Type": "application/json"},
-            body: JSON.stringify({fechaCompra: Date.now(), supermercado: "super Prueba"}),
-        })
+            body: JSON.stringify({
+                fechaCompra: new Date(ev.target.fechaCompra.value).getTime() + new Date().getTimezoneOffset()*60000
+                || Date.now(),
+                supermercado: ev.target.supermercado.value}),
+            } 
+        )
         .then(async (response) => {
             if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
             return response.json()
         })
         .then(nuevaListaCompra=>{
-            alert(JSON.stringify(nuevaListaCompra));
+            console.log(JSON.stringify(nuevaListaCompra));
             location.assign(`./listaCompra/index.html?listaCompra=${nuevaListaCompra._id}`);
+            ev.target.fechaCompra.value = ev.target.supermercado.value = "";
         })
         .catch(err=>{
             errorRender(err);
