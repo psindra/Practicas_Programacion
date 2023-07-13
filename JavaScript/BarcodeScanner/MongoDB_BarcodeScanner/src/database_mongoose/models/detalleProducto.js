@@ -11,7 +11,7 @@ const detalleProducto_Schema = mongoose.Schema({
             listaCompra: {type: mongoose.Types.ObjectId, ref: "listaCompra", /* require:true */},
             fechaCompra: {type: Date, default: Date.now},
             precio: {type: Number, require: true},
-            cantidad: {type: Number, require: true},
+            cantidadProducto: {type: Number, require: true},
         }
     ],
    /*  historicoPrecios: [
