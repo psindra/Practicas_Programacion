@@ -20,6 +20,9 @@ router.route("/detalleProducto")
         newDetalleProducto.save().then(producto => {
             return res.json(producto);
         })
+        .catch(err => {
+            return res.status(400).send(err);
+        })
     })
 
 
