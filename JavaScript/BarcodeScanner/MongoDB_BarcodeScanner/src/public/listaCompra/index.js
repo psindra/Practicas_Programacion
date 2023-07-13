@@ -174,8 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             updateTotal();
         })
-        .catch(() => {
-            alert("Error getting API REST and submitting the form");
+        .catch((err) => {
+            // alert("Error getting API REST and submitting the form");
+            alert(JSON.stringify(err))
+            
         })
 
 
