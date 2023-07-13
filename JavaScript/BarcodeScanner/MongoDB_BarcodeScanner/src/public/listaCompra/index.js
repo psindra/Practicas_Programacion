@@ -156,8 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.innerHTML = `
         <td>${data.barcodeProducto}</td>
         <td>${data.descripcionProducto}</td>
-        <td>${data.historicoPrecios[0].cantidad}</td>
-        <td>${data.historicoPrecios[0].precio}</td>
+        <td>${data.historicoPrecios[0]?.cantidad}</td>
+        <td>${data.historicoPrecios[0]?.precio}</td>
         <td>
           <button type="button" class="btn btn-sm btn-primary edit-btn" data-id="${rowId}">Edit</button>
           <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="${rowId}">Delete</button>
