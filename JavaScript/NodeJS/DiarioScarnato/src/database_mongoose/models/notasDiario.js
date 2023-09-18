@@ -8,7 +8,7 @@ const notas_Squema = new mongoose.Schema({
     sensibilidadR: Boolean,
     sensibilidadO: Boolean,
     afecto: { type: String, enum: ["??", "true", "+-", "false"]},
-    medicina:  { type: String, enum: ["??", "-", "Diclo100mg", "Diclo50mg+Relax", "Diclo50mg", "Diclo50mg*2", "Otro", "DicloPotasico50mg", "DicloPotasico50mg+Reliveran" , "Enantyum"]}
+    medicina:  { type: String, enum: ["??", "-", "Diclo100mg", "Diclo50mg+Relax", "Diclo50mg", "Diclo50mg*2", "Otro", "DicloPotasico50mg", "DicloPotasico50mg+Reliveran" , "Enantyum" , "FlocurRapid"]}
 })
 
 notas_Squema.path("date").set(date=>{
