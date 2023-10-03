@@ -125,9 +125,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     /* Botón Nuevo Producto en Barra Header */
     const nuevoProductoNav = document.querySelector("nav a.nav-link#nuevoProducto");
     const detalleProductoDialog = document.querySelector("dialog#detalleProductoDialog");
-    nuevoProductoNav.addEventListener("click", ()=>{
-        detalleProductoDialog.showModal();
-    });
+    // nuevoProductoNav.addEventListener("click", ()=>{
+    //     detalleProductoDialog.showModal();
+    // });
 
     /* Carga de Formulario (por el momento: Nuevo Producto) */
     const formularioDetalleProducto = document.querySelector("dialog form#formDetalleProducto");
