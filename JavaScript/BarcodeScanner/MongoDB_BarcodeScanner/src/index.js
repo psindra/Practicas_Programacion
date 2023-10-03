@@ -25,10 +25,8 @@ app.use(express.static(path.join(__dirname, "public")));
   // })
 
 console.log({__dirname});
-console.log(path.join( __dirname, "public", "index.html"));
 
 app.get("/", (req, res, next) =>{
-  // res.send("OK");
   res.sendFile(path.join( __dirname, "public", "index.html"))
 })
 
@@ -36,3 +34,5 @@ app.get("/", (req, res, next) =>{
 app.listen(app.get("PORT"), err=>{
   console.log("listening on PORT: ", app.get("PORT"));
 })
+
+export {DetalleProducto, ListaCompra, mongoose, app}

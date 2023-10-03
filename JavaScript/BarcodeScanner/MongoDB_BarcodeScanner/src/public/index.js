@@ -1,10 +1,13 @@
-import errorRender from "./errorRender.js"
+import renderError from "./errorRender.js"
 
 document.addEventListener("DOMContentLoaded", ()=>{
     const bodyTabla = document.querySelector("table#listaCompraTable").getElementsByTagName("tbody")[0]
 
     fetch("/api/listaCompra", {method: "GET", headers:{"Content-Type": "application/json"}})
-    .then(response => response.json())
+    .then(async (response) => {
+        if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
+        return response.json()
+    })
     .then(listasCompras=>{
         listasCompras.forEach(listaCompra => {
             const row = document.createElement("tr");
@@ -55,6 +58,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const formularioNvaLista = document.querySelector("form#formularioNvaLista");
     formularioNvaLista.addEventListener("submit", (ev)=>{
         ev.preventDefault();
+
+        // const formData = Object.fromEntries(new FormData(ev.target));
+        // if(!formData.supermercado){
+        //     return response.status(400).json({error: "falta nombre de supermercado"});
+        // }
+        // /* a las fechas enteras (12:00am GMT-3) se le adiciona la dif horaria para mantener el número de día */
+        // formData.fechaCompra = new Date(formData?.fechaCompra).getTime() + (formData.fechaCompra ? new Date().getTimezoneOffset()*60000: 0);
+        // // /* limpiar cualquier otro dato que venga del formulario por un error del FrontEnd */
+        // // formData = { fechaCompra: formData.fechaCompra, supermercado: formData.supermercado};
+        // fetch("/api/listaCompra", {
+        //     method: "POST", headers:{"Content-Type": "application/json"},
+        //     body: JSON.stringify(formData)
+
+
+
         fetch("/api/listaCompra", {
             method: "POST", headers:{"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -69,18 +87,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
         })
         .then(nuevaListaCompra=>{
             console.log(JSON.stringify(nuevaListaCompra));
-            location.assign(`./listaCompra/index.html?listaCompra=${nuevaListaCompra._id}`);
+            location.assign(`./listaDeCompra/index.html?listaCompra=${nuevaListaCompra._id}`);
             ev.target.fechaCompra.value = ev.target.supermercado.value = "";
+            ev.target.reset();
         })
         .catch(err=>{
-            errorRender(err);
+            renderError(err);
         });     //then fetch
     });
 
     bodyTabla.addEventListener("click", (ev)=>{
         if(ev.target.classList.contains("edit-btn")){
             const rowId = ev.target.dataset.id;
-            location.assign(`./listaCompra/index.html?listaCompra=${rowId}`);
+            location.assign(`./listaDeCompra/index.html?listaCompra=${rowId}`);
         } else if(ev.target.classList.contains("delete-btn")){
             const rowId = ev.target.dataset.id;
             // const row = document.getElementById(`row-${rowId}`);
@@ -98,7 +117,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 row.remove();
             })
             .catch(err=>{
-                errorRender(err);
+                renderError(err);
             });     //then fetch
         }
     })
