@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = {
             barcodeProducto: Number(barcode),
             descripcionProducto: description,
-            historicoPrecios: [{ precio: Number(price), cantidad: Number(cantidad) }],
+            historicoPrecios: [{ precio: Number(price), cantidadProducto: Number(cantidad) }],
         };
 
         if (editingRowId) {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     row.innerHTML = `
                         <td>${data.barcodeProducto}</td>
                         <td>${data.descripcionProducto}</td>
-                        <td>${data.historicoPrecios[0].cantidad}</td>
+                        <td>${data.historicoPrecios[0].cantidadProducto}</td>
                         <td>${data.historicoPrecios[0].precio}</td>
                         <td>
                         <button type="button" class="btn btn-sm btn-primary edit-btn" data-id="${rowId}">Edit</button>
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.innerHTML = `
         <td>${data.barcodeProducto}</td>
         <td>${data.descripcionProducto}</td>
-        <td>${data.historicoPrecios[0]?.cantidad}</td>
+        <td>${data.historicoPrecios[0]?.cantidadProducto}</td>
         <td>${data.historicoPrecios[0]?.precio}</td>
         <td>
           <button type="button" class="btn btn-sm btn-primary edit-btn" data-id="${rowId}">Edit</button>
