@@ -1,5 +1,6 @@
 // import { response } from "express";
 import renderError from "../errorRender.js";
+import renderError from "./barcode_script.js";
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
