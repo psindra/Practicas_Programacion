@@ -42,7 +42,7 @@ async function populateUserMediaDevices(){
     })
 }
 
-function playCamera(){
+export function playCamera(){
     // stopCamera();
     // const inputDeviceSelect = document.querySelector("select#inputDeviceSelect");
     // detector.detectBarcode({videoDOM: document.querySelector("video#camera")}).then(console.log);
@@ -57,7 +57,7 @@ function playCamera(){
     // detector.detectBarcode({cameraId:inputDeviceSelect.value, videoDIV: document.querySelector("video#camera")})
 }
 
-function stopCamera(){
+export function stopCamera(){
     detector.userStopDetection();
 }
 
