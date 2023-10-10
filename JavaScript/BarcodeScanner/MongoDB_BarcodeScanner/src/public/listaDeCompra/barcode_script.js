@@ -51,7 +51,8 @@ export function playCamera(){
         // stopButton.dispatchEvent(new Event("click"));
         stopCamera()
         document.getElementById("barcodeProducto").value = barcode;
-        fetch("/api/detalleProducto/findByBarcode/" + barcode)
+        fetch(`/api/detalleProducto/findByBarcode/${barcode}`)
+        .then(response=> response.json())
         .then(detalleProducto => {
             if(detalleProducto.descripcionProducto){
                 document.getElementById("descripcionProducto").value = detalleProducto.descripcionProducto;
@@ -61,7 +62,7 @@ export function playCamera(){
                 document.getElementById("precio").value = detalleProducto.historicoPrecios[0].precio;
 
             }
-            
+
             console.log(document.getElementById("barcodeProducto").value);
               scanDialog.close();
         })
