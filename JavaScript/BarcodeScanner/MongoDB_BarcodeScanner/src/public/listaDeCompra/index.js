@@ -1,18 +1,23 @@
 // import { response } from "express";
-import renderError from "../errorRender.js";
-import renderError from "./barcode_script.js";
+// import renderError from "../errorRender.js";
+import { playCamera, stopCamera } from "./barcode_script.js";
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
     const bodyTabla = document.querySelector("table#detalleProductosTable").getElementsByTagName("tbody")[0];
     const listaCompraId = new URLSearchParams(window.location.search).get("listaCompra");
-        function renderBodyTabla(listaProductos){
+    
+    function renderBodyTabla(listaProductos){
         bodyTabla.innerHTML = "";
         listaProductos.forEach(item => {
             const detalleProducto = item.producto;
+
+            /* Saltear todos los productos que devuelva "null" ya sea q se haya eliminado el detalleProducto
+                en la Base de Datos */
             if(!detalleProducto){
                 return;
             }
+
             const row = document.createElement("tr");
             const detalleProductoId = detalleProducto._id || detalleProducto.id;
             row.id = `row-${detalleProductoId}`;
@@ -52,24 +57,25 @@ document.addEventListener("DOMContentLoaded", ()=>{
             bodyTabla.appendChild(row);
         });     // forEach
 
-        function updateTotal() {
-            let total = 0;
-            const rows = bodyTabla.getElementsByTagName("tr");
-    
-            for (let i = 0; i < rows.length; i++) {
-                const priceCell = rows[i].getElementsByTagName("td")[3]
-                const qtyCell = rows[i].getElementsByTagName("td")[2];
-                const price = parseFloat(priceCell.innerText) * parseFloat(qtyCell.innerText);
-                if (!isNaN(price)) {
-                    total += price;
-                }
-            }
-    
-            // Update the total value
-            const totalElement = document.getElementById("totalSpan");
-            totalElement.innerText = total.toFixed(2); // Assuming 2 decimal places
-        }
         updateTotal();
+    }
+    
+    function updateTotal() {
+        let total = 0;
+        const rows = bodyTabla.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const priceCell = rows[i].getElementsByTagName("td")[3]
+            const qtyCell = rows[i].getElementsByTagName("td")[2];
+            const price = parseFloat(priceCell.innerText) * parseFloat(qtyCell.innerText);
+            if (!isNaN(price)) {
+                total += price;
+            }
+        }
+
+        // Update the total value
+        const totalElement = document.getElementById("totalSpan");
+        totalElement.innerText = total.toFixed(2); // Assuming 2 decimal places
     }
     
     fetch("/api/listaCompra/"+ listaCompraId, {method: "GET", headers:{"Content-Type": "application/json"}})
@@ -216,6 +222,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
         stopCamera()
         scanDialog.close();
     });
+
+    bodyTabla.addEventListener("click",(ev)=>{
+        if (ev.target.classList.contains("delete-btn")) {
+            const rowId = ev.target.dataset.id;
+            const row = ev.target.closest(`tr#row-${rowId}`);
+            fetch(`/api/detalleProducto/${rowId}`, {
+                method: "DELETE",
+                body: JSON.stringify({ _id: rowId })
+            })
+            .then(async (response) => {
+                if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
+                return response.json()
+            })
+            .then((data) => {
+                alert(JSON.stringify({ eliminado: data }));
+                row.remove();
+            })
+            .catch(err=>{
+                renderError(err);
+            });     //then fetch
+        }
+    })
 
 
 });

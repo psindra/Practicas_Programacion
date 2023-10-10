@@ -5,12 +5,17 @@ const router = express.Router();
 router.route("/detalleProducto")
     .get((req, res) => {          /* Consultar toda la BD */
         DetalleProducto.find()
-            .then(detalleProductos => {
-                return res.json(detalleProductos);
+        .populate("historicoPrecios.fechaCompra")
+        .exec()
+        .then(detalleProductos => {
+            detalleProductos.forEach(detalleProducto=>{
+                console.log({historicoPrecios: detalleProducto["historicoPrecios"]});
             })
-            .catch(err => {
-                return res.status(400).send(err);
-            })
+            return res.json(detalleProductos);
+        })
+        .catch(err => {
+            return res.status(400).send(err);
+        })
     })
     .post((req, res) => {         /* Crear nueva listaCompra */
         // delete req.body.id;
@@ -25,10 +30,28 @@ router.route("/detalleProducto")
         })
     })
 
+    
+router.route("/detalleProducto/findByBarcode/:barcode")
+.get((req, res) => {
+    DetalleProducto.find({barcodeProducto: req.params.barcode})
+    .sort('-createdAt')
+    .then(detalleProducto => {
+        if(detalleProducto==null){
+            return res.status(404).json({error: 'Barcode not Found'});
+        }
+        return res.json(detalleProducto);
+    })
+    .catch(err => {
+        return res.status(400).send(err);
+    })
+})
+
 
 router.route("/detalleProducto/:id")
     .get((req, res) => {          /* Consultar por UN producto */
         DetalleProducto.findById(req.params["id"])
+        .populate("historicoPrecios.fechaCompra")
+        .exec()
             .then(detalleProducto => {
                 if(detalleProducto==null){
                     return res.status(404).json({error: 'Id not Found'});
@@ -39,7 +62,7 @@ router.route("/detalleProducto/:id")
                 return res.status(400).send(err);
             })
     })
-    .post((req, res) => {         /* Editar nueva listaCompra existente */
+    .post((req, res) => {         /* Editar detalleProducto existente */
     console.log(req.body);
         const { id: _, ...editDoc } = { ...req.body };
         DetalleProducto.findByIdAndUpdate(req.params["id"], editDoc, {new: true})
@@ -65,6 +88,7 @@ router.route("/detalleProducto/:id")
                 return res.status(400).send(err);
             })
     })
+
 
 
 export { router as detalleProductoRoute };
