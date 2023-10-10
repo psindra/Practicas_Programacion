@@ -39,7 +39,7 @@ router.route("/detalleProducto/findByBarcode/:barcode")
         if(detalleProducto==null){
             return res.status(404).json({error: 'Barcode not Found'});
         }
-        return res.json(detalleProducto);
+        return res.json(detalleProducto[0]);
     })
     .catch(err => {
         return res.status(400).send(err);
