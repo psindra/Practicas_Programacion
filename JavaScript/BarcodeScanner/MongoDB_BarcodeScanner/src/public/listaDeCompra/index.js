@@ -228,8 +228,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     document.getElementById("descripcionProducto").value = resultado.detalleProducto.descripcionProducto;
     
                 }
-                if(resultado.detalleProducto.historicoPrecios.pop().precio){
-                    document.getElementById("precio").value = resultado.detalleProducto.historicoPrecios[0].precio;
+                if(resultado.detalleProducto.historicoPrecios[0].precio){
+                    document.getElementById("precio").value = resultado.detalleProducto.historicoPrecios.pop().precio;
     
                 }
             }
