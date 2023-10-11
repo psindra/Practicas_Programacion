@@ -215,7 +215,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const closeDialogBtn = document.getElementById("closeDialogBtn");
     scanBtn.addEventListener("click", () => {
         scanDialog.showModal();
-        playCamera();
+        playCamera()
+        .then(resultado => {
+            document.getElementById("barcodeProducto").value = resultado.barcode;
+
+            if(resultado.detalleProducto){
+                if(resultado.detalleProducto._id){
+                    document.getElementById("detalleProductoId").value = resultado.detalleProducto._id;
+    
+                }
+                if(resultado.detalleProducto.descripcionProducto){
+                    document.getElementById("descripcionProducto").value = resultado.detalleProducto.descripcionProducto;
+    
+                }
+                if(resultado.detalleProducto.historicoPrecios.pop().precio){
+                    document.getElementById("precio").value = resultado.detalleProducto.historicoPrecios[0].precio;
+    
+                }
+            }
+
+            console.log(document.getElementById("barcodeProducto").value);
+            scanDialog.close();
+        })
     });
 
     closeDialogBtn.addEventListener("click", () => {

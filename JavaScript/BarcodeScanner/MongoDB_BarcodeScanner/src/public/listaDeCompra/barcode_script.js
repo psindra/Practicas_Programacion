@@ -42,29 +42,31 @@ async function populateUserMediaDevices(){
     })
 }
 
-export function playCamera(){
+export async function playCamera(){
     // stopCamera();
     // const inputDeviceSelect = document.querySelector("select#inputDeviceSelect");
     // detector.detectBarcode({videoDOM: document.querySelector("video#camera")}).then(console.log);
-    detector.detectBarcode({videoDOM: document.querySelector("video#scanVideo")}).then(barcode=>{
+    return detector.detectBarcode({videoDOM: document.querySelector("video#scanVideo")})
+    .then(async barcode=>{
         console.log(barcode);
         // stopButton.dispatchEvent(new Event("click"));
         stopCamera()
-        document.getElementById("barcodeProducto").value = barcode;
-        fetch(`/api/detalleProducto/findByBarcode/${barcode}`)
+        // document.getElementById("barcodeProducto").value = barcode;
+        return fetch(`/api/detalleProducto/findByBarcode/${barcode}`)
         .then(response=> response.json())
         .then(detalleProducto => {
-            if(detalleProducto.descripcionProducto){
-                document.getElementById("descripcionProducto").value = detalleProducto.descripcionProducto;
+            // if(detalleProducto.descripcionProducto){
+            //     document.getElementById("descripcionProducto").value = detalleProducto.descripcionProducto;
 
-            }
-            if(detalleProducto.historicoPrecios[0].precio){
-                document.getElementById("precio").value = detalleProducto.historicoPrecios[0].precio;
+            // }
+            // if(detalleProducto.historicoPrecios[0].precio){
+            //     document.getElementById("precio").value = detalleProducto.historicoPrecios[0].precio;
 
-            }
+            // }
 
-            console.log(document.getElementById("barcodeProducto").value);
-              scanDialog.close();
+            // console.log(document.getElementById("barcodeProducto").value);
+            // scanDialog.close();
+            return {barcode, detalleProducto};
         })
     });
     // detector.detectBarcode({cameraId:inputDeviceSelect.value, videoDIV: document.querySelector("video#camera")})
