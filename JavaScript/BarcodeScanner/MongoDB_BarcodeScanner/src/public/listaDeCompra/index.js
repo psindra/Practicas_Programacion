@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             const precioCell = document.createElement("td");
             // precioCell.innerText = detalleProducto.precio;
             precioCell.innerText = detalleProducto.historicoPrecios[0].precio;
+            precioCell.dataset.historicoPrecios = historicoPrecios;
             row.appendChild(precioCell);
     
             const actionsCell = document.createElement("td");
