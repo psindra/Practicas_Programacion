@@ -33,6 +33,10 @@ router.route("/detalleProducto")
     
 router.route("/detalleProducto/findByBarcode/:barcode")
 .get((req, res) => {
+    if(!req.params.barcode){
+        return res.status(400).send("no hay parámetro 'barcode'");
+        throw new Error("no hay parámetro 'barcode'")
+    }
     DetalleProducto.find({barcodeProducto: req.params.barcode})
     .sort('-createdAt')
     .then(detalleProducto => {
@@ -56,7 +60,7 @@ router.route("/detalleProducto/:id")
                 if(detalleProducto==null){
                     return res.status(404).json({error: 'Id not Found'});
                 }
-                return res.json(detalleProducto);
+                return res.json({detalleProducto});
             })
             .catch(err => {
                 return res.status(400).send(err);

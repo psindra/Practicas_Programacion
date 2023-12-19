@@ -68,6 +68,9 @@ export async function playCamera(){
             // scanDialog.close();
             return {barcode, detalleProducto};
         })
+        .catch(err=>{
+            return {barcode};
+        })
     });
     // detector.detectBarcode({cameraId:inputDeviceSelect.value, videoDIV: document.querySelector("video#camera")})
 }
