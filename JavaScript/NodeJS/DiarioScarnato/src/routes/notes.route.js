@@ -141,7 +141,10 @@ router.get("/calendarioNotasDiario", (req, res)=>{
                     case "Diclo50mg*2": elem.medicamento = "4"; break;
                     case "DicloPotasico50mg": elem.medicamento = "5"; break;
                     case "DicloPotasico50mg+Reliveran": elem.medicamento = "6"; break;
-                    case "Otro": elem.medicamento = "7"; break;
+                    case "Enantyum": elem.medicamento = "7"; break;
+                    case "FlocurRapid": elem.medicamento = "8"; break;
+                    case "Geniol": elem.medicamento = "9"; break;
+                    case "Otro": elem.medicamento = "10"; break;
                     default:elem.medicamento = ""; break;
                 }
                 return elem;
