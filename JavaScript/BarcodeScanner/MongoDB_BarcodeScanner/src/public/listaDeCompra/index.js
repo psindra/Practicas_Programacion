@@ -1,5 +1,5 @@
 // import { response } from "express";
-// import renderError from "../errorRender.js";
+import renderError from "../errorRender.js";
 import { playCamera, stopCamera } from "./barcode_script.js";
 
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             const precioCell = document.createElement("td");
             // precioCell.innerText = detalleProducto.precio;
             precioCell.innerText = detalleProducto.historicoPrecios[0].precio;
-            precioCell.dataset.historicoPrecios = historicoPrecios;
+            precioCell.dataset.historicoPrecios = detalleProducto.historicoPrecios;
             row.appendChild(precioCell);
     
             const actionsCell = document.createElement("td");
@@ -198,6 +198,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
                     return response.json()
                 })
+                .then(nuevaListaCompra => {console.log({nuevaListaCompra}); return nuevaListaCompra})
                 .then(nuevaListaCompra => nuevaListaCompra.listaProductos)
                 .then(renderBodyTabla)
             })

@@ -17,7 +17,7 @@ router.route("/detalleProducto")
             return res.status(400).send(err);
         })
     })
-    .post((req, res) => {         /* Crear nueva listaCompra */
+    .post((req, res) => {         /* Crear nuevo detalleProducto */
         // delete req.body.id;
         const { id: _, ...newDoc } = { ...req.body };
         let newDetalleProducto = new DetalleProducto(newDoc);

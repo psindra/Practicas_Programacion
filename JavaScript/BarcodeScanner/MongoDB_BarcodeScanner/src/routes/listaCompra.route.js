@@ -100,7 +100,7 @@ router.route("/listaCompra/:id/listaProductos")
         if(listaCompra==null){
             return res.status(404).json({error: 'POST: Id not Found'});
         }
-        if(listaCompra.listaProductos.findIndex(producto=> producto._id = req.body["_id"]) == -1){
+        if(listaCompra.listaProductos.findIndex(producto=> producto._id == req.body["_id"]) != -1){
             return res.status(404).json({error: 'POST: el Producto ya existe en esta lista'});
         }
         
@@ -109,6 +109,8 @@ router.route("/listaCompra/:id/listaProductos")
         .then(listaCompraSaved=>{
             return ListaCompra.populate(listaCompraSaved, { path: 'listaProductos.producto' })
             .then(listaCompraSavedPopulated => {
+                console.log({listaCompraSaved});
+                console.log(listaCompraSaved);
                 return res.json(listaCompraSaved);
             })
         })
