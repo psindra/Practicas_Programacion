@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
             row.appendChild(descripcionCell);
     
             const cantidadProductoCell = document.createElement("td");
-            cantidadProductoCell.innerText = detalleProducto.historicoPrecios[0].cantidadProducto;
+            cantidadProductoCell.innerText = detalleProducto.historicoPrecios.find(item => item.listaCompra == listaCompraId).cantidadProducto;
             row.appendChild(cantidadProductoCell);
     
             const precioCell = document.createElement("td");
             // precioCell.innerText = detalleProducto.precio;
-            precioCell.innerText = detalleProducto.historicoPrecios[0].precio;
+            precioCell.innerText = detalleProducto.historicoPrecios.find(item => item.listaCompra == listaCompraId).precio;
             precioCell.dataset.historicoPrecios = JSON.stringify(detalleProducto.historicoPrecios);
             row.appendChild(precioCell);
     
