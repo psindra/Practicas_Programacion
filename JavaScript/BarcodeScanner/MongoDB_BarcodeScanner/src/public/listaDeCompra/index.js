@@ -161,20 +161,25 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 return response.json()
             })
             .then(async listaCompra => {
-                i/* f(formData.detalleProductoId != ""){
+
+                /* if(formData.detalleProductoId != ""){
                     formData.historicoPrecios = JSON.parse(formData.historicoPrecios);
                     if (!formData.historicoPrecios.findIndex(item=> item.listaCompra == listaCompraId)){
                         
                     }
                 } */
-            formData.historicoPrecios = [{
-                "barcodeProducto": formData.barcodeProducto,
-                "descripcionProducto": formData.descripcionProducto,
-                "precio": formData.precio,
-                "cantidadProducto": formData.cantidadProducto,
-                "listaCompra": listaCompraId || listaCompra.id || listaCompra._id,
-                "fechaCompra": listaCompra.fechaCompra,
-            }]
+                formData.historicoPrecios = formData.detalleProductoId != "" ? JSON.parse(formData.historicoPrecios) : [];
+                formData.historicoPrecios.push(
+                    {
+                        "barcodeProducto": formData.barcodeProducto,
+                        "descripcionProducto": formData.descripcionProducto,
+                        "precio": formData.precio,
+                        "cantidadProducto": formData.cantidadProducto,
+                        "listaCompra": listaCompraId || listaCompra.id || listaCompra._id,
+                        "fechaCompra": listaCompra.fechaCompra,
+                    }
+                )
+                
             /* Creamos el nuevo Producto */
             return fetch("/api/detalleProducto", {
                 method: "POST", headers:{"Content-Type": "application/json"},
