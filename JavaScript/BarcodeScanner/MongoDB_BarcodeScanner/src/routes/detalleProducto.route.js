@@ -68,7 +68,7 @@ router.route("/detalleProducto/:id")
     })
     .post((req, res) => {         /* Editar detalleProducto existente */
     console.log(req.body);
-        const { id: _, ...editDoc } = { ...req.body };
+        const { id: _, ...editDoc } = { ...req.body };  // por seguridad, pero entiendo que es al pedo
         DetalleProducto.findByIdAndUpdate(req.params["id"], editDoc, {new: true})
             .then(detalleProducto => {
                 if(detalleProducto==null){

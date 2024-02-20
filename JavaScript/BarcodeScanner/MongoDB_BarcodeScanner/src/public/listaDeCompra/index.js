@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             const precioCell = document.createElement("td");
             // precioCell.innerText = detalleProducto.precio;
             precioCell.innerText = detalleProducto.historicoPrecios[0].precio;
-            precioCell.dataset.historicoPrecios = detalleProducto.historicoPrecios;
+            precioCell.dataset.historicoPrecios = JSON.stringify(detalleProducto.historicoPrecios);
             row.appendChild(precioCell);
     
             const actionsCell = document.createElement("td");
@@ -142,26 +142,31 @@ document.addEventListener("DOMContentLoaded", ()=>{
     formularioDetalleProducto.addEventListener("submit", (ev)=>{
         ev.preventDefault();
         const formData = Object.fromEntries(new FormData(ev.target));
-
+        console.log({formData});
+        
         if(!formData.barcodeProducto || !formData.cantidadProducto ||
             !formData.precio){
-            return response.status(400).json({error: "faltan parámetros"});
-        }
-
-        
-        /* a las fechas enteras (12:00am GMT-3) se le adiciona la dif horaria para mantener el número de día */
-        formData.fechaCompra = new Date(formData?.fechaCompra).getTime() + (formData.fechaCompra ? new Date().getTimezoneOffset()*60000: 0);
-
-        
-        /* Pido los detalles de la Lista de Compra */
-        fetch("/api/listaCompra/"+ listaCompraId, {method: "GET", headers:{"Content-Type": "application/json"}})
-        .then(async (response) => {
-            if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
-            return response.json()
-        })
-        .then(async listaCompra => {
+                return response.status(400).json({error: "faltan parámetros"});
+            }
             
-            // formData.historicoPrecios.findIndex(item=> item.listaCompra == listaCompraId)
+            
+            /* a las fechas enteras (12:00am GMT-3) se le adiciona la dif horaria para mantener el número de día */
+            formData.fechaCompra = new Date(formData?.fechaCompra).getTime() + (formData.fechaCompra ? new Date().getTimezoneOffset()*60000: 0);
+            
+            
+            /* Pido los detalles de la Lista de Compra */
+            fetch("/api/listaCompra/"+ listaCompraId, {method: "GET", headers:{"Content-Type": "application/json"}})
+            .then(async (response) => {
+                if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
+                return response.json()
+            })
+            .then(async listaCompra => {
+                i/* f(formData.detalleProductoId != ""){
+                    formData.historicoPrecios = JSON.parse(formData.historicoPrecios);
+                    if (!formData.historicoPrecios.findIndex(item=> item.listaCompra == listaCompraId)){
+                        
+                    }
+                } */
             formData.historicoPrecios = [{
                 "barcodeProducto": formData.barcodeProducto,
                 "descripcionProducto": formData.descripcionProducto,
@@ -228,6 +233,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 }
                 if(resultado.detalleProducto.descripcionProducto){
                     document.getElementById("descripcionProducto").value = resultado.detalleProducto.descripcionProducto;
+    
+                }
+                if(resultado.detalleProducto.historicoPrecios){
+                    document.getElementById("historicoPrecios").value = JSON.stringify(resultado.detalleProducto.historicoPrecios);
     
                 }
                 if(resultado.detalleProducto.historicoPrecios[0].precio){
