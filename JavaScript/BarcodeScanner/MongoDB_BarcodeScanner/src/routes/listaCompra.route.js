@@ -109,8 +109,6 @@ router.route("/listaCompra/:id/listaProductos")
         .then(listaCompraSaved=>{
             return ListaCompra.populate(listaCompraSaved, { path: 'listaProductos.producto' })
             .then(listaCompraSavedPopulated => {
-                console.log({listaCompraSaved});
-                console.log(listaCompraSaved);
                 return res.json(listaCompraSaved);
             })
         })
