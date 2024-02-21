@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 )
                 
             /* Creamos el nuevo Producto */
-            return fetch("/api/detalleProducto", {
+            return fetch("/api/detalleProducto" + formData.detalleProductoId != "" ? "/" + formData.detalleProductoId : "" , {
                 method: "POST", headers:{"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
             })
