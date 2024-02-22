@@ -39,7 +39,7 @@
 
             <div class="card bg-dark">
                 <div class="card-header">
-                    <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close()">X</a>
+                    <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close(); this.documentQuery('form#formDetalleProducto').reset()">X</a>
                     <h4 class="h4 text-primary">Detalle Producto</h2>
                 </div>
                 <div class="card-body">
