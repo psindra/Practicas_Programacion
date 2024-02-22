@@ -89,44 +89,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     })
     .then(listaCompra => listaCompra.listaProductos)
     .then(renderBodyTabla)
-    /* .then(listaProductos=> {
-        listaProductos.forEach(item => {
-            const detalleProducto = item.producto;
-            const row = document.createElement("tr");
-            const detalleProductoId = detalleProducto._id || detalleProducto.id;
-            row.id = `row-${detalleProductoId}`;
-
-            const barcodeCell = document.createElement("td");
-            barcodeCell.innerText = detalleProducto.barcode;
-            row.appendChild(barcodeCell);
-
-            const cantidadProductoCell = document.createElement("td");
-            cantidadProductoCell.innerText = detalleProducto.cantidadProducto;
-            row.appendChild(cantidadProductoCell);
-
-            const precioCell = document.createElement("td");
-            // precioCell.innerText = detalleProducto.precio;
-            precioCell.innerText = detalleProducto.historicoPrecios[0].precio;
-            row.appendChild(precioCell);
-
-            const actionsCell = document.createElement("td");
-            const editBtn = document.createElement("button");
-            editBtn.type = "button";
-            editBtn.classList.add("btn", "btn-sm", "btn-primary", "edit-btn",);
-            editBtn.dataset.id = detalleProductoId;
-            editBtn.innerText = "🖊";
-            actionsCell.appendChild(editBtn);
-            const deleteBtn = document.createElement("button");
-            deleteBtn.type = "button";
-            deleteBtn.classList.add("btn", "btn-sm", "btn-danger", "delete-btn",);
-            deleteBtn.dataset.id = detalleProductoId;
-            deleteBtn.innerText = "🗑";
-            actionsCell.appendChild(deleteBtn);
-            row.appendChild(actionsCell);
-
-            bodyTabla.appendChild(row);
-        });     // forEach
-    })     // then fetch */
     .catch(err=>{
         renderError(err);
         alert(JSON.stringify(err));
@@ -164,13 +126,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 return response.json()
             })
             .then(async listaCompra => {
-
-                /* if(formData.detalleProductoId != ""){
-                    formData.historicoPrecios = JSON.parse(formData.historicoPrecios);
-                    if (!formData.historicoPrecios.findIndex(item=> item.listaCompra == listaCompraId)){
-                        
-                    }
-                } */
                 formData.historicoPrecios = formData.detalleProductoId != "" ? JSON.parse(formData.historicoPrecios) : [];
                 formData.historicoPrecios.push(
                     {
@@ -197,11 +152,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 console.log(JSON.stringify({nuevoDetalleProducto}));
                 ev.target.reset();
                 detalleProductoDialog.close();
-                // // listaCompra.listaProductos = [...bodyTabla].map(tr=> {return {"producto": tr.id.slice('row-'.length)}})
-                // if(listaCompra.listaProductos.findIndex(item => { item.producto == nuevoDetalleProducto.id}) != -1){
-                //     listaCompra.listaProductos.push({"producto": nuevoDetalleProducto.id})
-                // }
-                
+
                 return fetch("/api/listaCompra/"+ listaCompraId + "/listaProductos", {
                     method: "POST", headers:{"Content-Type": "application/json"},
                     body: JSON.stringify({"_id": (nuevoDetalleProducto.id || nuevoDetalleProducto._id)})
@@ -303,22 +254,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
             .catch(err=>{
                 renderError(err);
             });     //then fetch
-
-
-            // fetch(`/api/detalleProducto/${rowId}`, {
-            //     method: "DELETE",
-            //     body: JSON.stringify({ _id: rowId })
-            // })
-            // .then(async (response) => {
-            //     if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
-            //     return response.json()
-            // })
-            // .then((data) => {
-            //     alert(JSON.stringify({ eliminado: data }));
-            //     row.remove();
-            // })
         }
-    })
+    })  // eventListener "click"
 
 
 });
