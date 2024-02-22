@@ -100,7 +100,7 @@ router.route("/listaCompra/:id/listaProductos")
         if(listaCompra==null){
             return res.status(404).json({error: 'POST: Id not Found'});
         }
-        if(listaCompra.listaProductos.findIndex(producto=> producto._id == req.body["_id"]) != -1){
+        if(listaCompra.listaProductos.findIndex(item=> item.producto == req.body["_id"]) != -1){
             return res.status(404).json({error: 'POST: el Producto ya existe en esta lista'});
         }
         
@@ -122,14 +122,16 @@ router.route("/listaCompra/:id/listaProductos")
     // .populate("listaProductos.producto")
     .then(listaCompra=>{
         if(listaCompra==null){
-            return res.status(404).json({error: 'POST: Id not Found'});
+            return res.status(404).json({error: 'POST: Id ListaCompra not Found'});
         }
-        if(listaCompra.listaProductos.findIndex(producto=> producto._id = req.body["_id"]) == -1){
+        if(listaCompra.listaProductos.findIndex(item=> item.producto == req.body["_id"]) == -1){
             return res.status(404).json({error: 'POST: el Producto NO existe en esta lista'});
         }
+
+        listaCompra.listaProductos = listaCompra.listaProductos.filter(item => item.producto != req.body["_id"])
         
-        listaCompra.push({producto: req.body["_id"]});
-        listaCompra.save(listaCompraSaved=>{
+        listaCompra.save()
+        .then(listaCompraSaved=>{
             return res.json(listaCompraSaved);
         })
         .catch(err=>{

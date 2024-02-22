@@ -60,7 +60,7 @@ router.route("/detalleProducto/:id")
                 if(detalleProducto==null){
                     return res.status(404).json({error: 'Id not Found'});
                 }
-                return res.json({detalleProducto});
+                return res.json(detalleProducto);
             })
             .catch(err => {
                 return res.status(400).send(err);
@@ -68,7 +68,7 @@ router.route("/detalleProducto/:id")
     })
     .post((req, res) => {         /* Editar detalleProducto existente */
     console.log(req.body);
-        const { id: _, ...editDoc } = { ...req.body };  // por seguridad, pero entiendo que es al pedo
+        const { id: _, _id: __, ...editDoc } = { ...req.body };  // por seguridad, pero entiendo que es al pedo
         DetalleProducto.findByIdAndUpdate(req.params["id"], editDoc, {new: true})
             .then(detalleProducto => {
                 if(detalleProducto==null){

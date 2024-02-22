@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
             if(!detalleProducto){
                 return;
             }
+            if(!detalleProducto.historicoPrecios.find(item => item.listaCompra == listaCompraId)){
+                return;
+            }
 
             const row = document.createElement("tr");
             const detalleProductoId = detalleProducto._id || detalleProducto.id;
@@ -171,8 +174,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 formData.historicoPrecios = formData.detalleProductoId != "" ? JSON.parse(formData.historicoPrecios) : [];
                 formData.historicoPrecios.push(
                     {
-                        "barcodeProducto": formData.barcodeProducto,
-                        "descripcionProducto": formData.descripcionProducto,
+                        // "barcodeProducto": formData.barcodeProducto,
+                        // "descripcionProducto": formData.descripcionProducto,
                         "precio": formData.precio,
                         "cantidadProducto": formData.cantidadProducto,
                         "listaCompra": listaCompraId || listaCompra.id || listaCompra._id,
@@ -181,7 +184,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 )
                 
             /* Creamos el nuevo Producto */
-            return fetch("/api/detalleProducto" + formData.detalleProductoId != "" ? "/" + formData.detalleProductoId : "" , {
+            return fetch("/api/detalleProducto/" + (formData.detalleProductoId != "" ? formData.detalleProductoId : "") , {
                 method: "POST", headers:{"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
             })
@@ -264,21 +267,56 @@ document.addEventListener("DOMContentLoaded", ()=>{
         if (ev.target.classList.contains("delete-btn")) {
             const rowId = ev.target.dataset.id;
             const row = ev.target.closest(`tr#row-${rowId}`);
-            fetch(`/api/detalleProducto/${rowId}`, {
-                method: "DELETE",
-                body: JSON.stringify({ _id: rowId })
-            })
+            return fetch(`/api/detalleProducto/${rowId}`)   // primero se lee los detalles del Producto
             .then(async (response) => {
                 if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
                 return response.json()
             })
-            .then((data) => {
-                alert(JSON.stringify({ eliminado: data }));
-                row.remove();
+            .then((detalleProducto) => {
+                detalleProducto.historicoPrecios = detalleProducto.historicoPrecios.filter(item=> item.listaCompra != listaCompraId);
+                return fetch(`/api/detalleProducto/${rowId}`, {     // luego se edita el producto con el HistoricoPrecios modificado
+                    method: "POST", headers:{"Content-Type": "application/json"},
+                    body: JSON.stringify(detalleProducto)
+                })
+                .then(async (response) => {
+                    if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
+                    return response.json()
+                })
+                .then(async nuevoDetalleProducto=>{
+                    
+                    alert(JSON.stringify({nuevoDetalleProducto}));
+                    return fetch("/api/listaCompra/"+ listaCompraId + "/listaProductos", {
+                        method: "DELETE", headers:{"Content-Type": "application/json"},
+                        body: JSON.stringify({"_id": (nuevoDetalleProducto.id || nuevoDetalleProducto._id)})
+                        } 
+                    )
+                    .then(async (response) => {
+                        if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
+                        return response.json()
+                    })
+                    .then(nuevaListaCompra => {console.log({nuevaListaCompra}); return nuevaListaCompra})
+                    .then(nuevaListaCompra => nuevaListaCompra.listaProductos)
+                    .then(renderBodyTabla)
+                    row.remove();
+                })
             })
             .catch(err=>{
                 renderError(err);
             });     //then fetch
+
+
+            // fetch(`/api/detalleProducto/${rowId}`, {
+            //     method: "DELETE",
+            //     body: JSON.stringify({ _id: rowId })
+            // })
+            // .then(async (response) => {
+            //     if(!response.ok){ throw new Error(JSON.stringify(await response.json()));}
+            //     return response.json()
+            // })
+            // .then((data) => {
+            //     alert(JSON.stringify({ eliminado: data }));
+            //     row.remove();
+            // })
         }
     })
 
