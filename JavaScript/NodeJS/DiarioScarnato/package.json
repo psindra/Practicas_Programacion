@@ -1,7 +1,7 @@
 {
   "name": "prueba-api-mongoose",
   "version": "1.0.0",
-  "description": "Prueba de Mongoose con una API Rest de Express",
+  "description": "Logeo diario de Migraña a partir de: 'Prueba de Mongoose con una API Rest de Express'",
   "main": "./src/index.js",
   "scripts": {
     "start": "node src/index.js",
