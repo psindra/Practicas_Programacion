@@ -14,6 +14,10 @@ const puntoCarga_Schema = new mongoose.Schema({
         kilometrajeAuto: {type: Number, min: 0},
     },
     funcionoQR: {type: Boolean}
+}, { toJSON: { virtuals: true }, toObject: { getters: true, virtuals: true } })
+
+puntoCarga_Schema.virtual("kmPorLitroREAL").get(function(){
+    return this.kmTrip / this.litrosCarga;
 })
 
 // puntoCarga_Schema.path("fecha_new_Date").set(fecha=>{
