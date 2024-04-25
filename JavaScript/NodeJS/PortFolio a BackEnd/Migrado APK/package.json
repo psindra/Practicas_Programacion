@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-backend",
+  "version": "1.0.0",
+  "description": "Migrar la web de PortFolio hecha como proyecto final CoderHouse, a Backend",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "polyys",
+  "license": "ISC",
+  "dependencies": {
+    "androidjs": "^2.0.6",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "androidjs-builder": "^2.3.2",
+    "nodemon": "^2.0.20"
+  }
+}

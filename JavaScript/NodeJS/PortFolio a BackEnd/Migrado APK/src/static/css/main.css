@@ -1,0 +1,585 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: only light;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.95);
+  box-sizing: border-box;
+  display: grid;
+  min-height: 99.5vh;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+}
+
+h2, main section > div > div .div_img_hover[title]::before, main section > div > div > div:not(.div_imagenPerfil)[title]::before {
+  font-family: "Roboto", sans-serif;
+  font-weight: 450;
+  color: rgb(155, 55, 255);
+  display: inline-flex;
+}
+@supports (-webkit-background-clip: text) {
+  h2, main section > div > div .div_img_hover[title]::before, main section > div > div > div:not(.div_imagenPerfil)[title]::before {
+    -webkit-background-clip: text;
+    background-image: linear-gradient(-45deg, rgb(155, 55, 255), rgb(199, 179, 255));
+    color: transparent;
+  }
+}
+@media screen and (max-width: 414px) {
+  h2, main section > div > div .div_img_hover[title]::before, main section > div > div > div:not(.div_imagenPerfil)[title]::before {
+    text-align: center;
+    display: block;
+  }
+}
+
+h3 {
+  padding-block: 2%;
+}
+
+h4 {
+  text-transform: uppercase;
+  padding-block: 2%;
+}
+
+.wrap_reverse {
+  flex-wrap: wrap-reverse;
+}
+
+@keyframes rotar {
+  100% {
+    transform: rotate(719deg);
+  }
+}
+@keyframes radio {
+  0% {
+    border-radius: 48%;
+  }
+  50% {
+    border-radius: 50%;
+  }
+  100% {
+    border-radius: 48%;
+  }
+}
+/* ################# NAVBAR ################# */
+header {
+  background-color: #6c6c6c;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  z-index: 1;
+}
+header a {
+  text-decoration: none;
+}
+header h2, header main section > div > div .div_img_hover[title]::before, main section > div > div header .div_img_hover[title]::before, header main section > div > div > div:not(.div_imagenPerfil)[title]::before, main header section > div > div > div:not(.div_imagenPerfil)[title]::before {
+  color: rgb(199, 179, 255);
+  font-size: xx-large;
+  background-image: unset;
+  align-self: center;
+}
+@supports (-webkit-background-clip: text) {
+  header h2, header main section > div > div .div_img_hover[title]::before, main section > div > div header .div_img_hover[title]::before, header main section > div > div > div:not(.div_imagenPerfil)[title]::before, main header section > div > div > div:not(.div_imagenPerfil)[title]::before {
+    -webkit-background-clip: text;
+    background-image: url("https://uploads-ssl.webflow.com/61f03747d8d407ed117df27f/61f116f06248585a2739061f_Button%20BG.png");
+    color: transparent;
+    text-shadow: 0px 0px 0px rgba(232, 124, 245, 0.5607843137);
+  }
+}
+header > nav {
+  min-width: max-content;
+  /* menú hamburguesa */
+  /* ---------------- */
+}
+header > nav > input[type=checkbox] {
+  display: none;
+}
+header > nav > label[for=hamburger_chk] {
+  display: none;
+}
+header > nav > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 100%;
+}
+header > nav > ul > li {
+  display: flex;
+  background-color: #6c6c6c;
+  text-align: center;
+}
+header > nav > ul > li a {
+  text-decoration: none;
+  font-family: monospace;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.5em;
+  color: rgb(179, 152, 253);
+  width: 100%;
+}
+header > nav > ul > li a:hover, header > nav > ul > li a:focus {
+  text-decoration: underline;
+  line-height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(to top, rgba(155, 55, 255, 0.4) 0%, rgba(128, 0, 255, 0.05) 40%);
+  box-shadow: 0px 1px 12px 0px;
+}
+
+/* media-query mobile small */
+@media screen and (max-width: 414px) {
+  header h2, header main section > div > div .div_img_hover[title]::before, main section > div > div header .div_img_hover[title]::before, header main section > div > div > div:not(.div_imagenPerfil)[title]::before, main header section > div > div > div:not(.div_imagenPerfil)[title]::before {
+    font-size: x-large;
+  }
+  header > nav {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    width: 0;
+  }
+  header > nav > ul {
+    display: block;
+    position: absolute;
+    height: auto;
+    right: 0;
+    top: 100%;
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in;
+    transform: translateY(-50%) scaleY(0);
+  }
+  /* cuando el menú está abierto */
+  header > nav > input:checked ~ ul {
+    opacity: 1;
+    transform: translateY(0px) scaleY(1);
+  }
+  /* el "label" que funciona como botón para el menú desplegable */
+  header > nav > label[for=hamburger_chk] {
+    position: absolute;
+    right: 0;
+    margin: 2px;
+    padding: 2px;
+    height: 95%;
+    border: 1.75px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* si soporta la propiedad, fuerzo el aspect-ratio */
+  }
+  @supports (aspect-ratio: 1/1) {
+    header > nav > label[for=hamburger_chk] {
+      aspect-ratio: 1/1;
+    }
+  }
+  /* barras del menú desplegable cerrado */
+  header > nav > label[for=hamburger_chk] > hr {
+    width: 20px;
+    height: 4px;
+    border-radius: 15px;
+    background-color: gray;
+    border: 1.5px solid rgb(150, 150, 150);
+    transition: transform 0.5s ease-in-out, opacity 0.25s ease-in-out;
+    transform: rotate(0deg);
+  }
+  /* barras del menú desplegable cuando está abierto */
+  header > nav > input:checked + label[for=hamburger_chk] > hr {
+    border: 1px solid gray;
+    transform: translateY(7px) rotate(45deg);
+    /* barra del medio */
+    /* barra de abajo */
+  }
+  header > nav > input:checked + label[for=hamburger_chk] > hr:nth-child(2) {
+    opacity: 0;
+    transform: none;
+  }
+  header > nav > input:checked + label[for=hamburger_chk] > hr:last-child {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  header > nav > ul > li > a {
+    padding-block: 0.25rem;
+  }
+}
+/* ----------------- NAVBAR ----------------- */
+/* ################## MAIN ################## */
+main {
+  color: rgb(147, 125, 209);
+  /* para que quede más lindo, y mejor espaciadas la web */
+  max-width: 1000px;
+  justify-self: center;
+  width: 100%;
+}
+main p, main li, main form label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.74rem;
+  line-height: 0.91rem;
+  line-height: 1.25rem;
+}
+main section {
+  padding: 15px 5px;
+}
+main section > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+main section > div > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15rem;
+  min-width: min-content;
+  flex-grow: 1;
+  margin: 2.5% 5%;
+}
+main section > div > div .div_img_hover, main section > div > div > div:not(.div_imagenPerfil) {
+  width: 10rem;
+  height: 10rem;
+  max-height: 45vw;
+  max-width: 45vw;
+  align-self: center;
+  margin-inline: 15px;
+  box-shadow: 0 0 20px -5px;
+  /* efecto hover */
+  position: relative;
+  overflow: hidden;
+  /* FIN efecto hover */
+}
+main section > div > div .div_img_hover img, main section > div > div .div_img_hover video, main section > div > div > div:not(.div_imagenPerfil) img, main section > div > div > div:not(.div_imagenPerfil) video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+main section > div > div .div_img_hover[title]::before, main section > div > div > div:not(.div_imagenPerfil)[title]::before {
+  position: absolute;
+  content: attr(title);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #c2b6e5;
+  font-size: clamp(0.75rem, 5.5vw, 1rem);
+  background: rgba(0, 0, 0, 0.65);
+  transform: translateY(100%);
+  transition: transform 0.25s ease;
+}
+main section > div > div .div_img_hover[title]:hover::before, main section > div > div > div:not(.div_imagenPerfil)[title]:hover::before {
+  transform: none;
+}
+main section > div > ul {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: 40px;
+  margin-left: 5%;
+  justify-items: stretch;
+  list-style-type: "⩺  ";
+}
+main section > div > ul > li > ul { /* lista dentro de otra lista */
+  --estilo-lista-dentro-lista: none;
+  list-style-type: var(--estilo-lista-dentro-lista);
+  padding-left: 0.5rem;
+}
+main section > div > ul > li > ul > li {
+  text-indent: 0.5rem;
+}
+main section > div > ul#ulIdiomas {
+  /* para la seccion Idiomas las celdas van a ser un poquito más angostas */
+  grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+}
+main section > div > ul#ulIdiomas li {
+  justify-self: center;
+}
+main section#proyectos, main section#idiomas {
+  background-color: #1e1e1e;
+  box-shadow: 0px 0px 5px 5px #1e1e1e;
+}
+main section#experiencia div > ul > li[title-card] {
+  /* efecto de Card Hover */
+  perspective: 1500px;
+  position: relative;
+  /* se usa ::after para el Card-Front*/
+  /* y se usa ::before para darle un background de 100% x 100% */
+  /* FIN efecto de Card Hover */
+}
+main section#experiencia div > ul > li[title-card] > * {
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  perspective: 100px;
+  transition: transform 0.5s 0.8s ease;
+  backface-visibility: hidden;
+}
+main section#experiencia div > ul > li[title-card]:hover > * {
+  transform: rotateY(0);
+  transition: transform 0.5s ease;
+}
+main section#experiencia div > ul > li[title-card]::before, main section#experiencia div > ul > li[title-card]::after {
+  content: attr(title-card);
+  font-size: x-large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  backface-visibility: hidden;
+  transition: transform 0.5s 0.8s ease;
+  background-color: #161616;
+  /* efecto para la "esquina" redondeada */
+  border: 2px solid #1e1e1e;
+  border-bottom-right-radius: 40px;
+}
+main section#experiencia div > ul > li[title-card]::before {
+  content: "";
+  backface-visibility: initial;
+  border-bottom-right-radius: initial;
+  background-color: #1e1e1e;
+}
+main section#experiencia div > ul > li[title-card]:hover::before, main section#experiencia div > ul > li[title-card]:hover::after {
+  transform: rotateY(-180deg);
+  transition: transform 0.5s ease;
+}
+main section#proyectosLaborales {
+  /* efecto de timeline (para dimensiones mayores a Mobile) */
+}
+@media screen and (min-width: 415px) {
+  main section#proyectosLaborales > div {
+    position: relative;
+    justify-content: center;
+  }
+  main section#proyectosLaborales > div > ul {
+    grid-template-columns: repeat(2, 48%);
+    justify-content: center;
+    gap: 5.5rem;
+    column-gap: calc(5vw + 5px);
+    column-gap: 0;
+    position: relative;
+  }
+  main section#proyectosLaborales > div > ul > li {
+    padding: 0.5rem;
+    margin-left: 1.25rem;
+    grid-column: 2/3;
+    border: 2px solid rgb(147, 125, 209);
+    border-radius: 10px;
+    position: relative;
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd) {
+    transform-origin: -1.2rem; /* ajustado a ojo */
+    transform: rotateY(-180deg);
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd) > * {
+    transform-origin: center;
+    transform: rotateY(180deg);
+  }
+  main section#proyectosLaborales > div > ul > li::after {
+    content: attr(data-year);
+    position: absolute;
+    font-size: 2.1rem;
+    top: 7.5px; /* ajustado a ojo */
+    transform-origin: right;
+    transform: translateX(-7.5rem);
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd)::after {
+    content: attr(data-year);
+    transform-origin: center;
+    transform: rotateY(-180deg) translateX(7.5rem);
+  }
+  main section#proyectosLaborales > div > ul::after {
+    /* linea vertical del medio */
+    content: "";
+    position: absolute;
+    text-align: center;
+    width: 2.5px;
+    height: 100%;
+    background-color: rgb(147, 125, 209);
+    grid-column: 2;
+    z-index: -1;
+  }
+}
+
+.div_imagenPerfil {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  max-height: 45vw;
+  max-width: 45vw;
+  position: relative;
+}
+.div_imagenPerfil::before {
+  content: "";
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  max-height: inherit;
+  max-width: inherit;
+  border-radius: inherit;
+  background: linear-gradient(45deg, rgba(112, 40, 184, 0.985), rgb(199, 179, 255));
+  animation: rotar 5s infinite ease-in-out, radio 5s infinite linear;
+  box-shadow: 1px 0 10px;
+  z-index: -1;
+}
+.div_imagenPerfil #imagenPerfil {
+  display: block;
+  border-radius: 50%;
+  width: 9.5rem;
+  height: 9.5rem;
+  max-height: 42.5vw;
+  max-width: 42.5vw;
+}
+
+section#proyectos > div#proyectos_personales_1 > div img, section#proyectos > div#proyectos_personales_1 > div video {
+  object-position: 42%;
+}
+
+section#experiencia > div > ul > li:nth-child(3) > ul {
+  --estilo-lista-dentro-lista: "•";
+}
+
+section#experiencia > div > ul > li:nth-child(4) > ul {
+  --estilo-lista-dentro-lista: "•";
+}
+
+section#experiencia > div > ul > li:nth-child(5) > ul {
+  --estilo-lista-dentro-lista: "-";
+}
+
+section#proyectosLaborales > div > ul > li:nth-child(2) > ul {
+  --estilo-lista-dentro-lista: "•";
+}
+
+section#proyectosLaborales > div > ul > li:nth-child(3) > ul {
+  --estilo-lista-dentro-lista: "*";
+}
+
+section#proyectosLaborales > div > ul > li:nth-child(4) > ul {
+  --estilo-lista-dentro-lista: "-";
+}
+
+section#proyectosLaborales > div > ul > li:nth-child(5) > ul {
+  --estilo-lista-dentro-lista: "-";
+}
+
+/* ------------------ MAIN ------------------ */
+section > div > div > form#formulario_contacto {
+  display: flex;
+  flex-direction: column;
+  /* propiedades particulares para los botones del form */
+}
+section > div > div > form#formulario_contacto * {
+  border-radius: 5px;
+  padding: 5px;
+}
+section > div > div > form#formulario_contacto > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-self: space-between;
+  margin-top: 10px;
+}
+section > div > div > form#formulario_contacto > div > input[type=reset], section > div > div > form#formulario_contacto > div > input[type=submit] {
+  background-color: rgba(112, 40, 184, 0.985);
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  flex-grow: 1;
+  box-shadow: 0px 0px 7px rgb(147, 125, 209);
+}
+section > div > div > form#formulario_contacto > div > input[type=reset]:hover, section > div > div > form#formulario_contacto > div > input[type=submit]:hover {
+  background-color: rgb(128, 0, 255);
+  background-image: url("https://uploads-ssl.webflow.com/61f03747d8d407ed117df27f/61f116f06248585a2739061f_Button%20BG.png");
+}
+section > div > div > form#formulario_contacto > div > input[type=submit]:hover {
+  background-color: rgb(155, 55, 255);
+  background-image: url("https://uploads-ssl.webflow.com/61f03747d8d407ed117df27f/61f116f06248585a2739061f_Button%20BG.png");
+  background-size: cover;
+}
+
+/* ################# FOOTER ################# */
+footer {
+  /* no uso height por ahora */
+  min-height: 40px;
+  background-color: gray;
+  position: sticky;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  align-items: center;
+}
+footer #derechosReservados p {
+  text-align: center;
+  padding-block: 3%;
+  padding-block: min(3%, 10px);
+}
+footer > div {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  min-width: 50%;
+}
+footer > div > a {
+  padding: min(3%, 7.5px) 4%;
+  display: flex;
+}
+footer > div > a > i {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+}
+footer > div > a > i > svg {
+  height: 25px;
+  width: 25px;
+  color: rgb(186, 186, 186);
+}
+footer > div > a:hover > i > svg {
+  color: rgb(155, 55, 255);
+}
+
+/* ----------------- FOOTER ----------------- */
+@media screen and (min-width: 415px) {
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd)[data-aos=fade-down] {
+    transform: translate3d(0, -100px, 0) rotateY(-180deg);
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd)[data-aos=fade-up] {
+    transform: translate3d(0, 100px, 0) rotateY(-180deg);
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd)[data-aos=fade-left] {
+    transform: translate3d(100px, 0, 0) rotateY(-180deg);
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd)[data-aos^=fade][data-aos^=fade].aos-animate {
+    transform: rotateY(-180deg);
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd)[data-aos=flip-up] {
+    transform: perspective(2500px) rotateX(-90deg) rotateY(-180deg);
+    visibility: hidden;
+  }
+  main section#proyectosLaborales > div > ul > li:nth-of-type(odd)[data-aos^=flip][data-aos^=flip].aos-animate {
+    backface-visibility: initial;
+    visibility: initial;
+    transform: perspective(2500px) rotateX(0) rotateY(-180deg);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

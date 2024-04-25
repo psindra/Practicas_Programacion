@@ -1,0 +1,32 @@
+{
+    "version": "1.0.0",
+    "name": "app_prueba",
+    "app-name": "app_prueba",
+    "package-name": "webview",
+    "project-type": "webview",
+    "icon": "./assets/icon/icon.png",
+    "dist-path": "./dist",
+    "permission": [
+        "android.permission.INTERNET",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.WAKE_LOCK"
+    ],
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start:dev": "node .",
+        "build": "androidjs build",
+        "build-adb": "androidjs build && adb install -r .\\dist\\app_prueba.apk"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "androidjs": "^2.0.2",
+        "ejs": "^3.1.8",
+        "express": "^4.18.2"
+    },
+    "project-name": "app_prueba",
+    "theme": {
+        "fullScreen": true
+    }
+}
