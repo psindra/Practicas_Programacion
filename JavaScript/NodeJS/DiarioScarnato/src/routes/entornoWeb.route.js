@@ -93,4 +93,34 @@ router.post("/cmd-delete-nota/:id", (req,res)=>{
 
 })
 
+router.route("/cmd-add-edit-del-nota/:id")
+.post((req,res)=>{
+    Nota.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after'})
+    .then( notaActualizada =>{
+        console.log({notaActualizada});
+        return res.redirect("../notas");
+    })
+    .catch(err=>{
+        console.log(err);
+        return res.status(400).json({
+            error: err
+        })
+    })
+
+})
+.delete((req,res)=>{
+    Nota.findByIdAndDelete(req.params.id)
+    .then( notaEliminada =>{
+        console.log({notaEliminada});
+        return res.redirect("../notas");
+    })
+    .catch(err=>{
+        console.log(err);
+        return res.status(400).json({
+            error: err
+        })
+    })
+
+})
+
 module.exports = router;
