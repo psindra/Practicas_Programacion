@@ -1,5 +1,5 @@
 {
-  "name": "prueba-api-mongoose",
+  "name": "DiarioScarnato",
   "version": "1.0.0",
   "description": "Logeo diario de Migraña a partir de: 'Prueba de Mongoose con una API Rest de Express'",
   "main": "./src/index.js",
