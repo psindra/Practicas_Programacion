@@ -1,0 +1,28 @@
+{
+    "version": "1.0.0",
+    "name": "_application_name_",
+    "app-name": "_application_name_",
+    "package-name": "package_name_",
+    "project-type": "webview",
+    "icon": "./assets/icon/icon.png",
+    "dist-path": "./dist",
+    "permission": [
+        "android.permission.INTERNET"
+    ],
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start:dev": "node .",
+        "build": "androidjs build",
+        "build-adb": "androidjs build && adb install -r .\\dist\\_application_name_.apk"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "androidjs": "^2.0.2"
+    },
+    "project-name": "_project_name_",
+    "theme": {
+        "fullScreen": true
+    }
+}
