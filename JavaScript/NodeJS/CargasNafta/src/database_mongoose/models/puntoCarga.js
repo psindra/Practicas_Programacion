@@ -6,7 +6,7 @@ const puntoCarga_Schema = new mongoose.Schema({
     datosPuntoCarga: {
         kmToEmpty_Antes: {type: Number, min: 0},
         litrosCarga: {type: Number, min: 0, require: true},
-        dineroCarga: {type: Number, min: 0},
+        precio: {type: Number, min: 0, require: true},
         kmPorLitro: {type: Number, min: 0},
         kmTrip: {type: Number, min: 0},
         kmH_Veloc_Promedio: {type: Number, min: 0},
@@ -17,7 +17,7 @@ const puntoCarga_Schema = new mongoose.Schema({
 }, { toJSON: { virtuals: true }, toObject: { getters: true, virtuals: true } })
 
 puntoCarga_Schema.virtual("kmPorLitroREAL").get(function(){
-    return this.kmTrip / this.litrosCarga;
+    return this.datosPuntoCarga.kmTrip / this.datosPuntoCarga.litrosCarga;
 })
 
 // puntoCarga_Schema.path("fecha_new_Date").set(fecha=>{

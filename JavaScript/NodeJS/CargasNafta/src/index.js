@@ -14,6 +14,7 @@ import { puntoCargaRoute } from "./routes/puntoCarga.route.js";
 
 app.use(express.json());
 app.use("/api", puntoCargaRoute);
+app.use(express.static(path.join(__dirname, "public")));
 
 
 app.get("/", (req, res, next) =>{

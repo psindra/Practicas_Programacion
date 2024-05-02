@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargas Nafta</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script defer src="./index.js" type="module"></script>
+</head>
+<body class="bg-dark text-white-50 min-vh-100">
+    <nav class="navbar navbar-expand sticky-top navbar-dark bg-black">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white-50" href="./index.html">Cargas Nafta</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <!-- <a class="nav-link active" aria-current="page" href="/web/notas">Home</a> -->
+                    <a class="nav-link btn btn-dark" id="nuevoProducto" href="javascript:document.querySelector('dialog#puntoCargaDialog').showModal()">Nuevo Punto de Carga</a>
+                    <!-- <a class="nav-link" href="#">Pricing</a> -->
+                    <!-- <a class="nav-link disabled">Disabled</a> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="m-2">
+        <div class="container pt-2 col-auto">
+            <table id="puntoCargaTable" class="table text-white">
+                <caption>
+                    <tr>
+                            <h3 class="h3">Lista Cargas Nafta <span id="cargaNaftaSpan"></span></h3>
+                    </tr>
+                </caption>
+                <tfoot>
+                    <tr>
+                            <h4 class="h4">tfoot <span id="totalSpan"></span></h4>
+                    </tr>
+                </tfoot>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Estación Servicio</th>
+                        <th>Litros carga</th>
+                        <th>Precio</th>
+                        <th>km Trip</th>
+                        <th>km/L</th>
+                        <th>kilometraje Auto</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </main>
+    
+
+
+    <dialog id="puntoCargaDialog" class="bg-dark text-white-50 col-sm-8 col-xl-6">
+
+        <div class="card bg-dark">
+            <div class="card-header">
+                <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close(); this.closest('dialog').querySelector('form').reset()">X</a>
+                <h4 class="h4 text-primary">Punto Carga</h2>
+            </div>
+            <div class="card-body">
+                <form action="#" id="formPuntoCarga">
+                    <fieldset>
+                        <input type="hidden" id="puntoCargaId">
+                        <div class="input-group mb-3">
+                            <label for="fecha" class="input-group-text bg-dark text-white-50">Fecha</label>
+                            <input type="" class="form-control text-center bg-dark text-white" style="min-width: 140px;" name="fecha"
+                            onfocus="(this.type='date', this.disabled=false, this.value=(new Date().toLocaleDateString('fr-CA')))">
+                        </div>
+                        <div class="_form-group mb-3">
+                            <label for="estacionServicio" id="estacionServicioLabel"
+                                class="form-label">Estación de Servicio:</label>
+                            <input type="text" class="form-control bg-secondary bg-opacity-50 text-white" id="estacionServicio"
+                            list="estacionServicioDatalistOptions" onchange="this.name='estacionServicio'"  autofocus>
+                            <datalist id="estacionServicioDatalistOptions">
+                                <option value="YPF Duarte Quiroz">
+                                <option value="YPF Puerto Príncipe">
+                                <option value="YPF Rafael Nuñez">
+                              </datalist>
+                        </div>
+                        <div class="_form-group mb-3">
+                            <label for="litrosCarga" id="litrosCargaLabel" class="form-label">Litros Cargados</label>
+                            <input type="number" class="form-control bg-secondary bg-opacity-50 text-white" name="litrosCarga" id="litrosCarga" step="0.001" min="0" required >
+                            <!-- <div class="_input-group">
+                                <button type="button" class="btn btn-outline-secondary" id="scanBtn">📸</button>
+                            </div> -->
+                        </div>
+                        <div class="_form-group mb-3">
+                            <label for="precio" id="precioLabel" class="form-label">Precio:</label>
+                            <input type="number" class="form-control bg-secondary bg-opacity-50 text-white" name="precio" id="precio" step="0.01" min="0" required>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="_form-group mb-3">
+                            <label for="kmTrip" id="kmTripLabel" class="form-label">Trip:</label>
+                            <input type="number" class="form-control bg-secondary bg-opacity-50 text-white" id="kmTrip" step="0.1" min="0"
+                            onchange="this.name='kmTrip'" >
+                        </div>
+                        <div class="_form-group mb-3">
+                            <label for="kmPorLitro" id="kmPorLitroLabel" class="form-label">km/L Tablero:</label>
+                            <input type="number" class="form-control bg-secondary bg-opacity-50 text-white" id="kmPorLitro" step="0.1" min="0"
+                            onchange="this.name='kmPorLitro'" >
+                        </div>
+                        <div class="_form-group mb-3">
+                            <label for="kilometrajeAuto" id="kilometrajeAutoLabel" class="form-label">kilometraje Auto:</label>
+                            <input type="number" class="form-control bg-secondary bg-opacity-50 text-white" id="kilometrajeAuto" step="1" min="0"
+                            onchange="this.name='kilometrajeAuto'" >
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="_form-group mb-3">
+                            <label for="kmToEmpty" id="kmToEmptyLabel" class="form-label">kmToEmpty:</label>
+                            <input type="number" class="form-control bg-secondary bg-opacity-50 text-white" id="kmToEmpty" step="1" min="0"
+                            onchange="this.name='kmToEmpty'" >
+                        </div>
+                        <div class="_form-group mb-3">
+                            <label for="kmH_Veloc_Promedio" id="kmH_Veloc_PromedioLabel" class="form-label">km/H Promedio:</label>
+                            <input type="number" class="form-control bg-secondary bg-opacity-50 text-white" id="kmH_Veloc_Promedio" step="1" min="0"
+                            onchange="this.name='kmH_Veloc_Promedio'" >
+                        </div>
+                    </fieldset>
+            </div>
+
+            <div class="card-footer d-flex flex-wrap justify-content-evenly gap-4">
+                <button type="submit" class="btn btn-primary  text-center px-4" id="submitBtn">Submit</button>
+                <button type="reset" class="btn btn-secondary text-center px-4" id="cancelBtn">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+
+    <footer class="sticky-bottom top-100">
+        <!-- <br><br> -->
+        <hr class="mt-5 border-top">
+        <button type="button" class="btn btn-sm btn-outline-light" id="cleanConsole">Clean Console</button>
+        <div class="form-switch form-check-inline">
+            <input type="checkbox" class="form-check-input" id="enableConsole" name="enableConsole">
+        </div>
+        <pre id="preConsole">
+        </pre>
+    </footer>
+</body>
+</html>

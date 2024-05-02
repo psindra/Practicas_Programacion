@@ -17,6 +17,8 @@ router.route("/puntoCarga")
     })
     .post((req, res)=>{
         const { _id, id, ...newDoc} = {...req.body};
+        console.debug({"req_body":req.body});
+        console.debug({newDoc});
         PuntoCarga.create(newDoc)
         .then(puntoCarga=>{
             return res.json(puntoCarga);
