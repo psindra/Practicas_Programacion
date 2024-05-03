@@ -1,0 +1,28 @@
+{
+  "name": "DiarioScarnato",
+  "app-name": "DiarioScarnato",
+  "package-name": "DiarioScarnato",
+  "project-name": "DiarioScarnato_project_name",
+  "version": "1.0.0",
+  "description": "Prueba de Mongoose con una API Rest de Express",
+  "project-type": "webview",
+  "icon": "./assets/icon/icon.png",
+  "dist-path": "./dist",
+  "permission": [
+    "android.permission.INTERNET"
+  ],
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "build": "androidjs build",
+    "build-adb": "androidjs build && adb install -r .\\dist\\DiarioScarnato.apk"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "androidjs": "^2.0.6",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0"
+  }
+}

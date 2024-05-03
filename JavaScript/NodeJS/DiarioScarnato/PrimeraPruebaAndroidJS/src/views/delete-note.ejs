@@ -1,0 +1,95 @@
+<%- include('partials/header') %>
+    <div class="container mt-2 col-sm-8 col-md-6 col-lg-5">
+        <div class="card">
+            <div class="card-header">
+                <p class="h4">Agregar nota</p>
+            </div>
+            <div class="card-body">
+                <form action="../cmd-delete-nota/<%- note._id %>" method="post" id="formularioNota">
+                    <div class="input-group mb-4 flex-wrap">
+                        <label for="date" class="input-group-text">Intensidad Dolor</label>
+                        <input type="date" class="form-control text-center" style="min-width: 140px;" name="date" required disabled>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="intensidadDolor" class="input-group-text">Intensidad Dolor</label>
+                        <select class="form-select" style="min-width: 100px;" name="intensidadDolor" disabled>
+                            <option value="-1" selected> -  ?? - </option>
+                            <option value="L">Leve</option>
+                            <option value="LL">Leve +</option>
+                            <option value="M">Medio</option>
+                            <option value="S">Severo</option>
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="sensibilidadL" class="input-group-text">Sensibilidad Luz</label>
+                        <select class="form-select" style="min-width: 70px !important;" name="sensibilidadL" disabled>
+                            <option value="false" selected> - </option>
+                            <option value="True">L</option>
+                            <option value="True+">L+</option>
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="sensibilidadR" class="input-group-text">Sensibili Ruidos</label>
+                        <select class="form-select" style="min-width: 70px !important;" value="True" name="sensibilidadR" disabled>
+                            <option value="false" selected> - </option>
+                            <option value="True">R</option>
+                            <!-- <option value="True+">R+</option> -->
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="sensibilidadO" class="input-group-text">Sensibili Olores</label>
+                        <select class="form-select" style="min-width: 70px !important;" name="sensibilidadO" disabled>
+                            <option value="false" selected> - </option>
+                            <option value="True">O</option>
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="afecto" class="input-group-text">Afectó ?</label>
+                        <select class="form-select" style="min-width: 70px !important;" name="afecto" disabled>
+                            <option value="-1" selected> -  ?? - </option>
+                            <option value="True">Sí</option>
+                            <option value="+-">+/-</option>
+                            <option value="false">No</option>
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="medicina" class="input-group-text">Medicina ?</label>
+                        <select class="form-select" style="min-width: 120px;" name="medicina" disabled>
+                            <!-- <option value="-1" selected> -  ?? - </option> -->
+                            <option value="-" selected>No</option>
+                            <option value="??"> -  ?? - </option>
+                            <option value="Diclo100mg">Diclofenac 100mg</option>
+                            <option value="Diclo50mg+Relax">Diclofenac 50mg + Relajante</option>
+                            <option value="Diclo50mg">Diclofenac 50mg</option>
+                            <option value="Diclo50mg*2">Diclofenac 50mg x 2 (100mg)</option>
+                            <option value="DicloPotasico50mg">Diclofenac Potasico 50mg</option>
+                            <option value="DicloPotasico50mg+Reliveran">Diclofenac Potasico 50mg + Reliveran</option>
+                            <option value="Enantyum">Enantyum</option>
+                            <option value="FlocurRapid">Flocur Rapid</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-danger d-block mx-auto w-50 my-2 text-center">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <% if (typeof edit != 'undefined' && typeof note != 'undefined') { %>
+        <script>
+            const form = document.querySelector("form#formularioNota");
+            form.date.value = "<%- (new Date(note.date).toLocaleDateString('fr-CA')) %>";
+            // form.date.value = "<%- (new Date(note.date).toISOString().split("T")[0]) %>";
+            form.date.readOnly = true;
+            form.date.classList.add("form-control-plaintext");
+            form.intensidadDolor.value = "<%- note.intensidadDolor %>";
+            form.sensibilidadL.value = "<%- note.sensibilidadL %>";
+            form.sensibilidadR.value = "<%- note.sensibilidadR %>";
+            form.sensibilidadO.value = "<%- note.sensibilidadO %>";
+            form.afecto.value = "<%- note.afecto %>";
+            form.medicina.value = "<%- note.medicina %>";
+        </script>
+    <% } %>
+<%- include('partials/footer') %>

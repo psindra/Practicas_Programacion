@@ -1,0 +1,184 @@
+<%- include('partials/header') %>
+    <div class="container pt-2 col-11 col-sm-8 col-md-6 col-lg-5">
+        <div class="card bg-black border-success">
+            <div class="card-header d-flex justify-content-between align-items-center gap-2">
+                <p class="h4">Agregar nota</p>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-outline-danger btn-sm" onclick="window.history.back();">
+                            X
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form action="./cmd-add-edit-nota" method="post" id="formularioNota">
+                    <div class="input-group mb-4 flex-wrap">
+                        <label for="date" class="input-group-text bg-dark text-white-50">Fecha</label>
+                        <input type="date" class="form-control text-center bg-dark text-white" style="min-width: 140px;" name="date" required>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="intensidadDolor" class="input-group-text bg-dark text-white-50">Intensidad Dolor</label>
+                        <select class="form-select bg-dark text-white" style="min-width: 100px;" name="intensidadDolor">
+                            <option value="??" selected> -  ?? - </option>
+                            <option value="-">No</option>
+                            <option value="Leve-">Leve-</option>
+                            <option value="Leve">Leve</option>
+                            <option value="Leve+">Leve +</option>
+                            <option value="Medio">Medio</option>
+                            <option value="Severo">Severo</option>
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="mareos" class="input-group-text bg-dark text-white-50">Mareos</label>
+                        <select class="form-select bg-dark text-white" style="min-width: 70px !important;" name="mareos">
+                            <option value="false" selected> - </option>
+                            <option value="true">Si</option>
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="sensibilidadL" class="input-group-text bg-dark text-white-50">Sensibilidad Luz</label>
+                        <select class="form-select bg-dark text-white" style="min-width: 70px !important;" name="sensibilidadL">
+                            <option value="false" selected> - </option>
+                            <option value="true">L</option>
+                            <option value="true+">L+</option>
+                          </select>
+                    </div>
+                    <div class="d-flex justify-content-around mb-4">
+                        <input type="checkbox" class="btn-check" name="sensibilidadR" id="sensibilidadR" value="true">
+                        <label class="btn btn-outline-secondary" for="sensibilidadR">Sensibili Ruidos</label>
+
+                        <input type="checkbox" class="btn-check" name="sensibilidadO" id="sensibilidadO" value="true">
+                        <label class="btn btn-outline-secondary" for="sensibilidadO">Sensibili Olores</label>
+                        <!-- <label for="sensibilidadR" class="input-group-text bg-dark text-white-50">Sensibili Ruidos</label> -->
+                        <!-- <select class="form-select bg-dark text-white" style="min-width: 70px !important;" value="true" name="sensibilidadR">
+                            <option value="false" selected> - </option>
+                            <option value="true">R</option>
+                          </select> -->
+                    </div>
+                    <!-- <div class="input-group mb-4">
+                        <label for="sensibilidadO" class="input-group-text bg-dark text-white-50">Sensibili Olores</label>
+                        <select class="form-select bg-dark text-white" style="min-width: 70px !important;" name="sensibilidadO">
+                            <option value="false" selected> - </option>
+                            <option value="true">O</option>
+                          </select>
+                    </div> -->
+                    <div class="input-group mb-4">
+                        <label for="afecto" class="input-group-text bg-dark text-white-50">Afectó ?</label>
+                        <select class="form-select bg-dark text-white" style="min-width: 70px !important;" name="afecto">
+                            <option value="??" selected> -  ?? - </option>
+                            <option value="true">Sí</option>
+                            <option value="+-">+/-</option>
+                            <option value="false">No</option>
+                          </select>
+                    </div>
+                    <div class="input-group mb-4">
+                        <label for="medicina" class="input-group-text bg-dark text-white-50">Medicina ?</label>
+                        <select class="form-select bg-dark text-white" style="min-width: 120px;" name="medicina" value="Diclo100mg">
+                            <!-- <option value="-1" selected> -  ?? - </option> -->
+                            <option value="??" selected> -  ?? - </option>
+                            <option value="-">No</option>
+                            <option value="Diclo100mg">Diclofenac 100mg</option>
+                            <option value="Diclo50mg+Relax">Diclofenac 50mg + Relajante</option>
+                            <option value="Diclo50mg">Diclofenac 50mg</option>
+                            <option value="Diclo50mg*2">Diclofenac 50mg x 2 (100mg)</option>
+                            <option value="DicloPotasico50mg">Diclofenac Potasico 50mg</option>
+                            <option value="DicloPotasico50mg+Reliveran">Diclofenac Potasico 50mg + Reliveran</option>
+                            <option value="Enantyum">Enantyum</option>
+                            <option value="FlocurRapid">Flocur Rapid</option>
+                            <option value="Geniol">Geniol</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success d-block mx-auto w-50 my-2 text-center">Agregar</button>
+                    </div>
+                </form>
+
+                <!-- FLOATIN FORM -->
+                <%
+                // <form action="/notasDiario" method="post">
+                //     <div class="form-floating mb-4">
+                //         <select class="form-select">
+                //             <option value="-1" selected> -  ?? - </option>
+                //             <option value="L">Leve</option>
+                //             <option value="LL">Leve +</option>
+                //             <option value="M">Medio</option>
+                //             <option value="S">Severo</option>
+                //         </select>
+                //         <label for="intensidadDolor" class="">Intensidad Dolor</label>
+                //     </div>
+                //     <div class="form-floating input-group-sm mb-4">
+                //         <select class="form-select">
+                //             <option value="false" selected> - </option>
+                //             <option value="true">L</option>
+                //             <option value="true+">L+</option>
+                //         </select>
+                //         <label for="sensibilidadL" class="">Sensibilidad Luz</label>
+                //     </div>
+                //     <div class="form-floating mb-4">
+                //         <select class="form-select">
+                //             <option value="false" selected> - </option>
+                //             <option value="true">R</option>
+                //             <!-- <option value="true+">R+</option> -->
+                //         </select>
+                //         <label for="sensibilidadR" class="">Sensibili Ruidos</label>
+                //     </div>
+                //     <div class="form-floating mb-4">
+                //         <select class="form-select">
+                //             <option value="false" selected> - </option>
+                //             <option value="true">O</option>
+                //         </select>
+                //         <label for="sensibilidadO" class="">Sensibili Olores</label>
+                //     </div>
+                //     <div class="form-floating mb-4">
+                //         <select class="form-select">
+                //             <option value="-1" selected> -  ?? - </option>
+                //             <option value="true">Sí</option>
+                //             <option value="+-">+/-</option>
+                //             <option value="false">No</option>
+                //         </select>
+                //         <label for="afecto" class="">Afectó ?</label>
+                //     </div>
+                //     <div class="form-floating mb-4">
+                //         <select class="form-select" name="medicina">
+                //             <!-- <option value="-1" selected> -  ?? - </option> -->
+                //             <option value="-" selected>-</option>
+                //             <option value="Diclo100mg">Diclofenac 100mg</option>
+                //             <option value="Diclo50mg+Relax">Diclofenac 50mg + Relajante</option>
+                //             <option value="Diclo50mg">Diclofenac 50mg</option>
+                //             <option value="Otro">Otro</option>
+                //         </select>
+                //         <label for="medicina" class="">Medicina ?</label>
+                //     </div>
+                //     <div class="card-footer">
+                //         <button type="submit" class="btn btn-primary d-block mx-auto w-50 my-2">Submit</button>
+                //     </div>
+                // </form>
+                %>
+                <!-- FLOATIN FORM -->
+
+
+
+            </div>
+            </div>
+        </div>
+    </div>
+    <% if (typeof edit != 'undefined' && typeof note != 'undefined') { %>
+        <script>
+            const form = document.querySelector("form#formularioNota");
+            form.action = "../cmd-add-edit-nota/<%- note._id %>";
+            form.date.value = "<%- (new Date(note.date).toLocaleDateString('fr-CA', {timeZone: 'UTC'})) %>";
+            // form.date.value = "<%- (new Date(note.date).toISOString().split("T")[0]) %>";
+            form.date.readOnly = true;
+            form.date.classList.add("form-control-plaintext");
+            form.intensidadDolor.value = "<%- note.intensidadDolor %>";
+            form.mareos.value = "<%- note.mareos %>";
+            form.sensibilidadL.value = "<%- note.sensibilidadL %>";
+            form.sensibilidadR.checked = + <%- note.sensibilidadR %> + false;
+            form.sensibilidadO.checked = + <%- note.sensibilidadO %> + false;
+            form.afecto.value = "<%- note.afecto %>";
+            form.medicina.value = "<%- note.medicina %>";
+            form.querySelector("button[type='submit'].btn").classList.replace("btn-success", "btn-primary");
+            form.querySelector("button[type='submit'].btn").textContent = "Editar";
+        </script>
+    <% } %>
+<%- include('partials/footer') %>
