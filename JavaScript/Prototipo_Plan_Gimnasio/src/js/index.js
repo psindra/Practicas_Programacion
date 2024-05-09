@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     const diaPlan = (new URLSearchParams(window.location.search).get("dia") ?? 1);
 
-    document.querySelectorAll("#navbarNav > .navbar-nav > li.nav-item > a.nav-link")[diaPlan].classList.add("active", "disabled");
+    document.querySelectorAll("#navbarNav > .navbar-nav > li.nav-item > a.nav-link")[diaPlan - 1].classList.add("active", "disabled");
     renderTabla(ejercicios[diaPlan - 1]);
 
     const captionTablaPlan = document.querySelector("table#tablaPlan > caption");
