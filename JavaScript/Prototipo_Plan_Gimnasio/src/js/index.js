@@ -19,14 +19,35 @@
 // ]
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    import("./plan.json", { assert: { type: "json" } }).then((plan)=>{
-        const ejercicios = plan.default;
-    
-    const diaPlan = (new URLSearchParams(window.location.search).get("dia") ?? 1);
 
-    document.querySelectorAll("#navbarNav > .navbar-nav > li.nav-item > a.nav-link")[diaPlan - 1].classList.add("active", "disabled");
-    renderTabla(ejercicios[diaPlan - 1]);
+// await cookieStore.set({
+//     name: "login-info",
+//     value: JSON.stringify({email:"paolo", dni:34840859}),
+//     expires: Date.now() + 30 *24 *60 *60 *1000
+// });
+cookieStore.set({
+    name: "login-info",
+    value: JSON.stringify({email:"paolo", dni:34840859}),
+    expires: Date.now() + 30 *24 *60 *60 *1000
+});
+
+
+// JSON.parse((await cookieStore.get("login-info")).value)
+
+
+const diaPlan = (new URLSearchParams(window.location.search).get("dia") ?? 1);
+
+document.addEventListener("DOMContentLoaded", async ()=>{
+    
+    // import("./plan.json", { assert: { type: "json" } }).then((plan)=>{
+    // const ejercicios = plan.default;
+        
+    const ejercicios = await fetchPlan();
+    
+    renderNavBarNav(ejercicios);
+
+    console.log(ejercicios[diaPlan - 1]);
+    renderTablaArray(ejercicios[diaPlan - 1]);
 
     const captionTablaPlan = document.querySelector("table#tablaPlan > caption");
     captionTablaPlan.textContent = "Plan Día " + diaPlan;
@@ -40,8 +61,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         ev.target.closest('dialog').querySelector('h4#Título').textContent ="";
         ev.target.closest('dialog').close();
     })
-})
-
+// }) fin import json
 
 })
 
@@ -78,4 +98,98 @@ function renderTabla(ejerciciosDelDia) {
 
         tablaPlan.tBodies[0].append(_Row);
     }
+    const spinnerDiv = document.querySelector("#spinnerDiv");
+    spinnerDiv.remove();
+}
+
+function renderTablaArray(ejerciciosDelDia) {
+    const tablaPlan = document.querySelector("table#tablaPlan");
+    tablaPlan.tBodies[0].replaceChildren();
+    for (const ejercicio of ejerciciosDelDia) {
+        const _Row = document.createElement("tr");
+
+        const ejercicioCell = document.createElement("td");
+        ejercicioCell.textContent = ejercicio[0];
+        _Row.append(ejercicioCell);
+        ejercicioCell.addEventListener("click", (ev) => {
+            document.querySelector('dialog#explicacionDialog').showModal();
+            document.querySelector('dialog#explicacionDialog img#imgEjercicio').src = ejercicio[4];
+            document.querySelector('dialog#explicacionDialog>.card>.card-header>h4').textContent = ejercicio[0];
+
+        });
+
+
+        const seriesCell = document.createElement("td");
+        seriesCell.textContent = ejercicio[1];
+        if (ejercicio[3]) {
+            seriesCell.rowSpan = 2;
+        }
+        if (ejercicio[1] != "⬆" && ejercicio[1] != "") {
+            _Row.append(seriesCell);
+
+        }
+
+        const repeticionesCell = document.createElement("td");
+        repeticionesCell.textContent = ejercicio[2];
+        _Row.append(repeticionesCell);
+
+        tablaPlan.tBodies[0].append(_Row);
+    }
+    const spinnerDiv = document.querySelector("#spinnerDiv");
+    spinnerDiv.remove();
+}
+
+
+/* TODO */async function autenticar({email, dni}) {
+    return fetch("https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1",{
+        method: "POST",
+        body: JSON.stringify({email, dni}),
+        redirect: "follow",
+        ContentType: "application/json",
+        // mode: "no-cors"
+    })
+}
+
+async function fetchPlan(){
+    return fetch("https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1",{
+        method: "POST",
+        body: (await cookieStore.get("login-info")).value,
+        ContentType: "application/json",
+        redirect: "follow",
+        // mode: "no-cors"
+    })
+    .then(response=> response.json())
+    .catch(async err=>{
+        console.log(err);
+        // alert(JSON.stringify(err));
+        return fetch("https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1",{
+            method: "POST",
+            body: (await cookieStore.get("login-info")).value,
+            ContentType: "application/json",
+            redirect: "follow",
+            mode: "no-cors"
+        })
+        .then(response=> response.text())
+        .then(fetchPlan())
+        .catch(err=>{
+            console.log(err);
+            const alertComponent = document.querySelector("#alertComponent.alert");
+            alertComponent.classList.remove("vissually-hidden");
+        })
+    })
+}
+
+function renderNavBarNav(ejercicios){
+    const navbarNavUl = document.querySelector("#navbarNav > .navbar-nav");
+    navbarNavUl.replaceChildren();
+    for (let i = 0; i < ejercicios.length; i++) {
+        navbarNavUl.innerHTML += `
+        <li class="nav-item mx-md-2 m-2">
+            <a class="nav-link" href="?dia=${i+1}">Día ${i+1}</a>
+        </li>
+        `
+    }
+    navbarNavUl.querySelectorAll("li.nav-item > a.nav-link")[diaPlan - 1].classList.add("active", "disabled");
+    navbarNavUl.querySelectorAll("li.nav-item > a.nav-link")[diaPlan - 1].tabIndex = -1;
+    navbarNavUl.querySelectorAll("li.nav-item > a.nav-link")[diaPlan - 1].ariaCurrent = "page";
 }
