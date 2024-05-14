@@ -27,7 +27,7 @@
 // });
 cookieStore.set({
     name: "login-info",
-    value: JSON.stringify({email:"paolo", dni:34840859}),
+    value: JSON.stringify({email:"paolo", dni:34840859, spreadsheetID: "1i4Xh0gTDPSVMStlE2BS5q_WfaR-xvo1sp51jg46Px9g"}),
     expires: Date.now() + 30 *24 *60 *60 *1000
 });
 
@@ -151,7 +151,9 @@ function renderTablaArray(ejerciciosDelDia) {
 }
 
 async function fetchPlan(){
-    return fetch("https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1",{
+    // const scriptUrl = "https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1";
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbz7BH7cqzUPJwhEExCUCjvYC8ymEf7nzUp54NVK90kpi_QJdWDoAI0bpHkz0X6iNAYB/exec";
+    return fetch(scriptUrl,{
         method: "POST",
         body: (await cookieStore.get("login-info")).value,
         ContentType: "application/json",
@@ -161,8 +163,7 @@ async function fetchPlan(){
     .then(response=> response.json())
     .catch(async err=>{
         console.log(err);
-        // alert(JSON.stringify(err));
-        return fetch("https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1",{
+        return fetch(scriptUrl,{
             method: "POST",
             body: (await cookieStore.get("login-info")).value,
             ContentType: "application/json",
