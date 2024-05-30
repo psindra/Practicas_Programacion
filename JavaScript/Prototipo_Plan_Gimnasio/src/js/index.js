@@ -153,9 +153,10 @@ function renderTablaArray(ejerciciosDelDia) {
 async function fetchPlan(){
     // const scriptUrl = "https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1";
     const scriptUrl = "https://script.google.com/macros/s/AKfycbz7BH7cqzUPJwhEExCUCjvYC8ymEf7nzUp54NVK90kpi_QJdWDoAI0bpHkz0X6iNAYB/exec";
+    const loginInfo = (await cookieStore.get("login-info")).value;
     return fetch(scriptUrl,{
         method: "POST",
-        body: (await cookieStore.get("login-info")).value,
+        body: loginInfo,
         ContentType: "application/json",
         redirect: "follow",
         // mode: "no-cors"
@@ -165,7 +166,7 @@ async function fetchPlan(){
         console.log(err);
         return fetch(scriptUrl,{
             method: "POST",
-            body: (await cookieStore.get("login-info")).value,
+            body: loginInfo,
             ContentType: "application/json",
             redirect: "follow",
             mode: "no-cors"
