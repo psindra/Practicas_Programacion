@@ -51,9 +51,6 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     console.debug("luego del await fetchedPlan");
     renderData(ejercicios);
 
-    const captionTablaPlan = document.querySelector("table#tablaPlan > caption");
-    captionTablaPlan.textContent = "Plan Día " + diaPlan;
-
     document.querySelectorAll("#navbarNav > .navbar-nav > li.nav-item > a.nav-link").forEach(anchorLink => {
     
     })
@@ -75,6 +72,10 @@ function renderData(ejercicios) {
 function renderTablaJson(ejerciciosDelDia) {    /* Obsoleto ahora */
     const tablaPlan = document.querySelector("table#tablaPlan");
     tablaPlan.tBodies[0].replaceChildren();
+    
+    const captionTablaPlan = document.querySelector("table#tablaPlan > caption");
+    captionTablaPlan.textContent = "Plan Día " + diaPlan;
+    
     for (const ejercicio of ejerciciosDelDia) {
         const _Row = document.createElement("tr");
 
@@ -112,6 +113,10 @@ function renderTablaJson(ejerciciosDelDia) {    /* Obsoleto ahora */
 function renderTablaArray(ejerciciosDelDia) {
     const tablaPlan = document.querySelector("table#tablaPlan");
     tablaPlan.tBodies[0].replaceChildren();
+    
+    const captionTablaPlan = document.querySelector("table#tablaPlan > caption");
+    captionTablaPlan.textContent = "Plan Día " + diaPlan;
+    
     for (const ejercicio of ejerciciosDelDia) {
         const _Row = document.createElement("tr");
 
