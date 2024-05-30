@@ -38,15 +38,13 @@ cookieStore.set({
 const diaPlan = (new URLSearchParams(window.location.search).get("dia") ?? 1);
 
 document.addEventListener("DOMContentLoaded", async ()=>{
-    
-    // import("./plan.json", { assert: { type: "json" } }).then((plan)=>{
-    // const ejercicios = plan.default;
+    console.debug("inicio DOMContentLoaded");
         
     const ejercicios = await fetchPlan();
     
     renderNavBarNav(ejercicios);
 
-    console.log(ejercicios[diaPlan - 1]);
+    // console.log(ejercicios[diaPlan - 1]);
     renderTablaArray(ejercicios[diaPlan - 1]);
 
     const captionTablaPlan = document.querySelector("table#tablaPlan > caption");
@@ -151,9 +149,15 @@ function renderTablaArray(ejerciciosDelDia) {
 }
 
 async function fetchPlan(){
+    console.log("inicio fetchPlan");/*  */
+
+
     // const scriptUrl = "https://script.google.com/macros/s/AKfycbwTMAhlEANcNSMQF5ouXldIfYHBIgNpXsKS98Aw5F6bGgXw9ceZ0Ziffmh-wcNbKprP/exec?paolo=1";
     const scriptUrl = "https://script.google.com/macros/s/AKfycbz7BH7cqzUPJwhEExCUCjvYC8ymEf7nzUp54NVK90kpi_QJdWDoAI0bpHkz0X6iNAYB/exec";
+    console.time("loginInfo");
     const loginInfo = (await cookieStore.get("login-info")).value;
+    console.timeEnd("loginInfo");
+    console.time("fetchPlan");
     return fetch(scriptUrl,{
         method: "POST",
         body: loginInfo,
@@ -162,6 +166,10 @@ async function fetchPlan(){
         // mode: "no-cors"
     })
     .then(response=> response.json())
+    .then(response=> {
+        console.timeEnd("fetchPlan");
+        return response;
+    })/*  */
     .catch(async err=>{
         console.log(err);
         return fetch(scriptUrl,{
@@ -172,6 +180,7 @@ async function fetchPlan(){
             mode: "no-cors"
         })
         .then(response=> response.text())
+        .then(response=> {console.timeEnd("fetchPlan"); return response;})/*  */
         .then(fetchPlan())
         .catch(err=>{
             console.log(err);
