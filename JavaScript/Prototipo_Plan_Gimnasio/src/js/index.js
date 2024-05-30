@@ -145,8 +145,6 @@ function renderTablaArray(ejerciciosDelDia) {
 
         tablaPlan.tBodies[0].append(_Row);
     }
-    // const spinnerDiv = document.querySelector("#spinnerDiv");
-    // spinnerDiv.remove();
 }
 
 
