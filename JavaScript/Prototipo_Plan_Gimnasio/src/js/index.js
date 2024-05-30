@@ -1,3 +1,4 @@
+const fetchedPlan = fetchPlan();
 
 // const ejercicios = [
 //         /* Día 1 */[
@@ -39,6 +40,15 @@ const diaPlan = (new URLSearchParams(window.location.search).get("dia") ?? 1);
 
 document.addEventListener("DOMContentLoaded", async ()=>{
     console.debug("inicio DOMContentLoaded");
+
+
+    const storageEjercicios = JSON.parse(localStorage.getItem("storagePlan"));
+    renderNavBarNav(storageEjercicios);
+    renderTablaArray(storageEjercicios[diaPlan - 1]);
+
+
+        
+    const ejercicios = await fetchedPlan;
     console.debug("luego del await fetchedPlan");
     
     renderNavBarNav(ejercicios);
@@ -132,8 +142,8 @@ function renderTablaArray(ejerciciosDelDia) {
 
         tablaPlan.tBodies[0].append(_Row);
     }
-    const spinnerDiv = document.querySelector("#spinnerDiv");
-    spinnerDiv.remove();
+    // const spinnerDiv = document.querySelector("#spinnerDiv");
+    // spinnerDiv.remove();
 }
 
 
@@ -167,6 +177,12 @@ async function fetchPlan(){
     .then(response=> response.json())
     .then(response=> {
         console.timeEnd("fetchPlan");
+        
+        localStorage.setItem("storagePlan", JSON.stringify(response));
+        
+        const spinnerDiv = document.querySelector("#spinnerDiv");
+        spinnerDiv.remove();
+
         return response;
     })/*  */
     .catch(async err=>{
