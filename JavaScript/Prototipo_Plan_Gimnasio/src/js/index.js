@@ -72,7 +72,7 @@ function renderData(ejercicios) {
     renderTablaArray(ejercicios[diaPlan - 1]);
 }
 
-function renderTabla(ejerciciosDelDia) {
+function renderTablaJson(ejerciciosDelDia) {    /* Obsoleto ahora */
     const tablaPlan = document.querySelector("table#tablaPlan");
     tablaPlan.tBodies[0].replaceChildren();
     for (const ejercicio of ejerciciosDelDia) {
