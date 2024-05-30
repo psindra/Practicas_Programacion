@@ -43,18 +43,13 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
 
     const storageEjercicios = JSON.parse(localStorage.getItem("storagePlan"));
-    renderNavBarNav(storageEjercicios);
-    renderTablaArray(storageEjercicios[diaPlan - 1]);
+    renderData(storageEjercicios);
 
 
         
     const ejercicios = await fetchedPlan;
     console.debug("luego del await fetchedPlan");
-    
-    renderNavBarNav(ejercicios);
-
-    // console.log(ejercicios[diaPlan - 1]);
-    renderTablaArray(ejercicios[diaPlan - 1]);
+    renderData(ejercicios);
 
     const captionTablaPlan = document.querySelector("table#tablaPlan > caption");
     captionTablaPlan.textContent = "Plan Día " + diaPlan;
@@ -71,6 +66,11 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 // }) fin import json
 
 })
+
+function renderData(ejercicios) {
+    renderNavBarNav(ejercicios);
+    renderTablaArray(ejercicios[diaPlan - 1]);
+}
 
 function renderTabla(ejerciciosDelDia) {
     const tablaPlan = document.querySelector("table#tablaPlan");
