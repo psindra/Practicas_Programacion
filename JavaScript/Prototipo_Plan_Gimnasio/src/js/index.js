@@ -106,8 +106,6 @@ function renderTablaJson(ejerciciosDelDia) {    /* Obsoleto ahora */
 
         tablaPlan.tBodies[0].append(_Row);
     }
-    const spinnerDiv = document.querySelector("#spinnerDiv");
-    spinnerDiv.remove();
 }
 
 function renderTablaArray(ejerciciosDelDia) {
