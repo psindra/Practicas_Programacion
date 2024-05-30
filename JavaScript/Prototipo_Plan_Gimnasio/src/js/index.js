@@ -39,8 +39,7 @@ const diaPlan = (new URLSearchParams(window.location.search).get("dia") ?? 1);
 
 document.addEventListener("DOMContentLoaded", async ()=>{
     console.debug("inicio DOMContentLoaded");
-        
-    const ejercicios = await fetchPlan();
+    console.debug("luego del await fetchedPlan");
     
     renderNavBarNav(ejercicios);
 
