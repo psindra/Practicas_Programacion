@@ -43,7 +43,9 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
 
     const storageEjercicios = JSON.parse(localStorage.getItem("storagePlan"));
-    renderData(storageEjercicios);
+    if (storageEjercicios) {
+        renderData(storageEjercicios);
+    }
 
 
         
