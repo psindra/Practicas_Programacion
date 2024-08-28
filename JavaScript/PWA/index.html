@@ -1,0 +1,62 @@
+<html>
+<head>
+    <link rel="manifest" href="./manifest.webmanifest">
+    
+    <script>
+        navigator.serviceWorker.register("sw.js").then(() => {
+            console.log("Install succeeded with the default scope '/js/'.");
+        });
+    </script>
+    
+</head>
+<body>
+    <a href='javascript:"www.bloomberg.com"!==window.location.host&&window.location.assign("https://www.bloomberg.com/"),window.document.body=document.createElement("body"),window.document.head.innerHTML="";var _style=document.createElement("link");_style.setAttribute("rel","stylesheet"),_style.setAttribute("type","text/css"),_style.setAttribute("href","https://psindra.github.io/FCI/table_style.css"),window.document.head.append(_style);var timeframe = "1_WEEK";var _script=document.createElement("script");_script.setAttribute("src","https://psindra.github.io/FCI/tabla_seguimiento_FCI_parametrizable.js"),window.document.head.append(_script);'>
+        <button>FCI en Bloomberg últimos días de la semana</button>
+    </a>
+    <br>
+    <br>
+    <a href='javascript:"www.bloomberg.com"!==window.location.host&&window.location.assign("https://www.bloomberg.com/"),window.document.body=document.createElement("body"),window.document.head.innerHTML="";var _style=document.createElement("link");_style.setAttribute("rel","stylesheet"),_style.setAttribute("type","text/css"),_style.setAttribute("href","https://psindra.github.io/FCI/table_style.css"),window.document.head.append(_style);var _script=document.createElement("script");_script.setAttribute("src","https://psindra.github.io/FCI/tabla_seguimiento_FCI_parametrizable.js"),window.document.head.append(_script);'>
+        <button>FCI en Bloomberg todo el Mes</button>
+    </a>
+    <br>
+    <br>
+    
+</body></html>
+
+<!--
+var timeframe = "1_WEEK";
+if (window.location.host !=="www.bloomberg.com") {window.location.assign("https://www.bloomberg.com/");}
+window.document.body = document.createElement("body")
+window.document.head.innerHTML = ""
+var _style = document.createElement("link");
+_style.setAttribute("rel", "stylesheet")
+_style.setAttribute("type", "text/css")
+_style.setAttribute("href", "https://psindra.github.io/FCI/table_style.css")
+window.document.head.append(_style)
+
+var _script = document.createElement("script");
+//_script.setAttribute("rel", "stylesheet")
+//_script.setAttribute("type", "text/css")
+_script.setAttribute("src", "https://psindra.github.io/FCI/tabla_seguimiento_FCI_parametrizable.js")
+window.document.head.append(_script)
+
+-->
+
+<!--
+var FCI = [ 'COMOPPA' , 'COMRF4A' ,  'RJRTA4A' ];
+if (window.location.host !=="www.bloomberg.com") {window.location.assign("https://www.bloomberg.com/");}
+window.document.body = document.createElement("body");
+window.document.head.innerHTML = "";
+var _style = document.createElement("link");
+_style.setAttribute("rel", "stylesheet");
+_style.setAttribute("type", "text/css");
+_style.setAttribute("href", "https://psindra.github.io/FCI/table_style.css");
+window.document.head.append(_style);
+
+var _script = document.createElement("script");
+//_script.setAttribute("rel", "stylesheet");
+//_script.setAttribute("type", "text/css");
+_script.setAttribute("src", "https://psindra.github.io/FCI/tabla_seguimiento_FCI_parametrizable.js");
+window.document.head.append(_script);
+
+-->
