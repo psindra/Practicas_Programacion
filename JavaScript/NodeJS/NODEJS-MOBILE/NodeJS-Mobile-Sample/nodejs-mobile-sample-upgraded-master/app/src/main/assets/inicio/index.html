@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Navegar por Puerto</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    label, input, button {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <label for="puerto">Puerto:</label>
+  <input type="number" id="puerto" name="puerto" value="3000" autocomplete="on" />
+
+  <button onclick="navegar()">Navegar</button>
+
+  <script>
+    function navegar() {
+      const puerto = document.getElementById('puerto').value;
+      if (puerto) {
+        window.location.href = `http://localhost:${puerto}`;
+      } else {
+        alert("Por favor, ingresa un número de puerto.");
+      }
+    }
+  </script>
+</body>
+</html>
+

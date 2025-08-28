@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+    // Set the compile SDK version
+    compileSdkVersion 33
+
+    // Set the namespace (required for AGP 7.x+)
+    namespace 'com.yourorg.sample'  // Set your namespace here (usually the same as applicationId)
+
+    defaultConfig {
+        applicationId "com.yourorg.sample"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"  // Use androidx for modern testing
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                arguments "-DANDROID_STL=c++_shared"
+            }
+        }
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86_64"
+        }
+    }
+
+   // -------------------------------------------------------------------------
+   // 1) Esto le dice a AAPT que NO ignora ningún archivo (incluidos los que 
+   //    empiezan con “.”). De este modo, el `.env` será incluido en assets.
+   aaptOptions {
+       ignoreAssetsPattern ""
+   }
+   // -------------------------------------------------------------------------
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+    // If you want Gradle to package prebuilt native libraries
+    // with your APK, modify the default source set configuration
+    // to include the directory of your prebuilt .so files as follows.
+    sourceSets {
+        main {
+            jniLibs.srcDirs 'libnode/bin/'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Update to use the correct dependencies with implementation or api
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0') {
+        exclude group: 'androidx.test', module: 'test-annotations'
+    }
+    implementation 'androidx.appcompat:appcompat:1.6.1'  // Latest stable version as of now
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'  // Latest version
+    testImplementation 'junit:junit:4.12'
+}

@@ -1,0 +1,3 @@
+/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/.cxx/RelWithDebInfo/42r1h2c4/armeabi-v7a/CMakeFiles/native-lib.dir
+/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/.cxx/RelWithDebInfo/42r1h2c4/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/.cxx/RelWithDebInfo/42r1h2c4/armeabi-v7a/CMakeFiles/rebuild_cache.dir

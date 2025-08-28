@@ -1,0 +1,29 @@
+{
+  "buildFiles": [
+    "/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/polyys/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/.cxx/RelWithDebInfo/42r1h2c4/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/polyys/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/.cxx/RelWithDebInfo/42r1h2c4/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "native-lib::@6890427a1f51a3e7e1df": {
+      "artifactName": "native-lib",
+      "abi": "arm64-v8a",
+      "output": "/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/build/intermediates/cxx/RelWithDebInfo/42r1h2c4/obj/arm64-v8a/libnative-lib.so",
+      "runtimeFiles": [
+        "/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/libnode/bin/arm64-v8a/libnode.so"
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+total 76
+drwxrwxr-x   4 polyys polyys  4096 jun  6 16:08 .
+drwxrwxr-x   5 polyys polyys  4096 jun  5 19:09 ..
+-rw-rw-r--   1 polyys polyys  1621 may 19 18:20 BarcodeShoppingList-2_0.mongodb.js
+-rw-rw-r--   1 polyys polyys   130 may 19 18:20 .env
+-rw-rw-r--   1 polyys polyys     0 jun  6 16:08 lista_assets_local.txt
+drwxrwxr-x 109 polyys polyys  4096 jun  5 18:39 node_modules
+-rw-rw-r--   1 polyys polyys   482 may 19 18:20 package.json
+-rw-rw-r--   1 polyys polyys 44828 jun  5 18:39 package-lock.json
+-rw-rw-r--   1 polyys polyys  2550 may 19 18:20 playground-3.mongodb.js
+drwxrwxr-x   5 polyys polyys  4096 jun  5 20:11 src

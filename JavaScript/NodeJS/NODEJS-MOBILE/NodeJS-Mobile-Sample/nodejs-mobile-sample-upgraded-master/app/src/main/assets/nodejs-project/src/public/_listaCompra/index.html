@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+    <title>Form and Table</title>
+    <style>
+        @media (max-width: 576px) {
+            .flex-wrap {
+                flex-wrap: wrap;
+            }
+        }
+      input#enableConsole:not(:checked)+pre#preConsole{
+        display: none;
+      }
+    </style>
+    <!-- <script defer src="errorRender.js" ></script> -->
+    <!-- <script defer src="./class_barcodeDetector.js"></script> -->
+    <script defer src="./barcode_script.js" type="module"></script>
+    <script defer src="./index.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Form</h2>
+                <form id="myForm">
+                    <input type="hidden" id="rowId">
+                    <div class="form-group">
+                        <label for="barcodeProducto">Barcode:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="barcodeProducto" required>
+                            <button type="button" class="btn btn-outline-secondary" id="scanBtn">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.75 2A1.75 1.75 0 0 0 4 3.75v2.5A1.75 1.75 0 0 0 5.75 8h1.5A1.75 1.75 0 0 0 9 6.25v-2.5A1.75 1.75 0 0 0 7.25 2h-1.5zM6 4a.75.75 0 1 1 0-1.5A.75.75 0 0 1 6 4zm4.854-.146a.5.5 0 0 1 .353-.147h1.939a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1.939a.5.5 0 0 1-.353-.147l-1.18-1.18a.5.5 0 0 0-.707 0l-2.147 2.147a.5.5 0 0 1-.707 0L4.146 9.854a.5.5 0 0 1 0-.707L6.293 7.5a.5.5 0 0 0 0-.707L4.146 5.146a.5.5 0 0 1 0-.707l1.18-1.18a.5.5 0 0 0 0-.707L4.646.646a.5.5 0 0 0-.707 0L1.793 3.793a1.5 1.5 0 0 0 0 2.122l2.147 2.147a.5.5 0 0 1 0 .707l-1.18 1.18a.5.5 0 0 0 0 .707l2.147 2.147a.5.5 0 0 1 .707 0l2.147-2.147a.5.5 0 0 0 .707 0l1.18 1.18a.5.5 0 0 0 .707 0L11.854 9.854a1.5 1.5 0 0 0 0-2.122L9.707 5.585a.5.5 0 0 1 0-.707l2.147-2.147z" />
+                              </svg>
+                            </button>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcionProducto">Description:</label>
+                        <input type="text" class="form-control" id="descripcionProducto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Qty:</label>
+                        <input type="number" class="form-control" id="cantidad" step=".01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Price:</label>
+                        <input type="number" class="form-control" id="precio" step=".01" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                </form>
+            </div>
+            <dialog id="scanDialog"  class="w-75 h-75 m-auto">
+                <div class="m-auto d-flex flex-column justify-content-evenly h-100">
+                    <video id="scanVideo" muted autoplay="autoplay" playsinline="playsinline" webkit-playsinline width="100%"></video>
+                    <button id="closeDialogBtn" class="btn btn-secondary">Close</button>
+                </div>
+              </dialog>
+            <div class="col-md-6">
+                <h2>Total <span id="total"></span></h2>
+                
+                <table id="dataTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Barcode</th>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <br><br>
+    <hr>
+    <button id="cleanConsole">Clean Console</button> <input type="checkbox" id="enableConsole" name="enableConsole">
+    <pre id="preConsole">
+    </pre>
+</body>
+
+</html>

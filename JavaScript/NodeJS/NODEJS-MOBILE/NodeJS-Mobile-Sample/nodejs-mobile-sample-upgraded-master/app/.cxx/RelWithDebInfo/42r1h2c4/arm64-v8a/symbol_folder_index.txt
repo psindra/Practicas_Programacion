@@ -1,0 +1,1 @@
+/home/polyys/Documentos/GitHub/psindra.github.io/Practicas_Programacion/JavaScript/NodeJS/NODEJS-MOBILE/NodeJS-Mobile-Sample/nodejs-mobile-sample-upgraded-master/app/build/intermediates/cxx/RelWithDebInfo/42r1h2c4/obj/arm64-v8a
