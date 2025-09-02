@@ -1,0 +1,35 @@
+    <dialog id="loginDialog" class="col-sm-6 col-8 col-xl-3" open>
+        <div class="card">
+
+            <div class="card-header">
+                <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close(); this.documentQuery('form#formDetalleProducto').reset()">X</a>
+                <h4 class="h4 card-title text-primary" id="Título">Login</h2>
+            </div>
+
+            <div class="card-body">
+                <form action="#" id="loginForm">
+                    <fieldset>
+                        <div class="mb-3">
+                            <label for="user" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="user" name="user" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="card-footer text-center">
+                <button type="submit" form="loginForm" class="btn btn-primary">Ingresar</button>
+            </div>
+            
+            <div class="card-footer d-flex flex-wrap justify-content-evenly gap-4">
+                <button type="submit" class="btn btn-primary  text-center px-4" id="submitBtn">Submit</button>
+                <button type="reset" class="btn btn-secondary text-center px-4" id="cancelBtn">Cancel</button>
+            </div>
+            
+        </div>
+    </dialog>
+        
