@@ -30,10 +30,13 @@
                 <!-- <ul class="navbar-nav flex-row justify-content-around"> --> 
                 <ul class="navbar-nav"> 
                     <li class="nav-item mx-md-2 m-2">
-                        <a class="nav-link btn btn-primary btn-outline-dark" id="estadoCartera" href="../">Estado Cartera</a>
+                        <a class="nav-link btn btn-success btn-outline-dark" id="estadoCartera" href="#">Login</a>
+                    </li> 
+                    <li class="nav-item mx-md-2 m-2">
+                        <a class="nav-link btn btn-primary btn-outline-dark" id="estadoCartera" href="estadoCartera.html">Estado Cartera</a>
                     </li>
                     <li class="nav-item mx-md-2 m-2">
-                        <a class="nav-link btn btn-primary btn-outline-dark id="nuevaOrden" href="#">Nueva Orden</a>
+                        <a class="nav-link btn btn-primary btn-outline-dark id="nuevaOrden" href="nuevaOrden.html">Nueva Orden</a>
                     </li>
                 </ul>
             </div>
@@ -50,30 +53,30 @@
                 </div>
                 <div class="card-body">
                     <form action="#" id="formularioNuevaOrden">
-                        <div class="input-group mb-4 flex-wrap">
+                        <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="mercado" class="input-group-text bg-black text-white-50">Mercado</label>
-                            <input type="text" name="mercado" value="bCBA" class="form-control text-center bg-dark text-white" required>
+                            <input type="text" name="mercado" value="bCBA" class="form-control text-center bg-black bg-opacity-25 text-white" required style="min-width: 125px;">
                         </div>
 
-                        <div class="input-group mb-4 flex-wrap">
+                        <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="simbolo" class="input-group-text bg-black text-white-50">Símbolo</label>
-                            <input type="text" name="simbolo" class="form-control text-center  bg-dark text-white" autofocus required>
+                            <input type="text" name="simbolo" class="form-control text-center  bg-black bg-opacity-25 text-white" autofocus required style="min-width: 125px;">
                         </div>
 
-                        <div class="input-group mb-4 flex-wrap">
+                        <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="cantidad" class="input-group-text bg-black text-white-50">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control text-center  bg-dark text-white" required>
+                            <input type="number" name="cantidad" class="form-control text-center  bg-black bg-opacity-25 text-white" required style="min-width: 125px;">
                         </div>
 
-                        <div class="input-group mb-4 flex-wrap">
+                        <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="precio" class="input-group-text bg-black text-white-50">Precio</label>
-                            <input type="number" name="precio" class="form-control text-center  bg-dark text-white" required>
+                            <input type="number" name="precio" class="form-control text-center  bg-black bg-opacity-25 text-white" required style="min-width: 125px;">
                         </div>
 
-                        <div class="input-group mb-4 flex-wrap">
+                        <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="plazo" class="input-group-text bg-black text-white-50">plazo</label>
-                            <!-- <input type="text" name="plazo" value="t1" class="form-control text-center  bg-dark text-white" required> -->
-                            <select name="plazo" id="plazo" class="form-select text-center bg-dark text-white">
+                            <!-- <input type="text" name="plazo" value="t1" class="form-control text-center  bg-black bg-opacity-25 text-white" required style="min-width: 125px;"> -->
+                            <select name="plazo" id="plazo" class="form-select text-center bg-black bg-opacity-25 text-white" required style="min-width: 125px;">
                                 <option value="t0"          >t0</option>
                                 <option value="t1" selected >t1</option>
                                 <option value="t2"          >t2</option>
@@ -81,18 +84,18 @@
                             </select>
                         </div>
 
-                        <div class="input-group mb-4 flex-wrap">
+                        <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="tipoOrden" class="input-group-text bg-black text-white-50">tipoOrden</label>
-                            <!-- <input type="text" name="tipoOrden" value="precioLimite" class="form-control text-center  bg-dark text-white" required> -->
-                            <select name="tipoOrden" id="tipoOrden" class="form-select text-center bg-dark text-white" required>
+                            <!-- <input type="text" name="tipoOrden" value="precioLimite" class="form-control text-center  bg-black bg-opacity-25 text-white" required style="min-width: 125px;"> -->
+                            <select name="tipoOrden" id="tipoOrden" class="form-select text-center bg-black bg-opacity-25 text-white" required style="min-width: 125px;">
                                 <option value="precioLimite" selected>precioLimite</option>
                                 <option value="precioMercado">precioMercado</option>
                             </select>
                         </div>
 
-                        <div class="input-group mb-4 flex-wrap">
+                        <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="validez" class="input-group-text bg-black text-white-50">validez</label>
-                            <input type="date" name="validez" value="2025-12-31" class="form-control text-center  bg-dark text-white" required>
+                            <input type="date" name="validez" class="form-control text-center  bg-black bg-opacity-25 text-white" value="2025-12-31" required  style="min-width: 125px;">
                         </div>
 
                     <!-- </form> -->
@@ -108,15 +111,58 @@
 
 
     <footer class="sticky-bottom top-100">
-        <!-- <br><br> -->
         <hr class="mt-5 border-top">
-        <button type="button" class="btn btn-sm btn-outline-light" id="cleanConsole">Clean Console</button>
-        <div class="form-switch form-check-inline">
-            <input type="checkbox" class="form-check-input" id="enableConsole" name="enableConsole">
+        <div class="form-switch form-check-inline mx-2">
+            <input type="checkbox" class="form-check-input" id="enableConsole" name="enableConsole" checked>
         </div>
-        <pre id="preConsole">
+        <button type="button" class="btn btn-sm btn-outline-light" id="cleanConsole">Clean Console</button>
+        <pre id="preConsole">Texot de prueba
         </pre>
+        <script>
+            document.getElementById('enableConsole').addEventListener('change', function() {
+                const preConsole = document.getElementById('preConsole');
+                preConsole.style.display = this.checked ? 'block' : 'none';
+            });
+            document.getElementById('cleanConsole').addEventListener('click', function() {
+                document.getElementById('preConsole').textContent = '';
+            });
+        </script>
     </footer>
     
+
+    <!-- LOGIN DIALOG -->
+     <!-- Borrar -->
+
+        <dialog id="loginDialog" class="col-sm-6 col-8 col-xl-3" open>
+        <div class="card">
+
+            <div class="card-header">
+                <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close(); this.documentQuery('form#formDetalleProducto').reset()">X</a>
+                <h4 class="h4 card-title text-primary" id="Título">Login</h2>
+            </div>
+
+            <div class="card-body">
+                <form action="#" id="loginForm">
+                    <fieldset>
+                        <div class="mb-3">
+                            <label for="user" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="user" name="user" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            
+            <div class="card-footer d-flex flex-wrap justify-content-evenly gap-4">
+                <button type="submit" class="btn btn-primary  text-center px-4" id="loginBtn">Ingresar</button>
+                <button type="reset" class="btn btn-secondary text-center px-4" id="cancelBtn">Cancel</button>
+            </div>
+            
+        </div>
+    </dialog>
+        
 </body>
 </html>
