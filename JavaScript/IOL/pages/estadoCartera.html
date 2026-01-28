@@ -16,12 +16,14 @@
         }
     </style>
 
-    <script src="./js/index.js" defer></script>
+    <script src="../js/index.js" defer></script>
+    <script src="../js/estadoCartera.js" defer></script>
+    <script src="../js/modalAlert.js" defer></script>
 </head>
 <body class="bg-black text-white-50">
     <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-primary">
     <div class="container-fluid">
-            <a class="navbar-brand text-white-50" href="./index.html">APIs Invertir Online</a>
+            <a class="navbar-brand text-white-50" href="../index.html">APIs Invertir Online</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,7 +34,7 @@
                         <a class="nav-link btn btn-primary btn-outline-dark" id="estadoCartera" href="estadoCartera.html">Estado Cartera</a>
                     </li>
                     <li class="nav-item mx-md-2 m-2">
-                        <a class="nav-link btn btn-primary btn-outline-dark" id="nuevaOrden" href="#">Nueva Orden</a>
+                        <a class="nav-link btn btn-primary btn-outline-dark" id="nuevaOrden" href="../pages/nuevaOrden.html">Nueva Orden</a>
                     </li>
                 </ul>
             </div>
@@ -41,13 +43,13 @@
 
 
     <main>
-        <div class="container pt-2 col-11">
+        <div class="container-sm pt-2">
             <h2 class="h2">Estado Cartera</h2>
-            <table class="table table-sm text-center shadow" id="tablaEstadoCartera">
-                <thead class="table-active">
+            <table class="table table-sm text-center text-white small shadow" id="tablaEstadoCartera">
+                <thead class="table-dark text-break">
                     <tr>
-                        <th>A</th>
-                        <th>B</th>
+                        <th> </th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody class="align-middle"></tbody>
@@ -75,6 +77,40 @@
             });
         </script>
     </footer>
+
+    <!-- LOGIN DIALOG -->
+     <!-- Borrar -->
+
+        <dialog id="loginDialog" class="col-sm-6 col-8 col-xl-3">
+        <div class="card">
+
+            <div class="card-header">
+                <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close(); this.closest('dialog').querySelector('form#loginForm').reset()">X</a>
+                <h4 class="h4 card-title text-primary" id="Título">Login</h2>
+            </div>
+
+            <div class="card-body">
+                <form action="#" id="loginForm">
+                    <fieldset>
+                        <div class="mb-3">
+                            <label for="inputUsername" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="inputUsername" name="inputUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
+                        </div>
+                    </fieldset>
+                </form>
+                </div>
+                
+                <div class="card-footer d-flex flex-wrap justify-content-evenly gap-4">
+                    <button type="submit" class="btn btn-primary  text-center px-4" form="loginForm" id="loginBtn">Ingresar</button>
+                    <button type="reset" class="btn btn-secondary text-center px-4" form="loginForm" id="cancelLoginBtn">Cancel</button>
+            </div>
+            
+        </div>
+    </dialog>
     
 </body>
 </html>

@@ -15,7 +15,9 @@
         }
     </style>
 
-    <script src="./js/index.js" defer></script>
+    <script src="../js/index.js" defer></script>
+    <script src="../js/nuevaOrden.js" defer></script>
+    <script src="../js/modalAlert.js" defer></script>
 </head>
 <!-- <body class="bg-dark text-white-50"> -->
     <!--     <nav class="navbar navbar-expand sticky-top navbar-dark bg-black"> -->
@@ -60,12 +62,13 @@
 
                         <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="simbolo" class="input-group-text bg-black text-white-50">Símbolo</label>
-                            <input type="text" name="simbolo" class="form-control text-center  bg-black bg-opacity-25 text-white" autofocus required style="min-width: 125px;">
+                            <input type="text" name="simbolo" class="form-control text-center  bg-black bg-opacity-25 text-white text-uppercase" autofocus required autocomplete style="min-width: 125px;" autocapitalize="characters">
                         </div>
 
                         <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="cantidad" class="input-group-text bg-black text-white-50">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control text-center  bg-black bg-opacity-25 text-white" required style="min-width: 125px;">
+                            <input type="number" name="cantidad" value="1" class="form-control text-center  bg-black bg-opacity-25 text-white" required style="min-width: 125px;"
+                            min="1">
                         </div>
 
                         <div class="input-group mb-4 flex-wrap justify-content-center">
@@ -95,7 +98,7 @@
 
                         <div class="input-group mb-4 flex-wrap justify-content-center">
                             <label for="validez" class="input-group-text bg-black text-white-50">validez</label>
-                            <input type="date" name="validez" class="form-control text-center  bg-black bg-opacity-25 text-white" value="2025-12-31" required  style="min-width: 125px;">
+                            <input type="date" name="validez" class="form-control text-center  bg-black bg-opacity-25 text-white" value="2026-12-31" required  style="min-width: 125px;">
                         </div>
 
                     <!-- </form> -->
@@ -131,38 +134,39 @@
     
 
     <!-- LOGIN DIALOG -->
-     <!-- Borrar -->
-
-        <dialog id="loginDialog" class="col-sm-6 col-8 col-xl-3" open>
+    
+    <!-- Borrar -->
+    <dialog id="loginDialog" class="col-sm-6 col-8 col-xl-3">
         <div class="card">
-
+        
             <div class="card-header">
-                <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close(); this.documentQuery('form#formDetalleProducto').reset()">X</a>
-                <h4 class="h4 card-title text-primary" id="Título">Login</h2>
-            </div>
+            <a class="btn btn-outline-danger btn-sm end float-end" onclick="this.closest('dialog').close(); this.closest('dialog').querySelector('form#loginForm').reset()">X</a>
+            <h4 class="h4 card-title text-primary" id="Título">Login</h2>
+        </div>
 
-            <div class="card-body">
-                <form action="#" id="loginForm">
-                    <fieldset>
-                        <div class="mb-3">
-                            <label for="user" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="user" name="user" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputPassword" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
-                        </div>
-                    </fieldset>
-                </form>
+        <div class="card-body">
+            <form action="#" id="loginForm">
+                <fieldset>
+                    <div class="mb-3">
+                        <label for="inputUsername" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="inputUsername" name="inputUsername" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
+                    </div>
+                </fieldset>
+            </form>
             </div>
             
             <div class="card-footer d-flex flex-wrap justify-content-evenly gap-4">
-                <button type="submit" class="btn btn-primary  text-center px-4" id="loginBtn">Ingresar</button>
-                <button type="reset" class="btn btn-secondary text-center px-4" id="cancelBtn">Cancel</button>
+                <button type="submit" class="btn btn-primary  text-center px-4" form="loginForm" id="loginBtn">Ingresar</button>
+                <button type="reset" class="btn btn-secondary text-center px-4" form="loginForm" id="cancelLoginBtn">Cancel</button>
             </div>
-            
         </div>
     </dialog>
         
+
+
 </body>
 </html>
