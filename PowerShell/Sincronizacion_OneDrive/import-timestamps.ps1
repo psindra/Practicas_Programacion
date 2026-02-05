@@ -3,22 +3,24 @@ param(
     [string]$TimestampsFile = "$Path\.timestamps.csv",
     [string]$LogFile = "$Path\import-timestamps.log"
 )
-
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function Print_Log {
     param (
         [Parameter(Mandatory=$true)][string]$Message,
         [ValidateSet("INFO", "SUCCESS","ERROR","WARNING")][string]$Level = "INFO"
     )
-    
-    $logEntry = "(Get-Date).ToString('yyyy-MM-dd HH:mm:ss') [$Level] $Message"
+
     switch ($Level) {
-        "SUCCESS" { Write-Host $logEntry -ForegroundColor Green }
-        "INFO" { Write-Host $logEntry -ForegroundColor Cyan }
-        "ERROR" { Write-Host $logEntry -ForegroundColor Red }
-        "WARNING" { Write-Host $logEntry -ForegroundColor Yellow }
+        "SUCCESS" { Write-Host $Message -ForegroundColor Green }
+        "INFO" { Write-Host $Message -ForegroundColor Cyan }
+        "ERROR" { Write-Host $Message -ForegroundColor Red }
+        "WARNING" { Write-Host $Message -ForegroundColor Yellow }
     }
+    
+    $logEntry = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) [$Level] $Message"
     Add-Content -Path $LogFile -Value $logEntry
 }
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Validar archivos y rutas
 if (-not (Test-Path $TimestampsFile)) {
@@ -110,7 +112,7 @@ foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10
 }
 
 if ($validationErrors -eq 0) {
-    Write-Host "Validación exitosa: marcas de tiempo correctas" -ForegroundColor Green
+    Print_Log "Validación exitosa: marcas de tiempo correctas" -Level "SUCCESS"
 } else {
-    Write-Host "Validación encontró $validationErrors discrepancias" -ForegroundColor Yellow
+    Print_Log "Validación encontró $validationErrors discrepancias" -Level "WARNING"
 }
