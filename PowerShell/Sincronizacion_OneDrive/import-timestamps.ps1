@@ -16,7 +16,7 @@ function Print_Log {
         "ERROR" { Write-Host $Message -ForegroundColor Red }
         "WARNING" { Write-Host $Message -ForegroundColor Yellow }
     }
-    
+
     $logEntry = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) [$Level] $Message"
     Add-Content -Path $LogFile -Value $logEntry
 }
@@ -91,22 +91,22 @@ foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10
 
     $obj = Get-Item -Path $fullPath -Force
 
-    # $expectedCreation = date $item.CreationTime
-    # $expectedLastWrite = date $item.LastWriteTime
-    # $expectedLastAccess = date $item.LastAccessTime
+    $expectedCreation = date $item.CreationTime
+    $expectedLastWrite = date $item.LastWriteTime
+    $expectedLastAccess = date $item.LastAccessTime
 
-    if ($obj.CreationTime -ne (date $item.CreationTime)) {
-        Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedCreation, Actual: $($obj.CreationTime)" -Level "WARNING"
+    if ($obj.CreationTime -ne $expectedCreation) {
+        Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation ➡️ $($obj.CreationTime)" -Level "WARNING"
         $validationErrors++
     }
 
-    if ($obj.LastWriteTime -ne (date $item.LastWriteTime)) {
-        Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedLastWrite, Actual: $($obj.LastWriteTime)" -Level "WARNING"
+    if ($obj.LastWriteTime -ne $expectedLastWrite) {
+        Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. $expectedLastWrite ➡️ $($obj.LastWriteTime)" -Level "WARNING"
         $validationErrors++
     }
 
-    if ($obj.LastAccessTime -ne (date $item.LastAccessTime)) {
-        Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedLastAccess, Actual: $($obj.LastAccessTime)" -Level "WARNING"
+    if ($obj.LastAccessTime -ne $expectedLastAccess) {
+        Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. $expectedLastAccess ➡️ $($obj.LastAccessTime)" -Level "WARNING"
         $validationErrors++
     }
 }
