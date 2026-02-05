@@ -56,9 +56,9 @@ foreach ($item in $timestampsSorted) {
         $obj = Get-Item -Path $fullPath -Force
         
         # Actualizar marcas de tiempo
-        $obj.CreationTime = date $item.CreationTime
-        $obj.LastWriteTime = date $item.LastWriteTime
-        $obj.LastAccessTime = date $item.LastAccessTime
+        $obj.CreationTime = [datetime] ($item.CreationTime)
+        $obj.LastWriteTime = [datetime] ($item.LastWriteTime)
+        $obj.LastAccessTime = [datetime] ($item.LastAccessTime)
         
         $updatedCount++
     }
@@ -91,9 +91,9 @@ foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10
 
     $obj = Get-Item -Path $fullPath -Force
 
-    $expectedCreation = date $item.CreationTime
-    $expectedLastWrite = date $item.LastWriteTime
-    $expectedLastAccess = date $item.LastAccessTime
+    $expectedCreation = [datetime] $item.CreationTime
+    $expectedLastWrite = [datetime] $item.LastWriteTime
+    $expectedLastAccess = [datetime] $item.LastAccessTime
 
     if ($obj.CreationTime -ne $expectedCreation) {
         Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation ➡️ $($obj.CreationTime)" -Level "WARNING"

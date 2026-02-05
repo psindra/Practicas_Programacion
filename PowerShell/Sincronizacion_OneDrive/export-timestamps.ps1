@@ -41,9 +41,18 @@ Get-ChildItem -Path $Path -Recurse -Force |
         Name       = 'Depth'
         Expression = { ($_.FullName.Substring($Path.Length).TrimStart('\')).Split('\').Count }
     },
-    CreationTime,
-    LastWriteTime,
-    LastAccessTime |
+    @{
+        Name       = 'CreationTime'
+        Expression = { $_.CreationTime.ToString('o') }
+    },
+    @{
+        Name       = 'LastWriteTime'
+        Expression = { $_.LastWriteTime.ToString('o') }
+    },
+    @{
+        Name       = 'LastAccessTime'
+        Expression = { $_.LastAccessTime.ToString('o') }
+    } |
     Export-Csv -Path $TimestampsFile -NoTypeInformation -Encoding UTF8
 
 Print_Log "Timestamps exportados: $TimestampsFile" -Level "SUCCESS"
