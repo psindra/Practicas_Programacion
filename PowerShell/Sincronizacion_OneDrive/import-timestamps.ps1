@@ -77,7 +77,7 @@ if ($errorCount -gt 0) {
 
 ##########################################################################
 # Validación: Verificar marcas de tiempo aplicadas correctamente
-Print_Log "`nValidando resultados..." -Level "INFO"
+Print_Log "Validando resultados..." -Level "INFO"
 $validationErrors = 0
 
 foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10 elementos
