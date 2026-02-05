@@ -35,7 +35,7 @@ if (-not (Test-Path $Path)) {
 $timestamps = Import-Csv -Path $TimestampsFile -Encoding UTF8
 
 # Ordenar por profundidad descendente (procesa primero archivos/carpetas más profundas)
-$timestampsSorted = $timestamps | Sort-Object -Property @{Expression = {($_.RelativePath.Split('\').Count)}; Descending = $true}
+$timestampsSorted = $timestamps | Sort-Object -Property Depth -Descending
 
 $updatedCount = 0
 $errorCount = 0
