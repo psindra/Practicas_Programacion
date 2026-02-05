@@ -1,6 +1,7 @@
 param(
     [string]$Path = $PSScriptRoot,
-    [string]$TimestampsFile = "$Path\.timestamps.csv"
+    [string]$TimestampsFile = "$Path\.timestamps.csv",
+    [string]$LogFile = "$Path\import-timestamps.log"
 )
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function Print_Log {

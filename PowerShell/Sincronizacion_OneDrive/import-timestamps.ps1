@@ -96,17 +96,17 @@ foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10
     $expectedLastAccess = [datetime] $item.LastAccessTime
 
     if ($obj.CreationTime -ne $expectedCreation) {
-        Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation ➡️ $($obj.CreationTime)" -Level "WARNING"
+        Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation ⇏ $($obj.CreationTime)" -Level "WARNING"
         $validationErrors++
     }
 
     if ($obj.LastWriteTime -ne $expectedLastWrite) {
-        Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. $expectedLastWrite ➡️ $($obj.LastWriteTime)" -Level "WARNING"
+        Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. $expectedLastWrite ⇏ $($obj.LastWriteTime)" -Level "WARNING"
         $validationErrors++
     }
 
     if ($obj.LastAccessTime -ne $expectedLastAccess) {
-        Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. $expectedLastAccess ➡️ $($obj.LastAccessTime)" -Level "WARNING"
+        Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. $expectedLastAccess ⇏ $($obj.LastAccessTime)" -Level "WARNING"
         $validationErrors++
     }
 }
