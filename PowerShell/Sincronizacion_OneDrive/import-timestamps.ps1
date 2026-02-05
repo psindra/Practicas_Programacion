@@ -54,9 +54,9 @@ foreach ($item in $timestampsSorted) {
         $obj = Get-Item -Path $fullPath -Force
         
         # Actualizar marcas de tiempo
-        $obj.CreationTime = [DateTime]$item.CreationTime
-        $obj.LastWriteTime = [DateTime]$item.LastWriteTime
-        $obj.LastAccessTime = [DateTime]$item.LastAccessTime
+        $obj.CreationTime = date $item.CreationTime
+        $obj.LastWriteTime = date $item.LastWriteTime
+        $obj.LastAccessTime = date $item.LastAccessTime
         
         $updatedCount++
     }
@@ -89,22 +89,22 @@ foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10
 
     $obj = Get-Item -Path $fullPath -Force
 
-    $expectedCreation = [DateTime]$item.CreationTime
-    $expectedLastWrite = [DateTime]$item.LastWriteTime
-    $expectedLastAccess = [DateTime]$item.LastAccessTime
+    # $expectedCreation = date $item.CreationTime
+    # $expectedLastWrite = date $item.LastWriteTime
+    # $expectedLastAccess = date $item.LastAccessTime
 
-    if ($obj.CreationTime -ne [DateTime]$item.CreationTime) {
-        Write-Warning "CreationTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedCreation, Actual: $($obj.CreationTime)"
+    if ($obj.CreationTime -ne (date $item.CreationTime)) {
+        Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedCreation, Actual: $($obj.CreationTime)" -Level "WARNING"
         $validationErrors++
     }
 
-    if ($obj.LastWriteTime -ne [DateTime]$item.LastWriteTime) {
-        Write-Warning "LastWriteTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedLastWrite, Actual: $($obj.LastWriteTime)"
+    if ($obj.LastWriteTime -ne (date $item.LastWriteTime)) {
+        Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedLastWrite, Actual: $($obj.LastWriteTime)" -Level "WARNING"
         $validationErrors++
     }
 
-    if ($obj.LastAccessTime -ne [DateTime]$item.LastAccessTime) {
-        Write-Warning "LastAccessTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedLastAccess, Actual: $($obj.LastAccessTime)"
+    if ($obj.LastAccessTime -ne (date $item.LastAccessTime)) {
+        Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. Esperado: $expectedLastAccess, Actual: $($obj.LastAccessTime)" -Level "WARNING"
         $validationErrors++
     }
 }
