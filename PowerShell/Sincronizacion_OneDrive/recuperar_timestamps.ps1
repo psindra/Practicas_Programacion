@@ -96,7 +96,7 @@ if ($errorCount -gt 0) {
 Print_Log "Validando resultados..." -Level "INFO"
 $validationErrors = 0
 
-foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10 elementos
+foreach ($item in $timestamps) {  # Valida todos los elementos
     $fullPath = Join-Path -Path $Path -ChildPath $item.RelativePath
 
     Write-Progress -Activity "Validando marcas de tiempo" -Status $item.RelativePath
