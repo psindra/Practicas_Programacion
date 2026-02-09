@@ -45,8 +45,8 @@ $errorCount = 0
 
 # Aplicar marcas de tiempo
 Write-Progress -Activity "Recuperar timestamps" -Status "Aplicando marcas de tiempo" -PercentComplete 0
-foreach ($item in $timestampsSorted) {
-    Write-Progress -Activity "Recuperar timestamps" -Status $item.RelativePath -PercentComplete ($updatedCount + $errorCount) / $timestampsSorted.Count * 100)
+foreach ($item in $timestampsSorted){
+    Write-Progress -Activity "Recuperar timestamps" -Status $item.RelativePath -PercentComplete (($updatedCount + $errorCount) / $timestampsSorted.Count * 100)
     $fullPath = Join-Path -Path $Path -ChildPath $item.RelativePath
     
     if (-not (Test-Path $fullPath)) {
@@ -62,7 +62,7 @@ foreach ($item in $timestampsSorted) {
         $obj.CreationTime = [datetime] ($item.CreationTime)
         $obj.LastWriteTime = [datetime] ($item.LastWriteTime)
 
-        //saltear si LastAccessTime es despues del 06/02/2026
+        # saltear si LastAccessTime es despues del 06/02/2026
         if([datetime]::Parse($item.LastAccessTime) -lt [datetime]"2026-02-06") {
             $obj.LastAccessTime = [datetime] ($item.LastAccessTime)
         }
