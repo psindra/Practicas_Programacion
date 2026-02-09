@@ -59,11 +59,19 @@ foreach ($item in $timestampsSorted){
         $obj = Get-Item -Path $fullPath -Force
         
         # Actualizar marcas de tiempo
-        $obj.CreationTime = [datetime] ($item.CreationTime)
-        $obj.LastWriteTime = [datetime] ($item.LastWriteTime)
+        
+        # saltear si CreationTime es despues del 06/02/2026
+        if([datetime]::Parse($item.CreationTime) -lt [datetime]"2026-02-05") {
+            $obj.CreationTime = [datetime] ($item.CreationTime)
+        }
+
+        # saltear si LastWriteTime es despues del 06/02/2026
+        if([datetime]::Parse($item.LastWriteTime) -lt [datetime]"2026-02-05") {
+            $obj.LastWriteTime = [datetime] ($item.LastWriteTime)
+        }
 
         # saltear si LastAccessTime es despues del 06/02/2026
-        if([datetime]::Parse($item.LastAccessTime) -lt [datetime]"2026-02-06") {
+        if([datetime]::Parse($item.LastAccessTime) -lt [datetime]"2026-02-05") {
             $obj.LastAccessTime = [datetime] ($item.LastAccessTime)
         }
         
@@ -99,28 +107,31 @@ foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10
 
     $obj = Get-Item -Path $fullPath -Force
 
-    $expectedCreation = [datetime] $item.CreationTime
-    $expectedLastWrite = [datetime] $item.LastWriteTime
-    if([datetime]::Parse($item.LastAccessTime) -lt [datetime]"2026-02-06") {
+    
+    if([datetime]::Parse($item.CreationTime) -lt [datetime]"2026-02-05") {
+        $expectedCreation = [datetime] $item.CreationTime
+        if ($obj.CreationTime -ne $expectedCreation) {
+            Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation ⇏ $($obj.CreationTime)" -Level "WARNING"
+            $validationErrors++
+        }
+    }
+    if([datetime]::Parse($item.LastWriteTime) -lt [datetime]"2026-02-05") {
+        $expectedLastWrite = [datetime] $item.LastWriteTime
+        if ($obj.LastWriteTime -ne $expectedLastWrite) {
+            Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. $expectedLastWrite ⇏ $($obj.LastWriteTime)" -Level "WARNING"
+            $validationErrors++
+        }
+    }
+    if([datetime]::Parse($item.LastAccessTime) -lt [datetime]"2026-02-05") {
         $expectedLastAccess = [datetime] $item.LastAccessTime
-    } else {
-        $expectedLastAccess = $obj.LastAccessTime
+        if ($obj.LastAccessTime -ne $expectedLastAccess) {
+            Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. $expectedLastAccess ⇏ $($obj.LastAccessTime)" -Level "WARNING"
+            $validationErrors++
+        }
     }
 
-    if ($obj.CreationTime -ne $expectedCreation) {
-        Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation ⇏ $($obj.CreationTime)" -Level "WARNING"
-        $validationErrors++
-    }
 
-    if ($obj.LastWriteTime -ne $expectedLastWrite) {
-        Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. $expectedLastWrite ⇏ $($obj.LastWriteTime)" -Level "WARNING"
-        $validationErrors++
-    }
 
-    if ($obj.LastAccessTime -ne $expectedLastAccess) {
-        Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. $expectedLastAccess ⇏ $($obj.LastAccessTime)" -Level "WARNING"
-        $validationErrors++
-    }
 }
 
 if ($validationErrors -eq 0) {
