@@ -99,6 +99,8 @@ $validationErrors = 0
 foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10 elementos
     $fullPath = Join-Path -Path $Path -ChildPath $item.RelativePath
 
+    Write-Progress -Activity "Validando marcas de tiempo" -Status $item.RelativePath
+
     if (-not (Test-Path $fullPath)) {
         Print_Log -Message "No encontrado durante validación: $($item.RelativePath)" -Level "ERROR"
         $validationErrors++
