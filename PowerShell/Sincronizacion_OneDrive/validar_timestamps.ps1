@@ -93,4 +93,5 @@ if ($validationErrors -eq 0) {
     Print_Log "Validación exitosa: marcas de tiempo correctas" -Level "SUCCESS"
 } else {
     Print_Log "Validación encontró $validationErrors discrepancias" -Level "WARNING"
+    Print_Log "Y $validations elementos validados correctamente" -Level "INFO"
 }
