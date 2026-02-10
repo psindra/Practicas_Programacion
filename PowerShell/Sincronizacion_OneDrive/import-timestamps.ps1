@@ -46,14 +46,14 @@ $errorCount = 0
 foreach ($item in $timestampsSorted) {
     $fullPath = Join-Path -Path $Path -ChildPath $item.RelativePath
     
-    if (-not (Test-Path $fullPath)) {
+    if (-not (Test-Path -LiteralPath $fullPath)) {
         Print_Log "No encontrado: $($item.RelativePath)" -Level "ERROR"
         $errorCount++
         continue
     }
     
     try {
-        $obj = Get-Item -Path $fullPath -Force
+        $obj = Get-Item -LiteralPath $fullPath -Force
         
         # Actualizar marcas de tiempo
         $obj.CreationTime = [datetime] ($item.CreationTime)
@@ -83,13 +83,13 @@ $validationErrors = 0
 foreach ($item in $timestamps | Select-Object -First 10) {  # Valida primeros 10 elementos
     $fullPath = Join-Path -Path $Path -ChildPath $item.RelativePath
 
-    if (-not (Test-Path $fullPath)) {
+    if (-not (Test-Path -LiteralPath $fullPath)) {
         Print_Log -Message "No encontrado durante validación: $($item.RelativePath)" -Level "ERROR"
         $validationErrors++
         continue
     }
 
-    $obj = Get-Item -Path $fullPath -Force
+    $obj = Get-Item -LiteralPath $fullPath -Force
 
     $expectedCreation = [datetime] $item.CreationTime
     $expectedLastWrite = [datetime] $item.LastWriteTime

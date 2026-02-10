@@ -54,14 +54,14 @@ foreach ($item in $timestampsSorted){
     Write-Progress -Activity "Recuperar timestamps" -Status $item.RelativePath -PercentComplete (($updatedCount + $errorCount) / $timestampsSorted.Count * 100)
     $fullPath = Join-Path -Path $Path -ChildPath $item.RelativePath
     
-    if (-not (Test-Path $fullPath)) {
+    if (-not (Test-Path -LiteralPath $fullPath)) {
         Print_Log "No encontrado: $($item.RelativePath)" -Level "ERROR"
         $errorCount++
         continue
     }
     
     try {
-        $obj = Get-Item -Path $fullPath -Force
+        $obj = Get-Item -LiteralPath $fullPath -Force
         
         # Actualizar marcas de tiempo
         
