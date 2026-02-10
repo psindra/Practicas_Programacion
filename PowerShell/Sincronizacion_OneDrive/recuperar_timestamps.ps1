@@ -119,21 +119,21 @@ foreach ($item in $timestamps) {  # Valida todos los elementos
     if(([datetime]($item.CreationTime)) -lt ([datetime]"2026-02-05")) {
         $expectedCreation = [datetime] $item.CreationTime
         if ($obj.CreationTime -ne $expectedCreation) {
-            Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation ⇏ $($obj.CreationTime)" -Level "WARNING"
+            Print_Log "CreationTime incorrecta en '$($item.RelativePath)'. $expectedCreation -> $($obj.CreationTime)" -Level "WARNING"
             $validationErrors++
         }
     }
     if(([datetime]($item.LastWriteTime)) -lt ([datetime]"2026-02-05")) {
         $expectedLastWrite = [datetime] $item.LastWriteTime
         if ($obj.LastWriteTime -ne $expectedLastWrite) {
-            Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. $expectedLastWrite ⇏ $($obj.LastWriteTime)" -Level "WARNING"
+            Print_Log "LastWriteTime incorrecta en '$($item.RelativePath)'. $expectedLastWrite -> $($obj.LastWriteTime)" -Level "WARNING"
             $validationErrors++
         }
     }
     if(([datetime]($item.LastAccessTime)) -lt ([datetime]"2026-02-05")) {
         $expectedLastAccess = [datetime] $item.LastAccessTime
         if ($obj.LastAccessTime -ne $expectedLastAccess) {
-            Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. $expectedLastAccess ⇏ $($obj.LastAccessTime)" -Level "WARNING"
+            Print_Log "LastAccessTime incorrecta en '$($item.RelativePath)'. $expectedLastAccess -> $($obj.LastAccessTime)" -Level "WARNING"
             $validationErrors++
         }
     }
