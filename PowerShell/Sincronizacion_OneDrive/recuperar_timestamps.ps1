@@ -18,6 +18,7 @@ function Print_Log {
     }
 
     $logEntry = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) [$Level] $Message"
+    try {
     Add-Content -Path $LogFile -Value $logEntry
 }
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
