@@ -19,8 +19,8 @@ function Print_Log {
 
     $logEntry = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) [$Level] $Message"
     try {
-    Add-Content -Path $LogFile -Value $logEntry
-}
+        Add-Content -Path $LogFile -Value $logEntry
+    }
     catch {
         Write-Host "Error al escribir en el archivo de log: $_"
     }
@@ -100,11 +100,12 @@ if ($errorCount -gt 0) {
 # Validación: Verificar marcas de tiempo aplicadas correctamente
 Print_Log "Validando resultados..." -Level "INFO"
 $validationErrors = 0
+$validations = 0
 
 foreach ($item in $timestamps) {  # Valida todos los elementos
     $fullPath = Join-Path -Path $Path -ChildPath $item.RelativePath
 
-    Write-Progress -Activity "Validando marcas de tiempo" -Status $item.RelativePath
+    Write-Progress -Activity "Validando marcas de tiempo" -Status $item.RelativePath -PercentComplete (($validations) / $timestamps.Count * 100)
 
     if (-not (Test-Path $fullPath)) {
         Print_Log -Message "No encontrado durante validación: $($item.RelativePath)" -Level "ERROR"
@@ -136,6 +137,8 @@ foreach ($item in $timestamps) {  # Valida todos los elementos
             $validationErrors++
         }
     }
+
+    $validations++
 
 
 
