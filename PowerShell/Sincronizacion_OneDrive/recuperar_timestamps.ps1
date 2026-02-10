@@ -19,7 +19,7 @@ function Print_Log {
 
     $logEntry = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) [$Level] $Message"
     try {
-        Add-Content -Path $LogFile -Value $logEntry
+        Add-Content -LiteralPath $LogFile -Value $logEntry
     }
     catch {
         Write-Host "Error al escribir en el archivo de log: $_"
@@ -28,19 +28,19 @@ function Print_Log {
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Validar archivos y rutas
-if (-not (Test-Path $TimestampsFile)) {
+if (-not (Test-Path -LiteralPath $TimestampsFile)) {
     Print_Log -Message "Archivo CSV no encontrado: $TimestampsFile" -Level "ERROR"
     exit 1
 }
 
-if (-not (Test-Path $Path)) {
+if (-not (Test-Path -LiteralPath $Path)) {
     Print_Log -Message "Ruta destino no encontrada: $Path" -Level "ERROR"
     exit 1
 }
 
 # Importar CSV
 Write-Progress -Activity "Recuperar timestamps" -Status "Cargando archivo CSV"
-$timestamps = Import-Csv -Path $TimestampsFile -Encoding UTF8
+$timestamps = Import-Csv -LiteralPath $TimestampsFile -Encoding UTF8
 
 # Ordenar por profundidad descendente (procesa primero archivos/carpetas más profundas)
 Write-Progress -Activity "Recuperar timestamps" -Status "Ordenando elementos"
@@ -107,13 +107,13 @@ foreach ($item in $timestamps) {  # Valida todos los elementos
 
     Write-Progress -Activity "Validando marcas de tiempo" -Status $item.RelativePath -PercentComplete (($validations) / $timestamps.Count * 100)
 
-    if (-not (Test-Path $fullPath)) {
+    if (-not (Test-Path -LiteralPath $fullPath)) {
         Print_Log -Message "No encontrado durante validación: $($item.RelativePath)" -Level "ERROR"
         $validationErrors++
         continue
     }
 
-    $obj = Get-Item -Path $fullPath -Force
+    $obj = Get-Item -LiteralPath $fullPath -Force
 
     
     if(([datetime]($item.CreationTime)) -lt ([datetime]"2026-02-05")) {
@@ -139,9 +139,6 @@ foreach ($item in $timestamps) {  # Valida todos los elementos
     }
 
     $validations++
-
-
-
 }
 
 if ($validationErrors -eq 0) {

@@ -18,7 +18,7 @@ function Print_Log {
     }
 
     $logEntry = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) [$Level] $Message"
-    Add-Content -Path $LogFile -Value $logEntry
+    Add-Content -LiteralPath $LogFile -Value $logEntry
 }
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -29,7 +29,7 @@ if (-not (Test-Path $Path)) {
 }
 
 # Recolectar timestamps (archivos y carpetas) mostrando el path relativo en la misma línea
-$items = Get-ChildItem -Path $Path -Recurse -Force
+$items = Get-ChildItem -LiteralPath $Path -Recurse -Force
 $total = $items.Count
 if ($total -eq 0) {
     Print_Log "No se encontraron elementos en: $Path" -Level "WARNING"
@@ -53,7 +53,7 @@ if ($total -eq 0) {
 
     # Completar y exportar
     Write-Progress -Activity "Exportando timestamps" -Completed
-    $rows | Export-Csv -Path $TimestampsFile -NoTypeInformation -Encoding UTF8
+    $rows | Export-Csv -LiteralPath $TimestampsFile -NoTypeInformation -Encoding UTF8
 }
 
 Print_Log "Timestamps exportados: $TimestampsFile" -Level "SUCCESS"
