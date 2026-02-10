@@ -21,6 +21,10 @@ function Print_Log {
     try {
     Add-Content -Path $LogFile -Value $logEntry
 }
+    catch {
+        Write-Host "Error al escribir en el archivo de log: $_"
+    }
+}
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Validar archivos y rutas
