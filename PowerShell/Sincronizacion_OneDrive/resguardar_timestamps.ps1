@@ -23,7 +23,7 @@ function Print_Log {
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Validar ruta
-if (-not (Test-Path $Path)) {
+if (-not (Test-Path -LiteralPath $Path)) {
     Print_Log "Ruta no encontrada: $Path" -Level "ERROR"
     exit 1
 }
