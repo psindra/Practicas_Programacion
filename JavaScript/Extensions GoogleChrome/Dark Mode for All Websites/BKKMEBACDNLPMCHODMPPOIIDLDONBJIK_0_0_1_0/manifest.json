@@ -1,0 +1,30 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 3,
+  "name": "Dark Mode for All Websites",
+  "version": "0.0.1",
+  "description": "Enable dark mode on any websites",
+  "action": {
+    "default_icon": {
+      "128": "icons/light-128.png"
+    }
+  },
+  "icons": {
+    "128": "icons/dark-128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "bg.js"
+  },
+  "content_scripts": [{
+    "js": [
+      "content.js"
+    ],
+    "matches": ["<all_urls>"]
+  }]
+}
