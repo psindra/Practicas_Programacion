@@ -1,0 +1,17 @@
+{
+  "name": "fetch-masiva-de-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon ./index.js",
+    "run": "node ./index.js",
+    "start": "node ./index.js"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

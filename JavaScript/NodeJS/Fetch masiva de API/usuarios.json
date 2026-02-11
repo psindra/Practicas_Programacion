@@ -1,0 +1,11 @@
+[
+    {
+        "user" : "tecnico_indra",
+        "rol" : "PI_RED_TECH"
+    },
+    
+    {
+        "user" : "sup_indra",
+        "rol" : "PI_RED_SUPER"
+    }
+]
