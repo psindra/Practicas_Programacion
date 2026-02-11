@@ -1,8 +1,8 @@
 var active = false;
 const cssCode =
-                ":root { filter: invert(1) hue-rotate(180deg);} " +
-                "img, video, button {filter: invert(1) hue-rotate(180deg);}"
-                // "img, video, button {filter: invert(1) hue-rotate(180deg);}";
+                ":root { filter: invert(1) hue-rotate(180deg);} "
+                //  + "img, video, button {filter: invert(1) hue-rotate(180deg);}"
+                
 // "img, video, iframe, [style*=background-image] {filter: invert(1) hue-rotate(180deg)}" +
 
 chrome.action.onClicked.addListener((tab) => {
