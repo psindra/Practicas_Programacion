@@ -1,0 +1,24 @@
+[
+	{
+		"id": 1,
+		"priority": 1,
+		"action": {
+			"type": "modifyHeaders",
+			"requestHeaders": [
+				{
+					"header": "User-Agent",
+					"operation": "set",
+					"value": "Mozilla/5.0 (Linux; Andr0id 9; BRAVIA 8K UR2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36 OPR/46.0.2207.0 OMI/4.21.0.273.DIA6.149 Model/Sony-BRAVIA-8K-UR2"
+				}
+			]
+		},
+		"condition": {
+			"urlFilter": "*://*.youtube.com/tv*",
+			"resourceTypes": [
+				"script",
+				"main_frame",
+				"sub_frame"
+			]
+		}
+	}
+]

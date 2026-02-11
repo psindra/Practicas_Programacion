@@ -1,0 +1,12 @@
+a{
+	text-decoration: none !important;
+}
+b{
+	cursor: default;
+}
+#popupBody{	
+	width: 108px;	
+}
+#helpBody{
+	background-color:#E7EAED;	
+}
