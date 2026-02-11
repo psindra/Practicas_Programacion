@@ -1,4 +1,7 @@
-
+img{
+    width: 100%;
+    max-width: 300px;
+}
 
 h1{
     background-color: chartreuse;
