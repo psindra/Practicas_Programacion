@@ -1,0 +1,102 @@
+<html lang="en"><head>
+    <title>Red Neuronal números escritos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js">
+      // Your code will go here
+      // open up your console - if everything loaded properly you should see the correct version number
+      console.log('ml5 version:', tf.version);
+    </script>
+  </head>
+
+  <body style="background: gray">
+    <h1>X</h1>
+    <canvas width="250" height="250" style= "background: white">
+    </canvas>
+    <script>
+      inicio = async function () 
+      {
+        try{await tf.loadLayersModel("localstorage://modelo_entrenado_MNIST_web").then((respuesta) => {modelo=respuesta})} catch{await tf.loadLayersModel("./Modelo_pre_entrenado/model.json").then((respuesta) => {modelo=respuesta})};
+        canvas = document.querySelector("canvas");
+        signaturePad = new SignaturePad(canvas, {maxWidth:10, minWidth:8, velocityFilterWeight: 0});
+        document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
+        modelo.compile({loss:'categoricalCrossentropy', optimizer:'sgd', metrics:'accuracy'})
+      }
+      inicio();
+    </script>
+    
+    <script>
+      cargarValor = function () 
+      {
+        try { canvas2} catch{ canvas2 = document.createElement("canvas")};
+        canvas2.width = 28;
+        canvas2.height = 28;
+        canvas2.style.background = "white";
+        document.body.appendChild(canvas2);
+        canvas2_cont = canvas2.getContext("2d");
+        canvas2_cont.drawImage(canvas, 0,0, 28,28);
+        canvas2_data = canvas2_cont.getImageData(0,0,canvas2.width, canvas2.height).data
+        canvas2_data_array = new Array(canvas2_data.length/4);
+        for (i=0; i < canvas2_data.length;i+=4)
+        {
+          canvas2_data_array[i/4] = canvas2_data[i+3] / 255;
+        }
+        try { historial, historial_numero } catch{ historial = new Array; historial_numero = new Array}
+        historial.push(canvas2_data_array);
+        historial_numero.push(parseInt(document.querySelector("body > h1").textContent));
+        document.querySelector("body > h1").textContent = Math.floor(Math.random()*10);
+        canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
+      }
+      
+      entrenarModelo = async function()
+      {
+        ff = await modelo.fit(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10), {epochs:50, verbose:2})
+        alert("entrenado");
+        evaluacion = await modelo.evaluate(tf.tensor(historial,[historial.length,784]), tf.oneHot(historial_numero,10))
+        alert("evaluación => " + await evaluacion[1].array()*100 + "%");
+        pp = await modelo.predict(tf.tensor(historial,[historial.length,784]))
+        prediccion = (await pp.array()).map((arr)=>{return arr.indexOf(Math.max(...arr))});
+//         save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
+      }
+      descargarModelo = async function()
+      {
+        save_file = await modelo.save('downloads://modelo_entrenado_MNIST_web')
+      }
+      
+      cargardesdeArchivo = async function()
+      {
+        const uploadJSONInput = document.getElementById('upload-json');
+        const uploadWeightsInput = document.getElementById('upload-weights');
+        modelo = await tf.loadLayersModel(tf.io.browserFiles(
+        [uploadJSONInput.files[0], uploadWeightsInput.files[0]]));
+      }
+      guardarLocal = async function()
+      {
+        save_local = await modelo.save('localstorage://modelo_entrenado_MNIST_web')
+      }
+      vaciarBuffer = async function()
+      {
+        historial = new Array; historial_numero = new Array;
+      }
+        
+    </script>
+      <div><br>
+      <button onclick="cargarValor()" style="width: 86px; height: 76px;">Cargar valor</button><b>  </b>
+      <button onclick="signaturePad.clear()">Clear</button>
+      <button onclick="vaciarBuffer()" style="width: 86px; height: 76px;">Vaciar Buffer</button><b>  </b>
+      <br><br>
+    </div>
+    <div>
+    <button onclick="entrenarModelo()" style="width: 86px; height: 76px;">Entrenar Modelo</button>
+    <button onclick="descargarModelo()" style="width: 86px; height: 76px;">Descargar Modelo</button>
+    <button onclick="guardarLocal()" style="width: 86px; height: 76px;">Guardar Modelo en navegador</button>
+    </div>
+    <br><br>
+    <label for="upload-json">JSON file:</label>
+    <input type="file" id="upload-json" name="upload-json"><br>
+    <label for="upload-weights">BIN file:</label>
+    <input type="file" id="upload-weights" name="upload-weights"><br>
+    <button onclick="cargardesdeArchivo()">Cargar modelo desde archivo</button>
+  </body>
+  
