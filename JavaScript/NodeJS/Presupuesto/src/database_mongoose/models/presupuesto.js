@@ -28,69 +28,142 @@ const presupuestoEsquemaBase = new mongoose.Schema({
         type: String,
         required: true,
         validate: {
-            validator: function(v) {
+            validator: function (v) {
                 return /^(19|20)\d{2}(0[1-9]|1[0,1,2])$/.test(v);
             },
             message: props => `${props.value} no es un formato de mes válido (YYYYMM)`
         },
         index: true
     },
-    nombre: {type: String, required: true, trim: true},
+    nombre: { type: String, required: true, trim: true, maxlength: 50 },
     formaPago: {
         type: String,
+        trim: true,
+        enum: ["Contado", "TC Visa BH", "TC Powercard", "Otros"],
         required: true,
-        enum: ["Contado", "TC Visa BH", "TC Powercard", "?????", "???????"]
     }
 },
-{
-    discriminatorKey: "tipo",
-    collection: "Movimiento",
-    timestamps: true
-});
+    {
+        discriminatorKey: "tipo",     // usamos "tipo" en español
+        collection: "movimientos",
+        timestamps: true
+    });
 
+presupuestoEsquemaBase.plugin(integer);
+
+/**
+ * Los indices se pueden definir en el Schema, a la hora de compilar, o directamente a nivel de colección. 
+ * En el primero caso, Mongoose se encarga de crear los índices automáticamente al iniciar la aplicación (si no existen y
+ *  el autoIndex está activado).
+ * En el segundo caso, crea el indice en tiempo de ejecución, lo cual puede ser útil para índices que se crean o modifican
+ * dinámicamente,(no es necesario para índices estáticos definidos en el Schema).
+ * En general, para índices estáticos, es recomendable definirlos en el Schema para mantener la definición del modelo
+ * centralizada y aprovechar las características de Mongoose.
+ */
+/**
+ * índices compuestos recomendados
+ */
+presupuestoEsquemaBase.index({ mes: 1, tipo: 1, nombre: 1 }); // Índice compuesto para consultas frecuentes por mes, tipo y nombre
+presupuestoEsquemaBase.index({ tipo: 1, nombre: 1 }); // Índice para consultas por tipo y nombre
+presupuestoEsquemaBase.index({ mes: 1 }); // Índice para consultas por mes
+
+/**
+ * Modelo base
+ */
 const Movimiento = mongoose.model("Movimiento", presupuestoEsquemaBase);
 
 const esquemaIngreso = new mongoose.Schema({
     monto: {
-        total: {type: Number,  validate: {min: 0, validator: (v) => Number.isInteger(v) }},
-        habitual: {type: Number,  validate: {min: 0, validator: (v) => Number.isInteger(v) || v === undefined}},
-        extra: {type: Number,  validate: {min: 0, validator: (v) => Number.isInteger(v) || v === undefined}}
-    },
-}, {_id: false});
+        total: {
+            type: Number,
+            validate: {
+                min: 0,
+                validator: (v) => Number.isInteger(v),
+                message
+            }
+        },
+        habitual: {
+            type: Number,
+            validate: {
+                min: 0,
+                validator: (v) => Number.isInteger(v) || v === undefined,
+                message: "El campo Monto.Habitual debe ser un número entero no negativo o undefined"
+            }
+        },
+        extra: {
+            type: Number,
+            validate: {
+                min: 0,
+                validator: (v) => Number.isInteger(v) || v === undefined,
+                message: "El campo Monto.Extra debe ser un número entero no negativo o undefined"
+            }
+        }
+    }
+}, { _id: false });
 
-const Ingreso = Movimiento.discriminator("Ingreso", esquemaIngreso);
+const Ingreso = Movimiento.discriminator("ingreso", esquemaIngreso);
 
 const esquemaGasto = new mongoose.Schema({
-    monto: {type: Number, required: true, validate: {min: 0, validator: (v) => Number.isInteger(v)}},
-    habitual: {type: Boolean, required: true},
-    categoria: {type: String, required: false,
-        enum: ["Vivienda", "Servicios", "Auto", "Alimentación", "Salud", "Ocio", "Otros"], index: true},
-    mesResumen: [{type: String, validate: Movimiento.path("mes").validate[0].validator, required: false, _id: false}] // Array de meses relacionados para el resumen, validando el mismo formato que el campo "mes"
-}, {_id: false});
+    monto: {
+        type: Number,
+        required: true,
+        validate: {
+            min: 0,
+            validator: (v) => Number.isInteger(v),
+            message: "El campo Monto debe ser un número entero no negativo"
+        }
+    },
+    habitual: { type: Boolean, required: true },
+    categoria: {
+        type: String,
+        required: false,
+        enum: ["Vivienda", "Servicios", "Auto", "Alimentación", "Salud", "Ocio", "Otros"],
+        index: true
+    },
+    mesResumen: [{
+        type: String,
+        validate: Movimiento.path("mes").validate[0].validator,
+        required: false,
+        _id: false
+    }] // Array de meses relacionados para el resumen, validando el mismo formato que el campo "mes"
+}, { _id: false });
 
-const Gasto = Movimiento.discriminator("Gasto", esquemaGasto);
+const Gasto = Movimiento.discriminator("gasto", esquemaGasto);
 
+/**
+ * -----------------------
+ * Discriminador: inversion
+ * - plataforma, instrumento requeridos
+ * - cantidadInstrumento opcional (puede ser decimal)
+ * - montoARS, montoUSD: Number >= 0 (recomiendo centavos si son fiat)
+ */
 const esquemaInversion = new mongoose.Schema({
-    plataforma: {type: String, required: true},
-    instrumento: {type: String, required: true},
-    cantidadInstrumento: {type: Number, required: false, validate: {min: 0}},
-    montoARS: {type: Number, required: true},
-    montoUSD: {type: Number, required: true}
-}, {_id: false});
+    plataforma: { type: String, required: true, trim: true, maxlength: 50 },
+    instrumento: { type: String, required: true, trim: true, maxlength: 50 },
+    cantidadInstrumento: { type: Number, required: false, min: 0 },
+    montoARS: { type: Number, required: true },
+    montoUSD: { type: Number, required: true }
+}, { _id: false });
 
-const Inversion = Movimiento.discriminator("Inversion", esquemaInversion);
+const Inversion = Movimiento.discriminator("inversion", esquemaInversion);
 
-// validaciones condicionales para campos específicos según el tipo de movimiento
-Movimiento.schema.pre("validate", function(next) {
-    if (this.tipo === "Ingreso") {
+/**
+ * -----------------------
+ * Validaciones condicionales globales (pre-validate)
+ */
+Movimiento.schema.pre("validate", function (next) {
+    if (this.tipo === "ingreso") {
         if (!this.monto || typeof this.monto.total !== "number") {
             return next(new Error("El campo 'monto.total' es requerido para movimientos de tipo Ingreso y debe ser un número entero."));
         }
-    } else if (this.tipo === "Gasto") {
+    } else if (this.tipo === "gasto") {
         if (!this.monto || typeof this.monto !== "number") {
             return next(new Error("El campo 'monto' es requerido para movimientos de tipo Gasto y debe ser un número entero."));
         }
-    } else if (this.tipo === "Inversion") {
+        if (this.habitual === undefined) {
+            return next(new Error("Para tipo 'gasto' el campo 'habitual' es requerido (true/false)."));
+        }
+    } else if (this.tipo === "inversion") {
         if (!this.plataforma || !this.instrumento) {
             return next(new Error("Los campos 'plataforma' e 'instrumento' son requeridos para movimientos de tipo Inversion."));
         }
@@ -98,10 +171,16 @@ Movimiento.schema.pre("validate", function(next) {
     next();
 });
 
-Movimiento.schema.index({ mes: 1, tipo: 1, nombre: 1 }); // Índice compuesto para consultas frecuentes por mes, tipo y nombre
-Movimiento.schema.index({ tipo: 1, nombre: 1 }); // Índice para consultas por tipo y nombre
-Movimiento.collection.createIndex({ mes: 1 }); // Índice para consultas por mes
-Movimiento.collection.createIndex({ mes: 1, tipo: 1, nombre: 1 }); // Índice compuesto a nivel de colección para mejorar el rendimiento de consultas frecuentes
-Movimiento.collection.createIndex({ tipo: 1, nombre: 1 }); // Índice a nivel de colección para consultas por tipo y nombre
+// /**
+//  * -----------------------
+//  * los indices se pueden definir en el Schema, a la hora de compilar, o directamente a nivel de colección. 
+//  * En el primero caso, Mongoose se encarga de crear los índices automáticamente al iniciar la aplicación (si no existen).
+//  * En el segundo caso, crea el indice en tiempo de ejecución, lo cual puede ser útil para índices que se crean o modifican dinámicamente, pero no es necesario para índices estáticos definidos en el Schema.
+//  * En general, para índices estáticos, es recomendable definirlos en el Schema para mantener la definición del modelo centralizada y aprovechar las características de Mongoose.
+//  */
+// Movimiento.collection.createIndex({ mes: 1 }); // Índice para consultas por mes
+// Movimiento.collection.createIndex({ mes: 1, tipo: 1, nombre: 1 }); // Índice compuesto a nivel de colección para mejorar el rendimiento de consultas frecuentes
+// Movimiento.collection.createIndex({ tipo: 1, nombre: 1 }); // Índice a nivel de colección para consultas por tipo y nombre
 
-export {Movimiento, Ingreso, Gasto, Inversion};
+export { Movimiento, Ingreso, Gasto, Inversion };
+export default Movimiento;
