@@ -57,7 +57,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 		urls: ['<all_urls>'],
 		types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "other"]
 	},
-	['responseHeaders']
+	['extraHeaders', 'blocking', 'responseHeaders']
 );
 
 function loadOptions(callback)
@@ -82,9 +82,9 @@ function saveOptions()
 function updateUI()
 {
 	var str = active? "Undisposition active, click to deactivate": "Undisposition disabled, click to activate";
-	chrome.action.setTitle({title:str});
-	chrome.action.setBadgeText({text:active?"Act":"Dis"});
-	chrome.action.setBadgeBackgroundColor({color:active?"#5084ee":"#e91e63"});
+	chrome.browserAction.setTitle({title:str});
+	chrome.browserAction.setBadgeText({text:active?"Act":"Dis"});
+	chrome.browserAction.setBadgeBackgroundColor({color:active?"#5084ee":"#e91e63"});
 }
 
 function ToggleActive()
@@ -95,4 +95,4 @@ function ToggleActive()
 }
 
 loadOptions(updateUI);
-chrome.action.onClicked.addListener(ToggleActive);
+chrome.browserAction.onClicked.addListener(ToggleActive);
