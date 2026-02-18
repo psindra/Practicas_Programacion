@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import mongooseInteger from "mongoose-integer";
+// import mongooseInteger from "mongoose-integer";
 /*
 {mes: "202401", type: "Ingreso", nombre: "Salario", monto: {total: 5000, extra: 500, habitual: 4500}, formaPago: "Contado"}
 {mes: "202401", type: "Gasto", nombre: "Alquiler", monto: 1500, habitual: true, formaPago: "Contado"},
@@ -32,8 +32,7 @@ const presupuestoEsquemaBase = new mongoose.Schema({
                 return /^(19|20)\d{2}(0[1-9]|1[0-2])$/.test(v);
             },
             message: props => `${props.value} no es un formato de mes válido (YYYYMM)`
-        },
-        index: true
+        }
     },
     nombre: { type: String, required: true, trim: true, maxlength: 50 },
     formaPago: {
@@ -49,7 +48,7 @@ const presupuestoEsquemaBase = new mongoose.Schema({
         timestamps: true
     });
 
-presupuestoEsquemaBase.plugin(mongooseInteger);
+// presupuestoEsquemaBase.plugin(mongooseInteger);
 
 /**
  * Los indices se pueden definir en el Schema, a la hora de compilar, o directamente a nivel de colección. 
