@@ -1,0 +1,30 @@
+{
+  "name": "presupuesto",
+  "version": "1.0.0",
+  "description": "Aplicativo Full Stack para llevar Presupuesto mensual",
+  "homepage": "https://github.com/psindra/Practicas_Programacion#readme",
+  "bugs": {
+    "url": "https://github.com/psindra/Practicas_Programacion/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psindra/Practicas_Programacion.git"
+  },
+  "license": "ISC",
+  "author": "polyys",
+  "type": "module",
+  "main": ".\\src\\index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .\\src\\index.js",
+    "dev": "nodemon .\\src\\index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.2.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.3.1",
+    "nodemon": "^3.1.11"
+  }
+}
