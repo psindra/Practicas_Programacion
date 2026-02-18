@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { integer } from "mongoose-integer";
+import mongooseInteger from "mongoose-integer";
 /*
 {mes: "202401", type: "Ingreso", nombre: "Salario", monto: {total: 5000, extra: 500, habitual: 4500}, formaPago: "Contado"}
 {mes: "202401", type: "Gasto", nombre: "Alquiler", monto: 1500, habitual: true, formaPago: "Contado"},
@@ -29,7 +29,7 @@ const presupuestoEsquemaBase = new mongoose.Schema({
         required: true,
         validate: {
             validator: function (v) {
-                return /^(19|20)\d{2}(0[1-9]|1[0,1,2])$/.test(v);
+                return /^(19|20)\d{2}(0[1-9]|1[0-2])$/.test(v);
             },
             message: props => `${props.value} no es un formato de mes válido (YYYYMM)`
         },
@@ -49,7 +49,7 @@ const presupuestoEsquemaBase = new mongoose.Schema({
         timestamps: true
     });
 
-presupuestoEsquemaBase.plugin(integer);
+presupuestoEsquemaBase.plugin(mongooseInteger);
 
 /**
  * Los indices se pueden definir en el Schema, a la hora de compilar, o directamente a nivel de colección. 
@@ -71,15 +71,16 @@ presupuestoEsquemaBase.index({ mes: 1 }); // Índice para consultas por mes
  * Modelo base
  */
 const Movimiento = mongoose.model("Movimiento", presupuestoEsquemaBase);
+Movimiento.createIndexes(); // Asegura que los índices definidos en el Schema se creen en la colección
 
 const esquemaIngreso = new mongoose.Schema({
     monto: {
         total: {
             type: Number,
+            min: 0,
             validate: {
-                min: 0,
                 validator: (v) => Number.isInteger(v),
-                message: "El campo Monto.Total debe ser un número entero no negativo"
+                message: "El campo Monto.Total debe ser un valor valido"
             }
         },
         habitual: {
