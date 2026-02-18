@@ -8,12 +8,14 @@ import "./database_mongoose/connection.js";
 import Movimiento, { Ingreso, Gasto, Inversion } from './database_mongoose/models/presupuesto.js';
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 // configuración de dirname para ES Modules
 import path from "path"; import { fileURLToPath } from 'url'; const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// app.use(express.static(path.join(__dirname, "public")));
+/** Middleware para servir archivos estáticos desde la carpeta "public"
+app.use(express.static(path.join(__dirname, "public")));
+*/
 
 app.get("/", (req, res, next) =>{
     res.send("¡Hola Mundo! Este es el endpoint raíz de la API de Presupuesto.")

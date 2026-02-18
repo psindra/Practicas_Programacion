@@ -79,7 +79,7 @@ const esquemaIngreso = new mongoose.Schema({
             validate: {
                 min: 0,
                 validator: (v) => Number.isInteger(v),
-                message
+                message: "El campo Monto.Total debe ser un número entero no negativo"
             }
         },
         habitual: {
@@ -141,8 +141,8 @@ const esquemaInversion = new mongoose.Schema({
     plataforma: { type: String, required: true, trim: true, maxlength: 50 },
     instrumento: { type: String, required: true, trim: true, maxlength: 50 },
     cantidadInstrumento: { type: Number, required: false, min: 0 },
-    montoARS: { type: Number, required: true },
-    montoUSD: { type: Number, required: true }
+    montoARS: { type: Number, required: true, min: 0, validate: { validator: (v) => Number.isInteger(v), message: "El campo MontoARS debe ser un número entero no negativo" } },
+    montoUSD: { type: Number, required: true, min: 0, validate: { validator: (v) => Number.isInteger(v), message: "El campo MontoUSD debe ser un número entero no negativo" } }
 }, { _id: false });
 
 const Inversion = Movimiento.discriminator("inversion", esquemaInversion);
