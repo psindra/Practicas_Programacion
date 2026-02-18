@@ -30,4 +30,4 @@ app.listen(app.get("PORT"), err=>{
 })
 
 // ???? porqué????
-export { Movimiento, Ingreso, Gasto, Inversion, app };
+// export { Movimiento, Ingreso, Gasto, Inversion, app };
