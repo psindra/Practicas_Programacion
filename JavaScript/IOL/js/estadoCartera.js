@@ -42,7 +42,6 @@ class tablaPortfolio {
 
         portfolioFetch()
         .then(this.estilarDatosPortfolio)
-        // .then(portfolio => this.estilarDatosPortfolio(portfolio))
         .then(portfolio => {
             this.table.tBodies[0].innerHTML = ""; // Limpiar contenido previo
             return portfolio.activos;
