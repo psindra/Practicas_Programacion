@@ -20,7 +20,7 @@ const apiHost = "https://api.invertironline.com/";
 const tokenURL = "https://script.google.com/macros/s/AKfycbwG4sMNG2bwy28UurDp_oO9wHSkCFIeWYgzvQk_7kfH7y-a6v7EfxapqfeH7pbHqXErCg/exec";
 
 async function reAUTH() {
-    getCredentials()
+    return getCredentials()
     .then(async credencials => {
         return fetch(tokenURL, {
             method: "POST",
