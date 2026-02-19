@@ -45,7 +45,7 @@ async function reAUTH() {
     })
     .catch(err => {
         console.error("Error en la reautenticación:", err);
-        mensajeModal("Error en la reautenticación", err);
+        mensajeModal("Error en la reautenticación", `${err}`);
         return Promise.reject(err);
     });
 }
