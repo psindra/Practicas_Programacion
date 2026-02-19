@@ -122,7 +122,7 @@ const esquemaGasto = new mongoose.Schema({
     },
     mesResumen: [{
         type: String,
-        validate: Movimiento.path("mes").validate[0].validator,
+        validate: Movimiento.schema.path("mes").validate,
         required: false,
         _id: false
     }] // Array de meses relacionados para el resumen, validando el mismo formato que el campo "mes"

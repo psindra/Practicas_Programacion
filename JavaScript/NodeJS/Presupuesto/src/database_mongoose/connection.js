@@ -12,9 +12,9 @@ const MONGODB_URI = process.env["MONGODB_URI"];
 const MONGODB_DATABASE = process.env["MONGODB_DATABASE"];
 console.log({MONGODB_URI, MONGODB_DATABASE});
 
-mongoose.connect( path.join(MONGODB_URI, MONGODB_DATABASE), {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+mongoose.connect(MONGODB_URI + MONGODB_DATABASE, {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
 })
 .then(DB=>{
     console.log("Conectado. Nombre Base de Datos: ", mongoose.connection.name);
