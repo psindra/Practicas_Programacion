@@ -43,9 +43,10 @@ async function reAUTH() {
         mensajeModal("Reautenticación exitosa", "Se ha reautenticado correctamente.", false);
         return Promise.resolve();
     })
-    .catch(err => {
+    .catch(async err => {
         console.error("Error en la reautenticación:", err);
         mensajeModal("Error en la reautenticación", `${err}`);
+        cookieStore.delete("login-info");
         return Promise.reject(err);
     });
 }
