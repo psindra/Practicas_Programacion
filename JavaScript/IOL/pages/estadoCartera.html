@@ -15,10 +15,11 @@
             /* --bs-dark-rgb: 0,36,62; */
         }
     </style>
-
-    <script src="../js/index.js" defer></script>
-    <script src="../js/estadoCartera.js" defer></script>
-    <script src="../js/modalAlert.js" defer></script>
+        
+        <script src="../js/index.js" defer></script>
+        <script src="../js/estadoCartera.js" defer></script>
+        <script src="../js/modalAlert.js" defer></script>
+        <script src="../js/custom_consoleLog.js" defer></script>
 </head>
 <body class="bg-black text-white-50">
     <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-primary">
@@ -65,7 +66,7 @@
             <input type="checkbox" class="form-check-input" id="enableConsole" name="enableConsole" checked>
         </div>
         <button type="button" class="btn btn-sm btn-outline-light" id="cleanConsole">Clean Console</button>
-        <pre id="preConsole">Texot de prueba
+        <pre id="preConsole">CONSOLA:
         </pre>
         <script>
             document.getElementById('enableConsole').addEventListener('change', function() {

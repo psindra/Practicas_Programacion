@@ -30,6 +30,7 @@ async function portfolioFetch() {
     })
     .catch(async err => {
         mensajeModal("Error fetching portfolio", `${err.message}`);
+        throw err;
     });
 }
 
@@ -73,6 +74,10 @@ class tablaPortfolio {
                 this.table.tBodies[0].appendChild(row);
             }
         })
+        .catch(err => {
+            mensajeModal("Error cargando los datos del portfolio", `${err.message}`);
+            console.error(`Error cargando los datos del portfolio: ${err.message}`);
+        });
     }   // final cargarDatos
 
     estilarDatosPortfolio(portfolio) {
