@@ -30,11 +30,7 @@ function submitFormNvoMov(event) {
 
     const data = formData.entries().reduce((_data, [key, value]) => {
         if (value === "") { return _data; }
-        /* const objetoAnidado = key.split(".").reverse().reduce((nestedAcc, keyPart) => {
-                return { [keyPart]: nestedAcc };
-        }, value);
-        return { ...data,  ...objetoAnidado }; */
-
+        
         /* Algoritmo para pasar bar.foo.too a bar: {foo: too} */
         return key.split(".").reduce((nestedObj, keySubPart, index, array) => {
             if (index === array.length - 1) {

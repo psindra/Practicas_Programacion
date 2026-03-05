@@ -6,12 +6,12 @@ export function editFormString(movimientoString) {
 
 export function editForm(movimiento) {
     const divPaneNvoMovParsed = parseDivPaneNvoMov(movimiento.tipo);
-    DOMModalFormNvoMov.querySelector(".card-header > h5#cardTitle").textContent = "Editar Movimiento";
+    DOMModalFormNvoMov.querySelector(".card-header > h5#cardTitle").textContent = `Editar ${movimiento.tipo}`;
     DOMModalFormNvoMov.querySelector("#navNvoMovTipo").style.display = "none";
     const form = divPaneNvoMovParsed.querySelector("form");
     movimiento["añoMov"] = movimiento["mes"].slice(0, 4);
     movimiento["mesMov"] = movimiento["mes"].slice(4, 6);
-    form["_id"].disabled = false;
+    form["_id"].hidden = false;
     const flattenObj = flattenObject(movimiento);
     for (const key in flattenObj) {
         if (key in form) form[key].value = flattenObj[key];
@@ -19,7 +19,7 @@ export function editForm(movimiento) {
     form.closest("dialog").showModal();
 }
 
-function flattenObject(object) {
+/* function flattenObject(object) {
     let flatObject = {};
     Object.entries(object).forEach(([key, value]) => {
         const subflatObject = recursiveFlattenObject({ [key]: value });
@@ -38,4 +38,28 @@ function recursiveFlattenObject(object) {
             return { [key]: value };
         }
     })[0];
+} */
+
+
+function flattenObject(objeto, prefijo="", resultado={}){
+    for (const [key, value] of Object.entries(objeto)) {
+        if (typeof value === "object" && !Array.isArray(value)) {
+            flattenObject(value, prefijo + key + ".", resultado);
+        } else {
+            resultado[prefijo + key] = value;
+        }
+    }
+    return resultado;
 }
+
+var bar = {
+  mes: '202401',
+  nombre: 'Sueldo',
+  formaPago: 'Contado',
+  _id: ('69a91bae908e54fc18d30952'),
+  tipo: 'ingreso',
+  monto: { total: 76511252, habitual: 56511252, extra: 20000000 },
+  habitual: true,
+}
+
+console.log(flattenObject(bar));

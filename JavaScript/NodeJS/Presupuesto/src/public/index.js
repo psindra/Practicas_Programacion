@@ -91,12 +91,15 @@ async function renderUI() {
 }
 
 async function updateUI() {
-    const activeYearButton = document.querySelector("#navYears .nav-link.active");
-    const activeTablist = document.querySelector("#tablist>.nav-item>.nav-link.active");
+    const activeYearButton = document.querySelector("#navYears .active");
+    const activeTablist = document.querySelector("#tablist>.nav-item>.active");
     const activeTabContent = document.querySelector("#tabsContent>.tab-pane.show.active");
     await renderUI();
     activeYearButton?.click();
+    activeYearButton.classList.add("active");
     activeTablist?.click();
+    activeTablist.classList.add("active");
+    activeTabContent?.classList.add("show", "active");
     activeTabContent?.querySelector("#tabsContainer")?.scrollIntoView({ behavior: "smooth" });
 }
 
@@ -151,9 +154,15 @@ function renderTabsContent(presupuesto, year) {
         _tdIngresoExtraordinario.style.color = "#0040ff";
         
         const _tdIngresoMonto = document.createElement("td");
-        const _ingresoHabitual = presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]?.ingreso
-        ?.reduce((acc, movimiento) => acc + movimiento.monto.habitual, 0) || 0
+        const _ingreso = presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]?.ingreso
+        ?.find((movimiento) => movimiento.nombre.includes("Sueldo"));
+        const _ingresoHabitual = _ingreso?.monto?.habitual || 0;
         _tdIngresoMonto.innerHTML = _ingresoHabitual.toLocaleString();
+        const __btnEdit = document.createElement("a");
+        __btnEdit.textContent = "🖊"
+        __btnEdit.classList.add("edit-btn", "float-end", "opacity-0");
+        __btnEdit.addEventListener("click", () => { editForm(_ingreso) });
+        _tdIngresoMonto.appendChild(__btnEdit);
         // _tdIngresoMonto.setAttribute("colspan",2)
         _tdIngresoMonto.classList.add("text-end");
         _tdIngresoMonto.style.color = "cornflowerblue"
@@ -210,6 +219,11 @@ function renderTabsContent(presupuesto, year) {
             const _thInversionNombre = document.createElement("th");
             _thInversionNombre.textContent = inversion.nombre;
             _thInversionNombre.style.color = "darkcyan"
+            const _btnEdit = document.createElement("a");
+            _btnEdit.textContent = "🖊"
+            _btnEdit.classList.add("edit-btn", "float-end", "opacity-0");
+            _btnEdit.addEventListener("click", () => { editForm(inversion) });
+            _thInversionNombre.appendChild(_btnEdit);
             const _tdInversionMontoUSD = document.createElement("td");
             _tdInversionMontoUSD.textContent = `(~U$D${inversion.montoUSD})`
             _tdInversionMontoUSD.style.color = "darkcyan"

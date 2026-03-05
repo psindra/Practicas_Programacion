@@ -1,12 +1,12 @@
 <div class="div-pane fade show active" role="tabpanel" aria-labelledby="pillNvoMovXXX" id="tabNvoMov">
     <form id="formularioNvoMov">
         <!-- <input type="hidden" name="_id" id="idNvoMov" disabled> -->
-        <input class="form-text form-control form-control-sm" type="text" name="_id" id="idNvoMov" disabled readonly>
+        <input class="form-text form-control form-control-sm text-center" type="text" name="_id" id="idNvoMov" readonly tabindex="-1" hidden>
         <input type="hidden" name="tipo" id="tipoNvoMov">
         <div class="input-group input-group-sm mb-sm-3 mb-2">
             <label class="input-group-text" for="añoMov">Año</label>
             <select class="form-select form-select-sm" id="añoMov" name="añoMov" aria-label="Año" placeholder="Año"
-                required>
+                required autofocus>
                 <option selected disabled hidden></option>
                 <option value="2026">2026</option>
                 <option value="2025">2025</option>
