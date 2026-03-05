@@ -1,31 +1,62 @@
 import express from "express";
-import { Movimiento, Ingreso, Gasto } from "../database_mongoose/models/presupuesto.js";
+import { Movimiento, Ingreso, Gasto, Inversion } from "../database_mongoose/models/modelosPresupuesto.js";
+import mongoose from "mongoose";
 
 
 const controladorGet = (Model, filtroF = () => ({}), sort = {}) => (req, res) => {
     const filtro = filtroF(req);
     console.log(filtro);
-    
+
     return Model.find(filtro)
-    .sort(sort)
-    .exec()
-    .then(resultados => {
-        res.json(resultados);
-    })
-    .catch(err => {
-        res.status(500).json({ error: err.message });
-    })
+        .sort(sort)
+        .exec()
+        .then(resultados => {
+            res.json(resultados);
+        })
+        .catch(err => {
+            console.error("Error en controladorGet: ", err);
+            return res.status(500).json({ error: err.message });
+        })
 }
 
 const controladorPost = (Model) => (req, res) => {
-    return Model.create(req.body)
-        .then(movimientoCreado => {
-            res.status(201).json(movimientoCreado);
+    // return Model.create(req.body)
+    //     .then(movimientoCreado => {
+    //         res.status(201).json(movimientoCreado);
+    //     })
+    //     .catch(err => {
+    //         console.error("Error al crear movimiento:", err);
+    //         return res.status(500).json({ error: err.message });
+    //     })
+    const nuevoMovimiento = new Model(req.body);
+    nuevoMovimiento.isNew = !req.body._id; // Si no tiene _id, es nuevo
+    return nuevoMovimiento.save()
+        .then(movimientoGuardado => {
+            res.status(201).json(movimientoGuardado);
         })
         .catch(err => {
             console.error("Error al crear movimiento:", err);
             return res.status(500).json({ error: err.message });
         })
+    // if (req.body._id) {
+    //     return Model.findByIdAndUpdate(req.body._id, req.body, { returnDocument: 'after' })
+    //         .then(movimientoActualizado => {
+    //             res.json(movimientoActualizado);
+    //         })
+    //         .catch(err => {
+    //             console.error("Error al actualizar movimiento:", err);
+    //             return res.status(500).json({ error: err.message });
+    //         });
+    // } else {
+    //     return Model.create(req.body)
+    //         .then(movimientoCreado => {
+    //             res.status(201).json(movimientoCreado);
+    //         })
+    //         .catch(err => {
+    //             console.error("Error al crear movimiento:", err);
+    //             return res.status(500).json({ error: err.message });
+    //         });
+    // }
 }
 
 const controladorDelete = (Model, filtroF = () => ({})) => (req, res) => {
@@ -35,13 +66,14 @@ const controladorDelete = (Model, filtroF = () => ({})) => (req, res) => {
         return res.status(400).json({ error: "Filtro vacío" });
     }
     return Model.deleteMany(filtro)
-    .exec()
-    .then(resultado => {
-        res.json({ mensaje: "Movimientos eliminados", resultado });
-    })
-    .catch(err => {
-        res.status(500).json({ error: err.message });
-    })
+        .exec()
+        .then(resultado => {
+            res.json({ mensaje: "Movimientos eliminados", resultado });
+        })
+        .catch(err => {
+            console.error("Error en controladorDelete: ", err);
+            return res.status(500).json({ error: err.message });
+        })
 }
 
 export { controladorGet, controladorPost, controladorDelete };

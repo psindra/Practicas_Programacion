@@ -1,21 +1,38 @@
-import mongoose from "mongoose";
-import { Movimiento } from "./presupuesto.js";
+import mongoose, { Mongoose } from "mongoose";
+import Movimiento from "./movimiento.js";
 
 const esquemaGasto = new mongoose.Schema({
     monto: {
-        type: Number,
-        required: true,
-        validate: {
-            min: 0,
-            validator: (v) => Number.isInteger(v),
-            message: "El campo Monto debe ser un número entero no negativo"
+        total: {
+            type: Number,
+            validate: [
+                {
+                    validator: (v) => Number.isInteger(v*100) && v > 0,
+                    message: "El campo Monto.Total debe ser un valor entero positivo"
+                }
+            ],
+            required: true
+        },
+        nroCuotas: {
+            type: Number,
+            validate: {
+                min: 1,
+                validator: (v) => Number.isInteger(v),
+                message: "El campo Monto.NroCuotas debe ser un valor entero positivo"
+            },
+            required: function () {
+                return this.formaPago !== "Contado";
+            },
+            disable: function () {
+                return this.formaPago === "Contado";
+            }
         }
     },
     habitual: { type: Boolean, required: true },
     categoria: {
         type: String,
         required: false,
-        enum: ["Vivienda", "Servicios", "Auto", "Alimentación", "Salud", "Ocio", "Otros"],
+        enum: ["Vivienda", "Servicios", "Tarjetas", "Auto", "Alimentación", "Salud", "Ocio", "Otros"],
         index: true
     },
     mesResumen: [{
@@ -25,5 +42,12 @@ const esquemaGasto = new mongoose.Schema({
         _id: false
     }] // Array de meses relacionados para el resumen, validando el mismo formato que el campo "mes"
 }, { _id: false });
+
+esquemaGasto.pre("validate", function (next) {
+    if (this.formaPago === "Contado" && this.monto.nroCuotas) {
+        throw new Error("La forma de pago 'Contado' no puede tener cuotas. Por favor, elija una forma de pago diferente.");
+    }
+    return;
+});
 export const Gasto = Movimiento.discriminator("gasto", esquemaGasto);
 export default Gasto;

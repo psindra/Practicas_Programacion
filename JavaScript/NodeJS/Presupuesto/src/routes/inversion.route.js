@@ -1,5 +1,5 @@
 import express from "express";
-import { Movimiento, Ingreso, Gasto, Inversion } from "../database_mongoose/models/presupuesto.js";
+import { Movimiento, Ingreso, Gasto, Inversion } from "../database_mongoose/models/modelosPresupuesto.js";
 const router = express.Router();
 import {controladorGet, controladorPost, controladorDelete} from "./controlador.js";
 

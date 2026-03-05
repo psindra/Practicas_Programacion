@@ -1,0 +1,176 @@
+<div class="div-pane fade show active" role="tabpanel" aria-labelledby="pillNvoMovXXX" id="tabNvoMov">
+    <form id="formularioNvoMov">
+        <!-- <input type="hidden" name="_id" id="idNvoMov" disabled> -->
+        <input class="form-text form-control form-control-sm" type="text" name="_id" id="idNvoMov" disabled readonly>
+        <input type="hidden" name="tipo" id="tipoNvoMov">
+        <div class="input-group input-group-sm mb-sm-3 mb-2">
+            <label class="input-group-text" for="añoMov">Año</label>
+            <select class="form-select form-select-sm" id="añoMov" name="añoMov" aria-label="Año" placeholder="Año"
+                required>
+                <option selected disabled hidden></option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+            </select>
+            <label class="input-group-text" for="mesMov">Mes</label>
+            <select class="form-select form-select-sm" id="mesMov" name="mesMov" aria-label="Mes" required>
+                <option selected disabled hidden></option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+        <div class="form-floating mb-sm-3 mb-2" data-tipo="inversion">
+            <input type="text" class="form-control" id="plataformaNvoMov" name="plataforma" list="listaPlataformaMov"
+                placeholder="Plataforma" required>
+            <datalist id="listaPlataformaMov">
+                <option value="Binance">
+                <option value="BuenBit">
+                <option value="Bull Market">
+                <option value="IOL">
+                <option value="Bybit">
+                <option value="BSC Wallet">
+                <option value="Bco Hipotecario">
+                <option value="Uala">
+            </datalist>
+            <label for="plataformaNvoMov">Plataforma</label>
+        </div>
+        <div class="form-floating mb-sm-3 mb-2" data-tipo="inversion">
+            <input type="text" class="form-control" id="instrumentoNvoMov" name="instrumento" list="listaInstrumentoMov"
+                placeholder="Instrumento" required>
+            <datalist id="listaInstrumentoMov" aria-autocomplete="list" autocomplete="on">
+                <option value="BCBA:">
+                <option value="BYMA:">
+                <option value="FCI BH T Trust">
+                <option value="Dolar Ofical Uala">
+                <option value="Dolar Ofical BH">
+                <option value="Bybit P2P">
+                <option value="Binance P2P">
+                <option value="USDT">
+                <option value="USDC">
+                <option value="PF BH">
+            </datalist>
+            <label for="instrumentoNvoMov">Instrumento</label>
+        </div>
+        <div class="form-floating mb-sm-3 mb-2" data-tipo="ingreso, gasto">
+            <input type="text" class="form-control" id="nombreNvoMov" name="nombre" list="listaNombreMov"
+                placeholder="Nombre del movimiento" required>
+            <datalist id="listaNombreMov">
+                <option value="Sueldo">
+                <option value="Alquiler">
+                <option value="Expensas">
+                <option value="Cochera">
+                <option value="Visa BH">
+                <option value="PowerCard">
+                <option value="Comidita Mami">
+            </datalist>
+            <label for="nombreNvoMov">Nombre del movimiento</label>
+        </div>
+        <div class="input-group mb-sm-3 mb-2">
+            <div class="form-floating" data-tipo="ingreso, gasto">
+                <input type="number" class="form-control" id="montoTotalNvoMov" name="monto.total"
+                    placeholder="Monto Total" step="0.01">
+                <label for="montoTotalNvoMov">Monto Total</label>
+            </div>
+            <div class="form-floating" data-tipo="ingreso">
+                <input type="number" class="form-control" id="montoHabitualNvoMov" name="monto.habitual"
+                    placeholder="Monto Habitual" step="0.01">
+                <label for="montoHabitualNvoMov">Habitual</label>
+            </div>
+            <div class="form-floating" data-tipo="ingreso">
+                <input type="number" class="form-control" id="montoExtraNvoMov" name="monto.extra"
+                    placeholder="Monto Extra" step="0.01">
+                <label for="montoExtraNvoMov">Extra</label>
+            </div>
+            <div class="form-floating" data-tipo="gasto">
+                <input type="number" class="form-control" id="nroCuotasNvoMov" name="monto.nroCuotas"
+                    placeholder="Nro Cuotas">
+                <label for="nroCuotasNvoMov">Nro Cuotas</label>
+            </div>
+        </div>
+        <div class="input-group mb-sm-3 mb-2">
+            <div class="form-floating" data-tipo="inversion">
+                <input type="number" class="form-control" id="cantInstrumentoNvoMov" name="cantidadInstrumento"
+                    placeholder="Cantidad Instrumento" step="any">
+                <label for="cantInstrumentoNvoMov">Cantidad</label>
+            </div>
+            <div class="form-floating" data-tipo="inversion">
+                <input type="number" class="form-control" id="montoARSNvoMov" name="montoARS"
+                placeholder="Monto AR$" step="0.01">
+                <label for="montoARSNvoMov">Monto AR$</label>
+            </div>
+            <div class="form-floating" data-tipo="inversion">
+                <input type="number" class="form-control" id="montoUSDNvoMov" name="montoUSD"
+                placeholder="Monto USD" step="0.01">
+                <label for="montoUSDNvoMov">Monto U$D</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group input-group-sm mb-sm-3 mb-2 col-sm">
+                <label class="input-group-text" for="formaPagoNvoMov"><small class="small">Forma de Pago</small></label>
+                <select class="form-select" id="formaPagoNvoMov" name="formaPago" aria-label="Forma de Pago" required>
+                    <!-- <option selected disabled hidden></option> -->
+                    <option selected value="Contado">Contado</option>
+                    <option value="TC Visa BH">TC Visa BH</option>
+                    <option value="TC Powercard">TC Powercard</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-sm-3 mb-2 col-sm" data-tipo="gasto">
+
+                <label class="input-group-text" for="categoriaNvoMov">Categoría</label>
+                <select class="form-select" id="categoriaNvoMov" name="categoria" aria-label="Categoria" required>
+                    <option selected disabled hidden></option>
+                    <option value="Vivienda">Vivienda</option>
+                    <option value="Servicios">Servicios</option>
+                    <option value="Tarjetas">Tarjetas</option>
+                    <option value="Auto">Auto</option>
+                    <option value="Alimentación">Alimentación</option>
+                    <option value="Salud">Salud</option>
+                    <option value="Ocio">Ocio</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group input-group-sm mb-sm-3 mb-2" data-tipo="gasto">
+            <label class="input-group-text" for="añoResumenMov">Mes Resumen:</label>
+            <select class="form-select form-select-sm" id="añoResumenMov" name="añoResumenMov" aria-label="Año Resumen">
+                <option selected disabled hidden></option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+            </select>
+            <select class="form-select form-select-sm" id="mesResumenMov" name="mesResumenMov" aria-label="Mes Resumen">
+                <option selected disabled hidden></option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+
+        <div class="form-check form-switch form-control-lg align-items-center" data-tipo="ingreso, gasto">
+            <label class="form-check-label px-2" for="nvoMovHabitual">Habitual</label>
+            <input class="form-check-input" type="checkbox" id="nvoMovHabitual" name="habitual" value="true" checked>
+        </div>
+    </form>
+</div>

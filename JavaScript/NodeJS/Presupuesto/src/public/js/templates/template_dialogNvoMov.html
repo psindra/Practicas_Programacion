@@ -1,0 +1,29 @@
+<dialog class="col-sm-8 col-xl-6">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-danger btn-sm float-end" onclick="this.closest('dialog').close()">x</a>
+            <h5 id="cardTitle" class="card-title text-center">Agregar Movimiento</h5>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <nav id="navNvoMovTipo" class="nav nav-pills nav-justify mb-sm-4 mb-3" role="navigation">
+                    <button id="pillNvoMovIngreso" data-bs-toggle="tab" data-bs-target="#tabNvoMov"
+                        class="nav-link flex-fill active" aria-current="page" role="tab">Ingreso</button>
+                    <button id="pillNvoMovGasto" data-bs-toggle="tab" data-bs-target="#tabNvoMov"
+                        class="nav-link flex-fill" role="tab">Gasto</button>
+                    <button id="pillNvoMovInversion" data-bs-toggle="tab" data-bs-target="#tabNvoMov"
+                        class="nav-link flex-fill" role="tab">Inversión</button>
+                </nav>
+                <div id="pillsNvoMovContent" class="tab-content">
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex flex-wrap justify-content-evenly gap-4">
+            <button type="submit" class="btn btn-primary  text-center px-4" id="submitBtn"
+                form="formularioNvoMov">Submit</button>
+            <button type="reset" class="btn btn-secondary text-center px-4" id="cancelBtn"
+                form="formularioNvoMov">Reset</button>
+        </div>
+    </div>
+</dialog>

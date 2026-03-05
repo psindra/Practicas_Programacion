@@ -71,6 +71,7 @@ presupuestoEsquemaBase.index({ mes: 1 }); // Índice para consultas por mes
  */
 const Movimiento = mongoose.model("Movimiento", presupuestoEsquemaBase);
 Movimiento.createIndexes(); // Asegura que los índices definidos en el Schema se creen en la colección
+export default Movimiento;
 
 const esquemaIngreso = new mongoose.Schema({
     monto: {
@@ -105,13 +106,15 @@ const Ingreso = Movimiento.discriminator("ingreso", esquemaIngreso);
 
 const esquemaGasto = new mongoose.Schema({
     monto: {
-        type: Number,
-        required: true,
-        validate: {
-            min: 0,
-            validator: (v) => Number.isInteger(v),
-            message: "El campo Monto debe ser un número entero no negativo"
-        }
+        total: {
+            type: Number,
+            validate: {
+                min: 0,
+                validator: (v) => Number.isInteger(v),
+                message: "El campo Monto.Total debe ser un valor entero positivo"
+            },
+            required: true
+        },
     },
     habitual: { type: Boolean, required: true },
     categoria: {
@@ -128,8 +131,27 @@ const esquemaGasto = new mongoose.Schema({
     }] // Array de meses relacionados para el resumen, validando el mismo formato que el campo "mes"
 }, { _id: false });
 
+const esquemaGastoTC = new mongoose.Schema({
+    monto: {
+        cantCuotas: {
+            type: Number,
+            validate: {
+                min: 1,
+                validator: (v) => Number.isInteger(v),
+                message: "El campo CantCuotas debe ser un número entero positivo"
+            },
+            required: true
+        }
+    }
+}, { 
+    _id: false,
+    discriminatorKey: "formaPago", // Usamos "formaPago" como clave de discriminación para diferenciar gastos por forma de pago
+    collection: "movimientos" // No es necesario especificar la colección aquí, ya que hereda del modelo base
+});
+
 const Gasto = Movimiento.discriminator("gasto", esquemaGasto);
 
+const GastoTC = Gasto.discriminator("TC Powercard", esquemaGastoTC);
 /**
  * -----------------------
  * Discriminador: inversion
@@ -157,7 +179,7 @@ Movimiento.schema.pre("validate", function (next) {
             return next(new Error("El campo 'monto.total' es requerido para movimientos de tipo Ingreso y debe ser un número entero."));
         }
     } else if (this.tipo === "gasto") {
-        if (!this.monto || typeof this.monto !== "number") {
+        if (!this.monto || !this.monto.total || typeof this.monto.total !== "number") {
             return next(new Error("El campo 'monto' es requerido para movimientos de tipo Gasto y debe ser un número entero."));
         }
         if (this.habitual === undefined) {
@@ -182,5 +204,5 @@ Movimiento.schema.pre("validate", function (next) {
 // Movimiento.collection.createIndex({ mes: 1, tipo: 1, nombre: 1 }); // Índice compuesto a nivel de colección para mejorar el rendimiento de consultas frecuentes
 // Movimiento.collection.createIndex({ tipo: 1, nombre: 1 }); // Índice a nivel de colección para consultas por tipo y nombre
 
-export { Movimiento, Ingreso, Gasto, Inversion };
-export default Movimiento;
+export { Movimiento, Ingreso, Gasto, Inversion, GastoTC };
+// export default Movimiento;
