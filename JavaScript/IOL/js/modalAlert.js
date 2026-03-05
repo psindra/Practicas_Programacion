@@ -37,4 +37,7 @@ function mensajeModal(titulo, mensaje, closeButton = true, saveButton = false) {
   modal.show();
 }
 
+export { mensajeModal };
+export default mensajeModal;
+
 // modal.show()
