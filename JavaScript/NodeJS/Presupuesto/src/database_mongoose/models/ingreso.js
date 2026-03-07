@@ -22,8 +22,8 @@ const esquemaIngreso = new mongoose.Schema({
             type: Number,
             validate: {
                 min: 0,
-                validator: (v) => (Number.isInteger(v*100) && v > 0) || v === undefined,
-                message: "El campo Monto.Extra debe ser un número entero positivo o vacío"
+                validator: (v) => (Number.isInteger(v*100) && v >= 0) || v === undefined,
+                message: `El campo Monto.Extra debe ser un número entero positivo o vacío`
             }
         }
     },

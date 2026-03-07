@@ -1,4 +1,6 @@
+import { updateUI } from "../index.js";
 import { DOMModalFormNvoMov, parseDivPaneNvoMov, submitFormNvoMov } from "./formNvoMov.js";
+import mensajeModal from "./modalAlert.js";
 
 export function editFormString(movimientoString) {
     editForm(JSON.parse(movimientoString));
@@ -16,6 +18,9 @@ export function editForm(movimiento) {
     for (const key in flattenObj) {
         if (key in form) form[key].value = flattenObj[key];
     }
+    divPaneNvoMovParsed.querySelector("#btnEliminarMov").addEventListener("click", () => {
+        eliminarMovimiento(divPaneNvoMovParsed.querySelector("#btnEliminarMov"));
+    });
     form.closest("dialog").showModal();
 }
 
@@ -52,14 +57,29 @@ function flattenObject(objeto, prefijo="", resultado={}){
     return resultado;
 }
 
-var bar = {
-  mes: '202401',
-  nombre: 'Sueldo',
-  formaPago: 'Contado',
-  _id: ('69a91bae908e54fc18d30952'),
-  tipo: 'ingreso',
-  monto: { total: 76511252, habitual: 56511252, extra: 20000000 },
-  habitual: true,
-}
 
-console.log(flattenObject(bar));
+
+export function eliminarMovimiento(button) {
+    const id = button.closest("form")["_id"].value;
+    fetch("/api/movimiento/",
+        {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({ _id: id })
+        })  
+        .then(async response => {
+            if (!response.ok) throw new Error(JSON.stringify(await response.json()));
+            return response.json();
+        })
+        .then(result => {
+            console.log("Movimiento eliminado exitosamente:", result);
+            mensajeModal("Movimiento eliminado exitosamente:", result);
+            button.closest("form").reset();
+            button.closest("dialog").close();
+            updateUI();
+        })
+        .catch(error => {
+            console.error("Error al eliminar movimiento:\n", error)
+            mensajeModal("Error al eliminar movimiento:\n", error.message || error);
+        })
+}

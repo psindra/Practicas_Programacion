@@ -1,7 +1,11 @@
 <div class="div-pane fade show active" role="tabpanel" aria-labelledby="pillNvoMovXXX" id="tabNvoMov">
     <form id="formularioNvoMov">
         <!-- <input type="hidden" name="_id" id="idNvoMov" disabled> -->
-        <input class="form-text form-control form-control-sm text-center" type="text" name="_id" id="idNvoMov" readonly tabindex="-1" hidden>
+         <div class="input-group input-group-sm">
+             <input class="form-text form-control form-control-sm text-center" type="text" name="_id" id="idNvoMov" readonly tabindex="-1" hidden>
+                <a class="btn btn-outline-danger btn-sm my-1" id="btnEliminarMov">Eliminar</a>
+            </input>
+         </div>
         <input type="hidden" name="tipo" id="tipoNvoMov">
         <div class="input-group input-group-sm mb-sm-3 mb-2">
             <label class="input-group-text" for="añoMov">Año</label>

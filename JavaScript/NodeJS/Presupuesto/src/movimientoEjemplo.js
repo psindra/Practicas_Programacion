@@ -4,20 +4,26 @@ import Movimiento from './database_mongoose/models/movimiento.js';
 
 Movimiento.deleteMany({}).then(() => console.log("Movimientos eliminados")).catch(err => console.error("Error al eliminar movimientos: ", err));
 
-const movimientoEjemplo = new Movimiento({
+Movimiento.create({
     tipo: "ingreso",
     mes: "202401",
     nombre: "Sueldo",
-    monto: { total: 765112.52 * 100, extra: 200000 * 100, habitual: 565112.52 * 100 },
+    monto: { total: 100, habitual: 100 },
     formaPago: "Contado"
 });
-movimientoEjemplo.save()
-    .then(nvoMovimiento => {
-        console.log(nvoMovimiento);
-        
-        nvoMovimiento.nombre = "Sueldo editado";
-        new Movimiento(nvoMovimiento).save()
-    });
+// const movimientoEjemplo = new Movimiento({
+//     tipo: "ingreso",
+//     mes: "202401",
+//     nombre: "Sueldo",
+//     monto: { total: 100, habitual: 100 },
+//     formaPago: "Contado"
+// });
+// movimientoEjemplo.save()
+//     .then(nvoMovimiento => {
+
+//         nvoMovimiento.nombre = "Sueldo editado";
+//         new Movimiento(nvoMovimiento).save()
+//     });
 
 Gasto.create({
     mes: "202401",
@@ -28,13 +34,12 @@ Gasto.create({
     habitual: true,
     categoria: "Vivienda"
 })
-.then(nvoGasto => {
-    nvoGasto.nombre = "Alquiler editado";
-    nvoGasto._id = nvoGasto._id.toString();
-    console.log(nvoGasto);
-    new Gasto(nvoGasto).save()
-})
-.catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
+    .then(nvoGasto => {
+        nvoGasto.nombre = "Alquiler editado";
+        nvoGasto._id = nvoGasto._id.toString();
+        new Gasto(nvoGasto).save()
+    })
+    .catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
 
 Gasto.create({
     mes: "202401",
@@ -99,7 +104,7 @@ Movimiento.create({
     tipo: "ingreso",
     mes: "202402",
     nombre: "Sueldo",
-    monto: { total: 765112.52 * 100, extra: 200000 * 100 },
+    monto: { total: 200, habitual: 200 },
     formaPago: "Contado"
 });
 Gasto.create({
@@ -175,7 +180,7 @@ Movimiento.create({
     tipo: "ingreso",
     mes: "202403",
     nombre: "Sueldo",
-    monto: { total: 765112.52 * 100, extra: 200000 * 100 },
+    monto: { total: 300, habitual: 300 },
     formaPago: "Contado"
 });
 Gasto.create({
@@ -251,88 +256,88 @@ Inversion.create({
 Movimiento.create({
     tipo: "ingreso",
     mes: "202501",
+    nombre: "Sueldo",
+    monto: { total: 500, extra: 200, habitual: 300 },
+    formaPago: "Contado"
+});
+Gasto.create({
+    mes: "202501",
+    nombre: "Alquiler",
+    monto: { total: 200000 },
+    formaPago: "Contado",
+    habitual: true,
+    categoria: "Vivienda"
+}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
+
+Gasto.create({
+    mes: "202501",
+    nombre: "Cochera",
+    monto: { total: 20000 },
+    formaPago: "Contado",
+    habitual: true,
+    categoria: "Auto"
+}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
+
+Gasto.create({
+    mes: "202501",
+    nombre: "Expensas",
+    monto: { total: 20000 },
+    formaPago: "Contado",
+    habitual: true,
+    categoria: "Vivienda"
+}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
+
+Gasto.create({
+    mes: "202501",
+    nombre: "Visa BH",
+    monto: { total: 200000 },
+    formaPago: "Contado",
+    habitual: true,
+    categoria: "Tarjetas"
+}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
+
+Gasto.create({
+    mes: "202501",
+    nombre: "PowerCard",
+    monto: { total: 200000 },
+    formaPago: "Contado",
+    habitual: true,
+    categoria: "Tarjetas"
+}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
+
+
+Gasto.create({
+    mes: "202501",
+    nombre: "Compra en supermercado",
+    monto: {
+        total: 50000,
+        nroCuotas: 3,
+    },
+    formaPago: "TC Powercard",
+    habitual: true,
+    categoria: "Alimentación"
+}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
+
+Inversion.create({
+    mes: "202501",
+    nombre: "BCBA:GGAL",
+    formaPago: "Contado",
+    plataforma: "Rava",
+    instrumento: "GGAL",
+    cantidadInstrumento: 100,
+    montoARS: 150000,
+    montoUSD: 500
+});
+
+//////////////////////////////////////////
+Movimiento.create({
+    tipo: "ingreso",
+    mes: "202502",
     nombre: "Sueldo",
     monto: { total: 500000 },
     formaPago: "Contado"
 });
 Gasto.create({
-    mes: "202501",
-    nombre: "Alquiler",
-    monto: { total: 200000 },
-    formaPago: "Contado",
-    habitual: true,
-    categoria: "Vivienda"
-}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
-
-Gasto.create({
-    mes: "202501",
-    nombre: "Cochera",
-    monto: { total: 20000 },
-    formaPago: "Contado",
-    habitual: true,
-    categoria: "Auto"
-}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
-
-Gasto.create({
-    mes: "202501",
-    nombre: "Expensas",
-    monto: { total: 20000 },
-    formaPago: "Contado",
-    habitual: true,
-    categoria: "Vivienda"
-}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
-
-Gasto.create({
-    mes: "202501",
-    nombre: "Visa BH",
-    monto: { total: 200000 },
-    formaPago: "Contado",
-    habitual: true,
-    categoria: "Tarjetas"
-}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
-
-Gasto.create({
-    mes: "202501",
-    nombre: "PowerCard",
-    monto: { total: 200000 },
-    formaPago: "Contado",
-    habitual: true,
-    categoria: "Tarjetas"
-}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
-
-
-Gasto.create({
-    mes: "202501",
-    nombre: "Compra en supermercado",
-    monto: {
-        total: 50000,
-        nroCuotas: 3,
-    },
-    formaPago: "TC Powercard",
-    habitual: true,
-    categoria: "Alimentación"
-}).catch(err => console.error("Error al guardar el gasto de ejemplo: ", err));
-
-Inversion.create({
-    mes: "202501",
-    nombre: "BCBA:GGAL",
-    formaPago: "Contado",
-    plataforma: "Rava",
-    instrumento: "GGAL",
-    cantidadInstrumento: 100,
-    montoARS: 150000,
-    montoUSD: 500
-});
-
-//////////////////////////////////////////
-Movimiento.create({
-    tipo: "ingreso",
-    mes: "202502",
-    nombre: "Sueldo",
-    monto: { total: 500000 },
-    formaPago: "Contado"
-});
-Gasto.create({
     mes: "202502",
     nombre: "Alquiler",
     monto: { total: 200000 },
@@ -400,3 +405,40 @@ Inversion.create({
     montoARS: 150000,
     montoUSD: 500
 });
+
+
+/* ######################################################################### */
+
+
+
+
+
+
+/* gastoMensualTotal no sirve mucho ELIMINAR */
+const _____gastoMensualTotal_____ = await Gasto.aggregate([
+    { $match: { tipo: "gasto" } },
+    {
+        $group: {
+            _id: "$mes",
+            gastoMensualTotal: { $sum: { $ifNull: ["$monto.total", 0] } }
+        }
+    },
+    // cambiar "_id" por "mes"
+    { $project: { mes: "$_id", gastoMensualTotal: 1 } },
+    { $sort: { "mes": 1 } }
+])
+
+/* gastoMensualHabitual no sirve mucho ELIMINAR */
+const gastoMensualHabitual = await Gasto.aggregate([
+    { $match: { tipo: "gasto", habitual: true } },
+    {
+        $group: {
+            _id: "$mes",
+            gastoMensualHabitual: { $sum: { $ifNull: ["$monto.total", 0] } }
+        }
+    },
+    // cambiar "_id" por "mes"
+    { $project: { mes: "$_id", gastoMensualHabitual: 1 } },
+    { $sort: { "mes": 1 } }
+])
+

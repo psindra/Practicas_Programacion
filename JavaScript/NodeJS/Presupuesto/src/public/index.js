@@ -2,7 +2,7 @@ import "./js/custom_consoleLog.js";
 import mensajeModal from "./js/modalAlert.js";
 import "./js/formNvoMov.js";
 import { parseModalFormNvoMov } from "./js/formNvoMov.js";
-import { editForm } from "./js/formEditMov.js";
+import { editForm, eliminarMovimiento } from "./js/formEditMov.js";
 
 
 async function refreshPresupuestos() {
@@ -41,6 +41,7 @@ async function parsePresupuestos(presupuestosData) {
             });
         });
     });
+    console.log(presupuesto);
     return presupuesto;
 }
 
@@ -289,4 +290,4 @@ document.addEventListener("DOMContentLoaded", function () {
     init();
 });
 init();
-export {updateUI}
+export {updateUI, eliminarMovimiento}

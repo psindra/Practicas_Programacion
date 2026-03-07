@@ -1,7 +1,7 @@
 import { updateUI } from "../index.js";
 import mensajeModal from "./modalAlert.js";
 
-const DOMModalFormNvoMov = await fetch("./js/templates/template_dialogNvoMov.html")
+const DOMModalFormNvoMov = await fetch("./templates/template_dialogNvoMov.html")
     .then(response => response.text())
     .then(text => {
         const doc = new DOMParser().parseFromString(text, "text/html");
@@ -12,7 +12,7 @@ const DOMModalFormNvoMov = await fetch("./js/templates/template_dialogNvoMov.htm
         return null;
     });
 
-const DOMdivPaneNvoMov = await fetch("./js/templates/template_formNvoMov.html")
+const DOMdivPaneNvoMov = await fetch("./templates/template_formNvoMov.html")
     .then(response => response.text())
     .then(text => {
         const doc = new DOMParser().parseFromString(text, "text/html");
@@ -69,7 +69,7 @@ function submitFormNvoMov(event) {
         })
         .catch(error => {
             console.error("Error al crear movimiento:\n", error)
-            mensajeModal("Error al crear movimiento:\n", error)
+            mensajeModal("Error al crear movimiento:\n", error.message || error);
         })
 }
 
