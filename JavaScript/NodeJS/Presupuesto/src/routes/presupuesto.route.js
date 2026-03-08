@@ -1,10 +1,13 @@
 import express from "express";
 import { Movimiento, Ingreso, Gasto, Inversion } from "../database_mongoose/models/modelosPresupuesto.js";
 const router = express.Router();
-import { controladorGet } from "./controlador.js";
+import { controladorEstadisticas, controladorGet } from "./controlador.js";
 
 router.route("/presupuesto")
     .get(controladorGet(Movimiento))
+
+router.route("/presupuesto/estadisticas")
+    .get(controladorEstadisticas());
 
 router.route("/presupuesto/:mes")
     .get(controladorGet(Movimiento, req => ({ mes: req.params.mes })))
@@ -17,6 +20,8 @@ router.route("/presupuesto/anual/:año")
         return { mes: { $regex: `^${req.params.año}` } };
     },
         { mes: 1 }))
+
+
 
 export const presupuestoRoute = router;
 export default presupuestoRoute;

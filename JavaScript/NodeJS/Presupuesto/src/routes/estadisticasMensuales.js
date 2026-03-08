@@ -1,3 +1,5 @@
+import Movimiento from "../database_mongoose/models/movimiento.js";
+
 const estadisticasDelMes = await Movimiento.aggregate([
     {
         $group: {

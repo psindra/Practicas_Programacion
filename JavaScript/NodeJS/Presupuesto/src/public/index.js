@@ -15,7 +15,17 @@ async function refreshPresupuestos() {
         });
 }
 
+async function refreshEstadisticas() {
+    return fetch("/api/presupuesto/estadisticas")
+        .then(response => response.json())
+        .catch(error => {
+            mensajeModal("Error al obtener estadisticas del presupuesto:", error)
+
+        });
+}
+
 async function parsePresupuestos(presupuestosData) {
+    const estadisticas = await refreshEstadisticas();
     const presupuesto = {};
     const ordenGastos = {
         "Alquiler": 1,
@@ -30,12 +40,14 @@ async function parsePresupuestos(presupuestosData) {
     }
     presupuestosData.forEach(movimiento => {
         presupuesto[(movimiento.mes).substring(0, 4)] ??= {};
-        presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes] ??=  {ingreso: [], gasto: [], inversion: []};
-        if (!movimiento.tipo){
+        presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes] ??= { ingreso: [], gasto: [], inversion: [] };
+        if (!movimiento.tipo) {
             console.log("Movimiento sin tipo:\n", movimiento);
         }
-        
+
         presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes][movimiento.tipo].push(movimiento);
+        presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes]["estadistica"] = estadisticas.find(est => est.mes === movimiento.mes);
+
     });
 
     Object.values(presupuesto).forEach(movimientoMeses => {
@@ -71,10 +83,10 @@ function renderNav(presupuesto) {
 
         _button.addEventListener("click", () => {
             renderYear(presupuesto, year)
-            .catch(error => {
-                console.error("Error al refrescar el año seleccionado: ", error)
-                mensajeModal("Error al refrescar el año seleccionado: ", error)
-            });
+                .catch(error => {
+                    console.error("Error al refrescar el año seleccionado: ", error)
+                    mensajeModal("Error al refrescar el año seleccionado: ", error)
+                });
         });
     });
     _ul?.firstChild?.firstChild?.classList?.add("active");
@@ -120,7 +132,7 @@ async function renderYear(presupuesto, year) {
 }
 
 function renderTabsContent(presupuesto, year) {
-    if (!presupuesto.length) return;
+    if (!Object.keys(presupuesto).length) return;
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const tabsContainer = document.querySelector("#tabsContainer");
@@ -128,6 +140,7 @@ function renderTabsContent(presupuesto, year) {
     _tabsContent.setAttribute("id", "tabsContent");
     _tabsContent.classList.add("tab-content", "container", "pt-2", "col-lg-8", "col-md-11");
     meses.forEach((mes, index) => {
+        const month = `${year}${String(index + 1).padStart(2, "0")}`;
         const _tabPane = document.createElement("div");
         _tabPane.setAttribute("id", `tabPresupuesto${mes}`);
         _tabPane.classList.add("tab-pane", "fade");
@@ -151,17 +164,17 @@ function renderTabsContent(presupuesto, year) {
         _thIngreso.classList.add("text-end");
         _thIngreso.textContent = "Ingreso";
         _thIngreso.style.color = "#0040ff"
-        
+
         const _tdIngresoExtraordinario = document.createElement("td");
-        const _ingresoExtraordinario = presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]?.ingreso
-        ?.reduce((acc, movimiento) => acc + movimiento.monto.total, 0) || 0
+        const _ingresoExtraordinario = presupuesto[year][month]?.ingreso
+            ?.reduce((acc, movimiento) => acc + movimiento.monto.total, 0) || 0
         _tdIngresoExtraordinario.textContent = "$ " + _ingresoExtraordinario.toLocaleString();
         _tdIngresoExtraordinario.classList.add("fw-bold");
         _tdIngresoExtraordinario.style.color = "#0040ff";
-        
+
         const _tdIngresoMonto = document.createElement("td");
-        const _ingreso = presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]?.ingreso
-        ?.find((movimiento) => movimiento.nombre.includes("Sueldo"));        
+        const _ingreso = presupuesto[year][month]?.ingreso
+            ?.find((movimiento) => movimiento.nombre.includes("Sueldo"));
         const _ingresoHabitual = _ingreso?.monto?.habitual || 0;
         _tdIngresoMonto.innerHTML = _ingresoHabitual.toLocaleString();
         const __btnEdit = document.createElement("a");
@@ -172,7 +185,7 @@ function renderTabsContent(presupuesto, year) {
         // _tdIngresoMonto.setAttribute("colspan",2)
         _tdIngresoMonto.classList.add("text-end");
         _tdIngresoMonto.style.color = "cornflowerblue"
-        
+
         const _tdIngreso = document.createElement("td");
         _tdIngreso.textContent = "Sueldo Normal"
         _tdIngreso.style.color = "cornflowerblue"
@@ -188,11 +201,22 @@ function renderTabsContent(presupuesto, year) {
         const _tdEspacio = document.createElement("td");
         _tdEspacio.setAttribute("colspan", "2");
         _tdEspacio.setAttribute("rowspan", "20");
+        _tdEspacio.innerHTML = `
+        <div class="estadistica">
+                <p class="mb-2" style="color: orange"><strong>Ahorro/Superávit:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2" style="color: gray"><strong>Ahorro Habitual:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualHabitual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2" style="color: gray"><strong>Ahorro Extraordinario:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualExtraordinario?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2" style="color: blueviolet"><strong>Ingresos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.ingresoAcumuladoAnual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2" style="color: blueviolet"><strong>Gastos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.gastoAcumuladoAnual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2" style="color: blueviolet"><strong>Ahorro Acumulado:</strong> $${presupuesto[year][month]?.estadistica.ahorroAcumuladoAnual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2" style="color: green"><strong>Inversiones ARS acumuladas:</strong> $${presupuesto[year][month]?.estadistica.inversionARSAcumuladaAnual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2" style="color: green"><strong>Inversiones USD acumuladas:</strong> U$D${presupuesto[year][month]?.estadistica.inversionUSDAcumuladaAnual?.toLocaleString() || "0"}</  span><br>
+        </div>`;
         _trEspacio.appendChild(_tdEspacio);
         _tbody.appendChild(_trEspacio);
 
         /* GASTOS */
-        presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]?.gasto?.forEach((gasto, index) => {
+        presupuesto[year][month]?.gasto?.forEach((gasto, index) => {
             const _trGasto = document.createElement("tr");
             index === 0 && _trGasto.classList.add("table-group-divider");
             const _tdGastoMonto = document.createElement("td");
@@ -207,7 +231,7 @@ function renderTabsContent(presupuesto, year) {
             _thGastoNombre.appendChild(_btnEdit);
             _thGastoNombre.style.color = "salmon"
             const _tdGastoPorcentaje = document.createElement("td")
-            _tdGastoPorcentaje.innerHTML = `(${(gasto.monto.total/_ingresoHabitual*100).toFixed(1)} %)`
+            _tdGastoPorcentaje.innerHTML = `(${(gasto.monto.total / _ingresoHabitual * 100).toFixed(1)} %)`
             _tdGastoPorcentaje.style.color = "cornflowerblue"
             _trGasto.appendChild(_tdGastoMonto);
             _trGasto.appendChild(_thGastoNombre);
@@ -216,7 +240,7 @@ function renderTabsContent(presupuesto, year) {
         });
 
         /* INVERSIONES */
-        presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]?.inversion?.forEach((inversion, index) => {
+        presupuesto[year][month]?.inversion?.forEach((inversion, index) => {
             const _trInversion = document.createElement("tr");
             index === 0 && _trInversion.classList.add("table-group-divider");
             const _tdInversionMonto = document.createElement("td");
@@ -245,7 +269,7 @@ function renderTabsContent(presupuesto, year) {
 }
 
 function renderTablist(presupuesto, year) {
-    if (!presupuesto.length) return;
+    if (!Object.keys(presupuesto).length) return;
 
     const tabsContainer = document.querySelector("#tabsContainer");
     tabsContainer.innerHTML = ""; // Limpiar contenido previo
@@ -259,6 +283,7 @@ function renderTablist(presupuesto, year) {
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     meses.forEach((mes, index) => {
+        const month = `${year}${String(index + 1).padStart(2, "0")}`;
         const _liTabs = document.createElement("li");
         _liTabs.classList.add("nav-item");
         _liTabs.setAttribute("role", "presentation");
@@ -270,7 +295,7 @@ function renderTablist(presupuesto, year) {
         _buttonTabs.setAttribute("role", "tab");
         _buttonTabs.setAttribute("aria-controls", `tabPresupuesto${mes}`);
         _buttonTabs.textContent = mes;
-        if (!presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]) {
+        if (!presupuesto[year][month]) {
             _buttonTabs.classList.add("disabled");
         }
         _liTabs.appendChild(_buttonTabs);
@@ -285,7 +310,7 @@ async function init() {
     await renderUI();
     const navBarBrand = document.getElementById("navBarBrand");
     const _html = document.documentElement;
-    
+
     navBarBrand.addEventListener("click", async () => {
         _html.dataset['bsTheme'] === "dark" ? _html.dataset['bsTheme'] = "light" : _html.dataset['bsTheme'] = "dark";
 
@@ -297,4 +322,4 @@ document.addEventListener("DOMContentLoaded", function () {
     init();
 });
 init();
-export {updateUI, eliminarMovimiento}
+export { updateUI, eliminarMovimiento }
