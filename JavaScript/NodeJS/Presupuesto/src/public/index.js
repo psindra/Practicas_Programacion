@@ -120,11 +120,7 @@ async function renderYear(presupuesto, year) {
 }
 
 function renderTabsContent(presupuesto, year) {
-<<<<<<< HEAD
     if (!presupuesto.length) return;
-=======
-    if (presupuesto.length === 0) return;
->>>>>>> 4863c0d68ccb0774c03d467f55bd8626a0710d91
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const tabsContainer = document.querySelector("#tabsContainer");
@@ -249,11 +245,7 @@ function renderTabsContent(presupuesto, year) {
 }
 
 function renderTablist(presupuesto, year) {
-<<<<<<< HEAD
     if (!presupuesto.length) return;
-=======
-    if (presupuesto.length === 0) return;
->>>>>>> 4863c0d68ccb0774c03d467f55bd8626a0710d91
 
     const tabsContainer = document.querySelector("#tabsContainer");
     tabsContainer.innerHTML = ""; // Limpiar contenido previo
