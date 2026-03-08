@@ -11,7 +11,7 @@ Haz clic en el nombre para abrir cada proyecto/archivo.
 - [Web3](#-web3)
 - [TensorFlowJS](#-tensorflowjs)
 - [Scripts del navegador / YouTube](#-scripts-del-navegador--youtube)
-- [PDFs y certificados](#-pdfs-y-certificados)
+- [PDFs y certificados](#-pdfs--certificados--recursos)
 
 ---
 
