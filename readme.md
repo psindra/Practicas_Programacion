@@ -1,7 +1,7 @@
 # 📁 Índice de proyectos — Accesos rápidos
 
 Este README reúne accesos directos a las páginas, demos y archivos front-end del repositorio.  
-Haz clic en el nombre para abrir cada proyecto/archivo. Los enlaces a archivos internos usan rutas relativas desde la raíz del repositorio.
+Haz clic en el nombre para abrir cada proyecto/archivo.
 
 ---
 
@@ -71,5 +71,3 @@ Haz clic en el nombre para abrir cada proyecto/archivo. Los enlaces a archivos i
 - Si querés que algunos de los proyectos apunten a su versión **GitHub Pages** (renderizada como sitio), decímelo y te armo las URLs públicas (si existen) usando el dominio `https://<usuario>.github.io/<repo>/...`.
 
 ---
-
-> Si querés, te lo dejo también listo como `README.md` en el repo (pegar el contenido de arriba). ¿Querés que genere una versión con una sección de **Estado** (ej.: "Listo / En progreso / No deployado") para cada entrada?
