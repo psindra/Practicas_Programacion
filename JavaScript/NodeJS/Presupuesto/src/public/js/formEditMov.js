@@ -13,7 +13,7 @@ export function editForm(movimiento) {
     const form = divPaneNvoMovParsed.querySelector("form");
     movimiento["añoMov"] = movimiento["mes"].slice(0, 4);
     movimiento["mesMov"] = movimiento["mes"].slice(4, 6);
-    form["_id"].hidden = false;
+    form["_id"].parentElement.hidden = false;
     const flattenObj = flattenObject(movimiento);
     for (const key in flattenObj) {
         if (key in form) form[key].value = flattenObj[key];

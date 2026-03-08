@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 const controladorGet = (Model, filtroF = () => ({}), sort = {}) => (req, res) => {
     const filtro = filtroF(req);
-    console.log(filtro);
+    console.log({ filtro });
 
     return Model.find(filtro)
         .sort(sort)
@@ -20,15 +20,37 @@ const controladorGet = (Model, filtroF = () => ({}), sort = {}) => (req, res) =>
 }
 
 const controladorPost = (Model) => (req, res) => {
-    return Model.findByIdAndUpdate(req.body._id || new mongoose.Types.ObjectId(), req.body, { returnDocument: 'after', upsert: true })
+    return Model.findById(req.body._id)
+    .then(documento => {
+        if (!documento) {
+            // Si no existe el documento, se crea uno nuevo
+            documento = new Model(req.body);
+        } else {
+            // Si el documento existe, se actualizan sus campos
+            Object.assign(documento, req.body);
+        }
+        return documento.save();
+    })
     .then(movimientoGuardado => {
-            res.status(201).json(movimientoGuardado);
+        console.log({ movimientoGuardado });
+        return res.status(201).json(movimientoGuardado);
+    })
+    .catch(err => {
+        console.error("Error al crear o actualizar movimiento:", err);
+        return res.status(500).json({ error: err.message });
+    })
+
+    console.log({ body: req.body });
+    return Model.findByIdAndUpdate(req.body._id || new mongoose.Types.ObjectId(), req.body, { returnDocument: 'after', upsert: true, runValidators: true })
+        .then(movimientoGuardado => {
+            console.log({ movimientoGuardado });
+            return res.status(201).json(movimientoGuardado);
         })
         .catch(err => {
             console.error("Error al crear movimiento:", err);
             return res.status(500).json({ error: err.message });
         })
-    
+
     /*  */
     const nuevoMovimiento = new Model(req.body);
     nuevoMovimiento.isNew = !req.body._id; // Si no tiene _id, es nuevo
@@ -44,8 +66,8 @@ const controladorPost = (Model) => (req, res) => {
 
 const controladorDelete = (Model, filtroF = () => ({})) => (req, res) => {
     const filtro = filtroF(req);
-    console.log({filtro},{body: req.body});
-    
+    console.log({ filtro }, { body: req.body });
+
     //validar que filtro no es un objeto vacío
     if (filtro == undefined || Object.keys(filtro).length === 0) {
         return res.status(400).json({ error: "Filtro vacío" });

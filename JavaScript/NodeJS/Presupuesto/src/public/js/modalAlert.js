@@ -26,13 +26,17 @@ var modal = bootstrap.Modal.getOrCreateInstance(modalAlert) // Returns a Bootstr
 
 
 function mensajeModal(titulo, mensaje, closeButton = true, saveButton = false) {
+  console.log(mensaje);
   try {
     mensaje = (mensaje.replaceAll("\n", "<br>")).replaceAll("  ", "&nbsp;&nbsp;");
   } catch (error) {
-    mensaje = JSON.stringify(mensaje, null, 2).replaceAll("\n", "<br>").replaceAll("  ", "&nbsp;&nbsp;");
+    try {
+      mensaje = JSON.stringify(mensaje, null, 2).replaceAll("\n", "<br>").replaceAll("  ", "&nbsp;&nbsp;");
+    } catch (error) {
+      mensaje = JSON.stringify(mensaje, null, 2);
+    }
     
   }
-  console.log(mensaje);
   document.querySelector('#modalAlert .modal-title#modalAlertLabel').innerText = titulo;
   document.querySelector('#modalAlert .modal-body').innerHTML = mensaje;
   document.querySelector('#modalAlert .modal-body').classList.add('font-monospace', 'small');

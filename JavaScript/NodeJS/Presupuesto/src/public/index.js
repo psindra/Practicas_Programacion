@@ -31,6 +31,10 @@ async function parsePresupuestos(presupuestosData) {
     presupuestosData.forEach(movimiento => {
         presupuesto[(movimiento.mes).substring(0, 4)] ??= {};
         presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes] ??=  {ingreso: [], gasto: [], inversion: []};
+        if (!movimiento.tipo){
+            console.log("Movimiento sin tipo:\n", movimiento);
+        }
+        
         presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes][movimiento.tipo].push(movimiento);
     });
 
@@ -41,7 +45,6 @@ async function parsePresupuestos(presupuestosData) {
             });
         });
     });
-    console.log(presupuesto);
     return presupuesto;
 }
 
@@ -156,14 +159,14 @@ function renderTabsContent(presupuesto, year) {
         
         const _tdIngresoMonto = document.createElement("td");
         const _ingreso = presupuesto[year][`${year}${String(index + 1).padStart(2, "0")}`]?.ingreso
-        ?.find((movimiento) => movimiento.nombre.includes("Sueldo"));
+        ?.find((movimiento) => movimiento.nombre.includes("Sueldo"));        
         const _ingresoHabitual = _ingreso?.monto?.habitual || 0;
         _tdIngresoMonto.innerHTML = _ingresoHabitual.toLocaleString();
         const __btnEdit = document.createElement("a");
         __btnEdit.textContent = "🖊"
         __btnEdit.classList.add("edit-btn", "float-end", "opacity-0");
         __btnEdit.addEventListener("click", () => { editForm(_ingreso) });
-        _tdIngresoMonto.appendChild(__btnEdit);
+        _ingreso && _tdIngresoMonto.appendChild(__btnEdit);
         // _tdIngresoMonto.setAttribute("colspan",2)
         _tdIngresoMonto.classList.add("text-end");
         _tdIngresoMonto.style.color = "cornflowerblue"

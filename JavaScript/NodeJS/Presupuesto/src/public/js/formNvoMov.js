@@ -62,14 +62,14 @@ function submitFormNvoMov(event) {
             return response.json();
         })
         .then(result => {
-            console.log("Movimiento creado exitosamente:", result);
+            mensajeModal(`Movimiento ${(data["_id"])? "modificado" : "creado"} exitosamente:`, result);
             event.target.reset();
             event.target.closest("dialog").close();
             updateUI();
         })
         .catch(error => {
-            console.error("Error al crear movimiento:\n", error)
-            mensajeModal("Error al crear movimiento:\n", error.message || error);
+            console.error(`Error al ${(data["_id"])? "modificar" : "crear"} movimiento:\n`, error)
+            mensajeModal(`Error al ${(data["_id"])? "modificar" : "crear"} movimiento:\n`, error.message || error);
         })
 }
 
