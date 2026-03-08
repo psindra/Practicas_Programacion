@@ -1,4 +1,4 @@
-import Movimiento from "../database_mongoose/models/movimientos.js";
+import Movimiento from "../database_mongoose/models/movimiento.js";
 
 export const estadisticasDelMes = async () => {
     return await Movimiento.aggregate([
