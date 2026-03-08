@@ -88,4 +88,4 @@ const acumuladoEnElAño = await Movimiento.aggregate([
 for(const estadisticaMes of estadisticasDelMes) {
     Object.assign(estadisticaMes, acumuladoEnElAño.find(accumMes => accumMes.mes === estadisticaMes.mes));
 }
-console.log("estadisticasDelMes con acumulados:\n", estadisticasDelMes);
+// console.log("estadisticasDelMes con acumulados:\n", estadisticasDelMes);

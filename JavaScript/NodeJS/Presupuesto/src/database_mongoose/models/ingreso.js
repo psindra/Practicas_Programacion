@@ -32,7 +32,6 @@ const esquemaIngreso = new mongoose.Schema({
 }, { _id: false });
 
 function fullfillIngresoSchema(doc, next) {
-    console.log({doc});
     
     if (!doc.monto?.total && !doc.monto?.habitual && !doc.monto?.extra) {
         throw new Error("El campo Monto debe tener algún dato");
