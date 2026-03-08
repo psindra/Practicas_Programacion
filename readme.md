@@ -17,16 +17,14 @@ Haz clic en el nombre para abrir cada proyecto/archivo.
 
 ## 🌐 Portafolio / Demos en GH Pages
 - **Portfolio** — Página principal:  
-  https://ps-dev-repo.github.io/DesarrolloWeb-37320/
-- **Screen Recorder (IndexedDB)** — Demo pública:  
-  https://psindra.github.io/Screen%20Recorder/Media%20Capture%20and%20Streams%20API%20-%20IndexedDB/
+  [DesarrolloWeb-37320](https://ps-dev-repo.github.io/DesarrolloWeb-37320/)
+- **Screen Recorder (IndexedDB)** — [Screen Recorder](https://psindra.github.io/Screen%20Recorder/Media%20Capture%20and%20Streams%20API%20-%20IndexedDB/)
 
 ---
 
 ## 💻 Proyectos JavaScript / HTML
 - [Invertir Online API](JavaScript/IOL/)
-- [Descargar videos Instagram](JavaScript/Instragram/videos%20i.js)
-- [Plan Gimnasio (script asociado)](JavaScript/Instragram/videos%20i.js)
+- [Plan Gimnasio](JavaScript/Prototipo_Plan_Gimnasio/src/)
 - [Plan Gimnasio (hash) — prototipo](JavaScript/Prototipo_Plan_Gimnasio_hash/src/)
 - [WebDevSimplified — css-parallax-main](JavaScript/WebDevSimplified/css-parallax-main/css-parallax-main/)
 
@@ -54,6 +52,7 @@ Haz clic en el nombre para abrir cada proyecto/archivo.
 - [JS Video Record YT (Video Recorder)](JavaScript/script%20Navegador/YouTube/Record_Videos/Video%20Recorder.js)
 - [JS Download YT 1](JavaScript/script%20Navegador/YouTube/download_videos/YT.js)
 - [JS Download YT 2](JavaScript/script%20Navegador/YouTube/download_videos/%E2%86%93%20Y.js)
+- [JS Descargar videos Instagram (script asociado)](JavaScript/Instragram/videos%20i.js)
 
 ---
 
