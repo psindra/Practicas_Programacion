@@ -65,9 +65,3 @@ Haz clic en el nombre para abrir cada proyecto/archivo.
 
 ---
 
-## ℹ️ Notas / consejos
-- Los enlaces son relativos al root del repositorio; si cambias de estructura, actualiza las rutas aquí.  
-- Los archivos PDF y JS se abrirán en el visualizador de GitHub al hacerles click; las demos públicas (GH Pages) abren en su URL correspondiente.  
-- Si querés que algunos de los proyectos apunten a su versión **GitHub Pages** (renderizada como sitio), decímelo y te armo las URLs públicas (si existen) usando el dominio `https://<usuario>.github.io/<repo>/...`.
-
----
