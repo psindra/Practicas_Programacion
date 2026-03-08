@@ -77,7 +77,7 @@ function renderNav(presupuesto) {
             });
         });
     });
-    _ul.firstChild.firstChild.classList.add("active");
+    _ul?.firstChild?.firstChild?.classList?.add("active");
     navYears.appendChild(_ul);
 
     return presupuesto;
@@ -109,7 +109,7 @@ async function updateUI() {
 
 async function renderYear(presupuesto, year) {
     if (!year) {
-        year = Object.keys(presupuesto)[0].substring(0, 4);
+        year = Object.keys(presupuesto)[0]?.substring(0, 4) || 2023;
     }
 
     // Renderizado de la lista de Tabs
@@ -120,6 +120,8 @@ async function renderYear(presupuesto, year) {
 }
 
 function renderTabsContent(presupuesto, year) {
+    if (presupuesto.length === 0) return;
+
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const tabsContainer = document.querySelector("#tabsContainer");
     const _tabsContent = document.createElement("div");
@@ -238,11 +240,13 @@ function renderTabsContent(presupuesto, year) {
         });
 
     });
-    _tabsContent.firstChild.classList.add("show", "active");
+    _tabsContent?.firstChild?.classList?.add("show", "active");
     tabsContainer.appendChild(_tabsContent);
 }
 
 function renderTablist(presupuesto, year) {
+    if (presupuesto.length === 0) return;
+
     const tabsContainer = document.querySelector("#tabsContainer");
     tabsContainer.innerHTML = ""; // Limpiar contenido previo
 
@@ -272,7 +276,7 @@ function renderTablist(presupuesto, year) {
         _liTabs.appendChild(_buttonTabs);
         _ulTabs.appendChild(_liTabs);
     });
-    _ulTabs.firstChild.firstChild.classList.add("active");
+    _ulTabs?.firstChild?.firstChild?.classList?.add("active");
     tabsContainer.appendChild(_ulTabs);
     return { meses, tabsContainer };
 }
