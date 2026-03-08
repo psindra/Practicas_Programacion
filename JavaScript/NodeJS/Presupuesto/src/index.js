@@ -44,7 +44,7 @@ app.listen(app.get("PORT"), err => {
     }
 })
 
-if (process.env.ENV_PRUEBAS) {
+if (process.env.ENV_PRUEBAS === "true") {
     console.log("Importando movimientos de ejemplo...");
     import ("./movimientoEjemplo.js");
 }
