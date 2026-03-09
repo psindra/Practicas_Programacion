@@ -183,12 +183,11 @@ function renderTabsContent(presupuesto, year) {
         __btnEdit.addEventListener("click", () => { editForm(_ingreso) });
         _ingreso && _tdIngresoMonto.appendChild(__btnEdit);
         // _tdIngresoMonto.setAttribute("colspan",2)
-        _tdIngresoMonto.classList.add("text-end");
-        _tdIngresoMonto.style.color = "cornflowerblue"
+        _tdIngresoMonto.classList.add("text-end", "text-primary-emphasis");
 
         const _tdIngreso = document.createElement("td");
         _tdIngreso.textContent = "Sueldo Normal"
-        _tdIngreso.style.color = "cornflowerblue"
+        _tdIngreso.classList.add("text-primary-emphasis");
         _trIngreso.appendChild(_thIngreso);
         _trIngreso.appendChild(_tdIngresoExtraordinario);
         _trIngreso.appendChild(_tdIngresoMonto);
@@ -204,7 +203,7 @@ function renderTabsContent(presupuesto, year) {
         _tdEspacio.innerHTML = `
         <div class="estadistica">
                 <p class="mb-2 text-danger"><strong>Gasto Mensual:</strong> $${presupuesto[year][month]?.estadistica.gastoMensual?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-warning-emphasis"><strong>Ahorro/Superávit:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2 text-warning-emphasis"><strong>Ahorro/Superávit:</strong> $<strong>${presupuesto[year][month]?.estadistica.ahorroMensual?.toLocaleString() || "0"}</strong></span><br>
                 <p class="mb-2 text-muted"><strong>Ahorro Habitual:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualHabitual?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-muted"><strong>Ahorro Extraordinario:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualExtraordinario?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-body-tertiary"><strong>Ingresos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumIngreso?.toLocaleString() || "0"}</span><br>
@@ -235,7 +234,7 @@ function renderTabsContent(presupuesto, year) {
             _thGastoNombre.style.color = "salmon"
             const _tdGastoPorcentaje = document.createElement("td")
             _tdGastoPorcentaje.innerHTML = `(${(gasto.monto.total / _ingresoHabitual * 100).toFixed(1)} %)`
-            _tdGastoPorcentaje.style.color = "cornflowerblue"
+            _tdGastoPorcentaje.classList.add("text-primary-emphasis");
             _trGasto.appendChild(_tdGastoMonto);
             _trGasto.appendChild(_thGastoNombre);
             _trGasto.appendChild(_tdGastoPorcentaje);
