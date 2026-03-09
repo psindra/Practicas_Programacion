@@ -16,7 +16,10 @@ export function editForm(movimiento) {
     form["_id"].parentElement.hidden = false;
     const flattenObj = flattenObject(movimiento);
     for (const key in flattenObj) {
-        if (key in form) form[key].value = flattenObj[key];
+        if (key in form) {
+            form[key].value =  flattenObj[key];
+            form[key][1] && (form[key][1].checked = flattenObj[key]) // Si el campo es un checkbox
+        }
     }
     divPaneNvoMovParsed.querySelector("#btnEliminarMov").addEventListener("click", () => {
         eliminarMovimiento(divPaneNvoMovParsed.querySelector("#btnEliminarMov"));
