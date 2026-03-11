@@ -35,8 +35,12 @@ async function parsePresupuestos(presupuestosData) {
         "PowerCard": 5,
         "Power Card": 5,
         "Comidita Mami": 6,
-        "Club Parque VS": 90,
-        "Gs Varios Salidas": 91
+        "OS Mami": 7,
+        "Limp Gracielita": 90,
+        "🛒Makro": 91,
+        "Extracciones Ef": 92,
+        "Club Parque VS": 93,
+        "Gs Varios Salidas": 94,
     }
     presupuestosData.forEach(movimiento => {
         presupuesto[(movimiento.mes).substring(0, 4)] ??= {};
@@ -213,7 +217,7 @@ function renderTabsContent(presupuesto, year) {
                 <p class="mb-2 text-success-emphasis"><strong>Inversiones USD acumuladas:</strong> U$D${presupuesto[year][month]?.estadistica.inversionUSDAcumuladaAnual?.toLocaleString() || "0"}</  span><br>
         </div>`;
         _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
-        _tabla.caption.innerHTML += `&ensp; - Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
+        _tabla.caption.innerHTML += `&ensp; -&ensp; Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
         _trEspacio.appendChild(_tdEspacio);
         _tbody.appendChild(_trEspacio);
 
