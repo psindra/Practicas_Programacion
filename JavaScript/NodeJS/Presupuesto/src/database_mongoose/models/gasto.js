@@ -32,7 +32,7 @@ const esquemaGasto = new mongoose.Schema({
     categoria: {
         type: String,
         required: false,
-        enum: ["Vivienda", "Servicios", "Tarjetas", "Auto", "Alimentación", "Salud", "Ocio", "Otros"],
+        enum: ["Vivienda", "Servicios", "Tarjetas", "Auto", "Alimentación", "Salud", "Vestimenta", "Limpieza", "Ocio", "Otros"],
         index: true
     },
     mesResumen: [{
