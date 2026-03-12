@@ -15,15 +15,15 @@ const esquemaInversion = new mongoose.Schema({
     montoARS: {
         type: Number, required: true,
         validate: {
-            validator: (v) => (Number.isInteger(v*100) && v > 0),
-            message: "El campo MontoARS debe ser un número entero positivo"
+            validator: (v) => ((v==v.toFixed(2)) && v > 0),
+            message: "El campo MontoARS debe ser un número positivo"
         }
     },
     montoUSD: {
         type: Number, required: true,
         validate: {
-            validator: (v) => (Number.isInteger(v*100) && v > 0),
-            message: "El campo MontoUSD debe ser un número entero positivo"
+            validator: (v) => ((v==v.toFixed(2)) && v > 0),
+            message: "El campo MontoUSD debe ser un número positivo"
         }
     }
 }, { _id: false });
