@@ -213,8 +213,8 @@ function renderTabsContent(presupuesto, year) {
                 <p class="mb-2 text-body-tertiary"><strong>Ingresos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumIngreso?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-body-tertiary"><strong>Gastos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumGasto?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-body-tertiary"><strong>Ahorro Acumulado:</strong> $${presupuesto[year][month]?.estadistica.accumAhorro?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-success"><strong>Inversiones ARS acumuladas:</strong> $${presupuesto[year][month]?.estadistica.inversionARSAcumuladaAnual?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-success-emphasis"><strong>Inversiones USD acumuladas:</strong> U$D${presupuesto[year][month]?.estadistica.inversionUSDAcumuladaAnual?.toLocaleString() || "0"}</  span><br>
+                <p class="mb-2 text-success"><strong>Inversiones ARS acumuladas:</strong> $${presupuesto[year][month]?.estadistica.accumInversionesARS?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2 text-success-emphasis"><strong>Inversiones USD acumuladas:</strong> U$D${presupuesto[year][month]?.estadistica.accumInversionesUSD?.toLocaleString() || "0"}</  span><br>
         </div>`;
         _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
         _tabla.caption.innerHTML += `&ensp; -&ensp; Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
