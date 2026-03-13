@@ -186,7 +186,6 @@ function renderTabsContent(presupuesto, year) {
         __btnEdit.classList.add("edit-btn", "float-end", "opacity-0");
         __btnEdit.addEventListener("click", () => { editForm(_ingreso) });
         _ingreso && _tdIngresoMonto.appendChild(__btnEdit);
-        // _tdIngresoMonto.setAttribute("colspan",2)
         _tdIngresoMonto.classList.add("text-end", "text-primary-emphasis");
 
         const _tdIngreso = document.createElement("td");
@@ -251,9 +250,10 @@ function renderTabsContent(presupuesto, year) {
             index === 0 && _trInversion.classList.add("table-group-divider");
             const _tdInversionMonto = document.createElement("td");
             _tdInversionMonto.classList.add("text-end");
-            _tdInversionMonto.textContent = `$${inversion.montoARS}`;
+            _tdInversionMonto.textContent = `$ ${inversion.montoARS.toLocaleString()}`;
             const _thInversionNombre = document.createElement("th");
-            _thInversionNombre.textContent = inversion.nombre;
+            _thInversionNombre.textContent = inversion.cantidadInstrumento + "\t";;
+            _thInversionNombre.textContent += inversion.nombre;
             _thInversionNombre.style.color = "darkcyan"
             const _btnEdit = document.createElement("a");
             _btnEdit.textContent = "🖊"
