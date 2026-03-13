@@ -7,7 +7,7 @@ const esquemaGasto = new mongoose.Schema({
             type: Number,
             validate: [
                 {
-                    validator: (v) => Number.isInteger(v*100) && v > 0,
+                    validator: (v) => (v == v.toFixed(2)) && v > 0,
                     message: "El campo Monto.Total debe ser un valor entero positivo"
                 }
             ],

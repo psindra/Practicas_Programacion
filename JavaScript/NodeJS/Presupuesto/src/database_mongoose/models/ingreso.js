@@ -6,7 +6,7 @@ const esquemaIngreso = new mongoose.Schema({
         total: {
             type: Number,
             validate: {
-                validator: (v) => Number.isInteger(v*100) && v > 0,
+                validator: (v) => v == v.toFixed(2) && v > 0,
                 message: "El campo Monto.Total debe ser un valor entero positivo"
             },
             required: true
@@ -15,7 +15,7 @@ const esquemaIngreso = new mongoose.Schema({
             type: Number,
             validate: {
                 min: 0,
-                validator: (v) => (Number.isInteger(v*100) && v > 0) || v === undefined,
+                validator: (v) => (v == v.toFixed(2) && v > 0) || v === undefined,
                 message: "El campo Monto.Habitual debe ser un número entero positivo o vacío"
             }
         },
@@ -23,7 +23,7 @@ const esquemaIngreso = new mongoose.Schema({
             type: Number,
             validate: {
                 min: 0,
-                validator: (v) => (Number.isInteger(v*100) && v >= 0) || v === undefined,
+                validator: (v) => (v == v.toFixed(2) && v >= 0) || v === undefined,
                 message: `El campo Monto.Extra debe ser un número entero positivo o vacío`
             }
         }
