@@ -100,7 +100,7 @@ function renderNav(presupuesto) {
 }
 
 async function renderUI() {
-    refreshPresupuestos()
+    return refreshPresupuestos()
         .then(parsePresupuestos)
         .then(renderNav)
         .then(renderYear)
@@ -111,16 +111,22 @@ async function renderUI() {
 }
 
 async function updateUI() {
-    const activeYearButton = document.querySelector("#navYears .active");
-    const activeTablist = document.querySelector("#tablist>.nav-item>.active");
-    const activeTabContent = document.querySelector("#tabsContent>.tab-pane.show.active");
+    const activeYearButtonText = document.querySelector("#navYears .active")?.textContent;
+    const activeTablistTarget = document.querySelector("#tablist>.nav-item>.active")?.getAttribute("data-bs-target");
     await renderUI();
-    activeYearButton?.click();
-    activeYearButton.classList.add("active");
-    activeTablist?.click();
-    activeTablist.classList.add("active");
-    activeTabContent?.classList.add("show", "active");
-    activeTabContent?.querySelector("#tabsContainer")?.scrollIntoView({ behavior: "smooth" });
+    // Restaurar el año activo
+    if (activeYearButtonText) {
+        const newActiveYearButton = document.querySelectorAll("#navYears .nav-item button").values().find(btn => btn.textContent === activeYearButtonText);
+        newActiveYearButton?.click();
+        newActiveYearButton?.classList.add("active");
+    }
+    // Restaurar la pestaña activa
+    if (activeTablistTarget) {
+        document.querySelector(`#tablist button[data-bs-target="${activeTablistTarget}"]`)?.click();
+        // newTabButton?.classList.add("active");
+        // const newTabContent = document.querySelector(activeTablistTarget);
+        // newTabContent?.classList.add("show", "active");
+    }
 }
 
 async function renderYear(presupuesto, year) {
@@ -270,8 +276,10 @@ function renderTabsContent(presupuesto, year) {
         });
 
     });
-    _tabsContent?.firstChild?.classList?.add("show", "active");
+    // _tabsContent?.firstChild?.classList?.add("show", "active");
     tabsContainer.appendChild(_tabsContent);
+    document.querySelector("#tablist>.nav-item>:not(.disabled)")?.click();
+
 }
 
 function renderTablist(presupuesto, year) {
@@ -307,7 +315,7 @@ function renderTablist(presupuesto, year) {
         _liTabs.appendChild(_buttonTabs);
         _ulTabs.appendChild(_liTabs);
     });
-    _ulTabs?.firstChild?.firstChild?.classList?.add("active");
+    // _ulTabs?.firstChild?.firstChild?.classList?.add("active");
     tabsContainer.appendChild(_ulTabs);
     return { meses, tabsContainer };
 }
