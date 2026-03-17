@@ -75,7 +75,6 @@ export function eliminarMovimiento(button) {
             return response.json();
         })
         .then(result => {
-            console.log("Movimiento eliminado exitosamente:", result);
             mensajeModal("Movimiento eliminado exitosamente:", result);
             button.closest("form").reset();
             button.closest("dialog").close();
