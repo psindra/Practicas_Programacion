@@ -44,7 +44,7 @@ async function parsePresupuestos(presupuestosData) {
     }
     presupuestosData.forEach(movimiento => {
         presupuesto[(movimiento.mes).substring(0, 4)] ??= {};
-        presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes] ??= { ingreso: [], gasto: [], inversion: [] };
+        presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes] ??= { ingreso: [], gasto: [], inversion: [], credito: [] };
         if (!movimiento.tipo) {
             console.log("Movimiento sin tipo:\n", movimiento);
         }
