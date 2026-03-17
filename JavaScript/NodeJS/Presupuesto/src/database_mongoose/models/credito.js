@@ -24,6 +24,7 @@ const esquemaCredito = new mongoose.Schema({
         }
     },
     formaDebito: {...Movimiento.schema.path("formaPago").options},
+    formaPago: {type: String, required: false}
 }, { _id: false });
 
 esquemaCredito.pre("validate", function (next) {
