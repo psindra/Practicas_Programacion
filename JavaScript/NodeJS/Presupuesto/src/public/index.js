@@ -162,7 +162,7 @@ function renderTabsContent(presupuesto, year) {
         _tabla.style.tableLayout = "fixed";
         _tabPane.appendChild(_tabla);
         const _caption = document.createElement("caption");
-        _caption.textContent = `Presupuesto ${mes} ${year}`;
+        // _caption.textContent = `Presupuesto ${mes} ${year}`;
         _tabla.appendChild(_caption);
         const _tbody = document.createElement("tbody");
         _tbody.classList.add("align-middle");
@@ -204,25 +204,25 @@ function renderTabsContent(presupuesto, year) {
         // _trIngreso.appendChild(document.createElement("td"))
         _tbody.appendChild(_trIngreso);
 
-        // Espacio de separación entre Ingreso y Gastos/Inversiones
+        /* ESTADISTICAS */
         const _trEspacio = document.createElement("tr");
         const _tdEspacio = document.createElement("td");
         _tdEspacio.setAttribute("colspan", "2");
-        _tdEspacio.setAttribute("rowspan", "20");
+        _tdEspacio.setAttribute("rowspan", "30");
         _tdEspacio.innerHTML = `
         <div class="estadistica">
                 <p class="mb-2 text-danger"><strong>Gasto Mensual:</strong> $${presupuesto[year][month]?.estadistica.gastoMensual?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-warning-emphasis"><strong>Ahorro/Superávit:</strong> $<strong>${presupuesto[year][month]?.estadistica.ahorroMensual?.toLocaleString() || "0"}</strong></span><br>
-                <p class="mb-2 text-muted"><strong>Ahorro Habitual:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualHabitual?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2 text-body-tertiary"><strong>Ahorro Habitual:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualHabitual?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-muted"><strong>Ahorro Extraordinario:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualExtraordinario?.toLocaleString() || "0"}</span><br>
+                <p class="mb-2 text-muted"><strong>Total Invertido:</strong> $${presupuesto[year][month]?.estadistica.invertidoMensual?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-body-tertiary"><strong>Ingresos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumIngreso?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-body-tertiary"><strong>Gastos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumGasto?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-body-tertiary"><strong>Ahorro Acumulado:</strong> $${presupuesto[year][month]?.estadistica.accumAhorro?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-success"><strong>Inversiones ARS acumuladas:</strong> $${presupuesto[year][month]?.estadistica.accumInversionesARS?.toLocaleString() || "0"}</span><br>
                 <p class="mb-2 text-success-emphasis"><strong>Inversiones USD acumuladas:</strong> U$D${presupuesto[year][month]?.estadistica.accumInversionesUSD?.toLocaleString() || "0"}</  span><br>
         </div>`;
-        _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
-        _tabla.caption.innerHTML += `&ensp; -&ensp; Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
+        
         _trEspacio.appendChild(_tdEspacio);
         _tbody.appendChild(_trEspacio);
 
@@ -250,6 +250,33 @@ function renderTabsContent(presupuesto, year) {
             _tbody.appendChild(_trGasto);
         });
 
+        /* CREDITOS */
+        let accumTotalCreditoMes = 0;
+        presupuesto[year][month]?.credito?.forEach((credito, index) => {
+            const _trCredito = document.createElement("tr");
+            index === 0 && _trCredito.classList.add("table-group-divider");
+            const _tdCreditoMonto = document.createElement("td");
+            _tdCreditoMonto.classList.add("text-end");
+            _tdCreditoMonto.textContent = `$ ${(credito.monto.total).toLocaleString()}`;
+            const _thCreditoNombre = document.createElement("th");
+            _thCreditoNombre.innerHTML = credito.nombre;
+            const _btnEdit = document.createElement("a");
+            _btnEdit.textContent = "🖊"
+            _btnEdit.classList.add("edit-btn", "float-end", "opacity-0");
+            _btnEdit.addEventListener("click", () => { editForm(credito) });
+            _thCreditoNombre.appendChild(_btnEdit);
+            _thCreditoNombre.style.color = "orange"
+            // const _tdCreditoPorcentaje = document.createElement("td")
+            // _tdCreditoPorcentaje.innerHTML = `(${(credito.monto.total / _ingresoHabitual * 100).toFixed(1)} %)`
+            // _tdCreditoPorcentaje.classList.add("text-primary-emphasis");
+            _trCredito.appendChild(_tdCreditoMonto);
+            _trCredito.appendChild(_thCreditoNombre);
+            // _trCredito.appendChild(_tdCreditoPorcentaje);
+            _tbody.appendChild(_trCredito);
+
+            accumTotalCreditoMes += credito.monto.total;
+        });
+
         /* INVERSIONES */
         presupuesto[year][month]?.inversion?.forEach((inversion, index) => {
             const _trInversion = document.createElement("tr");
@@ -267,13 +294,20 @@ function renderTabsContent(presupuesto, year) {
             _btnEdit.addEventListener("click", () => { editForm(inversion) });
             _thInversionNombre.appendChild(_btnEdit);
             const _tdInversionMontoUSD = document.createElement("td");
-            _tdInversionMontoUSD.textContent = `(~U$D${inversion.montoUSD})`
+            _tdInversionMontoUSD.textContent = `(~U$D${inversion.montoUSD.toFixed(2).padStart(7, ' ')})`
+            _tdInversionMontoUSD.style.whiteSpace = "pre";
+            _tdInversionMontoUSD.classList.add("font-monospace");
             _tdInversionMontoUSD.style.color = "darkcyan"
             _trInversion.appendChild(_tdInversionMonto);
             _trInversion.appendChild(_thInversionNombre);
             _trInversion.appendChild(_tdInversionMontoUSD);
             _tbody.appendChild(_trInversion);
         });
+
+        /* pie de tabla (caption) */
+        _tabla.caption.innerHTML += `&emsp; - &emsp; Liquidez Restante: $${(_ingresoExtraordinario - presupuesto[year][month]?.estadistica.gastoMensual + accumTotalCreditoMes - presupuesto[year][month]?.estadistica.invertidoMensual).toLocaleString() || "0"}`;
+        _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
+        _tabla.caption.innerHTML += `&ensp; -&ensp; Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
 
     });
     // _tabsContent?.firstChild?.classList?.add("show", "active");

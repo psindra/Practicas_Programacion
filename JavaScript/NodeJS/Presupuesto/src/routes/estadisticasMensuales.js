@@ -8,7 +8,8 @@ export const estadisticasDelMes = async () => {
                 ingresoMensualHabitual: { $sum: { $cond: [{ $and: [{ $eq: ["$tipo", "ingreso"] }, { $eq: ["$nombre", "Sueldo"] }] }, "$monto.habitual", 0] } },
                 ingresoMensualExtraordinario: { $sum: { $cond: [{ $eq: ["$tipo", "ingreso"] }, "$monto.total", 0] } },
                 gastoMensual: { $sum: { $cond: [{ $and: [{ $eq: ["$tipo", "gasto"] }, { $eq: ["$formaPago", "Contado"] }] }, "$monto.total", 0] } },
-                gastoMensualHabitual: { $sum: { $cond: [{ $and: [{ $eq: ["$tipo", "gasto"] }, { $eq: ["$formaPago", "Contado"] }, { $eq: ["$habitual", true] }] }, "$monto.total", 0] } }
+                gastoMensualHabitual: { $sum: { $cond: [{ $and: [{ $eq: ["$tipo", "gasto"] }, { $eq: ["$formaPago", "Contado"] }, { $eq: ["$habitual", true] }] }, "$monto.total", 0] } },
+                invertidoMensual: { $sum: { $cond: [{ $and: [{ $eq: ["$tipo", "inversion"] }, { $eq: ["$formaPago", "Contado"] }] }, "$montoARS", 0] } }
             }
         },
         {
@@ -27,7 +28,8 @@ export const estadisticasDelMes = async () => {
                 gastoMensualHabitual: 1,
                 ahorroMensual: 1,
                 ahorroMensualHabitual: 1,
-                ahorroMensualExtraordinario: 1
+                ahorroMensualExtraordinario: 1,
+                invertidoMensual: 1
             }
         }
     ]);

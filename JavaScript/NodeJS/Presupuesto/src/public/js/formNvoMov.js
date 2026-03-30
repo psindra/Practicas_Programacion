@@ -73,14 +73,17 @@ function submitFormNvoMov(event) {
         })
 }
 
-function parseDivPaneNvoMov(tipo = "ingreso") {
-
+function parseDivPaneNvoMov(tipo) {
+    if(!tipo){
+    return DOMModalFormNvoMov.querySelector("#navNvoMovTipo > .active").click();
+    }
     DOMModalFormNvoMov.querySelector("#navNvoMovTipo").style.display = "";
     const pillsNvoMovContent = DOMModalFormNvoMov.querySelector("#pillsNvoMovContent");
-    pillsNvoMovContent.children[0]?.classList.remove("active", "show");
+    // pillsNvoMovContent.children[0]?.classList.remove("active", "show");
     pillsNvoMovContent.children[0]?.remove();
 
-    const divPaneNvoMovParsed = DOMdivPaneNvoMov.cloneNode(true);
+    // const divPaneNvoMovParsed = DOMdivPaneNvoMov.cloneNode(true);
+    const divPaneNvoMovParsed = DOMdivPaneNvoMov;
     
 
     // Filtrado por TC o Contado
@@ -93,9 +96,18 @@ function parseDivPaneNvoMov(tipo = "ingreso") {
     })
     divPaneNvoMovParsed.querySelector("form select#formaPagoNvoMov").dispatchEvent(new Event("change"));
 
+    divPaneNvoMovParsed.querySelector("form select#formaDebitoNvoMov").addEventListener("change", function () {
+        divPaneNvoMovParsed.querySelector("form div:has(>input#nroCuotasNvoMov)").style.display = (this.value === "Contado") ? "none" : "";
+        divPaneNvoMovParsed.querySelector("form input#nroCuotasNvoMov").disabled = (this.value === "Contado");
+    });
+    // divPaneNvoMovParsed.querySelector("form select#formaDebitoNvoMov").dispatchEvent(new Event("change"));
+
     divPaneNvoMovParsed.querySelectorAll("[data-tipo]").forEach(element => {
         if (!element.getAttribute("data-tipo").includes(tipo)) {
-            element.remove();
+            element.disabled = element.hidden = true;
+            // element.remove();
+        } else {
+            element.disabled = element.hidden = false;
         }
     });
     divPaneNvoMovParsed.querySelector("form")["tipo"].value = tipo;
@@ -115,8 +127,11 @@ function parseModalFormNvoMov() {
 
     const btnNvoMov = document.querySelector("#btnNvoMov");
     btnNvoMov.addEventListener("click", () => {
-    DOMModalFormNvoMov.querySelector(".card-header > h5#cardTitle").textContent = "Agregar Movimiento";
-        parseDivPaneNvoMov();
+        DOMModalFormNvoMov.querySelector(".card-header > h5#cardTitle").textContent = "Agregar Movimiento";
+        DOMModalFormNvoMov.querySelector("#navNvoMovTipo > .active").click();
+        const form = DOMModalFormNvoMov.querySelector("form");
+        form["_id"].parentElement.hidden = form["_id"].hidden = form["_id"].disabled = true;
+        DOMModalFormNvoMov.querySelector("#navNvoMovTipo").style.display = "";
         DOMModalFormNvoMov.showModal();
     });
 
@@ -131,6 +146,10 @@ function parseModalFormNvoMov() {
     const btn_pillNvoMovInversion = DOMModalFormNvoMov.querySelector("#pillNvoMovInversion");
     btn_pillNvoMovInversion.addEventListener("click", () => {
         parseDivPaneNvoMov("inversion");
+    });
+    const btn_pillNvoMovCredito = DOMModalFormNvoMov.querySelector("#pillNvoMovCredito");
+    btn_pillNvoMovCredito.addEventListener("click", () => {
+        parseDivPaneNvoMov("credito");
     });
 }
 

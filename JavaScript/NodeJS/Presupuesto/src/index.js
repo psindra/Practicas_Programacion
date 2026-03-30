@@ -44,7 +44,7 @@ app.listen(app.get("PORT"), err => {
     }
 })
 
-if (process.env.ENV_PRUEBAS === "true") {
+if (process.env.ENV_PRUEBAS === "true" && process.env.MONGODB_DATABASE !== "Presupuesto-PROD-1") {
     console.log("Importando movimientos de ejemplo...");
     import ("./movimientoEjemplo.js");
 }

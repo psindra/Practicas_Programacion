@@ -28,7 +28,7 @@ const esquemaCredito = new mongoose.Schema({
 }, { _id: false });
 
 esquemaCredito.pre("validate", function (next) {
-    if (this.formaPago === "Contado" && this.monto.nroCuotas) {
+    if (this.formaDebito === "Contado" && this.monto.nroCuotas) {
         throw new Error("La forma de pago 'Contado' no puede tener cuotas. Por favor, elija una forma de pago diferente.");
     }
     return;

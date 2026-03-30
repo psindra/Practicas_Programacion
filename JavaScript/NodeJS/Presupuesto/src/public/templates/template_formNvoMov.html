@@ -36,7 +36,7 @@
         </div>
         <div class="form-floating mb-sm-3 mb-2" data-tipo="inversion">
             <input type="text" class="form-control" id="plataformaNvoMov" name="plataforma" list="listaPlataformaMov"
-                placeholder="Plataforma" required>
+                placeholder="Plataforma" required data-tipo="inversion">
             <datalist id="listaPlataformaMov">
                 <option value="Binance">
                 <option value="BuenBit">
@@ -51,7 +51,7 @@
         </div>
         <div class="form-floating mb-sm-3 mb-2" data-tipo="inversion">
             <input type="text" class="form-control" id="instrumentoNvoMov" name="instrumento" list="listaInstrumentoMov"
-                placeholder="Instrumento" required>
+                placeholder="Instrumento" required data-tipo="inversion">
             <datalist id="listaInstrumentoMov" aria-autocomplete="list" autocomplete="on">
                 <option value="BCBA:">
                 <option value="BYMA:">
@@ -66,7 +66,7 @@
             </datalist>
             <label for="instrumentoNvoMov">Instrumento</label>
         </div>
-        <div class="form-floating mb-sm-3 mb-2" data-tipo="ingreso, gasto">
+        <div class="form-floating mb-sm-3 mb-2" data-tipo="ingreso, gasto, credito">
             <input type="text" class="form-control" id="nombreNvoMov" name="nombre" list="listaNombreMov"
                 placeholder="Nombre del movimiento" required>
             <datalist id="listaNombreMov">
@@ -86,8 +86,8 @@
             </datalist>
             <label for="nombreNvoMov">Nombre del movimiento</label>
         </div>
-        <div class="input-group mb-sm-3 mb-2">
-            <div class="form-floating" data-tipo="ingreso, gasto">
+        <div class="input-group mb-sm-3 mb-2" data-tipo="ingreso, gasto, credito">
+            <div class="form-floating" data-tipo="ingreso, gasto, credito">
                 <input type="number" class="form-control" id="montoTotalNvoMov" name="monto.total"
                     placeholder="Monto Total" step="0.01">
                 <label for="montoTotalNvoMov">Monto Total</label>
@@ -102,13 +102,13 @@
                     placeholder="Monto Extra" step="0.01">
                 <label for="montoExtraNvoMov">Extra</label>
             </div>
-            <div class="form-floating" data-tipo="gasto">
+            <div class="form-floating" data-tipo="gasto, credito">
                 <input type="number" class="form-control" id="nroCuotasNvoMov" name="monto.nroCuotas"
                     placeholder="Nro Cuotas">
                 <label for="nroCuotasNvoMov">Nro Cuotas</label>
             </div>
         </div>
-        <div class="input-group mb-sm-3 mb-2">
+        <div class="input-group mb-sm-3 mb-2" data-tipo="inversion">
             <div class="form-floating" data-tipo="inversion">
                 <input type="number" class="form-control" id="cantInstrumentoNvoMov" name="cantidadInstrumento"
                     placeholder="Cantidad Instrumento" step="any">
@@ -126,7 +126,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-group input-group-sm mb-sm-3 mb-2 col-sm">
+            <div class="input-group input-group-sm mb-sm-3 mb-2 col-sm" data-tipo="ingreso, gasto, inversion">
                 <label class="input-group-text" for="formaPagoNvoMov"><small class="small">Forma de Pago</small></label>
                 <select class="form-select" id="formaPagoNvoMov" name="formaPago" aria-label="Forma de Pago" required>
                     <!-- <option selected disabled hidden></option> -->
@@ -136,10 +136,20 @@
                     <option value="Otros">Otros</option>
                 </select>
             </div>
+            <div class="input-group input-group-sm mb-sm-3 mb-2 col-sm" data-tipo="credito">
+                <label class="input-group-text" for="formaDebitoNvoMov"><small class="small">Forma Débito</small></label>
+                <select class="form-select" id="formaDebitoNvoMov" name="formaDebito" aria-label="Forma Débito" required data-tipo="credito">
+                    <option selected disabled hidden></option>
+                    <!-- <option selected value="Contado">Contado</option> -->
+                    <option value="TC Visa BH">TC Visa BH</option>
+                    <option value="TC Powercard">TC Powercard</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
             <div class="input-group input-group-sm mb-sm-3 mb-2 col-sm" data-tipo="gasto">
 
                 <label class="input-group-text" for="categoriaNvoMov">Categoría</label>
-                <select class="form-select" id="categoriaNvoMov" name="categoria" aria-label="Categoria" required>
+                <select class="form-select" id="categoriaNvoMov" name="categoria" aria-label="Categoria" required data-tipo="gasto">
                     <option selected disabled hidden></option>
                     <option value="Vivienda">Vivienda</option>
                     <option value="Servicios">Servicios</option>
@@ -154,7 +164,7 @@
                 </select>
             </div>
         </div>
-        <div class="input-group input-group-sm mb-sm-3 mb-2" data-tipo="gasto">
+        <div class="input-group input-group-sm mb-sm-3 mb-2" data-tipo="">
             <label class="input-group-text" for="añoResumenMov">Mes Resumen:</label>
             <select class="form-select form-select-sm" id="añoResumenMov" name="añoResumenMov" aria-label="Año Resumen">
                 <option selected disabled hidden></option>

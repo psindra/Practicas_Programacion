@@ -13,17 +13,22 @@ export function editForm(movimiento) {
     const form = divPaneNvoMovParsed.querySelector("form");
     movimiento["añoMov"] = movimiento["mes"].slice(0, 4);
     movimiento["mesMov"] = movimiento["mes"].slice(4, 6);
-    form["_id"].parentElement.hidden = false;
+    form["_id"].parentElement.hidden = form["_id"].hidden = form["_id"].disabled = false;
     const flattenObj = flattenObject(movimiento);
     for (const key in flattenObj) {
-        if (key in form) {
-            form[key].value =  flattenObj[key];
-            form[key][1] && (form[key][1].checked = flattenObj[key]) // Si el campo es un checkbox
+        const element= form.querySelector(`[name="${key}"]:not([type="hidden"])`);
+        if(element){
+            element[ element.type === "checkbox" ? "checked" : "value" ] = flattenObj[key];
+            element?.dispatchEvent(new Event("change")); // Para mostrar/ocultar campos condicionales
         }
     }
-    divPaneNvoMovParsed.querySelector("#btnEliminarMov").addEventListener("click", () => {
-        eliminarMovimiento(divPaneNvoMovParsed.querySelector("#btnEliminarMov"));
-    });
+
+    /* en este caso como se ejecuta cada vez que se parsea un EditForm
+        tuve que utilizar "onclick" en vez de "addEventListener" */
+    divPaneNvoMovParsed.querySelector("#btnEliminarMov").onclick = function() {
+        eliminarMovimiento(this);
+    }
+    
     form.closest("dialog").showModal();
 }
 
