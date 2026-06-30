@@ -93,7 +93,7 @@ function renderNav(presupuesto) {
                 });
         });
     });
-    _ul?.firstChild?.firstChild?.classList?.add("active");
+    _ul?.lastChild?.firstChild?.classList?.add("active");
     navYears.appendChild(_ul);
 
     return presupuesto;
@@ -131,7 +131,7 @@ async function updateUI() {
 
 async function renderYear(presupuesto, year) {
     if (!year) {
-        year = Object.keys(presupuesto)[0]?.substring(0, 4) || 2023;
+        year = Object.keys(presupuesto).at(-1)?.substring(0, 4) || 2023;
     }
 
     // Renderizado de la lista de Tabs
@@ -312,7 +312,7 @@ function renderTabsContent(presupuesto, year) {
     });
     // _tabsContent?.firstChild?.classList?.add("show", "active");
     tabsContainer.appendChild(_tabsContent);
-    document.querySelector("#tablist>.nav-item>:not(.disabled)")?.click();
+    [...document.querySelectorAll("#tablist>.nav-item>:not(.disabled)")].at(-1)?.click();
 
 }
 
