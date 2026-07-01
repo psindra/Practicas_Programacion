@@ -131,7 +131,7 @@ async function updateUI() {
 
 async function renderYear(presupuesto, year) {
     if (!year) {
-        year = Object.keys(presupuesto).at(-1)?.substring(0, 4) || 2023;
+        year = Object.keys(presupuesto).at(-1)?.substring(0, 4) || 2026;
     }
 
     // Renderizado de la lista de Tabs
