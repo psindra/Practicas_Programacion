@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     <footer class="sticky-bottom top-100">
         <hr class="mt-5 border-top">
         <div class="form-switch form-check-inline mx-2">
-            <input type="checkbox" class="form-check-input" id="enableConsole" name="enableConsole" checked>
+            <input type="checkbox" class="form-check-input" id="enableConsole" name="enableConsole">
         </div>
         <button type="button" class="btn btn-sm btn-outline-secondary" id="cleanConsole">Clean Console</button>
-        <pre id="preConsole">CONSOLA:\n<br></pre>
+        <pre id="preConsole" style="display: none;">CONSOLA:\n<br></pre>
         <script>
             document.getElementById('enableConsole').addEventListener('change', function () {
                 const preConsole = document.getElementById('preConsole');
