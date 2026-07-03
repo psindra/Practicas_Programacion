@@ -343,6 +343,7 @@ function renderTablist(presupuesto, year) {
         _buttonTabs.setAttribute("role", "tab");
         _buttonTabs.setAttribute("aria-controls", `tabPresupuesto${mes}`);
         _buttonTabs.textContent = mes;
+        _buttonTabs.setAttribute("numMes", String(index + 1).padStart(2, "0"));
         if (!presupuesto[year][month]) {
             _buttonTabs.classList.add("disabled");
         }

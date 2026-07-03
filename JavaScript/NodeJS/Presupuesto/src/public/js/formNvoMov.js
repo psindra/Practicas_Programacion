@@ -131,6 +131,8 @@ function parseModalFormNvoMov() {
         DOMModalFormNvoMov.querySelector("#navNvoMovTipo > .active").click();
         const form = DOMModalFormNvoMov.querySelector("form");
         form["_id"].parentElement.hidden = form["_id"].hidden = form["_id"].disabled = true;
+        form["añoMov"].value = document.querySelector("#navYears > ul > .nav-item > button.active").textContent;
+        form["mesMov"].value = document.querySelector("#tablist > .nav-item > button.active").getAttribute("numMes");
         DOMModalFormNvoMov.querySelector("#navNvoMovTipo").style.display = "";
         DOMModalFormNvoMov.showModal();
     });
