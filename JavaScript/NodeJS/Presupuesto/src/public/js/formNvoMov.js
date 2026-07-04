@@ -97,11 +97,14 @@ function parseDivPaneNvoMov(tipo) {
     })
     divPaneNvoMovParsed.querySelector("form select#formaPagoNvoMov").dispatchEvent(new Event("change"));
 
+    /* 
+    // POR AHORA NO NECESITO MANIPULAR EL NÚMERO DE CUOTAS CON EL SELECT DE FORMA DE DÉBITO (inversion), PERO LO DEJO POR SI ACASO
     divPaneNvoMovParsed.querySelector("form select#formaDebitoNvoMov").addEventListener("change", function () {
         divPaneNvoMovParsed.querySelector("form div:has(>input#nroCuotasNvoMov)").style.display = (this.value === "Contado") ? "none" : "";
         divPaneNvoMovParsed.querySelector("form input#nroCuotasNvoMov").disabled = (this.value === "Contado");
     });
     // divPaneNvoMovParsed.querySelector("form select#formaDebitoNvoMov").dispatchEvent(new Event("change"));
+     */
 
     divPaneNvoMovParsed.querySelectorAll("[data-tipo]").forEach(element => {
         if (!element.getAttribute("data-tipo").includes(tipo)) {
