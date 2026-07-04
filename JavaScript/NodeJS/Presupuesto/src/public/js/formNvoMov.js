@@ -88,8 +88,9 @@ function parseDivPaneNvoMov(tipo) {
 
     // Filtrado por TC o Contado
     divPaneNvoMovParsed.querySelector("form select#formaPagoNvoMov").addEventListener("change", function () {
-        divPaneNvoMovParsed.querySelector("form div:has(>input#nroCuotasNvoMov)").style.display = (this.value === "Contado") ? "none" : "";
-        divPaneNvoMovParsed.querySelector("form input#nroCuotasNvoMov").disabled = (this.value === "Contado");
+        // divPaneNvoMovParsed.querySelector("form div:has(>input#nroCuotasNvoMov)").style.display = (this.value === "Contado") ? "none" : "";
+        divPaneNvoMovParsed.querySelector("form div:has(>input#nroCuotasNvoMov)").hidden = (this.value === "Contado");
+        // divPaneNvoMovParsed.querySelector("form input#nroCuotasNvoMov").disabled = (this.value === "Contado");
 
         divPaneNvoMovParsed.querySelector("form div:has(>select#añoResumenMov), form div:has(>select#añoResumenMov)").style.display = (this.value === "Contado") ? "none" : "";
         divPaneNvoMovParsed.querySelector("form select#añoResumenMov").disabled = (this.value === "Contado");
@@ -108,6 +109,8 @@ function parseDivPaneNvoMov(tipo) {
             // element.remove();
         } else {
             element.disabled = element.hidden = false;
+            // Para que se ejecute el evento de cambio y se actualice la visibilidad de los elementos relacionados (por ejemplo, el select de forma de pago/debito -> el input de número de cuotas)
+            element.dispatchEvent(new Event("change"));
         }
     });
     divPaneNvoMovParsed.querySelector("form")["tipo"].value = tipo;
