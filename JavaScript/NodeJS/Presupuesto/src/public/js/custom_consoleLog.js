@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const footerHTML = `
   <!-- Footer Log -->
     <footer class="sticky-bottom top-100">
-        <hr class="mt-5 border-top">
+        <hr class="mt-3 border-top">
         <div class="form-switch form-check-inline mx-2">
             <input type="checkbox" class="form-check-input" id="enableConsole" name="enableConsole">
         </div>
