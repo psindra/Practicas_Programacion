@@ -25,7 +25,7 @@ async function refreshEstadisticas() {
 }
 
 async function parsePresupuestos(presupuestosData) {
-    const estadisticas = await refreshEstadisticas();
+    /* const estadisticas = await refreshEstadisticas(); */
     const presupuesto = {};
     const ordenGastos = {
         "Alquiler": 1,
@@ -50,7 +50,7 @@ async function parsePresupuestos(presupuestosData) {
         }
 
         presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes][movimiento.tipo].push(movimiento);
-        presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes]["estadistica"] = estadisticas.find(est => est.mes === movimiento.mes);
+        /* presupuesto[(movimiento.mes).substring(0, 4)][movimiento.mes]["estadistica"] = estadisticas.find(est => est.mes === movimiento.mes); */
 
     });
 
@@ -61,6 +61,22 @@ async function parsePresupuestos(presupuestosData) {
             });
         });
     });
+
+    const __promesaEstadisticas = refreshEstadisticas()
+    .then(estadisticas => {
+        estadisticas.forEach(est => {
+            presupuesto[(est.mes).substring(0, 4)] ??= {};
+            presupuesto[(est.mes).substring(0, 4)][est.mes] ??= { ingreso: [], gasto: [], inversion: [], credito: [] };
+            presupuesto[(est.mes).substring(0, 4)][est.mes]["estadistica"] = est;
+        });
+    });
+    Object.defineProperty(presupuesto, "__promesaEstadisticas", {
+        value: __promesaEstadisticas,
+        writable: false,
+        enumerable: false,
+        configurable: false
+    });
+
     return presupuesto;
 }
 
@@ -209,19 +225,21 @@ function renderTabsContent(presupuesto, year) {
         const _tdEspacio = document.createElement("td");
         _tdEspacio.setAttribute("colspan", "2");
         _tdEspacio.setAttribute("rowspan", "30");
-        _tdEspacio.innerHTML = `
-        <div class="estadistica">
-                <p class="mb-2 text-danger"><strong>Gasto Mensual:</strong> $${presupuesto[year][month]?.estadistica.gastoMensual?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-warning-emphasis"><strong>Ahorro/Superávit:</strong> $<strong>${presupuesto[year][month]?.estadistica.ahorroMensual?.toLocaleString() || "0"}</strong></span><br>
-                <p class="mb-2 text-body-tertiary"><strong>Ahorro Habitual:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualHabitual?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-muted"><strong>Ahorro Extraordinario:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualExtraordinario?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-muted"><strong>Total Invertido:</strong> $${presupuesto[year][month]?.estadistica.invertidoMensual?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-body-tertiary"><strong>Ingresos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumIngreso?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-body-tertiary"><strong>Gastos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumGasto?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-body-tertiary"><strong>Ahorro Acumulado:</strong> $${presupuesto[year][month]?.estadistica.accumAhorro?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-success"><strong>Inversiones ARS acumuladas:</strong> $${presupuesto[year][month]?.estadistica.accumInversionesARS?.toLocaleString() || "0"}</span><br>
-                <p class="mb-2 text-success-emphasis"><strong>Inversiones USD acumuladas:</strong> U$D${presupuesto[year][month]?.estadistica.accumInversionesUSD?.toLocaleString() || "0"}</  span><br>
-        </div>`;
+        presupuesto.__promesaEstadisticas.then(() => {
+            _tdEspacio.innerHTML = `
+            <div class="estadistica">
+                    <p class="mb-2 text-danger"><strong>Gasto Mensual:</strong> $${presupuesto[year][month]?.estadistica.gastoMensual?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-warning-emphasis"><strong>Ahorro/Superávit:</strong> $<strong>${presupuesto[year][month]?.estadistica.ahorroMensual?.toLocaleString() || "0"}</strong></span><br>
+                    <p class="mb-2 text-body-tertiary"><strong>Ahorro Habitual:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualHabitual?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-muted"><strong>Ahorro Extraordinario:</strong> $${presupuesto[year][month]?.estadistica.ahorroMensualExtraordinario?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-muted"><strong>Total Invertido:</strong> $${presupuesto[year][month]?.estadistica.invertidoMensual?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-body-tertiary"><strong>Ingresos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumIngreso?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-body-tertiary"><strong>Gastos Acumulados:</strong> $${presupuesto[year][month]?.estadistica.accumGasto?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-body-tertiary"><strong>Ahorro Acumulado:</strong> $${presupuesto[year][month]?.estadistica.accumAhorro?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-success"><strong>Inversiones ARS acumuladas:</strong> $${presupuesto[year][month]?.estadistica.accumInversionesARS?.toLocaleString() || "0"}</span><br>
+                    <p class="mb-2 text-success-emphasis"><strong>Inversiones USD acumuladas:</strong> U$D${presupuesto[year][month]?.estadistica.accumInversionesUSD?.toLocaleString() || "0"}</  span><br>
+            </div>`;
+        });
         
         _trEspacio.appendChild(_tdEspacio);
         _tbody.appendChild(_trEspacio);
@@ -305,11 +323,12 @@ function renderTabsContent(presupuesto, year) {
             _tbody.appendChild(_trInversion);
         });
 
-        /* pie de tabla (caption) */
-        _tabla.caption.innerHTML += `Liquidez Restante: $${(_ingresoExtraordinario - presupuesto[year][month]?.estadistica.gastoMensual + accumTotalCreditoMes - presupuesto[year][month]?.estadistica.invertidoMensual).toLocaleString() || "0"}`;
-        _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro Ord: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
-        _tabla.caption.innerHTML += `&ensp; -&ensp; Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
-
+        presupuesto.__promesaEstadisticas.then(() => {
+            /* pie de tabla (caption) */
+            _tabla.caption.innerHTML += `Liquidez Restante: $${(_ingresoExtraordinario - presupuesto[year][month]?.estadistica.gastoMensual + accumTotalCreditoMes - presupuesto[year][month]?.estadistica.invertidoMensual).toLocaleString() || "0"}`;
+            _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro Ord: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
+            _tabla.caption.innerHTML += `&ensp; -&ensp; Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
+        });
     });
     // _tabsContent?.firstChild?.classList?.add("show", "active");
     tabsContainer.appendChild(_tabsContent);
