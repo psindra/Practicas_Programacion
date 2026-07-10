@@ -305,8 +305,8 @@ function renderTabsContent(presupuesto, year) {
         });
 
         /* pie de tabla (caption) */
-        _tabla.caption.innerHTML += `&emsp; - &emsp; Liquidez Restante: $${(_ingresoExtraordinario - presupuesto[year][month]?.estadistica.gastoMensual + accumTotalCreditoMes - presupuesto[year][month]?.estadistica.invertidoMensual).toLocaleString() || "0"}`;
-        _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
+        _tabla.caption.innerHTML += `Liquidez Restante: $${(_ingresoExtraordinario - presupuesto[year][month]?.estadistica.gastoMensual + accumTotalCreditoMes - presupuesto[year][month]?.estadistica.invertidoMensual).toLocaleString() || "0"}`;
+        _tabla.caption.innerHTML += `&emsp; - &emsp; Ahorro Ord: ${(presupuesto[year][month]?.estadistica.ahorroMensual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
         _tabla.caption.innerHTML += `&ensp; -&ensp; Ahorro Habitual: ${(presupuesto[year][month]?.estadistica.ahorroMensualHabitual/_ingresoHabitual * 100).toFixed(1) || "0"} %`;
 
     });
