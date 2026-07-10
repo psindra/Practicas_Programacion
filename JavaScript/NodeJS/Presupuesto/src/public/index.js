@@ -235,9 +235,10 @@ function renderTabsContent(presupuesto, year) {
             _tdGastoMonto.textContent = `$ ${(gasto.monto.total).toLocaleString()}`;
             const _thGastoNombre = document.createElement("th");
             _thGastoNombre.innerHTML = gasto.nombre;
+            _thGastoNombre.classList.add("position-relative");
             const _btnEdit = document.createElement("a");
             _btnEdit.textContent = "🖊"
-            _btnEdit.classList.add("edit-btn", "float-end", "opacity-0");
+            _btnEdit.classList.add("edit-btn", "position-absolute", "end-0", "opacity-0");
             _btnEdit.addEventListener("click", () => { editForm(gasto) });
             _thGastoNombre.appendChild(_btnEdit);
             _thGastoNombre.style.color = "salmon"
