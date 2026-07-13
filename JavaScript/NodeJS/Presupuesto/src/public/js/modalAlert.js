@@ -1,22 +1,23 @@
 const htmlModalAlert = `
 <!-- Modal -->
-<div class="modal fade text-black" id="modalAlert" tabindex="-1" aria-labelledby="modalAlertLabel" aria-hidden="true">
+<dialog class="modal fade bg-transparent border-0" id="modalAlert" tabindex="-1" aria-labelledby="modalAlertLabel" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content placeholder-glow">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="modalAlertLabel"><span class="placeholder">Titulo de Modal</span></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="this.closest('dialog').close()"></button>
       </div>
       <div class="modal-body">
         <p class="placeholder col-7">Mensaje</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" hidden>Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="this.closest('dialog').close()" hidden>Close</button>
         <button type="button" class="btn btn-primary" hidden>Save changes</button>
       </div>
     </div>
   </div>
-</div>`;
+</dialog>
+`;
 
 document.body.insertAdjacentHTML('beforeend', htmlModalAlert);
 
@@ -44,6 +45,7 @@ function mensajeModal(titulo, mensaje, closeButton = true, saveButton = false) {
   document.querySelector('#modalAlert button.btn.btn-secondary').focus();
   document.querySelector('#modalAlert button.btn.btn-primary').hidden = !saveButton;
   modal.show();
+  modalAlert.showModal();
 }
 
 export { mensajeModal };
