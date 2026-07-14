@@ -3,6 +3,7 @@ import mensajeModal from "./js/modalAlert.js";
 import "./js/formNvoMov.js";
 import { parseModalFormNvoMov } from "./js/formNvoMov.js";
 import { editForm, eliminarMovimiento } from "./js/formEditMov.js";
+import graficarPresupuesto from "./graficoPresupuesto.js";
 
 
 async function refreshPresupuestos() {
@@ -155,6 +156,9 @@ async function renderYear(presupuesto, year) {
 
     // Renderizado del contenido de los Tabs
     renderTabsContent(presupuesto, year);
+
+    
+    return graficarPresupuesto(presupuesto, year);
 }
 
 function renderTabsContent(presupuesto, year) {

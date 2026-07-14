@@ -13,6 +13,8 @@
     <!--  -->
 
     <script src="./index.js" defer type="module"></script>
+
+    <script src="./graficoPresupuesto.js" defer type="module"></script>
     <style>
         table th:hover>a.edit-btn, table td:hover>a.edit-btn{
             opacity: 1 !important;
@@ -39,7 +41,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Gráficos</a>
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#graficoModal">Gráficos</a>
                     </li>
 <!--             
                     <li class="nav-item mx-md-2">
@@ -96,6 +98,25 @@
     </main>
 
 
+<!-- Modal Gráfico -->
+<div class="modal fade" id="graficoModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="graficoModalTitle">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <canvas id="graficoCanvas">
+
+        </canvas>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
 
 </body>
 
