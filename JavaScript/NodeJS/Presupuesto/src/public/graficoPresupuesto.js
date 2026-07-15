@@ -32,6 +32,35 @@ const grafico = new Chart(ctx, {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false, // <-- FUEZA AL CANVAS A ADAPTARSE AL ALTO DEL CSS
+        interaction: {
+            intersect: false    // agranda el area para que aparezca el tooltip
+        },
+        scales: {
+            x: {
+                ticks: {
+                    // align: "start",
+                    // mirror: true,
+                    maxRotation: 85,
+                    // align: "start",
+                    // crossAlign: true,
+                },
+                grid: {
+                    color: 'rgba(128, 128, 128, 0.2)'
+                },
+            },
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    align: "end",
+                    mirror: true,
+                    padding: 0,
+                },
+                grid: {
+                    color: 'rgba(128, 128, 128, 0.3)'
+                },
+            }
+        }
     }
 });
 
@@ -40,33 +69,55 @@ const grafico = new Chart(ctx, {
 export default function graficarPresupuesto(Presupuesto, Year) {
     Presupuesto.__promesaEstadisticas.then(() => {
         grafico.data = {
-            labels: ['Enero' + Year, 'Febrero' + Year, 'Marzo' + Year, 'Abril' + Year, 'Mayo' + Year, 'Junio' + Year, 'Julio' + Year, 'Agosto' + Year, 
-                'Septiembre' + Year, 'Octubre' + Year, 'Noviembre' + Year, 'Diciembre' + Year],
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
+                'Sept.', 'Octubre', 'Nov.', 'Dic.'],
             datasets: [
                 {
                     label: 'Ingresos',
-                    data: Object.values(Presupuesto[Year]).map(mes=> mes.estadistica.ingresoMensualHabitual),
+                    data: Object.entries(Presupuesto[Year]).reduce((arr, [mes, datosMes]) => {
+                        arr[parseInt(mes.slice(-2)) - 1] = datosMes.estadistica.ingresoMensualHabitual;
+                        return arr;
+                    }, []),
                     backgroundColor: 'rgba(75, 192, 192, 1)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     tension: 0.1,
                 },
                 {
                     label: 'Gastos',
-                    data: Object.values(Presupuesto[Year]).map(mes=> mes.estadistica.gastoMensualHabitual),
+                    data: Object.entries(Presupuesto[Year]).reduce((arr, [mes, datosMes]) => {
+                        arr[parseInt(mes.slice(-2)) - 1] = datosMes.estadistica.gastoMensual;
+                        return arr;
+                    }, []),
+                    backgroundColor: 'rgba(255, 0, 55, 1)',
+                    borderColor: 'rgba(255, 0, 55, 1)',
+                    tension: 0.1,
+                },
+                {
+                    label: 'Gastos Habitual',
+                    data: Object.entries(Presupuesto[Year]).reduce((arr, [mes, datosMes]) => {
+                        arr[parseInt(mes.slice(-2)) - 1] = datosMes.estadistica.gastoMensualHabitual;
+                        return arr;
+                    }, []),
                     backgroundColor: 'rgba(255, 99, 132, 1)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     tension: 0.1,
                 },
                 {
                     label: 'Ahorros',
-                    data: Object.values(Presupuesto[Year]).map(mes=> mes.estadistica.ahorroMensual),
-                    backgroundColor: 'rgba(255, 206, 86, 1)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
+                    data: Object.entries(Presupuesto[Year]).reduce((arr, [mes, datosMes]) => {
+                        arr[parseInt(mes.slice(-2)) - 1] = datosMes.estadistica.ahorroMensual;
+                        return arr;
+                    }, []),
+                    backgroundColor: 'rgb(255, 165, 86)',
+                    borderColor: 'rgba(255, 165, 86, 1)',
                     tension: 0.1,
                 },
                 {
                     label: 'Ahorros Habituales',
-                    data: Object.values(Presupuesto[Year]).map(mes=> mes.estadistica.ahorroMensualHabitual),
+                    data: Object.entries(Presupuesto[Year]).reduce((arr, [mes, datosMes]) => {
+                        arr[parseInt(mes.slice(-2)) - 1] = datosMes.estadistica.ahorroMensualHabitual;
+                        return arr;
+                    }, []),
                     backgroundColor: 'rgb(255, 244, 86)',
                     borderColor: 'rgba(255, 244, 86, 1)',
                     tension: 0.1,
