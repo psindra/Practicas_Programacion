@@ -51,4 +51,6 @@ function mensajeModal(titulo, mensaje, closeButton = true, saveButton = false) {
 export { mensajeModal };
 export default mensajeModal;
 
+window.mensajeModal = mensajeModal;
+
 // modal.show()
