@@ -1,0 +1,91 @@
+<!-- Modal Nvo Mov por Lote -->
+<div class="modal fade" id="nvoMovLoteModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="container-type: inline-size;">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="nvoMovLoteModalTitle">Nuevos Movimiento por Lote</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form id="nvoMovLoteForm">
+          <fieldset class="border p-2">
+            <legend>Gastos</legend>
+            <div class="row g-2 p-2">
+              <div class="col">
+                <input type="number" class="form-control text-end" name="montoGasto[]" placeholder="Monto Gasto">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
+                  list="nombreGastoList">
+                <datalist id="nombreGastoList">
+                  <option value="Gasto 1">
+                  <option value="Gasto 2">
+                  <option value="Gasto 3">
+                </datalist>
+              </div>
+              <div class="col-1 align-self-center">
+                <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
+              </div>
+            </div>
+            <div class="row g-2 p-2">
+              <div class="col">
+                <input type="number" class="form-control text-end" name="montoGasto[]" placeholder="Monto Gasto">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
+                  list="nombreGastoList">
+                <datalist id="nombreGastoList">
+                  <option value="Gasto 1">
+                  <option value="Gasto 2">
+                  <option value="Gasto 3">
+                </datalist>
+              </div>
+              <div class="col-1 align-self-center">
+                <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
+              </div>
+            </div>
+            <div class="row g-2 p-2">
+              <div class="col">
+                <input type="number" class="form-control text-end" name="montoGasto[]" placeholder="Monto Gasto">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
+                  list="nombreGastoList">
+                <datalist id="nombreGastoList">
+                  <option value="Gasto 1">
+                  <option value="Gasto 2">
+                  <option value="Gasto 3">
+                </datalist>
+              </div>
+              <div class="col-1 align-self-center">
+                <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
+              </div>
+            </div>
+            <div class="row g-2 p-2">
+              <div class="col">
+                <input type="number" class="form-control text-end" name="montoGasto[]" placeholder="Monto Gasto">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
+                  list="nombreGastoList">
+                <datalist id="nombreGastoList">
+                  <option value="Gasto 1">
+                  <option value="Gasto 2">
+                  <option value="Gasto 3">
+                </datalist>
+              </div>
+              <div class="col-1 align-self-center">
+                <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="nvoMovLoteSubmitBtn" form="nvoMovLoteForm">Cargar Lote</button>
+        <button type="reset" class="btn btn-secondary" id="nvoMovLoteResetBtn" form="nvoMovLoteForm"
+          data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

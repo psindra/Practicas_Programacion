@@ -4,6 +4,7 @@ import "./js/formNvoMov.js";
 import { parseModalFormNvoMov } from "./js/formNvoMov.js";
 import { editForm, eliminarMovimiento } from "./js/formEditMov.js";
 import graficarPresupuesto from "./graficoPresupuesto.js";
+import { parseModalFormNvoMovLote } from "./js/formNvoMovLote.js";
 
 
 async function refreshPresupuestos() {
@@ -389,6 +390,7 @@ async function init() {
 
     });
     parseModalFormNvoMov();
+    parseModalFormNvoMovLote();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
