@@ -8,8 +8,13 @@
       </div>
       <div class="modal-body p-4">
         <form id="nvoMovLoteForm">
-          <fieldset class="border p-2">
+          <fieldset class="border p-2" id="fieldsetGastos">
             <legend>Gastos</legend>
+            <datalist id="nombreGastoList">
+              <option value="Gasto 1">
+              <option value="Gasto 2">
+              <option value="Gasto 3">
+            </datalist>
             <div class="row g-2 p-2">
               <div class="col">
                 <input type="number" class="form-control text-end" name="montoGasto[]" placeholder="Monto Gasto">
@@ -17,11 +22,6 @@
               <div class="col">
                 <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
                   list="nombreGastoList">
-                <datalist id="nombreGastoList">
-                  <option value="Gasto 1">
-                  <option value="Gasto 2">
-                  <option value="Gasto 3">
-                </datalist>
               </div>
               <div class="col-1 align-self-center">
                 <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
@@ -34,11 +34,6 @@
               <div class="col">
                 <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
                   list="nombreGastoList">
-                <datalist id="nombreGastoList">
-                  <option value="Gasto 1">
-                  <option value="Gasto 2">
-                  <option value="Gasto 3">
-                </datalist>
               </div>
               <div class="col-1 align-self-center">
                 <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
@@ -51,14 +46,9 @@
               <div class="col">
                 <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
                   list="nombreGastoList">
-                <datalist id="nombreGastoList">
-                  <option value="Gasto 1">
-                  <option value="Gasto 2">
-                  <option value="Gasto 3">
-                </datalist>
-              </div>
-              <div class="col-1 align-self-center">
-                <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
+                </div>
+                <div class="col-1 align-self-center">
+                  <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
               </div>
             </div>
             <div class="row g-2 p-2">
@@ -68,23 +58,24 @@
               <div class="col">
                 <input type="text" class="form-control text-start" name="nombreGasto[]" placeholder="Nombre del gasto"
                   list="nombreGastoList">
-                <datalist id="nombreGastoList">
-                  <option value="Gasto 1">
-                  <option value="Gasto 2">
-                  <option value="Gasto 3">
-                </datalist>
               </div>
               <div class="col-1 align-self-center">
                 <button type="button" class="btn btn-close" onclick='this.closest(".row").remove()'></button>
               </div>
             </div>
           </fieldset>
+          <fieldset class="border p-2" id="fieldsetCreditos">
+            <legend>Créditos</legend>
+          </fieldset>
+          <fieldset class="border p-2" id="fieldsetInversiones">
+            <legend>Inversiones</legend>
+          </fieldset>
         </form>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary" id="nvoMovLoteSubmitBtn" form="nvoMovLoteForm">Cargar Lote</button>
         <button type="reset" class="btn btn-secondary" id="nvoMovLoteResetBtn" form="nvoMovLoteForm"
-          data-bs-dismiss="modal">Cancelar</button>
+        data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>

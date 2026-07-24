@@ -1,3 +1,4 @@
+import { updateUI } from "../index.js";
 
 const nombresGastos = [
      "Alquiler",
@@ -47,6 +48,8 @@ const DOMModalFormNvoMovLote = await fetch("./templates/template_formNvoMovLote.
 
 
 export function parseModalFormNvoMovLote() {
+    DOMModalFormNvoMovLote.querySelector("#nombreGastoList").innerHTML
+     = nombresGastos.map(nombre => `<option value="${nombre}">${nombre}</option>`).join("\n");
     document.body.appendChild(DOMModalFormNvoMovLote);
     const form = DOMModalFormNvoMovLote.querySelector("form");
     form.addEventListener("submit", submitFormNvoMovLote);
@@ -84,21 +87,41 @@ function submitFormNvoMovLote(event) {
         });
     });
 
-    console.log(event.target);
-    
-    console.log({formData});
-    console.log([...formData]);
-    console.log([...formData.entries()]);
+    if (!movimientos.length) {
+        mensajeModal("Error", "No se han ingresado movimientos para procesar.");
+        return;
+    }
 
-    fetch("/api/movimiento/lote", {
-        method: "POST",
-        body: formData
-    })
-        .then(async response => {
-            const result = await response.json();
-            console.log(result);
-        })
-        .catch(error => {
-            console.error("Error submitting the form:", error);
+    movimientos.reduce((promesaAnterior, movimiento) => {
+        return promesaAnterior.then(() => {
+            return fetch("/api/movimiento/simuladorMovimiento", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(movimiento)
+            })
+            .then(async response => {
+                if (!response.ok) throw new Error(JSON.stringify(await response.json()));
+                return response.json();
+            })
+            .then(result => {
+            mensajeModal(`Movimiento ${(movimiento["_id"])? "modificado" : "creado"} exitosamente:`, result);
+            })
+            .catch(error => {
+                console.error(`Error al ${(movimiento["_id"])? "modificar" : "crear"} movimiento:\n`, error)
+                mensajeModal(`Error al ${(movimiento["_id"])? "modificar" : "crear"} movimiento:\n`, error.message || error);
+            });
         });
+    }, Promise.resolve())
+    .then(() => {
+        mensajeModal("Éxito", "Todos los movimientos han sido procesados exitosamente.");
+        event.target.reset();
+        bootstrap.Modal.getInstance(event.target.closest(".modal")).hide();
+        updateUI();
+    })
+    .catch(error => {
+        console.error("Error movimientos por lotes:", error);
+        mensajeModal("Error movimientos por lotes:\n", error.message || error);
+    });
 }
