@@ -65,6 +65,29 @@ export const controladorPost = (Model) => (req, res) => {
         })
 }
 
+export const simuladorPost = (Model) => (req, res) => {
+    return Model.findById(req.body._id)
+    .then(documento => {
+        if (!documento) {
+            // Si no existe el documento, se crea uno nuevo
+            documento = new Model(req.body);
+        } else {
+            // Si el documento existe, se actualizan sus campos
+            /* Object.assign(documento, req.body); */
+        }
+        return documento;
+    })
+    .then(movimientoGuardado => {
+        console.log({ movimientoGuardado });
+        return res.status(201).json(movimientoGuardado);
+    })
+    .catch(err => {
+        console.error("Error al crear o actualizar movimiento simulado:", err);
+        return res.status(500).json({ error: err.message });
+    })
+    
+}
+
 export const controladorDelete = (Model, filtroF = () => ({})) => (req, res) => {
     const filtro = filtroF(req);
     console.log({ filtro }, { body: req.body });

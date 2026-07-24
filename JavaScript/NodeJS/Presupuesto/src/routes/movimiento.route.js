@@ -1,13 +1,15 @@
 import express from "express";
 import { Movimiento, Ingreso, Gasto, Inversion } from "../database_mongoose/models/modelosPresupuesto.js";
 const router = express.Router();
-import {controladorGet, controladorPost, controladorDelete} from "./controlador.js";
+import {controladorGet, controladorPost, controladorDelete, simuladorPost} from "./controlador.js";
 
 router.route("/movimiento")
     .get(controladorGet(Movimiento,req => (req.body), { mes: -1 }))
     .post(controladorPost(Movimiento))
     .delete(controladorDelete(Movimiento, req => (req.body) )) /* Eliminar todos los movimientos (¡CUIDADO!) */
 
+router.route("/movimiento/simuladorMovimiento")
+    .post(simuladorPost(Movimiento, req => (req.body), { mes: -1 })) /* Simulador de movimientos */
 
 router.route("/movimiento/:mes")
     .get(controladorGet(Movimiento, req => ({ mes: req.params.mes }), { mes: -1 }))
