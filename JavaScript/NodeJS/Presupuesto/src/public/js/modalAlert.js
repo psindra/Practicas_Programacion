@@ -26,26 +26,29 @@ var modalAlert = document.getElementById('modalAlert')
 var modal = bootstrap.Modal.getOrCreateInstance(modalAlert) // Returns a Bootstrap modal instance
 
 
-function mensajeModal(titulo, mensaje, closeButton = true, saveButton = false) {
-  console.log(mensaje);
-  try {
-    mensaje = (mensaje.replaceAll("\n", "<br>")).replaceAll("  ", "&nbsp;&nbsp;");
-  } catch (error) {
+async function mensajeModal(titulo, mensaje, closeButton = true, saveButton = false) {
+    console.log(mensaje);
     try {
-      mensaje = JSON.stringify(mensaje, null, 2).replaceAll("\n", "<br>").replaceAll("  ", "&nbsp;&nbsp;");
+        mensaje = (mensaje.replaceAll("\n", "<br>")).replaceAll("  ", "&nbsp;&nbsp;");
     } catch (error) {
-      mensaje = JSON.stringify(mensaje, null, 2);
+        try {
+            mensaje = JSON.stringify(mensaje, null, 2).replaceAll("\n", "<br>").replaceAll("  ", "&nbsp;&nbsp;");
+        } catch (error) {
+            mensaje = JSON.stringify(mensaje, null, 2);
+        }
+
     }
-    
-  }
-  document.querySelector('#modalAlert .modal-title#modalAlertLabel').innerText = titulo;
-  document.querySelector('#modalAlert .modal-body').innerHTML = mensaje;
-  document.querySelector('#modalAlert .modal-body').classList.add('font-monospace', 'small');
-  document.querySelector('#modalAlert button.btn.btn-secondary').hidden = !closeButton;
-  document.querySelector('#modalAlert button.btn.btn-secondary').focus();
-  document.querySelector('#modalAlert button.btn.btn-primary').hidden = !saveButton;
-  modal.show();
-  modalAlert.showModal();
+    document.querySelector('#modalAlert .modal-title#modalAlertLabel').innerText = titulo;
+    document.querySelector('#modalAlert .modal-body').innerHTML = mensaje;
+    document.querySelector('#modalAlert .modal-body').classList.add('font-monospace', 'small');
+    document.querySelector('#modalAlert button.btn.btn-secondary').hidden = !closeButton;
+    document.querySelector('#modalAlert button.btn.btn-secondary').focus();
+    document.querySelector('#modalAlert button.btn.btn-primary').hidden = !saveButton;
+    modal.show();
+    modalAlert.showModal();
+    return new Promise((resolve) => {
+        modalAlert.addEventListener('hidden.bs.modal', resolve, { once: true });
+    });
 }
 
 export { mensajeModal };
