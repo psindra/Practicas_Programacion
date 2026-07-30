@@ -26,7 +26,7 @@ categoriasGastos["Cochera"] = categoriasGastos["Mecánico Auto"] = categoriasGas
 categoriasGastos["Visa BH"] = categoriasGastos["PowerCard"] = "Tarjetas";
 categoriasGastos["Comidita Mami"] = categoriasGastos["🛒Makro"] = "Alimentación";
 categoriasGastos["OS Mami"] = "Otros";
-categoriasGastos["Ropa"] = "Ropa";
+categoriasGastos["Ropa"] = "Vestimenta";
 categoriasGastos["Limp Gracielita"] = "Limpieza";
 categoriasGastos["Ortodoncia"] = "Salud";
 categoriasGastos["Extracciones Ef"] = categoriasGastos["Club Parque VS"] = "Otros";
