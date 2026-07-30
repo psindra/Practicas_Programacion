@@ -34,7 +34,7 @@ const grafico = new Chart(ctx, {
         responsive: true,
         maintainAspectRatio: false, // <-- FUEZA AL CANVAS A ADAPTARSE AL ALTO DEL CSS
         interaction: {
-            intersect: false    // agranda el area para que aparezca el tooltip
+            intersect: false    // agranda el area desde donde aparece el tooltip
         },
         scales: {
             x: {
@@ -59,7 +59,34 @@ const grafico = new Chart(ctx, {
                 grid: {
                     color: 'rgba(128, 128, 128, 0.3)'
                 },
+            },
+            yPorcentaje: {
+                beginAtZero: true,
+                position: 'right',
+                min: 0,
+                max: 115,
+                ticks: {
+                    callback: function (value) {
+                        return value + '%';
+                    }
+                },
+                grid: {
+                    drawOnChartArea: false, // Evita que se dibuje la cuadrícula del eje derecho
+                },
             }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        if(context.dataset.yAxisID === 'yPorcentaje') {
+                            const label = context.dataset.label || '';
+                            const value = context.parsed.y.toFixed(1) + '%';
+                            return label + ': ' + value;
+                        }
+                    }
+                }
+            },
         }
     }
 });
@@ -122,6 +149,41 @@ export default function graficarPresupuesto(Presupuesto, Year) {
                     borderColor: 'rgba(255, 244, 86, 1)',
                     tension: 0.1,
                 },
+                {
+                    label: "% Ah Hab",
+                    data: Object.entries(Presupuesto[Year]).reduce((arr, [mes, datosMes]) => {
+                        arr[parseInt(mes.slice(-2)) - 1] = (datosMes.estadistica.ahorroMensualHabitual / datosMes.estadistica.ingresoMensualHabitual) * 100;
+                        return arr;
+                    }, []),
+                    // backgroundColor: 'rgb(102, 255, 168)',
+                    borderColor: 'rgb(102, 255, 168)',
+                    borderWidth: 1.5,
+                    pointRadius: 1,
+                    tension: 0.1,
+                    borderDash: [5, 5],
+                    yAxisID: 'yPorcentaje',
+                },
+                {
+                    label: "~ % Ah Hab",
+                    hidden: true,
+                    data: Object.entries(Presupuesto[Year]).map(([mes, datosMes], index, arr) => {
+                        const val1 = (index-1)>=0 ? (arr[index - 1][1].estadistica.ahorroMensualHabitual /
+                                arr[index - 1][1].estadistica.ingresoMensualHabitual * 100) : null;
+                            const val2 = arr[index][1].estadistica.ahorroMensualHabitual /
+                                arr[index][1].estadistica.ingresoMensualHabitual * 100;
+                            const val3 = (index+1)<arr.length ? (arr[index + 1][1].estadistica.ahorroMensualHabitual /
+                                arr[index + 1][1].estadistica.ingresoMensualHabitual * 100) : null;
+                                
+                                
+                        const contDivisor = ((index-1)>=0 ? 1 : 0) + 1 + ((index+1)<arr.length ? 1 : 0);
+                        const media = (val1 + val2 + val3) / contDivisor;
+                        return media;
+                    }),
+                    borderColor: 'rgb(102, 255, 168)',
+                    borderWidth: 0.5,
+                    tension: 0.3,
+                    yAxisID: 'yPorcentaje',
+                }
             ]
         };
     });
